@@ -163,7 +163,7 @@ local function Autospawn_Timer()
 			local weather = {}
 
 			local function TableAdd()
-				local files, directory = file.Find("entities/gdr_d*.lua", "LUA")
+				local files, directory = file.Find("entities/gdr_w*.lua", "LUA")
 
 				for k, v in ipairs(files) do
 					local file = v:match("(.+)%..+$")
@@ -194,7 +194,7 @@ local function Autospawn_Timer()
 
 			local function TableAdd()
 				local files, directory = file.Find("entities/gdr_d*.lua", "LUA")
-				local files2, directory2 = file.Find("entities/gdr_d*.lua", "LUA")
+				local files2, directory2 = file.Find("entities/gdr_w*.lua", "LUA")
 
 				for k, v in ipairs(files) do
 					local file = v:match("(.+)%..+$")
@@ -216,7 +216,7 @@ local function Autospawn_Timer()
 				weadis:SetPos(FloorPos)
 
 			end
-			for k, v in pairs(ents.FindByClass("gdr_d*")) do
+			for k, v in pairs(ents.FindByClass("gdr_w*")) do
 				
 				weadis:SetPos(SkyPos)
 
@@ -239,6 +239,11 @@ local function Autospawn_Timer()
 			for k, v in pairs(ents.FindByClass("gdr_d*_*nado")) do
 
 				weadis:SetPos(SkyPos)
+
+			end
+			for k, v in pairs(ents.FindByClass("gdr_env_dynamic*")) do
+
+				weadis:SetPos(FloodPos)
 
 			end
 			for k, v in pairs(ents.FindByClass("gdr_env_dynamicwater")) do
