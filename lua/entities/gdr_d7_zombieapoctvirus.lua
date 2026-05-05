@@ -107,7 +107,7 @@ function ENT:SpawnZombies()
 		zom:Spawn()
 		zom:SetPos( tr.HitPos + Vector(0,0,2) )
 
-		local z_zom = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+		local z_zom = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 		z_zom:SetVar("zombie", zom)
 		z_zom:SetPos( zom:GetPos() ) 
 		z_zom:Spawn()

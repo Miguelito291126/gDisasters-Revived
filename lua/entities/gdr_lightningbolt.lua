@@ -194,7 +194,7 @@ end
 
 
 function CreateLightningBolt(startpos, endpos, color, grounded)
-	local ent = ents.Create("gdr_dlightningbolt")
+	local ent = ents.Create("gdr_lightningbolt")
 	ent:SetPos(Vector(0,0,0))
 	ent.TargetPositions = {startpos, endpos}
 	ent.ParticleData = { ["Color"] = color, ["IsGrounded"] = grounded}	

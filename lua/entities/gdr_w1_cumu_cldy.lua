@@ -86,7 +86,7 @@ function ENT:CreateClouds()
 	
 	self.NextCloudCreation = CurTime() + 0.1
 	
-	local cloud = ents.Create("gdr_dcloud_cumulus")
+	local cloud = ents.Create("gdr_cloud_cumulus")
 	cloud:Spawn()
 	cloud:Activate()
 	table.insert(self.Cloud, cloud)

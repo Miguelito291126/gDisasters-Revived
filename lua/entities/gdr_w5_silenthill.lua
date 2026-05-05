@@ -273,7 +273,7 @@ function ENT:CreateEnemies()
 			
 		
 			if tr.Hit then 
-				local nurse = ents.Create("gdr_dnpc_nurse")
+				local nurse = ents.Create("gdr_npc_nurse")
 				nurse:SetPos(tr.HitPos)
 				nurse:Spawn()
 				nurse:Activate()

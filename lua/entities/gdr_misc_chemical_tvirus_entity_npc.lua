@@ -64,7 +64,7 @@ function ENT:Think()
 	for k, v in pairs(ents.FindInSphere(self:GetPos(),100)) do
 		if v:IsPlayer() and v:Alive() and not v.isinfected then
 			if v.gasmasked==false and v.hazsuited==false then
-				local ent = ents.Create("gdr_dmisc_chemical_tvirus_entity")
+				local ent = ents.Create("gdr_misc_chemical_tvirus_entity")
 				ent:SetVar("infected", v)
 				ent:SetPos( self:GetPos() ) 
 				ent:Spawn()
@@ -75,7 +75,7 @@ function ENT:Think()
 		end
 		if (v:IsNPC() and table.HasValue(npc_tvirus,v:GetClass()) and not v.isinfected) or (v.IsVJHuman==true and not v.isinfected) then
 			if v.gasmasked==false or v.hazsuited==false then return end
-			local ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_npc")
+			local ent = ents.Create("gdr_misc_chemical_tvirus_entity_npc")
 			ent:SetVar("infected", v)
 			ent:SetPos( self:GetPos() ) 
 			ent:Spawn()
@@ -108,7 +108,7 @@ function ENT:Think()
 			else
 				ent:SetHealth(500)
 			end
-			local z_ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+			local z_ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 			z_ent:SetVar("zombie", ent)
 			z_ent:SetPos( ent:GetPos() ) 
 			z_ent:Spawn()
@@ -134,7 +134,7 @@ function ENT:Think()
 			else
 				ent:SetHealth(500)
 			end
-			local z_ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+			local z_ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 			z_ent:SetVar("zombie", ent)
 			z_ent:SetPos( ent:GetPos() ) 
 			z_ent:Spawn()
@@ -170,7 +170,7 @@ if (SERVER) then
 			else
 				ent:SetHealth(500)
 			end
-			local z_ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+			local z_ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 			z_ent:SetVar("zombie", ent)
 			z_ent:SetPos( ent:GetPos() ) 
 			z_ent:Spawn()
@@ -196,7 +196,7 @@ if (SERVER) then
 				else
 					ent:SetHealth(500)
 				end
-				local z_ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+				local z_ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 				z_ent:SetVar("zombie", ent)
 				z_ent:SetPos( ent:GetPos() ) 
 				z_ent:Spawn()
@@ -213,7 +213,7 @@ if (SERVER) then
 				ent:Spawn() 
 				ent:SetHealth(10000)
 				ent:SetModelScale(ent:GetModelScale()*2)
-				local z_ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+				local z_ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 				z_ent:SetVar("zombie", ent)
 				z_ent:SetPos( ent:GetPos() ) 
 				z_ent:Spawn()

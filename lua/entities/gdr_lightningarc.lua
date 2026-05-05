@@ -51,7 +51,7 @@ end
 function ENT:CreateTarget()
 	local endpos = self.TargetPositions[2]
 	
-	local ent = ents.Create("gdr_dlightningarc_child")
+	local ent = ents.Create("gdr_lightningarc_child")
 	ent:SetPos(endpos)
 	ent:Spawn()
 	ent:Activate()
@@ -104,7 +104,7 @@ end
 
 
 function CreateLightningArc(startpos, endpos, effect)
-	local ent = ents.Create("gdr_dlightningarc")
+	local ent = ents.Create("gdr_lightningarc")
 	ent:SetPos(Vector(0,0,0))
 	ent.TargetPositions = {startpos, endpos}
 	ent.Particle        = effect

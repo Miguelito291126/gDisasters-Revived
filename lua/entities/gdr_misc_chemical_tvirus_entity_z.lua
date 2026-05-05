@@ -41,7 +41,7 @@ function ENT:Think()
 		for k, v in pairs(ents.FindInSphere(self:GetPos(),200)) do
 			if v:IsNPC() and (v:GetClass()=="npc_headcrab" or v:GetClass()=="npc_headcrab_fast" or v:GetClass()=="npc_headcrab_poison") and not v.isinfected then
 			
-				local ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_z")
+				local ent = ents.Create("gdr_misc_chemical_tvirus_entity_z")
 				ent:SetVar("infected", v)
 				ent.zombie=v
 				ent:SetPos( self:GetPos() ) 
@@ -58,7 +58,7 @@ function ENT:Think()
 		for k, v in pairs(ents.FindInSphere(self:GetPos(),100)) do
 			if v:IsPlayer() and v:Alive() and not v.isinfected then
 				if v.gasmasked==false and v.hazsuited==false then
-					local ent = ents.Create("gdr_dmisc_chemical_tvirus_entity")
+					local ent = ents.Create("gdr_misc_chemical_tvirus_entity")
 					ent:SetVar("infected", v)
 					ent:SetPos( self:GetPos() ) 
 					ent:Spawn()
@@ -69,7 +69,7 @@ function ENT:Think()
 				end
 			end
 			if (v:IsNPC() and table.HasValue(npc_tvirus,v:GetClass()) and not v.isinfected) or (v.IsVJHuman==true and not v.isinfected) then
-				local ent = ents.Create("gdr_dmisc_chemical_tvirus_entity_npc")
+				local ent = ents.Create("gdr_misc_chemical_tvirus_entity_npc")
 				ent:SetVar("infected", v)
 				ent:SetPos( self:GetPos() ) 
 				ent:Spawn()

@@ -355,7 +355,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_d4_heavyacidrain")) do 
+		for k, v in pairs(ents.FindByClass("gdr_w4_heavyacidrain")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 

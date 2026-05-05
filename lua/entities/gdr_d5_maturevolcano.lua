@@ -290,16 +290,16 @@ function ENT:Erupt()
 	if GetConVar("gdisasters_revived_volcano_weatherchange"):GetInt() <= 0 then return end
 	
 	timer.Simple(10, function()
-	    local ent = ents.Create("gdr_d2_volcano_ash")
+	    local ent = ents.Create("gdr_w2_volcano_ash")
 		ent:Spawn()
 		ent:Activate()
 	end)		  
     timer.Simple(50, function()
-		local ent2 = ents.FindByClass("gdr_d2_volcano_ash")[1]
+		local ent2 = ents.FindByClass("gdr_w2_volcano_ash")[1]
 		if !ent2:IsValid() then return end
 		if ent2:IsValid() then ent2:Remove() end
 
-	    local ent = ents.Create("gdr_d2_acidrain")
+	    local ent = ents.Create("gdr_w2_acidrain")
 		ent:Spawn()
 		ent:Activate()
 	end)
