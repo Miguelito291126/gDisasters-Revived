@@ -26,8 +26,8 @@ function ENT:Initialize()
 		
 		if LocalPlayer().Sounds["Nurse_Idle"]==nil or LocalPlayer().Sounds["Nurse_Chasing"]==nil then
 		
-			LocalPlayer().Sounds["Nurse_Idle"]         = {  ["sound"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/silenthill/nurse_nearby.wav"), ["volume"] = 0 }
-			LocalPlayer().Sounds["Nurse_Chasing"]      = {  ["sound"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/silenthill/nurse_attack.wav"), ["volume"] = 0 }
+			LocalPlayer().Sounds["Nurse_Idle"]         = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/silenthill/nurse_nearby.wav"), ["volume"] = 0 }
+			LocalPlayer().Sounds["Nurse_Chasing"]      = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/silenthill/nurse_attack.wav"), ["volume"] = 0 }
 			LocalPlayer().Sounds["Nurse_Idle"]["sound"]:ChangeVolume(0,0)
 			LocalPlayer().Sounds["Nurse_Chasing"]["sound"]:ChangeVolume(0,0)
 		end
@@ -79,7 +79,7 @@ if (CLIENT) then
 
 	local function NearestNurse_Sound()
 
-		local nurse = gDisasters_Revived:FindNearestEntity(LocalPlayer(),  "gdr_dnpc_nurse")
+		local nurse = gDisasters_Revived.FindNearestEntity(LocalPlayer(),  "gdr_dnpc_nurse")
 		
 		if nurse==nil then 
 			
@@ -184,8 +184,8 @@ end
 
 function ENT:DetectTarget()
 
-	local ply  = gDisasters_Revived:FindNearestEntity(self, "player")
-	local lightlvl = gDisasters_Revived:GetLightLevel(ply) or Vector(1,1,1)
+	local ply  = gDisasters_Revived.FindNearestEntity(self, "player")
+	local lightlvl = gDisasters_Revived.GetLightLevel(ply) or Vector(1,1,1)
 	
 	
 	if (lightlvl:Length() > 3 or ply:FlashlightIsOn() ) and ply:GetPos():Distance(self:GetPos())  < 2000 then

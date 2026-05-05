@@ -22,8 +22,8 @@ function ENT:Initialize()
 
 		
 		
-		LocalPlayer().Sounds["Tsunamilava"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), self.WedgeSound)
-		LocalPlayer().Sounds["lava"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), self.WedgeSound2)
+		LocalPlayer().Sounds["Tsunamilava"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), self.WedgeSound)
+		LocalPlayer().Sounds["lava"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), self.WedgeSound2)
 		
 		
 	end
@@ -45,7 +45,7 @@ function ENT:Initialize()
 		
 		self.NextPhysicsTime = CurTime()
 
-		if IsMapRegistered()==false then self:Remove() end 
+		if gDisasters_Revived.IsMapRegistered()==false then self:Remove() end 
 	
 	end
 end
@@ -53,7 +53,7 @@ end
 function ENT:SetupMiscVarsLava()
 
 
-	local bounds      = getMapSkyBox()
+	local bounds      = gDisasters_Revived.getMapSkyBox()
 	local minp        = bounds[1]
 	local maxp        = bounds[2]
 	
@@ -139,7 +139,7 @@ function ENT:Expandlava()
 			LocalPlayer().Sounds["Tsunamilava"]:ChangeVolume( alpha,0,1)
 			LocalPlayer().Sounds["lava"]:ChangeVolume( alpha,0,1)
 			
-			if gDisasters_Revived:HitChance(10) then 
+			if gDisasters_Revived.HitChance(10) then 
 			
 			util.ScreenShake( Vector(self.Verts.wave_front[1].x, pos.y, pos.z), 0.2 *alpha , 0.5, math.random(), 1000 )
 			
@@ -186,7 +186,7 @@ function ENT:ProcessEntitiesInLava()
 	}
 	]]
 	
-	local scalar = gDisasters_Revived:GetPhysicsMultiplier()
+	local scalar = gDisasters_Revived.GetPhysicsMultiplier()
 	
 	
 	local sim_quality     = GetConVar( "gdisasters_revived_envdynamicwater_simquality" ):GetFloat() --  original water simulation is based on a value of 0.01 ( which is alright but not for big servers ) 
@@ -197,7 +197,7 @@ function ENT:ProcessEntitiesInLava()
 	
 
 	local verts = 	self.Verts 
-	local minz      = getMapCenterFloorPos().z
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z
 	local zrange    = self.CurrentHeight 
 	local zmax      = minz + zrange 
 
@@ -324,7 +324,7 @@ function ENT:ProcessEntitiesInWedgeLava()
 	
 
 	local verts = 	self.Verts 
-	local minz      = getMapCenterFloorPos().z
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z
 	local zrange    = self.CurrentHeight 
 	local zmax      = minz + zrange 
 
@@ -684,11 +684,11 @@ end
 function ENT:RebuildlavaVertices(distance_travelled, height, wedge_constant)
 
 
-	local bounds    = getMapSkyBox();
+	local bounds    = gDisasters_Revived.getMapSkyBox();
 	local min       = bounds[1];
 	local max       = bounds[2];
 
-	local minz      = getMapCenterFloorPos().z;
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z;
 	local dir       = (Vector(max.x, 0, 0)-Vector(min.z,0,0)):GetNormalized().x ;
 	local scale     = self.CurrentDistanceTravelled;
 	local height    = self:GetNWFloat("CurrentHeight");
@@ -846,21 +846,21 @@ function ENT:OnWedgelavaEntry(ent)
 		end
 		
 		if r >= 0 and r < 50 then 
-			if gDisasters_Revived:HitChance(10) then 
+			if gDisasters_Revived.HitChance(10) then 
 			ParticleEffect("lava_splash_main", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)	
 			end 
 			
 		elseif r >= 50 and r < 100 then 
-			if gDisasters_Revived:HitChance(25) then 
+			if gDisasters_Revived.HitChance(25) then 
 			ParticleEffect("lava_splash_main", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
 		elseif r >= 100 and r < 150 then 
-			if gDisasters_Revived:HitChance(35) then 
+			if gDisasters_Revived.HitChance(35) then 
 			ParticleEffect("lava_splash_main", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
 			
 		elseif r >= 150 and r < 200 then 
-			if gDisasters_Revived:HitChance(55) then 
+			if gDisasters_Revived.HitChance(55) then 
 			ParticleEffect("lava_splash_main", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
 		elseif r >= 200 then 
@@ -882,7 +882,7 @@ function ENT:DamageEntity(ent, phys, buoyancy_mod, mass)
 	local chance = math.Clamp( 1 - (buoyancy_mod / 5),0,1) * 100
 
 	
-	if gDisasters_Revived:HitChance(chance) then
+	if gDisasters_Revived.HitChance(chance) then
 		
 		
 		phys:EnableMotion(true)
@@ -908,7 +908,7 @@ function ENT:EFire(pointer, arg)
 end
 
 function createTsunamilava(parent, data)
-	if IsMapRegistered() == true then
+	if gDisasters_Revived.IsMapRegistered() == true then
 		for k, v in pairs(ents.FindByClass( "gdr_env_dynamicwater_b","gdr_env_dynamiclava_b")) do
 			v:Remove();
 		end
@@ -917,7 +917,7 @@ function createTsunamilava(parent, data)
 		tsunamilava.Data  = data;
 
 
-		tsunamilava:SetPos(getMapCenterFloorPos());
+		tsunamilava:SetPos(gDisasters_Revived.getMapCenterFloorPos());
 		tsunamilava:Spawn();
 		tsunamilava:Activate();
 
@@ -985,7 +985,7 @@ function gdr_env_dynamiclava_b_DrawLava()
 		render.SetMaterial(lava_texture)
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( tsunamilava:GetAngles( ) );
 	
 		matrix:Scale( Vector(1,1,1) )
@@ -1033,7 +1033,7 @@ end
 if (CLIENT) then
 	hook.Add("PostDrawTranslucentRenderables", "DrawTsunamiLava", function()
 
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 
 
 			gdr_env_dynamiclava_b_DrawLava()

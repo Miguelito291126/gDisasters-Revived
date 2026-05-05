@@ -45,8 +45,8 @@ function ENT:Initialize()
 end
 
 function ENT:Explode()
-	gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {70,130}, 20)
-	gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2.1, {80,130}, 20)
+	gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {70,130}, 20)
+	gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2.1, {80,130}, 20)
 	
 			
 	ParticleEffect("earthquake_swave_main", self:GetPos() + Vector(0,0, 10), Angle(0,0,0), nil)
@@ -54,7 +54,7 @@ function ENT:Explode()
 	
 		local phys = v:GetPhysicsObject()
 		local dis  = v:GetPos():Distance(self:GetPos())
-		local t    = dis  / gDisasters_Revived:convert_MetoSU( 340.29 / 2 )
+		local t    = dis  / gDisasters_Revived.convert_MetoSU( 340.29 / 2 )
 		
 		if phys:IsValid()  and  (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then
 			

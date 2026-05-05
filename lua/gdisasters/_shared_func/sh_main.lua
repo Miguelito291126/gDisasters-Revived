@@ -229,7 +229,7 @@ Material_Types = {
 
 }
 
-function gDisasters_Revived:isinWater(ply)
+function gDisasters_Revived.isinWater(ply)
 	local wl = ply:WaterLevel()
 	local wl1 = ( bit.band( util.PointContents(ply:GetPos()), CONTENTS_WATER ) == CONTENTS_WATER )
 	local wl2 = ply.IsInWater
@@ -257,7 +257,7 @@ function gDisasters_Revived:isinWater(ply)
 	end
 end
 
-function gDisasters_Revived:isUnderWater(ply)
+function gDisasters_Revived.isUnderWater(ply)
 	if ply.WaterIntensity == nil then ply.WaterIntensity = 0 end
 	local wl = ply:WaterLevel()
 	local wl2 = ply:GetNWBool("IsUnderwater")
@@ -289,7 +289,7 @@ function gDisasters_Revived:isUnderWater(ply)
 	end
 end
 
-function gDisasters_Revived:isinLava(ply)
+function gDisasters_Revived.isinLava(ply)
 	local lv = ply.IsInlava
 
 	if lv then
@@ -299,7 +299,7 @@ function gDisasters_Revived:isinLava(ply)
 	end
 end
 
-function gDisasters_Revived:isUnderLava(ply)
+function gDisasters_Revived.isUnderLava(ply)
 	if ply.LavaIntensity == nil then ply.LavaIntensity = 0 end
 	local lv = ply:GetNWBool("IsUnderlava")
 	local lv2 = ply.LavaIntensity
@@ -312,7 +312,7 @@ function gDisasters_Revived:isUnderLava(ply)
 	end
 end
 
-function gDisasters_Revived:isUnderGround(ply)
+function gDisasters_Revived.isUnderGround(ply)
 	local ug = ply:GetNWBool("IsUnderGround")
 
 	if ug then
@@ -322,7 +322,7 @@ function gDisasters_Revived:isUnderGround(ply)
 	end
 end
 
-function gDisasters_Revived:FindNearestEntity(self, class)
+function gDisasters_Revived.FindNearestEntity(self, class)
 
 	if ents.FindByClass(class)[1] == nil then return nil end
 
@@ -347,7 +347,7 @@ function gDisasters_Revived:FindNearestEntity(self, class)
 
 end
 
-function gDisasters_Revived:GetUnweldChanceFromEFCategory(category)
+function gDisasters_Revived.GetUnweldChanceFromEFCategory(category)
 
 	if category == "undetermined" then 
 		return 0 
@@ -368,7 +368,7 @@ function gDisasters_Revived:GetUnweldChanceFromEFCategory(category)
 
 end
 
-function gDisasters_Revived:GetEFCategory(windspeed)
+function gDisasters_Revived.GetEFCategory(windspeed)
 
 	if windspeed >= 0 and windspeed < 105 then 
 		return "undetermined";
@@ -390,7 +390,7 @@ function gDisasters_Revived:GetEFCategory(windspeed)
 	end
 end
 
-function gDisasters_Revived:QuadraticCurve(t)
+function gDisasters_Revived.QuadraticCurve(t)
 	
 	t = math.Clamp(t,0,1) * 20 
 	return ((t-10)^2)/100
@@ -398,125 +398,125 @@ function gDisasters_Revived:QuadraticCurve(t)
 	
 end
 
-function gDisasters_Revived:InversegQuadraticCurve(t)
-	return 1 - gDisasters_Revived:QuadraticCurve(t)
+function gDisasters_Revived.InversegQuadraticCurve(t)
+	return 1 - gDisasters_Revived.QuadraticCurve(t)
 end
 
 
-function gDisasters_Revived:GetPhysicsMultiplier()
+function gDisasters_Revived.GetPhysicsMultiplier()
 
 	return (200/3) / ( 1 / ( engine.TickInterval() ) )
 end
 
-function gDisasters_Revived:GetFrameMultiplier()
+function gDisasters_Revived.GetFrameMultiplier()
 	if FrameTime() == 0 then return 0 end 
 	
 	return 60 / ( 1 / FrameTime())
 end
 
 
-function gDisasters_Revived:HitChance(chance)
+function gDisasters_Revived.HitChance(chance)
 	if (SERVER) then 
 	
-		return math.random() < ( math.Clamp(chance * gDisasters_Revived:GetPhysicsMultiplier(),0,100)/100)
+		return math.random() < ( math.Clamp(chance * gDisasters_Revived.GetPhysicsMultiplier(),0,100)/100)
 	elseif (CLIENT) then 
 	
-		return math.random() < ( math.Clamp(chance * gDisasters_Revived:GetFrameMultiplier(),0,100)/100)
+		return math.random() < ( math.Clamp(chance * gDisasters_Revived.GetFrameMultiplier(),0,100)/100)
 
 	
 	end
 end
 
-function gDisasters_Revived:convert_SUtoMe(units)
+function gDisasters_Revived.convert_SUtoMe(units)
 	return (units * 0.75) / 39.37
 end
 
-function gDisasters_Revived:convert_GUtoMe(unit)
+function gDisasters_Revived.convert_GUtoMe(unit)
 	return unit * 0.01905
 end
 	
-function gDisasters_Revived:convert_MetoSU(metres)
+function gDisasters_Revived.convert_MetoSU(metres)
 	return (metres * 39.37) / 0.75
 end
 	
-function gDisasters_Revived:convert_KMPHtoMe(kmph)
+function gDisasters_Revived.convert_KMPHtoMe(kmph)
 	return (kmph*1000)/3600
 end
 
-function gDisasters_Revived:convert_MetoKMPH(me)
+function gDisasters_Revived.convert_MetoKMPH(me)
 	return (me*3600 / 1000)
 end
 
-function gDisasters_Revived:convert_KMPHtoMPH(kmph)
+function gDisasters_Revived.convert_KMPHtoMPH(kmph)
 	return (kmph * 0.621)
 end
-function gDisasters_Revived:convert_MPHtoKMPH(mph)
+function gDisasters_Revived.convert_MPHtoKMPH(mph)
 	return (mph * 1609)
 end
 
-function gDisasters_Revived:convert_CelciustoFahrenheit(celcius)
+function gDisasters_Revived.convert_CelciustoFahrenheit(celcius)
 	return ((celcius * 9 / 5) + 32)
 end
 
-function gDisasters_Revived:convert_FahrenheittoCelcius(Fahrenheit)
+function gDisasters_Revived.convert_FahrenheittoCelcius(Fahrenheit)
 	return ((Fahrenheit - 32) * 5 / 9 )
 end
 
-function gDisasters_Revived:convert_CelciustoKelvin(celcius)
+function gDisasters_Revived.convert_CelciustoKelvin(celcius)
 	return celcius + 273.15
 end
 
-function gDisasters_Revived:convert_PatoHpa(Pa)
+function gDisasters_Revived.convert_PatoHpa(Pa)
 	return Pa / 100
 end
 
-function gDisasters_Revived:convert_HpatoPa(Hpa)
+function gDisasters_Revived.convert_HpatoPa(Hpa)
 	return Hpa * 100
 end
 
-function gDisasters_Revived:convert_WtoWpm2(W, Area)
+function gDisasters_Revived.convert_WtoWpm2(W, Area)
 	return W / Area
 end
 
-function gDisasters_Revived:convert_Wpm2toW(W, Area)
+function gDisasters_Revived.convert_Wpm2toW(W, Area)
 	return W * Area
 end
 
-function gDisasters_Revived:convert_KevintoCelcius(Kevin)
+function gDisasters_Revived.convert_KevintoCelcius(Kevin)
 	return Kevin - 273.15
 end
 
-function gDisasters_Revived:convert_VectorToAngle(vector)
+function gDisasters_Revived.convert_VectorToAngle(vector)
 
     return vector:Angle()
 end
-function gDisasters_Revived:convert_AngleToVector(angle)
+function gDisasters_Revived.convert_AngleToVector(angle)
     return angle:Forward()
 end
 
-function gDisasters_Revived:convert_RadiantsToDegrees(radiants)
+function gDisasters_Revived.convert_RadiantsToDegrees(radiants)
 	return math.deg(radiants)
 end
 
-function gDisasters_Revived:convert_DegreesToRadiants(degrees)
+function gDisasters_Revived.convert_DegreesToRadiants(degrees)
 	return math.rad(degrees)
 end
 
-function gDisasters_Revived:convert_AngletoPitch(angle)
+function gDisasters_Revived.convert_AngletoPitch(angle)
 	return angle.x
 end
 
-function gDisasters_Revived:convert_AngletoYaw(angle)
+function gDisasters_Revived.convert_AngletoYaw(angle)
 	return angle.y
 end
 
-function gDisasters_Revived:convert_AngletoRoll(angle)
+function gDisasters_Revived.convert_AngletoRoll(angle)
 	return angle.z
 end
 
 
 
-function gDisasters_Revived:FixedSortedPairsByMemberValue( pTable, pValueName, Desc )
+function gDisasters_Revived.FixedSortedPairsByMemberValue( pTable, pValueName, Desc )
 
 	pTable = table.Copy( pTable )
 	Desc = Desc or false
@@ -536,7 +536,7 @@ function gDisasters_Revived:FixedSortedPairsByMemberValue( pTable, pValueName, D
 
 end
 
-function gDisasters_Revived:RotateVectorOnAxisGivenAngle(v, k, ang)
+function gDisasters_Revived.RotateVectorOnAxisGivenAngle(v, k, ang)
 	local theta    = math.rad(ang)
 	local ctheta   = math.cos(theta)
 	local stheta   = math.sin(theta)
@@ -547,7 +547,7 @@ function gDisasters_Revived:RotateVectorOnAxisGivenAngle(v, k, ang)
 
 end
 
-function gDisasters_Revived:BlendValues(i1,i2,mode)
+function gDisasters_Revived.BlendValues(i1,i2,mode)
 
 	if mode == "Darken Only" then 
 		return math.min(i1, i2)
@@ -567,13 +567,13 @@ function gDisasters_Revived:BlendValues(i1,i2,mode)
 end
 
 
-function gDisasters_Revived:Vec2D(vector)
+function gDisasters_Revived.Vec2D(vector)
 
 	return Vector(vector.x, vector.y, 0 )
 
 end
 
-function gDisasters_Revived:InitializeTable(num) 
+function gDisasters_Revived.InitializeTable(num) 
 
 	local tbl = {}
 	
@@ -609,9 +609,9 @@ Noise.p_temp = {
 }
 
 	
-Noise.p         = gDisasters_Revived:InitializeTable(255)
-Noise.perm      = gDisasters_Revived:InitializeTable(511)
-Noise.permMod12 = gDisasters_Revived:InitializeTable(511)
+Noise.p         = gDisasters_Revived.InitializeTable(255)
+Noise.perm      = gDisasters_Revived.InitializeTable(511)
+Noise.permMod12 = gDisasters_Revived.InitializeTable(511)
 Noise.perlin    = nil
 
 
@@ -919,42 +919,42 @@ function EvaluateRayleighAtT(T)
 	
 end
 
-function gDisasters_Revived:gDisasters_GetMoonAngleInRadians()
+function gDisasters_Revived.GetMoonAngleInRadians()
 
-	return math.rad(gDisasters_Revived:gDisasters_GetMoonAngleInDegs())
+	return math.rad(gDisasters_Revived.GetMoonAngleInDegs())
 end
 
-function gDisasters_Revived:gDisasters_GetMoonAngleInDegs()
+function gDisasters_Revived.GetMoonAngleInDegs()
 
-	return gDisasters_Revived:convert_VectorToAngle(gDisasters_Revived:gDisasters_GetSunDir()).x
+	return gDisasters_Revived.convert_VectorToAngle(gDisasters_Revived.GetMoonDir()).x
 end
 
-function gDisasters_Revived:gDisasters_GetSunAngleInRadians()
-	return math.rad(gDisasters_Revived:gDisasters_GetSunAngleInDegs())
+function gDisasters_Revived.GetSunAngleInRadians()
+	return math.rad(gDisasters_Revived.GetSunAngleInDegs())
 end
 
-function gDisasters_Revived:gDisasters_GetSunAngleInDegs()
-	return gDisasters_Revived:convert_VectorToAngle(gDisasters_GetSunDir()).x
+function gDisasters_Revived.GetSunAngleInDegs()
+	return gDisasters_Revived.convert_VectorToAngle(gDisasters_Revived.GetSunDir()).x
 end
 
-function gDisasters_Revived:gDisasters_GetMoonDir()
+function gDisasters_Revived.GetMoonDir()
 	return GetGlobalAngle("gdMoonDir")
 end
 
-function gDisasters_Revived:gDisasters_GetSunDir()
+function gDisasters_Revived.GetSunDir()
 	return GetGlobalAngle("gdSunDir")
 end
 
 
-function gDisasters_Revived:gDisasters_SetMoonDir(value)
+function gDisasters_Revived.SetMoonDir(value)
 	SetGlobalAngle("gdMoonDir", value)
 end
 
-function gDisasters_Revived:gDisasters_SetSunDir(value)
+function gDisasters_Revived.SetSunDir(value)
     SetGlobalAngle("gdSunDir", value)
 end
 
-function gDisasters_Revived:gDisasters_EntityExists(entname)
+function gDisasters_Revived.EntityExists(entname)
 	
 	if not (gDisasters_Revived.CachedExists[entname]) then 
 	
@@ -970,7 +970,7 @@ function gDisasters_Revived:gDisasters_EntityExists(entname)
 
 end
 
-function gDisasters_Revived:gDisasters_Is3DSkybox()
+function gDisasters_Revived.Is3DSkybox()
 
 
 	if (SERVER) then 
@@ -985,7 +985,7 @@ function gDisasters_Revived:gDisasters_Is3DSkybox()
 		
 	elseif (CLIENT) then
 		
-		return gDisasters_Revived:gDisasters_EntityExists("sky_camera")
+		return gDisasters_Revived.EntityExists("sky_camera")
 		
 		
 	end

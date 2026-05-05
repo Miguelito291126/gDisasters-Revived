@@ -1,5 +1,5 @@
-function gDisasters_Revived_PostSpawnSH()
-    local function gDisasters_Revived_SetupConvars()
+function gDisasters_Revived.PostSpawnSH()
+    local function SetupConvars()
         --Heat System
 
         CreateConVar( "gdisasters_revived_heat_system_enabled", "0", {FCVAR_ARCHIVE}, "" )
@@ -129,7 +129,7 @@ function gDisasters_Revived_PostSpawnSH()
 		CreateConVar( "gdisasters_revived_stormfox_enabled", "0", {FCVAR_ARCHIVE}, "")
     
     end
-    gDisasters_Revived_SetupConvars()
+    SetupConvars()
 end
-hook.Add( "InitPostEntity", "gDisasters_Revived_PostSpawnSH", gDisasters_Revived_PostSpawnSH)
-gDisasters_Revived_PostSpawnSH()
+hook.Add( "InitPostEntity", "PostSpawnSH", gDisasters_Revived.PostSpawnSH)
+gDisasters_Revived.PostSpawnSH()

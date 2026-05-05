@@ -18,7 +18,7 @@ function ENT:Initialize()
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(35,45),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(-10,-5), ["Humidity"]    = math.random(20,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(35,45),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(-10,-5), ["Humidity"]    = math.random(20,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 		self:SetModel(self.Model)
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -31,9 +31,9 @@ function ENT:Initialize()
 		if (phys:IsValid()) then
 			phys:SetMass(self.Mass)
 		end 
-		if IsMapRegistered() == false then
+		if gDisasters_Revived.IsMapRegistered() == false then
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 		
 		self.Original_SkyData = {}
@@ -50,12 +50,12 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 	
 	self:CreateSnowDecals()
-	gDisasters_Revived:setMapLight("d")		
+	gDisasters_Revived.setMapLight("d")		
 	
 
 
@@ -69,9 +69,9 @@ function ENT:Initialize()
 		data.EndMinCurrent  = 0
 		data.EndMaxCurrent  = 0       
 
-	gDisasters_Revived_CreateGlobalFog(self, data, true)	
+	gDisasters_Revived.CreateGlobalFog(self, data, true)	
 	
-	gDisasters_Revived_CreateGlobalGFX("heavyrain", self)						
+	gDisasters_Revived.CreateGlobalGFX("heavyrain", self)						
 		
 	end
 end
@@ -148,15 +148,15 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 		
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 	
 	

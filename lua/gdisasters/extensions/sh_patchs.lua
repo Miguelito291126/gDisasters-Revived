@@ -1,6 +1,6 @@
 
-MAP_PATHS = {}
-MAP_PATHS["gm_flatgrass"]    			  = { Vector(-13466,9319,-12795),
+gDisasters_Revived.MAP_PATHS = {}
+gDisasters_Revived.MAP_PATHS["gm_flatgrass"]    			  = { Vector(-13466,9319,-12795),
 												Vector(-5885,4476,-12795),
 												Vector(-2944,-2859,-12795),
 												Vector(-880,-3783,-12795),
@@ -11,7 +11,7 @@ MAP_PATHS["gm_flatgrass"]    			  = { Vector(-13466,9319,-12795),
 												Vector(5955,15091,-12795)
 											}
 
-MAP_PATHS["gm_flatgrass_winter"]    			  = { Vector(-13466,9319,-12795),
+gDisasters_Revived.MAP_PATHS["gm_flatgrass_winter"]    			  = { Vector(-13466,9319,-12795),
 												Vector(-5885,4476,-12795),
 												Vector(-2944,-2859,-12795),
 												Vector(-880,-3783,-12795),
@@ -22,7 +22,7 @@ MAP_PATHS["gm_flatgrass_winter"]    			  = { Vector(-13466,9319,-12795),
 												Vector(5955,15091,-12795)
 											}
 
-MAP_PATHS["gm_tornadohighway_final"]    			  = { 
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway_final"]    			  = { 
 															Vector(8865,11188,5),
 															Vector(8754,8179,0),
 															Vector(9224,5452,0),
@@ -83,7 +83,7 @@ MAP_PATHS["gm_tornadohighway_final"]    			  = {
 
 														}
 
-MAP_PATHS["gm_tornadohighway_mp"]    			  = 	  {
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway_mp"]    			  = 	  {
 
 															Vector(8865,11188,5),
 															Vector(8754,8179,0),
@@ -144,7 +144,7 @@ MAP_PATHS["gm_tornadohighway_mp"]    			  = 	  {
 															Vector(-8443,7928,0)
 														}				
 
-MAP_PATHS["gm_tornadohighway"]    			  = { 
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway"]    			  = { 
 															Vector(8865,11188,5),
 															Vector(8754,8179,0),
 															Vector(9224,5452,0),
@@ -204,7 +204,7 @@ MAP_PATHS["gm_tornadohighway"]    			  = {
 															Vector(-8443,7928,0)
 												}
 
-MAP_PATHS["gm_tornadohighway_night"]    		 = {		
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway_night"]    		 = {		
 															Vector(8865,11188,5),
 															Vector(8754,8179,0),
 															Vector(9224,5452,0),
@@ -264,7 +264,7 @@ MAP_PATHS["gm_tornadohighway_night"]    		 = {
 															Vector(-8443,7928,0)				
 												}														
 
-MAP_PATHS["gm_tornadohighway_2014"]    			  = { Vector(15343,-15344,137),
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway_2014"]    			  = { Vector(15343,-15344,137),
 														Vector(14583,-14202,59),
 														Vector(13343,-11935,274),
 														Vector(13069,-9575,455),
@@ -290,7 +290,7 @@ MAP_PATHS["gm_tornadohighway_2014"]    			  = { Vector(15343,-15344,137),
 														Vector(-13354,15343,-331)
 														}
 
-MAP_PATHS["gm_tornadohighway_2014_night"]    		 = { 
+gDisasters_Revived.MAP_PATHS["gm_tornadohighway_2014_night"]    		 = { 
 														Vector(15343,-15344,137),
 														Vector(14583,-14202,59),
 														Vector(13343,-11935,274),
@@ -317,7 +317,7 @@ MAP_PATHS["gm_tornadohighway_2014_night"]    		 = {
 														Vector(-13354,15343,-331)
 														}
 
-MAP_PATHS["gm_tornadoflatgrass"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_tornadoflatgrass"]    			  = {
 														Vector(-244,-1502,0),
 														Vector(-10582,-12129,0),
 														Vector(-9289,-12277,0),
@@ -389,7 +389,7 @@ MAP_PATHS["gm_tornadoflatgrass"]    			  = {
 														Vector(3178,8687,0)	
 													}
 
-MAP_PATHS["gm_sc_tornadocounty"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_sc_tornadocounty"]    			  = {
 
 														Vector(13295,-15344,36),
 														Vector(10661,-14291,98),
@@ -409,7 +409,7 @@ MAP_PATHS["gm_sc_tornadocounty"]    			  = {
 														Vector(-12885,15343,91)													
 													}
 												
-MAP_PATHS["gm_fork"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_fork"]    			  = {
 											Vector(-6714,10743,-10394),
 											Vector(-7318,10198,-10183),                          
 											Vector(-8268,9492,-10075),
@@ -421,7 +421,7 @@ MAP_PATHS["gm_fork"]    			  = {
 
 										}
 
-MAP_PATHS["gm_bigcity"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_bigcity"]    			  = {
 											Vector(-12323,12893,-11131),
 											Vector(-4188,11539,-11056),				
 											Vector(2025,9070,-11074),
@@ -436,7 +436,7 @@ MAP_PATHS["gm_bigcity"]    			  = {
 											Vector(-10878,-11407,-11131)									
 										}	
 
-MAP_PATHS["gm_oceanwaves"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_oceanwaves"]    			  = {
 											Vector(-5168,-4935,-8410),
 											Vector(-6250,-5150,-8393),
 											Vector(-7098,-5352,-8284),
@@ -527,7 +527,7 @@ MAP_PATHS["gm_oceanwaves"]    			  = {
 											Vector(12758,-5231,-8287)
 										}											
 									
-MAP_PATHS["gm_flatgrass17"]    			  = {
+gDisasters_Revived.MAP_PATHS["gm_flatgrass17"]    			  = {
 												Vector(-12576,5471,0),
 												Vector(-11912,1348,0),
 												Vector(-9662,-1369,0),
@@ -554,7 +554,7 @@ MAP_PATHS["gm_flatgrass17"]    			  = {
 												Vector(-3733,-2238,0)			
 											}
 
-MAP_PATHS["gm_calamitycoast_hl2"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_calamitycoast_hl2"]    		= {
 												Vector(12711,4134,-14667),
 												Vector(12958,4354,-14609),
 												Vector(13428,4824,-14532),
@@ -627,7 +627,7 @@ MAP_PATHS["gm_calamitycoast_hl2"]    		= {
 												Vector(-6106,5079,-14688)		
 												}
 
-MAP_PATHS["gm_calamitycoast"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_calamitycoast"]    		= {
 												Vector(12711,4134,-14667),
 												Vector(12958,4354,-14609),
 												Vector(13428,4824,-14532),
@@ -700,7 +700,7 @@ MAP_PATHS["gm_calamitycoast"]    		= {
 												Vector(-6106,5079,-14688)		
 												}
 
-MAP_PATHS["gm_th_tornadobeach"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_th_tornadobeach"]    		= {
 											Vector(-14161,-4264,64),
 											Vector(1741,-2788,64),
 											Vector(1784,-2777,78),
@@ -733,7 +733,7 @@ MAP_PATHS["gm_th_tornadobeach"]    		= {
 											Vector(-10680,975,64)
 											}
 
-MAP_PATHS["gm_flatbuild_pbs_2015_dev"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_flatbuild_pbs_2015_dev"]    		= {
 											Vector(-8916,-11435,-7168),
 											Vector(-1033,993,-7168),
 											Vector(3683,1214,-7168),
@@ -741,7 +741,7 @@ MAP_PATHS["gm_flatbuild_pbs_2015_dev"]    		= {
 											Vector(-1800,-6471,-7168)
 											}										  
 
-MAP_PATHS["gm_tornadovillage_final"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_tornadovillage_final"]    		= {
 											Vector(1831,-510,0),
 											Vector(7652,-5088,0),
 											Vector(7965,-8129,4),
@@ -757,7 +757,7 @@ MAP_PATHS["gm_tornadovillage_final"]    		= {
 											Vector(-10701,-16009,0)
 											}		
 
-MAP_PATHS["gm_tornado_village_beta1"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_tornado_village_beta1"]    		= {
 											Vector(1831,-510,0),
 											Vector(7652,-5088,0),
 											Vector(7965,-8129,4),
@@ -773,7 +773,7 @@ MAP_PATHS["gm_tornado_village_beta1"]    		= {
 											Vector(-10701,-16009,0)
 											}														  
 
-MAP_PATHS["gm_tornado_village_beta1a"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_tornado_village_beta1a"]    		= {
 											Vector(1831,-510,0),
 											Vector(7652,-5088,0),
 											Vector(7965,-8129,4),
@@ -789,7 +789,7 @@ MAP_PATHS["gm_tornado_village_beta1a"]    		= {
 											Vector(-10701,-16009,0)
 											}		
 
-MAP_PATHS["gm_hugeflatgrass_v1"]    		= {
+gDisasters_Revived.MAP_PATHS["gm_hugeflatgrass_v1"]    		= {
 
 										Vector(14222,14207,-15808),
 										Vector(8735,-167,-15808),
@@ -802,7 +802,7 @@ MAP_PATHS["gm_hugeflatgrass_v1"]    		= {
 
 									}		
 
-MAP_PATHS["gm_destroyable_city_001"] = {
+gDisasters_Revived.MAP_PATHS["gm_destroyable_city_001"] = {
 
 										Vector(9898,1875,67),
 										Vector(1413,2103,67),
@@ -827,18 +827,18 @@ MAP_PATHS["gm_destroyable_city_001"] = {
 									}
 
 
-function IsMapPathRegistered()
+function gDisasters_Revived.IsMapPathRegistered()
 	local map = game.GetMap()
 
-	if MAP_PATHS[map]==nil or table.IsEmpty(MAP_PATHS) then 
+	if gDisasters_Revived.MAP_PATHS[map]==nil or table.IsEmpty(gDisasters_Revived.MAP_PATHS) then 
 		return false 
 	else 
 		return true 
 	end 
 end
 
-function getMapPath()
+function gDisasters_Revived.getMapPath()
 	local map = game.GetMap()
-	if IsMapPathRegistered()==false then print("This map no have path, no work path tornados") return nil end 
-	return MAP_PATHS[map]
+	if gDisasters_Revived.IsMapPathRegistered()==false then print("This map no have path, no work path tornados") return nil end 
+	return gDisasters_Revived.MAP_PATHS[map]
 end

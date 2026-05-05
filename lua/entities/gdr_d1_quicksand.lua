@@ -17,7 +17,7 @@ ENT.Models                           =  {"models/props_debris/concrete_spawnplug
 
 function ENT:Initialize()	
 	if (CLIENT) then
-		gDisasters_Revived:SetMDScale(self, Vector(1,1,0.05))
+		gDisasters_Revived.SetMDScale(self, Vector(1,1,0.05))
 	end
 	
 	if (SERVER) then
@@ -92,7 +92,7 @@ function ENT:Think()
 		local t =  (FrameTime() / 0.1) / (66.666 / 0.1) -- tick dependant function that allows for constant think loop regardless of server tickrate
 		
 		for k, v in pairs(player.GetAll()) do
-			if v:EyePos().z < getMapCenterFloorPos().z then
+			if v:EyePos().z < gDisasters_Revived.getMapCenterFloorPos().z then
 				v:SetNWBool("IsUnderGround", true)
 			else
 				v:SetNWBool("IsUnderGround", false)

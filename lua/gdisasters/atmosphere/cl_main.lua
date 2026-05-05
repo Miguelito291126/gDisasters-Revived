@@ -1,9 +1,9 @@
-function Atmosphere()
-	WindControl()
+function gDisasters_Revived.Atmosphere()
+	gDisasters_Revived.WindControl()
 end
-hook.Add("Think", "atmosphericLoop", Atmosphere)
+hook.Add("Think", "atmosphericLoop", gDisasters_Revived.Atmosphere)
 
-function WindControl()
+function gDisasters_Revived.WindControl()
 	if LocalPlayer().gDisasters == nil then return end
 	if LocalPlayer().Sounds == nil then LocalPlayer().Sounds = {} end
 	
@@ -24,9 +24,9 @@ function WindControl()
 	if LocalPlayer().Sounds["Wind_Heavy"] == nil then
 		
 		
-		LocalPlayer().Sounds["Wind_Light"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_weak.wav")
-		LocalPlayer().Sounds["Wind_Moderate"]      = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_moderate.wav")
-		LocalPlayer().Sounds["Wind_Heavy"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_heavy.wav")
+		LocalPlayer().Sounds["Wind_Light"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_weak.wav")
+		LocalPlayer().Sounds["Wind_Moderate"]      = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_moderate.wav")
+		LocalPlayer().Sounds["Wind_Heavy"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/wind_heavy.wav")
 		
 		LocalPlayer().Sounds["Wind_Light"]:ChangeVolume(0, 0)
 		LocalPlayer().Sounds["Wind_Moderate"]:ChangeVolume(0, 0)

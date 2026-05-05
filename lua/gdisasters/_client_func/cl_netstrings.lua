@@ -28,7 +28,7 @@ net.Receive("gdr_createdecals", function()
 
 	for i=0, 25 do
 	
-		local bounds    = getMapSkyBox()
+		local bounds    = gDisasters_Revived.getMapSkyBox()
 		local min       = bounds[1]
 		local max       = bounds[2]
 
@@ -48,7 +48,7 @@ net.Receive("gdr_clParticles", function()
 	if GetConVar("gdisasters_revived_graphics_enable_weather_particles"):GetInt() <= 0 then return end
 
 	local effect = net.ReadString()
-	local angle  = gDisasters_Revived:convert_VectorToAngle(-GetGlobalVector("gDisasters_Revived_wind_Direction"))
+	local angle  = gDisasters_Revived.convert_VectorToAngle(-GetGlobalVector("gDisasters_Revived_wind_Direction"))
 	ParticleEffect( effect, LocalPlayer():GetPos(), angle, nil )
 
 end)
@@ -60,7 +60,7 @@ net.Receive("gdr_clParticles_ground", function()
 	end
 
 	local effect = net.ReadString()
-	local angle  = gDisasters_Revived:convert_VectorToAngle(-GetGlobalVector("gDisasters_Revived_wind_Direction"))
+	local angle  = gDisasters_Revived.convert_VectorToAngle(-GetGlobalVector("gDisasters_Revived_wind_Direction"))
 	ParticleEffect( effect, LocalPlayer():GetPos(), angle, nil )
 
 end)
@@ -70,7 +70,7 @@ net.Receive("gdr_CreateCeilingWaterDrops", function()
 	if GetConVar("gdisasters_revived_graphics_draw_ceiling_effects"):GetInt() <= 0 then return end 
 
 	timer.Create("CeilingWaterDrops", 10, 0, function()
-		gDisasters_Revived:AddCeilingWaterDrops("rain_ceiling_drops_effect", "rain_ceiling_drop_ground_splash", 2, 1, Angle(0,0,0))
+		gDisasters_Revived.AddCeilingWaterDrops("rain_ceiling_drops_effect", "rain_ceiling_drop_ground_splash", 2, 1, Angle(0,0,0))
 	end)
 
 end)
@@ -118,7 +118,7 @@ net.Receive("gdr_screen_particles", function()
 	local vel      = net.ReadVector()
 
 
-	for i=0, number do
+	for i = 0, number do
 		local pos      = Vector( math.random(0,ScrW()), math.random(0,ScrH()), 0) 
 		local center   = pos - Vector(size/2,size/2,0)
 
@@ -317,7 +317,7 @@ net.Receive("gdr_createfog", function()
 	LocalPlayer().gDisasters_Revived.Fog.Parent = entity
 	LocalPlayer().gDisasters_Revived.Fog.OQ     = oq
 
-	gDisasters_Revived_Effects["RENDERFOG"]()
+	gDisasters_Revived.Effects["RENDERFOG"]()
 
 end)
 
@@ -330,7 +330,7 @@ net.Receive("gdr_creategfx", function()
 	LocalPlayer().gDisasters_Revived.GFX.Parent = entity
 	LocalPlayer().gDisasters_Revived.GFX.Effect = effect
 
-	gDisasters_Revived_Effects[effect]()
+	gDisasters_Revived.Effects[effect]()
 
 
 end)

@@ -36,13 +36,13 @@ end
 
 function SWEP:PrimaryAttack()
 	local ply = self:GetOwner()
-	local pressure =  math.Round(GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
+	local pressure =  math.Round(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
 	ply:PrintMessage(HUD_PRINTCENTER,"Pressure is: " .. pressure .. "Pa")
 end
 
 function SWEP:SecondaryAttack()
 	local ply = self:GetOwner()
-	local pressure = math.Round(GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
+	local pressure = math.Round(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
 	
 	if pressure <= 100000 and pressure > 98000 then
 		ply:PrintMessage(HUD_PRINTCENTER,"Is Partly Cloudy")

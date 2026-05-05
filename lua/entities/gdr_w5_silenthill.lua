@@ -18,7 +18,7 @@ function ENT:Initialize()
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(2,5),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(5,15), ["Humidity"]    = math.random(20,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(2,5),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(5,15), ["Humidity"]    = math.random(20,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 		self:SetModel(self.Model)
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -51,7 +51,7 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
@@ -79,7 +79,7 @@ function ENT:Initialize()
 			data.EndMaxCurrent  = 0       
 
 		
-		gDisasters_Revived_CreateGlobalFog(self, data, true)	
+		gDisasters_Revived.CreateGlobalFog(self, data, true)	
 		
 		
 	end
@@ -101,7 +101,7 @@ end
 function ENT:AffectPlayers()
 	for k, v in pairs(player.GetAll()) do
 	
-		local outdoor = gDisasters_Revived:isOutdoor(v)
+		local outdoor = gDisasters_Revived.isOutdoor(v)
 		net.Start("gdr_isOutdoor")
 		net.WriteBool(outdoor)
 		net.Send(v)
@@ -134,7 +134,7 @@ function ENT:CreateDarkness(bool)
 	if bool == true then
 	
 		for k, ply in pairs(player.GetAll()) do	
-			gDisasters_Revived:clPlaySound(ply, "streams/disasters/silenthill/darkness_warning.mp3", 100, 1)
+			gDisasters_Revived.clPlaySound(ply, "streams/disasters/silenthill/darkness_warning.mp3", 100, 1)
 		end
 		
 		timer.Simple(20, function()
@@ -142,7 +142,7 @@ function ENT:CreateDarkness(bool)
 
 			
 			for k, ply in pairs(player.GetAll()) do	
-				gDisasters_Revived:clShakeScreen(ply, 10)
+				gDisasters_Revived.clShakeScreen(ply, 10)
 			end
 
 					
@@ -150,14 +150,14 @@ function ENT:CreateDarkness(bool)
 			timer.Simple(8, function()
 				if !self:IsValid() then return end
 				
-				gDisasters_Revived:setMapLight("a")
+				gDisasters_Revived.setMapLight("a")
 				self:SetNWBool("FogType", true)
 								
 		
 				for i=0, 100 do
 					timer.Simple(i/100, function()
 						if !self:IsValid() then return  end
-						gDisasters_Revived:paintSky_Fade(self.Darkness_SkyData, 0.05)
+						gDisasters_Revived.paintSky_Fade(self.Darkness_SkyData, 0.05)
 					end)
 				end
 			end)
@@ -170,7 +170,7 @@ function ENT:CreateDarkness(bool)
 				net.Start("gdr_clParticles")
 				net.WriteString("darkness_arriving_main", Angle(0,math.random(0,1),0))
 				net.Send(ply)	
-				gDisasters_Revived:clPlaySound(ply, "streams/disasters/silenthill/darkness_arrival.mp3", 100, 1)
+				gDisasters_Revived.clPlaySound(ply, "streams/disasters/silenthill/darkness_arrival.mp3", 100, 1)
 			end
 			
 			timer.Simple(23.3, function()
@@ -186,13 +186,13 @@ function ENT:CreateDarkness(bool)
 		
 
 	else
-		gDisasters_Revived:setMapLight("r")
+		gDisasters_Revived.setMapLight("r")
 		self:SetNWBool("FogType", false)
 
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 	end
@@ -315,11 +315,11 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
-		gDisasters_Revived:setMapLight("r")
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.setMapLight("r")
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 	end

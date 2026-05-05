@@ -23,11 +23,11 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_NONE  )
 		self:SetUseType( ONOFF_USE )
-		if IsMapRegistered() == true then
-			self:SetPos(getMapCenterFloorPos())
+		if gDisasters_Revived.IsMapRegistered() == true then
+			self:SetPos(gDisasters_Revived.getMapCenterFloorPos())
 		else
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true)  
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true)  
 		end
 		self:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
 		local phys = self:GetPhysicsObject()
@@ -45,9 +45,9 @@ end
 
 function ENT:SpawnTrees()
 
-	if gDisasters_Revived:HitChance(2) then
+	if gDisasters_Revived.HitChance(2) then
 	
-		local bounds    = getMapSkyBox()
+		local bounds    = gDisasters_Revived.getMapSkyBox()
 		local min       = bounds[1]
 		local max       = bounds[2]
 		
@@ -79,7 +79,7 @@ function ENT:SpawnTrees()
 		if (v:GetClass() == "prop_physics") then
 			if !self:IsValid() or !v:IsValid() then return end
 			
-			if gDisasters_Revived:HitChance(0.02) then
+			if gDisasters_Revived.HitChance(0.02) then
 			
 				print(v:GetModel())
 					
@@ -128,9 +128,9 @@ end
 
 function ENT:SpawnBirds()
 
-	if gDisasters_Revived:HitChance(0.5) then
+	if gDisasters_Revived.HitChance(0.5) then
 	
-		local bounds    = getMapSkyBox()
+		local bounds    = gDisasters_Revived.getMapSkyBox()
 		local min       = bounds[1]
 		local max       = bounds[2]
 		

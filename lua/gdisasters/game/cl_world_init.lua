@@ -1,4 +1,4 @@
-hook.Add( "InitPostEntity", "gDisastersFirstJoinLightmaps", function()
+hook.Add( "InitPostEntity", "gDisastersRevivedFirstJoinLightmaps", function()
 
 	render.RedownloadAllLightmaps();
 
@@ -6,19 +6,19 @@ hook.Add( "InitPostEntity", "gDisastersFirstJoinLightmaps", function()
 
 end )
 
-hook.Add( "CalcView", "gdisastersCalcView", function( pl, pos, ang, fov, nearZ, farZ )
+hook.Add( "CalcView", "gDisastersRevivedCalcView", function( pl, pos, ang, fov, nearZ, farZ )
 	
 	gDisasters_Revived.DayNightSystem.CalcView(pl, pos, ang, fov, nearZ, farZ)
 	
 end );
 
-hook.Add( "RenderScene", "gDisastersRenderScene", function( origin, angles, fov )
+hook.Add( "RenderScene", "gDisastersRevivedRenderScene", function( origin, angles, fov )
 
 	gDisasters_Revived.DayNightSystem.RenderScene(origin, angles, fov)
 
 end );
 
-hook.Add( "PostDrawSkyBox", "gDisastersPostDrawSkyBox", function()
+hook.Add( "PostDrawSkyBox", "gDisastersRevivedPostDrawSkyBox", function()
 
 	gDisasters_Revived.DayNightSystem.RenderMoon()
 

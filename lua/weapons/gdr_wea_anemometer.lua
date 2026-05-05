@@ -37,7 +37,7 @@ end
 function SWEP:PrimaryAttack()
 	if CLIENT then return end
 	local ply = self:GetOwner()
-	local wind_speed = math.Round(GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"],1)
+	local wind_speed = math.Round(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"],1)
 	local local_wind_speed = math.Round(ply:GetNWFloat("LocalWind"),1)
 	ply:PrintMessage(HUD_PRINTCENTER, "Your local wind velocity is: " .. local_wind_speed .. " Km/h, The global wind velocity is: " .. wind_speed .. " Km/h")
 end

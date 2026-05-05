@@ -1,5 +1,5 @@
 
-function gDisasters_Revived:setMapLight(light)
+function gDisasters_Revived.setMapLight(light)
 	local light_env = ents.FindByClass("light_environment")[1]
 
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() <= 0 then return end
@@ -26,7 +26,7 @@ function gDisasters_Revived:setMapLight(light)
 	end
 end
 
-function gDisasters_Revived:GetLightLevel(player)
+function gDisasters_Revived.GetLightLevel(player)
 
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() <= 0 then return end
 
@@ -39,7 +39,7 @@ function gDisasters_Revived:GetLightLevel(player)
 	end
 end
 -- --]]
-function gDisasters_Revived:paintSky_Fade(data_to, fraction) -- fade from one env_skyPaint setting to another
+function gDisasters_Revived.paintSky_Fade(data_to, fraction) -- fade from one env_skyPaint setting to another
 
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() <= 0 then return end
 
@@ -105,7 +105,7 @@ function gDisasters_Revived:paintSky_Fade(data_to, fraction) -- fade from one en
 
 end
 
-function gDisasters_Revived:paintSky(data)
+function gDisasters_Revived.paintSky(data)
 
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() <= 0 then return end
 
@@ -215,7 +215,7 @@ function env_skyPaint()
 
 end
 -- ]]--
-function gDisasters_Revived:GetMaterialType(ent)
+function gDisasters_Revived.GetMaterialType(ent)
 
 	local phys = ent:GetPhysicsObject()
 	if phys:IsValid() then 
@@ -227,12 +227,12 @@ end
 
 
 
-function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, speed, pitchrange, shakeduration) -- SPEED MUST BE IN MS^-1
+function gDisasters_Revived.CreateSoundWave(soundpath, epicenter, soundtype, speed, pitchrange, shakeduration) -- SPEED MUST BE IN MS^-1
 
 
 	for k, v in pairs(player.GetAll()) do
 		local distance = v:GetPos():Distance(epicenter) -- distance from player and epicenter
-		local t        = distance / gDisasters_Revived:convert_MetoSU(speed)  -- speed of sound = 340.29 m/s
+		local t        = distance / gDisasters_Revived.convert_MetoSU(speed)  -- speed of sound = 340.29 m/s
 		timer.Simple(t, function()
 			if v:IsValid() then
 			
@@ -254,7 +254,7 @@ function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, spe
 		end)
 	end
 end
-function gDisasters_Revived:StopSoundWave(soundpath, soundtype) -- SPEED MUST BE IN MS^-1
+function gDisasters_Revived.StopSoundWave(soundpath, soundtype) -- SPEED MUST BE IN MS^-1
 	for k, v in pairs(player.GetAll()) do
 
 		if v:IsValid() then
@@ -289,14 +289,14 @@ Function notes:
 --]]
 
 
-function gDisasters_Revived:Entity_Create(entity)
+function gDisasters_Revived.Entity_Create(entity)
 	local ent = ents.Create(entity)
 	ent:Spawn()
 	ent:Activate()
 end
 
 
-function gDisasters_Revived:FindInCone(pos, max_z_gain, min_z_loss, radius_at_max_z, radius_at_min_z, phys_only )
+function gDisasters_Revived.FindInCone(pos, max_z_gain, min_z_loss, radius_at_max_z, radius_at_min_z, phys_only )
 
 
 
@@ -393,7 +393,7 @@ Function notes:
 --]]
 
 
-function gDisasters_Revived:FindInCylinder(pos, radius, top, bottom, physonly)
+function gDisasters_Revived.FindInCylinder(pos, radius, top, bottom, physonly)
 
 	local entities = {}
 	local selfpos_normalized = Vector(pos.x, pos.y, 0)
@@ -464,7 +464,7 @@ function gDisasters_Revived:FindInCylinder(pos, radius, top, bottom, physonly)
 	return entities 
 end
 
-function gDisasters_Revived:clShakeScreen(ply, duration)
+function gDisasters_Revived.clShakeScreen(ply, duration)
 
 
 	net.Start("gdr_shakescreen")
@@ -474,7 +474,7 @@ function gDisasters_Revived:clShakeScreen(ply, duration)
 end
 
 
-function gDisasters_Revived:clPlaySound(ply, sound, pitch, volume)
+function gDisasters_Revived.clPlaySound(ply, sound, pitch, volume)
 
 	net.Start("gdr_sendsound")
 	net.WriteString(sound or "")
@@ -483,14 +483,14 @@ function gDisasters_Revived:clPlaySound(ply, sound, pitch, volume)
 	net.Send(ply)
 end
 
-function gDisasters_Revived:clStopSound(ply, sound)
+function gDisasters_Revived.clStopSound(ply, sound)
 
 	net.Start("gdr_stopsound")
 	net.WriteString(sound or "")
 	net.Send(ply)
 end
 
-function gDisasters_Revived:SetOffsetAngles(player, offset)
+function gDisasters_Revived.SetOffsetAngles(player, offset)
 	net.Start("gdr_seteyeangles_cl")
 	net.WriteAngle(offset)
 	net.Send(player)
@@ -498,7 +498,7 @@ function gDisasters_Revived:SetOffsetAngles(player, offset)
 end
 
 
-function gDisasters_Revived:FindEntitiesByModels(models)
+function gDisasters_Revived.FindEntitiesByModels(models)
 	local filtered = {}
 	for k, v in pairs(ents.GetAll()) do
 		if models[v:GetModel()]==true then
@@ -510,15 +510,15 @@ function gDisasters_Revived:FindEntitiesByModels(models)
 	return filtered
 end
 
-function gDisasters_Revived:FindNearestEntityByModels(self, models)
+function gDisasters_Revived.FindNearestEntityByModels(self, models)
 
 
-	if gDisasters_Revived:FindEntitiesByModels(models)[1] == nil then return nil end
+	if gDisasters_Revived.FindEntitiesByModels(models)[1] == nil then return nil end
 
-	local current_target          = gDisasters_Revived:FindEntitiesByModels(models)[1]
+	local current_target          = gDisasters_Revived.FindEntitiesByModels(models)[1]
 
 
-	for k, v in pairs(gDisasters_Revived:FindEntitiesByModels(models)) do
+	for k, v in pairs(gDisasters_Revived.FindEntitiesByModels(models)) do
 
 		local dis   = current_target:GetPos():Distance(self:GetPos()) -- from current target to self
 		local dis2  = v:GetPos():Distance(self:GetPos()) -- from new target to self 
@@ -536,7 +536,7 @@ function gDisasters_Revived:FindNearestEntityByModels(self, models)
 
 end
 
-function gDisasters_Revived:isOutdoor(ply, isprop)
+function gDisasters_Revived.isOutdoor(ply, isprop)
 
 
 
@@ -578,7 +578,7 @@ function gDisasters_Revived:isOutdoor(ply, isprop)
 	
 	local hitSky     = isBelowSky(ply)
 	
-	if gDisasters_Revived:isUnderWater(ply) or gDisasters_Revived:isUnderLava(ply) then
+	if gDisasters_Revived.isUnderWater(ply) or gDisasters_Revived.isUnderLava(ply) then
 		if isprop == nil then
 			net.Start("gdr_isOutdoor")
 			net.WriteBool(false)
@@ -603,18 +603,18 @@ end
 
 
 
-function gDisasters_Revived:windPressure(windspeed)
+function gDisasters_Revived.windPressure(windspeed)
 	return (windspeed*windspeed)*0.00256
 end
 
-function gDisasters_Revived:windLoad(entity, windSpeed) -- entity and wp = wind pressure
+function gDisasters_Revived.windLoad(entity, windSpeed) -- entity and wp = wind pressure
 	local bounding_radius = entity:BoundingRadius()
 	local area            = (2*math.pi)*(bounding_radius*bounding_radius)
-	local F               = area * gDisasters_Revived:windPressure(windSpeed) * 0.0035
+	local F               = area * gDisasters_Revived.windPressure(windSpeed) * 0.0035
 	return F
 end
 
-function gDisasters_Revived:Area(entity) -- entity and wp = wind pressure
+function gDisasters_Revived.Area(entity) -- entity and wp = wind pressure
 	if entity.boundingRadiusArea == nil then
 	
 		local bounding_radius = entity:BoundingRadius()
@@ -629,12 +629,12 @@ function gDisasters_Revived:Area(entity) -- entity and wp = wind pressure
 end
 
 
-function gDisasters_Revived:IsSomethingBlockingWind(entity)
+function gDisasters_Revived.IsSomethingBlockingWind(entity)
 
 
 	local tr = util.TraceLine( {
 		start = entity:GetPos() + Vector(0,0,10),
-		endpos = entity:GetPos() + Vector(0,0,10) + (GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] * 300),
+		endpos = entity:GetPos() + Vector(0,0,10) + (gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] * 300),
 		filter = entity
 
 	} )
@@ -644,7 +644,7 @@ function gDisasters_Revived:IsSomethingBlockingWind(entity)
 	return tr.Hit
 end
 
-function gDisasters_Revived:MakeFreeze( ent ) -- credits goes to Kogitsune
+function gDisasters_Revived.MakeFreeze( ent ) -- credits goes to Kogitsune
     if not IsValid( ent ) then
         return
     end
@@ -842,7 +842,7 @@ function gDisasters_Revived:MakeFreeze( ent ) -- credits goes to Kogitsune
             	end
             end
             SafeRemoveEntityDelayed( rag, 90 )
-			gDisasters_Revived:MakeFreeze( rag )
+			gDisasters_Revived.MakeFreeze( rag )
         else
             rag = ents.Create( "prop_physics" )
 			rag:SetModel( ent:GetModel( ) )
@@ -863,11 +863,11 @@ function gDisasters_Revived:MakeFreeze( ent ) -- credits goes to Kogitsune
         else
             ent:Remove( )
         end
-        gDisasters_Revived:MakeFreeze( rag )
+        gDisasters_Revived.MakeFreeze( rag )
     end
 end
 
-function gDisasters_Revived:MakeBurn( ent ) -- credits goes to Kogitsune
+function gDisasters_Revived.MakeBurn( ent ) -- credits goes to Kogitsune
     if not IsValid( ent ) then
         return
     end
@@ -983,7 +983,7 @@ function gDisasters_Revived:MakeBurn( ent ) -- credits goes to Kogitsune
             	end
             end
             SafeRemoveEntityDelayed( rag, 90 )
-			gDisasters_Revived:MakeBurn( rag )
+			gDisasters_Revived.MakeBurn( rag )
         else
             rag = ents.Create( "prop_physics" )
 			rag:SetModel( ent:GetModel( ) )
@@ -1004,7 +1004,7 @@ function gDisasters_Revived:MakeBurn( ent ) -- credits goes to Kogitsune
         else
             ent:Remove( )
         end
-        gDisasters_Revived:MakeBurn( rag )
+        gDisasters_Revived.MakeBurn( rag )
     end
 end
 
@@ -1023,7 +1023,7 @@ end)
 hook.Add( "Think", "gDisasters_EnvWaterMovement", function(  )
 	for k, ply in pairs(player.GetAll()) do 
 	
-		if gDisasters_Revived:isinWater(ply) then
+		if gDisasters_Revived.isinWater(ply) then
 			if ply:KeyDown( IN_JUMP) then 
 				if ply:GetVelocity():Dot(Vector(0,0,100)) < 1000 then 
 					ply:SetVelocity(Vector( 0,0,100 ))

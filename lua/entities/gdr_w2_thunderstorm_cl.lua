@@ -34,8 +34,8 @@ function ENT:Initialize()
 			phys:SetMass(self.Mass)
 		end 		
 			
-		if IsMapRegistered() == false then
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true)  
+		if gDisasters_Revived.IsMapRegistered() == false then
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true)  
 		end
 	end
 end
@@ -45,7 +45,7 @@ end
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
 	
-	if IsMapRegistered() == true then
+	if gDisasters_Revived.IsMapRegistered() == true then
 	
 	self.OWNER = ply
 	local ent = ents.Create( self.ClassName )
@@ -60,7 +60,7 @@ end
 
 function ENT:CreateBolts()
 	
-	local bounds    = getMapSkyBox()
+	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 	
@@ -72,25 +72,25 @@ function ENT:CreateBolts()
 
 	local endpos   = tr.HitPos
 	
-	if gDisasters_Revived:HitChance(1) then
+	if gDisasters_Revived.HitChance(1) then
 	
 	
 	
 	
-		if gDisasters_Revived:HitChance(2) then
+		if gDisasters_Revived.HitChance(2) then
 			local sprite_pos  = Vector(   math.random(min.x,max.x)      ,  math.random(min.y,max.y) ,  max.z )
 
 			ParticleEffect( table.Random( { "sprite_lightning_main_01", "sprite_lightning_main_02", "sprite_lightning_main_03" } ), sprite_pos - Vector(0,0,math.random(0,2000)), Angle(0,0,0), nil)
 		end
 		
-		if gDisasters_Revived:HitChance(1) then
+		if gDisasters_Revived.HitChance(1) then
 			local elves_pos  = Vector(   math.random(min.x,max.x)      ,  math.random(min.y,max.y) ,  max.z )
 
 			ParticleEffect( table.Random({"elves_main_01","elves_main_02"}), elves_pos - Vector(0,0,math.random(0,2000)), Angle(0,0,0), nil)
 		end		
 		
 	
-		if gDisasters_Revived:HitChance(0.1) then
+		if gDisasters_Revived.HitChance(0.1) then
 			local blue_jet_pos  = Vector(   math.random(min.x,max.x)      ,  math.random(min.y,max.y) ,  max.z )
 
 			ParticleEffect( "blue_jet_lightning_01_main", blue_jet_pos - Vector(0,0,math.random(2000,4000)), Angle(0,0,0), nil)

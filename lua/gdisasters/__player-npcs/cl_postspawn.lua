@@ -1,9 +1,9 @@
 
-function gDisasters_Revived_PostSpawnCL()
+function gDisasters_Revived.PostSpawnCL()
 	
 	LocalPlayer().gDisasters_Revived = {}
 	
-	local function gDisasters_Revived_SetupHUDMISC()
+	local function SetupHUDMISC()
 		LocalPlayer().gDisasters_Revived.HUD = {}
 		LocalPlayer().gDisasters_Revived.HUD.NextWarningSoundTime = CurTime()
 		LocalPlayer().gDisasters_Revived.HUD.NextHeartSoundTime   = CurTime()
@@ -17,7 +17,7 @@ function gDisasters_Revived_PostSpawnCL()
 		LocalPlayer().gDisasters_Revived.HUD.SneezeBigIntensity  = 0
 	end
 	
-	local function gDisasters_Revived_SetupCLConvars()
+	local function SetupCLConvars()
 	
 		--hud
 		CreateConVar( "gdisasters_revived_hud_enabled", 1, {FCVAR_ARCHIVE}	, "" )
@@ -65,7 +65,7 @@ function gDisasters_Revived_PostSpawnCL()
 	
 	end
 
-	local function gDisasters_Revived_SetupFOGVars()
+	local function SetupFOGVars()
 		LocalPlayer().gDisasters_Revived.Fog = {}
 		LocalPlayer().gDisasters_Revived.Fog.Data   = {}
 		LocalPlayer().gDisasters_Revived.Fog.Parent = false
@@ -86,13 +86,13 @@ function gDisasters_Revived_PostSpawnCL()
 	
 	end
 	
-	local function gDisasters_Revived_SetupGFXVars()
+	local function SetupGFXVars()
 		LocalPlayer().gDisasters_Revived.GFX = {}
 		LocalPlayer().gDisasters_Revived.GFX.Effect = "none"
 		LocalPlayer().gDisasters_Revived.GFX.Parent = false
 	end
 	
-	local function gDisasters_Revived_SetupOutsideVars()
+	local function SetupOutsideVars()
 		LocalPlayer().gDisasters_Revived.Outside = {}
 		LocalPlayer().gDisasters_Revived.Outside.IsOutside     = false
 		LocalPlayer().gDisasters_Revived.Outside.OutsideFactor = 0
@@ -101,21 +101,21 @@ function gDisasters_Revived_PostSpawnCL()
 	
 	end
 
-	local function gDisasters_Revived_SetupIntesity()
+	local function SetupIntesity()
 		LocalPlayer().LavaIntensity = 0
 		LocalPlayer().WaterIntensity = 0
 	end
 
-	local function gDisasters_Revived_SetupSound()
+	local function SetupSound()
 		LocalPlayer().Sounds = {}
 	end
 
-	gDisasters_Revived_SetupOutsideVars()
-	gDisasters_Revived_SetupHUDMISC()	
-	gDisasters_Revived_SetupFOGVars()
-	gDisasters_Revived_SetupCLConvars()
-	gDisasters_Revived_SetupGFXVars()
-	gDisasters_Revived_SetupIntesity()
-	gDisasters_Revived_SetupSound()
+	SetupOutsideVars()
+	SetupHUDMISC()	
+	SetupFOGVars()
+	SetupCLConvars()
+	SetupGFXVars()
+	SetupIntesity()
+	SetupSound()
 end
-hook.Add( "InitPostEntity", "gDisasters_Revived_PostSpawnCL", gDisasters_Revived_PostSpawnCL)
+hook.Add( "InitPostEntity", "gDisasters_Revived_PostSpawnCL", gDisasters_Revived.PostSpawnCL)

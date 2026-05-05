@@ -86,7 +86,7 @@ function ENT:UpdateOutputs()
 		WireLib.TriggerOutput(self, "X", pos.x)
 		WireLib.TriggerOutput(self, "Y", pos.y)
 		WireLib.TriggerOutput(self, "Z", pos.y)
-		WireLib.TriggerOutput(self, "WindSPD", gDisasters_Revived:convert_MetoKMPH(gDisasters_Revived:convert_SUtoMe(self:GetVelocity():Length())))
+		WireLib.TriggerOutput(self, "WindSPD", gDisasters_Revived.convert_MetoKMPH(gDisasters_Revived.convert_SUtoMe(self:GetVelocity():Length())))
 	end
 end 
 

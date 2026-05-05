@@ -1,12 +1,12 @@
-local function Autospawn_Timer()
+function gDisasters_Revived.Autospawn_Timer()
 	local recent = false
 
 	local function Autospawn()
 
-		local map_bounds = getMapBounds()
-		local map_skybox = getMapSkyBox()
-		local map_center = getMapCenterPos()
-		local map_floorcenter = getMapCenterFloorPos()
+		local map_bounds = gDisasters_Revived.getMapBounds()
+		local map_skybox = gDisasters_Revived.getMapSkyBox()
+		local map_center = gDisasters_Revived.getMapCenterPos()
+		local map_floorcenter = gDisasters_Revived.getMapCenterFloorPos()
 
 		local SkyPos = Vector(math.random(map_bounds[1].x,map_bounds[2].x),  math.random(map_bounds[1].y,map_bounds[2].y),  map_skybox[2].z)
 
@@ -314,13 +314,13 @@ local function Autospawn_Timer()
 
 	timer.Create( "Autospawn_Timer", GetConVar( "gdisasters_revived_autospawn_spawn_timer" ):GetInt(), 0, function()
 		if GetConVar("gdisasters_revived_autospawn_enable"):GetInt() >= 1 then 
-			if IsMapRegistered() == true then 
+			if gDisasters_Revived.IsMapRegistered() == true then 
 				if math.random(0,GetConVar( "gdisasters_revived_autospawn_spawn_chance" ):GetInt()) == GetConVar( "gdisasters_revived_autospawn_spawn_chance" ):GetInt() then
 					if recent then recent = false return end
 					Autospawn()
 				end
 			else
-				gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+				gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 				return 
 			end
 		end
@@ -328,10 +328,10 @@ local function Autospawn_Timer()
 	)
 
 end
-hook.Add( "Initialize", "gdisasters_revived_autospawn", Autospawn_Timer)
-Autospawn_Timer()
+hook.Add( "Initialize", "gdisasters_revived_autospawn", gDisasters_Revived.Autospawn_Timer)
+gDisasters_Revived.Autospawn_Timer()
 
-local function Removemaptornados()
+function gDisasters_Revived.Removemaptornados()
 	if GetConVar('gdisasters_revived_autospawn_getridmaptor'):GetInt() == 1 then
 		for k, v in pairs(ents.FindByClass("func_tracktrain", "func_tanktrain")) do
 			v:Remove()
@@ -340,10 +340,10 @@ local function Removemaptornados()
 	end
 end
 
-hook.Add("InitPostEntity","gdisastersRemovemaptornados",function()
-	Removemaptornados()
+hook.Add("InitPostEntity","gdisastersRevivedRemovemaptornados",function()
+	gDisasters_Revived.Removemaptornados()
 end)
 
-hook.Add("PostCleanupMap","gdisastersReRemovemaptornados",function()
-	Removemaptornados()
+hook.Add("PostCleanupMap","gdisastersRevivedRemovemaptornados",function()
+	gDisasters_Revived.Removemaptornados()
 end)

@@ -34,7 +34,7 @@ function ENT:Initialize()
 		self.FloodHeight = 0
 		self:SetNWFloat("FloodHeight", self.FloodHeight)
 		
-		if IsMapRegistered()==false then self:Remove() end 
+		if gDisasters_Revived.IsMapRegistered()==false then self:Remove() end 
 
 			
 		
@@ -53,14 +53,14 @@ end
 
 function createFlood(maxheight, parent)
 
-	if IsMapRegistered() == true then
+	if gDisasters_Revived.IsMapRegistered() == true then
 	
 	for k, v in pairs(ents.FindByClass("gdr_env_dynamiclava", "gdr_env_dynamicwater")) do
 		v:Remove()
 	end
 	
 	local flood = ents.Create("gdr_env_dynamicwater")
-	flood:SetPos(getMapCenterFloorPos())
+	flood:SetPos(gDisasters_Revived.getMapCenterFloorPos())
 	flood:Spawn()
 	flood:Activate()
 
@@ -87,7 +87,7 @@ function ENT:SpawnFunction( ply, tr )
 	ent:SetPhysicsAttacker(ply)
 	
 	
-	ent:SetPos( getMapCenterFloorPos() )
+	ent:SetPos( gDisasters_Revived.getMapCenterFloorPos() )
 
 	
 	ent:Spawn()
@@ -300,7 +300,7 @@ function gdr_env_dynamicwater_DrawWater()
 	model:SetNoDraw(true)	
 	
 	local height =  flood:GetNWFloat("FloodHeight")
-	local map_bounds = getMapBounds()
+	local map_bounds = gDisasters_Revived.getMapBounds()
 	local vmin, vmax =  Vector(map_bounds[1].x,map_bounds[1].y,0),  Vector(map_bounds[2].x,map_bounds[2].y,height)
 	
 	local water_texture =  water_textures[ math.Clamp(GetConVar( "gdisasters_revived_graphics_water_quality" ):GetInt(), 1, 3)]
@@ -342,7 +342,7 @@ function gdr_env_dynamicwater_DrawWater()
 		render.SuppressEngineLighting( true ) 
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( flood:GetAngles( ) );
 	
 		matrix:Scale( Vector(1,1,1) )
@@ -369,7 +369,7 @@ function gdr_env_dynamicwater_DrawWater()
 		render.SetBlend( 1 )
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( flood:GetAngles( ) );
 		matrix:Scale( Vector(1,1,1) )
 		
@@ -402,7 +402,7 @@ if (CLIENT) then
 	hook.Add("PreDrawTranslucentRenderables", "DRAWFLOOD", function()
 	
 
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 		
 			gdr_env_dynamicwater_DrawWater()
 

@@ -18,7 +18,7 @@ ENT.Models                           =  {"models/props_debris/concrete_spawnplug
 function ENT:Initialize()	
 
 	if (CLIENT) then
-		gDisasters_Revived:SetMDScale(self, Vector(1,1,0.05))
+		gDisasters_Revived.SetMDScale(self, Vector(1,1,0.05))
 	end
 	
 	if (SERVER) then

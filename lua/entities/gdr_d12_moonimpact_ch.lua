@@ -100,7 +100,7 @@ function ENT:Explode()
 	
 	ParticleEffect("chicxuclub_explosion_main", self:GetPos(), Angle(0,0,0), nil)
 	
-	gDisasters_Revived:CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
+	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 	
 	local earthquake = ents.Create("gdr_d12_rs12eq")
 	earthquake:Spawn()
@@ -194,13 +194,13 @@ function ENT:Think()
 	local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1	
 		
 	if (SERVER) then
-		if gDisasters_Revived:isinWater(self) or gDisasters_Revived:isUnderWater(self) then
+		if gDisasters_Revived.isinWater(self) or gDisasters_Revived.isUnderWater(self) then
 			self:Explode()
 			local ent = ents.Create("gdr_d10_megatsunami")
 			ent:Spawn()
 			ent:Activate()
 		end
-		if gDisasters_Revived:isinLava(self) or gDisasters_Revived:isUnderLava(self) then
+		if gDisasters_Revived.isinLava(self) or gDisasters_Revived.isUnderLava(self) then
 			self:Explode()
 			local ent = ents.Create("gdr_d10_lava_megatsunami")
 			ent:Spawn()

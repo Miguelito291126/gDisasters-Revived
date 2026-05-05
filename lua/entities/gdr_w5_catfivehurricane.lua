@@ -18,13 +18,13 @@ function ENT:Initialize()
 	if (CLIENT) then
 		
 		
-		LocalPlayer().Sounds["Rainstorm_IDLE"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop.wav")
-		LocalPlayer().Sounds["Rainstorm_muffled_IDLE"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop_muffled.wav")
+		LocalPlayer().Sounds["Rainstorm_IDLE"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop.wav")
+		LocalPlayer().Sounds["Rainstorm_muffled_IDLE"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop_muffled.wav")
 	end
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(252,321),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 95000, ["Temperature"] = math.random(10,15), ["Humidity"]    = math.random(40,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(252,321),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 95000, ["Temperature"] = math.random(10,15), ["Humidity"]    = math.random(40,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 		
 		self:SetModel(self.Model)
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -52,12 +52,12 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
 
-		gDisasters_Revived:setMapLight("d")		
+		gDisasters_Revived.setMapLight("d")		
 	
 
 
@@ -71,9 +71,9 @@ function ENT:Initialize()
 			data.EndMinCurrent  = 0
 			data.EndMaxCurrent  = 0       
 
-		gDisasters_Revived_CreateGlobalFog(self, data, true)	
+		gDisasters_Revived.CreateGlobalFog(self, data, true)	
 		
-		gDisasters_Revived_CreateGlobalGFX("heavyrain", self)
+		gDisasters_Revived.CreateGlobalGFX("heavyrain", self)
 
 	end
 end
@@ -161,14 +161,14 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 	
 	if (CLIENT) then

@@ -131,31 +131,31 @@ function ENT:PlayFadeinSound()
 	
 	if category == "EF0" or category == "EF1" or category == "EF2"then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef0_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef0_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 		
 	elseif category == "EF3" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef3_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef3_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF4" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef4_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef4_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF5" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 		
 	elseif category == "EF6" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "Martian EF6" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF7" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	end
 
@@ -167,27 +167,27 @@ function ENT:PlayFadeoutSound()
 	
 	if category == "EF0" or category == "EF1" or category == "EF2"then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef0_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef0_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 		
 	elseif category == "EF4" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef4_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef4_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF5" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF6" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/ef5_fadeout.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 	
 	elseif category == "Martian EF6" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	elseif category == "EF7" then
 	
-		gDisasters_Revived:CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/environment/wind_shared/martian_tornado_fadein.mp3", self:GetPos(), "3d", 340/2, {80,120}, 10)
 
 	end
 
@@ -212,7 +212,7 @@ end
 
 function ENT:PostShouldFollowPath()
 
-	self.Path          =  getMapPath()
+	self.Path          =  gDisasters_Revived.getMapPath()
 
 	self.NextPathIndex = 2
 
@@ -254,8 +254,8 @@ function ENT:BounceFromWalls(dir)
 		
 
 		
-		local new_target = tr.HitPos + ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived:Vec2D(self:GetPos()):Distance(gDisasters_Revived:Vec2D(self.TargetPosition))
-		self.TargetPosition = gDisasters_Revived:Vec2D(new_target)
+		local new_target = tr.HitPos + ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived.Vec2D(self:GetPos()):Distance(gDisasters_Revived.Vec2D(self.TargetPosition))
+		self.TargetPosition = gDisasters_Revived.Vec2D(new_target)
 		
 	end
 
@@ -265,7 +265,7 @@ end
 function ENT:RandomMove()
 
 	local selfpos    = self:GetPos()
-	local selfpos_2D = gDisasters_Revived:Vec2D(selfpos)
+	local selfpos_2D = gDisasters_Revived.Vec2D(selfpos)
 	
 	local dist       = selfpos_2D:Distance(self.TargetPosition)
 	local dir        = (self.TargetPosition - selfpos_2D):GetNormalized()
@@ -308,10 +308,10 @@ function ENT:PickRandomPositionBasedOnPreviousPositions()
 	local mindist, maxdist =  100, 700 
 	
 	local rangle  = math.random(-SWAY, SWAY) 
-	local dir     = gDisasters_Revived:Vec2D(self.PositionsCache[1]) - gDisasters_Revived:Vec2D(self.PositionsCache[2])
+	local dir     = gDisasters_Revived.Vec2D(self.PositionsCache[1]) - gDisasters_Revived.Vec2D(self.PositionsCache[2])
 	
-	local new_dir = gDisasters_Revived:RotateVectorOnAxisGivenAngle(dir:GetNormalized(), Vector(0,0,1), math.random(-SWAY,SWAY))
-	local new_targetpos = new_dir * math.random(mindist, maxdist)  + gDisasters_Revived:Vec2D(self:GetPos())
+	local new_dir = gDisasters_Revived.RotateVectorOnAxisGivenAngle(dir:GetNormalized(), Vector(0,0,1), math.random(-SWAY,SWAY))
+	local new_targetpos = new_dir * math.random(mindist, maxdist)  + gDisasters_Revived.Vec2D(self:GetPos())
 	
 	
 	self.TargetPosition = new_targetpos
@@ -322,7 +322,7 @@ end
 
 function ENT:SetupMoveType()
 	
-	if self.Data.ShouldFollowPath == true and IsMapPathRegistered() then
+	if self.Data.ShouldFollowPath == true and gDisasters_Revived.IsMapPathRegistered() then
 		self.MType = "follow_path" 
 		self:PostShouldFollowPath()	
 	else
@@ -348,7 +348,7 @@ function ENT:PathedMove()
 end 
 
 function ENT:Move()
-	if self.Data.ShouldFollowPath == true and IsMapPathRegistered() then
+	if self.Data.ShouldFollowPath == true and gDisasters_Revived.IsMapPathRegistered() then
 		self:PathedMove()
 	else
 		self:RandomMove()
@@ -375,8 +375,8 @@ function ENT:Waterspout(dir)
 	
 	if entity then
 		if isOnSolid then
-			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived:Vec2D(self:GetPos()):Distance(gDisasters_Revived:Vec2D(self.TargetPosition))
-			self.TargetPosition = gDisasters_Revived:Vec2D(new_target)
+			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived.Vec2D(self:GetPos()):Distance(gDisasters_Revived.Vec2D(self.TargetPosition))
+			self.TargetPosition = gDisasters_Revived.Vec2D(new_target)
 		end
 	end
 end
@@ -423,11 +423,11 @@ function ENT:Landspout(dir)
 
 	if entity then  
 		if IsOnWater then
-			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived:Vec2D(self:GetPos()):Distance(gDisasters_Revived:Vec2D(self.TargetPosition))
-			self.TargetPosition = gDisasters_Revived:Vec2D(new_target)
+			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived.Vec2D(self:GetPos()):Distance(gDisasters_Revived.Vec2D(self.TargetPosition))
+			self.TargetPosition = gDisasters_Revived.Vec2D(new_target)
 		elseif isOnSnow then
-			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived:Vec2D(self:GetPos()):Distance(gDisasters_Revived:Vec2D(self.TargetPosition))
-			self.TargetPosition = gDisasters_Revived:Vec2D(new_target)
+			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived.Vec2D(self:GetPos()):Distance(gDisasters_Revived.Vec2D(self.TargetPosition))
+			self.TargetPosition = gDisasters_Revived.Vec2D(new_target)
 		end
 	end
 end
@@ -445,8 +445,8 @@ function ENT:Snownado(dir)
 
 	if entity then  
 		if isNotOnSnow then
-			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived:Vec2D(self:GetPos()):Distance(gDisasters_Revived:Vec2D(self.TargetPosition))
-			self.TargetPosition = gDisasters_Revived:Vec2D(new_target)
+			local new_target = tr.HitPos - ( dir - 2 * ( dir:Dot(tr.HitNormal)) * tr.HitNormal) * gDisasters_Revived.Vec2D(self:GetPos()):Distance(gDisasters_Revived.Vec2D(self.TargetPosition))
+			self.TargetPosition = gDisasters_Revived.Vec2D(new_target)
 		end
 	end
 end
@@ -577,7 +577,7 @@ function ENT:CanBeSeenByTheWind(ent)
 	
 	if ent:IsPlayer() then
 	
-		isOutside = gDisasters_Revived:isOutdoor(ent);
+		isOutside = gDisasters_Revived.isOutdoor(ent);
 
 
 		if (can_be_seen_by_wind or can_be_directly_seen) and isOutside then 
@@ -588,7 +588,7 @@ function ENT:CanBeSeenByTheWind(ent)
 			
 		
 	else
-		isOutside = gDisasters_Revived:isOutdoor(ent, true);
+		isOutside = gDisasters_Revived.isOutdoor(ent, true);
 		
 		return (can_be_seen_by_wind or can_be_directly_seen) and isOutside
 	end
@@ -624,7 +624,7 @@ function ENT:ApplyShaking()
 		local d = v:GetPos():Distance(self:GetPos()) 
 		local d_ratio = 1 - (math.Clamp(d,0,8000)/8000)
 		
-		if gDisasters_Revived:HitChance(50) then
+		if gDisasters_Revived.HitChance(50) then
 			net.Start("gdr_shakescreen")
 			net.WriteFloat(1)
 			net.WriteFloat( 1 * d_ratio )
@@ -680,7 +680,7 @@ function ENT:TryRemoveConstraints(ent)
 	if chance == 0 then return end
 	
 	
-	if gDisasters_Revived:HitChance(chance) then
+	if gDisasters_Revived.HitChance(chance) then
 		local can_play_sound = false
 		
 		
@@ -692,7 +692,7 @@ function ENT:TryRemoveConstraints(ent)
 		
 		if can_play_sound then
 		
-			local material_type = gDisasters_Revived:GetMaterialType(ent)
+			local material_type = gDisasters_Revived.GetMaterialType(ent)
 			
 			if material_type == "wood" then 
 				sound.Play(table.Random(Break_Sounds.Wood), ent:GetPos(), 80, math.random(90,110), 1)
@@ -801,7 +801,7 @@ function ENT:GroundFunnelPhysics(physics_scalar)
 	local pos         = self:GetPos() 
 	local zoffset     = -100
 	
-	local funnel_ents = gDisasters_Revived:FindInCone(pos, self.Data.MaxGroundFunnel.Height, self.Data.MinGroundFunnel.Height + zoffset, self.Data.MaxGroundFunnel.Radius, self.Data.MinGroundFunnel.Radius, true )
+	local funnel_ents = gDisasters_Revived.FindInCone(pos, self.Data.MaxGroundFunnel.Height, self.Data.MinGroundFunnel.Height + zoffset, self.Data.MaxGroundFunnel.Radius, self.Data.MinGroundFunnel.Radius, true )
 	
 	local category         = self.Data.EnhancedFujitaScale
 	local wind_speed       = self.EnchancedFujitaScaleData[category].Speed
@@ -815,9 +815,9 @@ function ENT:GroundFunnelPhysics(physics_scalar)
 		local radius =         v[2]
 		local ent              = v[1] 
 		local entpos 		   = ent:GetPos()
-		local angular_speed    = ((math.pi * 2) / (radius / gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe(wind_speed)) ))  
+		local angular_speed    = ((math.pi * 2) / (radius / gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe(wind_speed)) ))  
 		
-		local force_mul        =  1 - (math.Clamp( gDisasters_Revived:Vec2D(ent:GetPos()):Distance(gDisasters_Revived:Vec2D(self:GetPos())) / radius , 0, 1)^2.718281828459)
+		local force_mul        =  1 - (math.Clamp( gDisasters_Revived.Vec2D(ent:GetPos()):Distance(gDisasters_Revived.Vec2D(self:GetPos())) / radius , 0, 1)^2.718281828459)
 
 
 		if ent:IsValid() and self:CanBeSeenByTheWind(ent) then 
@@ -943,7 +943,7 @@ end
 
 function ENT:FunnelPhysics(physics_scalar)
 	local pos         = self:GetPos() + Vector(0,0,self.Data.MaxGroundFunnel.Height)
-	local funnel_ents = gDisasters_Revived:FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxFunnel.Radius, self.Data.MinFunnel.Radius, true )
+	local funnel_ents = gDisasters_Revived.FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxFunnel.Radius, self.Data.MinFunnel.Radius, true )
 	
 	local category         = self.Data.EnhancedFujitaScale
 	local wind_speed       = self.EnchancedFujitaScaleData[category].Speed
@@ -954,7 +954,7 @@ function ENT:FunnelPhysics(physics_scalar)
 		local radius =         v[2]
 		local ent              = v[1] 
 		local entpos 		   = ent:GetPos()
-		local angular_speed    = ((math.pi * 2) / (radius / gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe(wind_speed)) )) 
+		local angular_speed    = ((math.pi * 2) / (radius / gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe(wind_speed)) )) 
 		
 		local height              =  self.Data.MaxFunnel.Height - ((self:GetPos().z + self.Data.MaxFunnel.Height) - ent:GetPos().z)
 
@@ -974,7 +974,7 @@ function ENT:FunnelPhysics(physics_scalar)
 			local tangential_force    = (tangential_vec * angular_speed) * angular_speed_mul
 			local suctional_force     = (suctional_vec * 5)
 			local main_force          = (tangential_force + suctional_force + upwards_force) 
-			local force_mul        =  1 - (math.Clamp( gDisasters_Revived:Vec2D(ent:GetPos()):Distance(gDisasters_Revived:Vec2D(self:GetPos())) / radius , 0, 1)^2.718281828459)
+			local force_mul        =  1 - (math.Clamp( gDisasters_Revived.Vec2D(ent:GetPos()):Distance(gDisasters_Revived.Vec2D(self:GetPos())) / radius , 0, 1)^2.718281828459)
 
 
 			if ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot() then
@@ -1234,7 +1234,7 @@ hook.Add( "PreDrawOpaqueRenderables", "test", function()
 	if GetConVar("gdisasters_revived_graphics_draw_smarttornado_path"):GetInt() >= 1 then
 		render.SetColorMaterial()
 
-		local Path          =  getMapPath()
+		local Path          =  gDisasters_Revived.getMapPath()
 		
 		local NextPathIndex = 8
 		

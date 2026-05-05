@@ -15,7 +15,7 @@ ENT.WedgeSound							= "streams/disasters/nature/volcano_idle.wav"
 
 function ENT:Initialize()	
 	if (CLIENT) then 
-		LocalPlayer().Sounds["lava"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), self.WedgeSound)
+		LocalPlayer().Sounds["lava"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), self.WedgeSound)
 	
 	end
 	
@@ -38,7 +38,7 @@ function ENT:Initialize()
 		self.lavaHeight = 0
 		self:SetNWFloat("lavaHeight", self.lavaHeight)
 		
-		if IsMapRegistered()==false then self:Remove() end 
+		if gDisasters_Revived.IsMapRegistered()==false then self:Remove() end 
 
 		
 		
@@ -73,14 +73,14 @@ end
 
 function createlava(maxheight, parent)
 
-	if IsMapRegistered() == true then
+	if gDisasters_Revived.IsMapRegistered() == true then
 	
 		for k, v in pairs(ents.FindByClass("gdr_env_dynamicwater", "gdr_env_dynamiclava")) do
 			v:Remove()
 		end
 
 		local lava = ents.Create("gdr_env_dynamiclava")
-		lava:SetPos(getMapCenterFloorPos())
+		lava:SetPos(gDisasters_Revived.getMapCenterFloorPos())
 		lava:Spawn()
 		lava:Activate()
 
@@ -107,7 +107,7 @@ function ENT:SpawnFunction( ply, tr )
 	ent:SetPhysicsAttacker(ply)
 	
 	
-	ent:SetPos( getMapCenterFloorPos() )
+	ent:SetPos( gDisasters_Revived.getMapCenterFloorPos() )
 
 	
 	ent:Spawn()
@@ -295,7 +295,7 @@ function gdr_env_dynamiclava_Drawlava()
 	model:SetNoDraw(true)	
 	
 	local height =  lava:GetNWFloat("lavaHeight")
-	local map_bounds = getMapBounds()
+	local map_bounds = gDisasters_Revived.getMapBounds()
 	local vmin, vmax =  Vector(map_bounds[1].x,map_bounds[1].y,0),  Vector(map_bounds[2].x,map_bounds[2].y,height)
 
 	local lava_texture =  lava_textures[ math.Clamp(GetConVar( "gdisasters_revived_graphics_lava_quality" ):GetInt(), 1, 2)]
@@ -335,7 +335,7 @@ function gdr_env_dynamiclava_Drawlava()
 		render.SetBlend( 1 )
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( lava:GetAngles( ) );
 		matrix:Scale( Vector(1,1,1) )
 		
@@ -368,7 +368,7 @@ end
 if (CLIENT) then
 	hook.Add("PreDrawTranslucentRenderables", "DRAWlava", function()
 
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 		
 			gdr_env_dynamiclava_Drawlava()
 		

@@ -67,13 +67,13 @@ function ENT:Initialize()
 			self.Reset_SkyData["StarFade"]       = 1.5
 			
 			
-		gDisasters_Revived:setMapLight("g")		
+		gDisasters_Revived.setMapLight("g")		
 			
 		
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 
@@ -87,7 +87,7 @@ function ENT:Initialize()
 			data.EndMinCurrent  = 0
 			data.EndMaxCurrent  = 0       
 
-		gDisasters_Revived_CreateGlobalFog(self, data, true)	
+		gDisasters_Revived.CreateGlobalFog(self, data, true)	
 		
 		self.Night = {}
 		
@@ -97,9 +97,9 @@ end
 
 function ENT:SpawnStar()
 
-	if gDisasters_Revived:HitChance(24) then
+	if gDisasters_Revived.HitChance(24) then
 	
-		local bounds    = getMapSkyBox()
+		local bounds    = gDisasters_Revived.getMapSkyBox()
 		local min       = bounds[1]
 		local max       = bounds[2]
 
@@ -161,11 +161,11 @@ function ENT:OnRemove()
 
 if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 		
@@ -174,7 +174,7 @@ if (SERVER) then
 		
 		end
 		
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 
 end

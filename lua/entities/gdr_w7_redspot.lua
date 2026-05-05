@@ -22,14 +22,14 @@ function ENT:Initialize()
 		
 		
 		
-		LocalPlayer().Sounds["Sandstorm_IDLE"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_loop.wav")
-		LocalPlayer().Sounds["Sandstorm_muffled_IDLE"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_muffled_loop.wav")
+		LocalPlayer().Sounds["Sandstorm_IDLE"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_loop.wav")
+		LocalPlayer().Sounds["Sandstorm_muffled_IDLE"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_muffled_loop.wav")
 
 	end
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(400,432),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 101000, ["Temperature"] = math.random(274,274), ["Humidity"]    = math.random(0,0), ["BRadiation"]  = 0.1, ["Oxygen"]  = 0}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(400,432),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 101000, ["Temperature"] = math.random(274,274), ["Humidity"]    = math.random(0,0), ["BRadiation"]  = 0.1, ["Oxygen"]  = 0}}
 
 		self:SetModel(self.Model)
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -57,13 +57,13 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
 		self:CreateSandDecals()
-		gDisasters_Revived:setMapLight("c")		
-		gDisasters_Revived_CreateGlobalGFX("sandstormy", self)
+		gDisasters_Revived.setMapLight("c")		
+		gDisasters_Revived.CreateGlobalGFX("sandstormy", self)
 
 		self:Lightning()
 		self:Lightning()
@@ -78,7 +78,7 @@ function ENT:Initialize()
 			data.EndMinCurrent  = 0
 			data.EndMaxCurrent  = 0       
 		
-		gDisasters_Revived_CreateGlobalFog(self, data, true)						
+		gDisasters_Revived.CreateGlobalFog(self, data, true)						
 		
 	end
 end
@@ -181,14 +181,14 @@ function ENT:OnRemove()
 	
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 	
 	for k, v in pairs(ents.FindByClass("gdr_w2_thunderstorm_cl")) do v:Remove() end
@@ -218,7 +218,7 @@ function ENT:UpdateTransmitState()
 end
 
 if (CLIENT) then
-	function gDisasters_Revived:CreateLoopedSound(client, sound)
+	function gDisasters_Revived.CreateLoopedSound(client, sound)
 		local sound = Sound(sound)
 
 		CSPatch = CreateSound(client, sound)

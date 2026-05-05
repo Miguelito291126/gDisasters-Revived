@@ -228,7 +228,7 @@ function ENT:AddGlobalClouds()
 		
 
 		
-		self.Pixels[k].intensity = math.Clamp(gDisasters_Revived:BlendValues(self.Pixels[k].intensity,i1 , "Add") ,0,1) 
+		self.Pixels[k].intensity = math.Clamp(gDisasters_Revived.BlendValues(self.Pixels[k].intensity,i1 , "Add") ,0,1) 
 
 	end
 
@@ -239,7 +239,7 @@ function ENT:Noise(noise_chance, intensity, blendingmode)
 	for k, v in pairs(self.Pixels) do 
 		
 		if math.random() < noise_chance then 
-			self.Pixels[k].intensity = math.Clamp( gDisasters_Revived:BlendValues(self.Pixels[k].intensity , intensity, blendingmode),0,1)
+			self.Pixels[k].intensity = math.Clamp( gDisasters_Revived.BlendValues(self.Pixels[k].intensity , intensity, blendingmode),0,1)
 		end
 	
 	end
@@ -291,7 +291,7 @@ function ENT:AddPixelIntensityInRadius(ox,oy,radius, intensity, noise, falloff_e
 			else
 				if math.random() < noise then 
 					
-					self.Pixels[offset].intensity = math.Clamp( gDisasters_Revived:BlendValues(self.Pixels[offset].intensity, intensity * (1 - ((math.sqrt( x^2 + y^2 )/radius)^falloff_exponent)), blendingmode),0,1)
+					self.Pixels[offset].intensity = math.Clamp( gDisasters_Revived.BlendValues(self.Pixels[offset].intensity, intensity * (1 - ((math.sqrt( x^2 + y^2 )/radius)^falloff_exponent)), blendingmode),0,1)
 					table.insert(pixels, offset)
 					
 				end
@@ -321,8 +321,8 @@ function ENT:UpdateDisplay()
 	
 	
 	local function ConvertVectorToScreenSpace(vector)
-		local map_bounds = getMapBounds()
-		local map_center = gDisasters_Revived:Vec2D( (map_bounds[1]+map_bounds[2]) * 0.5)
+		local map_bounds = gDisasters_Revived.getMapBounds()
+		local map_center = gDisasters_Revived.Vec2D( (map_bounds[1]+map_bounds[2]) * 0.5)
 		local new_vec    = vector + Vector(16384, 16384,0)
 		
 		

@@ -21,7 +21,7 @@ function ENT:Initialize()
 
 		
 		
-		LocalPlayer().Sounds["Tsunami"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), self.WedgeSound)
+		LocalPlayer().Sounds["Tsunami"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), self.WedgeSound)
 		
 		
 	end
@@ -43,7 +43,7 @@ function ENT:Initialize()
 		
 		self.NextPhysicsTime = CurTime()
 
-		if IsMapRegistered()==false then self:Remove() end 
+		if gDisasters_Revived.IsMapRegistered()==false then self:Remove() end 
 	
 	end
 end
@@ -51,7 +51,7 @@ end
 function ENT:SetupMiscVars()
 
 
-	local bounds      = getMapSkyBox()
+	local bounds      = gDisasters_Revived.getMapSkyBox()
 	local minp        = bounds[1]
 	local maxp        = bounds[2]
 	
@@ -136,7 +136,7 @@ function ENT:Expand()
 			local alpha = 1 - math.Clamp( (math.abs(LocalPlayer():GetPos().x - self.Verts.wave_front[1].x) / 5000),0,1)
 			LocalPlayer().Sounds["Tsunami"]:ChangeVolume( alpha,0,1)
 			
-			if gDisasters_Revived:HitChance(10) then 
+			if gDisasters_Revived.HitChance(10) then 
 			
 				util.ScreenShake( Vector(self.Verts.wave_front[1].x, pos.y, pos.z), 0.2 *alpha , 0.5, math.random(), 1000 )
 			
@@ -183,7 +183,7 @@ function ENT:ProcessEntitiesInWater()
 	}
 	]]
 	
-	local scalar = gDisasters_Revived:GetPhysicsMultiplier()
+	local scalar = gDisasters_Revived.GetPhysicsMultiplier()
 	
 	
 	local sim_quality     = GetConVar( "gdisasters_revived_envdynamicwater_simquality" ):GetFloat() --  original water simulation is based on a value of 0.01 ( which is alright but not for big servers ) 
@@ -194,7 +194,7 @@ function ENT:ProcessEntitiesInWater()
 	
 
 	local verts = 	self.Verts 
-	local minz      = getMapCenterFloorPos().z
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z
 	local zrange    = self.CurrentHeight 
 	local zmax      = minz + zrange 
 
@@ -348,7 +348,7 @@ function ENT:ProcessEntitiesInWedge()
 	
 
 	local verts = 	self.Verts 
-	local minz      = getMapCenterFloorPos().z
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z
 	local zrange    = self.CurrentHeight 
 	local zmax      = minz + zrange 
 
@@ -669,11 +669,11 @@ end
 function ENT:RebuildVertices(distance_travelled, height, wedge_constant)
 
 
-	local bounds    = getMapSkyBox();
+	local bounds    = gDisasters_Revived.getMapSkyBox();
 	local min       = bounds[1];
 	local max       = bounds[2];
 
-	local minz      = getMapCenterFloorPos().z;
+	local minz      = gDisasters_Revived.getMapCenterFloorPos().z;
 	local dir       = (Vector(max.x, 0, 0)-Vector(min.z,0,0)):GetNormalized().x ;
 	local scale     = self.CurrentDistanceTravelled;
 	local height    = self:GetNWFloat("CurrentHeight");
@@ -830,21 +830,21 @@ function ENT:OnWedgeEntry(ent)
 		end
 		
 		if r >= 0 and r < 50 then 
-			if gDisasters_Revived:HitChance(10) then 
+			if gDisasters_Revived.HitChance(10) then 
 			ParticleEffect("tsunami_splash_effect_r200", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)	
 			end 
 			
 		elseif r >= 50 and r < 100 then 
-			if gDisasters_Revived:HitChance(25) then 
+			if gDisasters_Revived.HitChance(25) then 
 			ParticleEffect("tsunami_splash_effect_r200", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
 		elseif r >= 100 and r < 150 then 
-			if gDisasters_Revived:HitChance(35) then 
+			if gDisasters_Revived.HitChance(35) then 
 			ParticleEffect("tsunami_splash_effect_r300", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
 			
 		elseif r >= 150 and r < 200 then 
-			if gDisasters_Revived:HitChance(55) then 
+			if gDisasters_Revived.HitChance(55) then 
 			ent:EmitSound("streams/disasters/tsunami/splash_big.mp3", 100, 100, 1)
 			ParticleEffect("tsunami_splash_effect_r400", ent:GetPos() - Vector(-1,0,0) * r * 0.8, Angle(0,0,0), nil)
 			end
@@ -868,7 +868,7 @@ function ENT:DamageEntity(ent, phys, buoyancy_mod, mass)
 	local chance = math.Clamp( 1 - (buoyancy_mod / 5),0,1) * 100
 
 	
-	if gDisasters_Revived:HitChance(chance) then
+	if gDisasters_Revived.HitChance(chance) then
 		
 		
 		phys:EnableMotion(true)
@@ -903,7 +903,7 @@ function createTsunami(parent, data)
 	tsunami.Data  = data;
 
 	
-	tsunami:SetPos(getMapCenterFloorPos());
+	tsunami:SetPos(gDisasters_Revived.getMapCenterFloorPos());
 	tsunami:Spawn();
 	tsunami:Activate();
 
@@ -983,7 +983,7 @@ function gdr_env_dynamicwater_b_DrawWater()
 		render.SuppressEngineLighting( true ) 
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( tsunami:GetAngles( ) );
 	
 		matrix:Scale( Vector(1,1,1) )
@@ -1027,7 +1027,7 @@ function gdr_env_dynamicwater_b_DrawWater()
 		render.SetMaterial(water_texture)
 		
 		local matrix = Matrix( );
-		matrix:Translate( getMapCenterFloorPos() );
+		matrix:Translate( gDisasters_Revived.getMapCenterFloorPos() );
 		matrix:Rotate( tsunami:GetAngles( ) );
 	
 		matrix:Scale( Vector(1,1,1) )
@@ -1076,7 +1076,7 @@ if (CLIENT) then
 	hook.Add("PostDrawTranslucentRenderables", "DrawTsunami", function()
 	
 
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 		
 			gdr_env_dynamicwater_b_DrawWater()
 			

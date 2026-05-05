@@ -210,8 +210,8 @@ function ENT:NewtonianGravity()
 end
 
 function ENT:Flares()
-	if gDisasters_Revived:HitChance(1) then
-		if gDisasters_Revived:HitChance(50) then
+	if gDisasters_Revived.HitChance(1) then
+		if gDisasters_Revived.HitChance(50) then
 			CreateLightningArc(self:GetAttachment( 1 ).Pos, self:GetAttachment( 2 ).Pos, "neutron_star_magnetic_field_lines_main")
 		else
 			CreateLightningArc(self:GetAttachment( 2 ).Pos, self:GetAttachment( 1 ).Pos, "neutron_star_magnetic_field_lines_main")

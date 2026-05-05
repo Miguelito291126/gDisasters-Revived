@@ -100,7 +100,7 @@ function ENT:Explode()
 
 	ParticleEffect("meteor_explosion_main_ground", self:GetPos(), Angle(0,0,0), nil)
 	
-	gDisasters_Revived:CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
+	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
@@ -155,9 +155,9 @@ function ENT:Think()
 	if (SERVER) then
 		if !self:IsValid() then return end
 		
-		if gDisasters_Revived:isinWater(self) then 
+		if gDisasters_Revived.isinWater(self) then 
 			self:Remove() 
-		elseif gDisasters_Revived:isinLava(self) then
+		elseif gDisasters_Revived.isinLava(self) then
 			self:Remove()
 		end
 		

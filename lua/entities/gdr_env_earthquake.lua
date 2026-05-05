@@ -16,7 +16,7 @@ function ENT:Initialize()
 	if (CLIENT) then
 		
 		if LocalPlayer().Sounds["Earthquake"]==nil then
-			LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
+			LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
 			LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(0,0)
 		end
 	end
@@ -44,9 +44,9 @@ function ENT:Initialize()
 end
 function ENT:PlayInitialSounds()
 	if self.Magnitude > 5 then
-		gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_strong.wav", self:GetPos(), "3d" ,340.29/2, {90,110}, 5)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_strong.wav", self:GetPos(), "3d" ,340.29/2, {90,110}, 5)
 	else
-		gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_weak.wav", self:GetPos(), "3d" ,340.29/2, {90,110}, 5)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_weak.wav", self:GetPos(), "3d" ,340.29/2, {90,110}, 5)
 	end	
 end
 function ENT:CreateEarthquakeWithParent()
@@ -66,7 +66,7 @@ function ENT:CreateEarthquakeWithParent()
 	local decider = math.random(1,math.floor(self.Magnitude * 2)) == 1
 	if decider == false then
 		if  math.floor(self.Magnitude) > 1 then
-			gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {40,100}, 10)
+			gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {40,100}, 10)
 			local aftershock_magnitude = math.Clamp( math.floor(self.Magnitude) - math.random(1,3), 1, 12)
 			local aftershock           = ents.Create( earthquakes[ aftershock_magnitude ] )
 			aftershock.IsAfterShock    = true 
@@ -76,8 +76,8 @@ function ENT:CreateEarthquakeWithParent()
 			ParticleEffect("earthquake_swave_refract", self.Parent:GetPos() + Vector(0,0,10) , Angle(0,0,0), nil)
 		end
 	else
-		gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {120,130}, 20)
-		gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2.1, {120,130}, 20)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2, {120,130}, 20)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_aftershock.wav", self:GetPos(), "3d" ,340.29/2.1, {120,130}, 20)
 		local foreshock_magnitude = math.Clamp( math.floor(self.Magnitude) + math.random(1,2), 1, 12)
 		local foreshock           = ents.Create( earthquakes[ foreshock_magnitude ] )
 		foreshock.IsForeShock     = true
@@ -182,7 +182,7 @@ function ENT:SendClientsideEffects( ply, offset_ang, amplitude )
 			net.Send(ply)
 		end	
 	end
-	gDisasters_Revived:SetOffsetAngles(ply, offset_ang)
+	gDisasters_Revived.SetOffsetAngles(ply, offset_ang)
 end
 function ENT:MagnitudeOne()
 	local percentage = math.Clamp(self.Magnitude/1.99,0,1)
@@ -334,7 +334,7 @@ function ENT:DoPhysics()
 	local mag_physmod    = mag-3 / 7
 	local vec = (mag * 25) * Vector(math.random(-15,15)/10,0 ,math.random(-5,4)/10)
 	local ang_vv =  (Vector( (math.random(-15,15)/10), 0,math.random(-5,4)/10) * (mag*8))
-	if gDisasters_Revived:HitChance(2) then ang_vv = ang_vv * 20  end 
+	if gDisasters_Revived.HitChance(2) then ang_vv = ang_vv * 20  end 
 	for k, v in pairs(player.GetAll()) do
 		if v:IsOnGround() then
 			if mag >= 3 and mag <=3.9 then		
@@ -464,7 +464,7 @@ function ENT:IsParentValid()
 end
 function ENT:CanDoPhysics(nexttime)
 	if CurTime() >= self.NextPhysicsTime then
-		if gDisasters_Revived:HitChance(1) then
+		if gDisasters_Revived.HitChance(1) then
 			self.NextPhysicsTime = CurTime() + (math.random(0,250)/100)
 		else
 			self.NextPhysicsTime = CurTime() + nexttime 
@@ -490,7 +490,7 @@ function ENT:MagnitudeModulateSound()
 	volmod = volmod * distance_mod
 	
 	if LocalPlayer().Sounds["Earthquake"]==nil then
-		LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
+		LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
 		LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(volmod,0)
 	else
 		LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(volmod,0)
@@ -513,7 +513,7 @@ function ENT:OnRemove()
 	if (CLIENT) then
 		
 		if LocalPlayer().Sounds["Earthquake"]==nil then
-			LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
+			LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
 			LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(0,0)
 		else
 			LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(0,0)

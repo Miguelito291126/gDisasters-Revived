@@ -1,7 +1,7 @@
-function gDisasters_Revived_PostSpawn(ply)
+function gDisasters_Revived.PostSpawn(ply)
 	ply.gDisasters_Revived = {}
 	
-	local function gDisasters_Revived_SetupBodyVariables()
+	local function SetupBodyVariables()
 		ply.gDisasters_Revived.Body = {}
 		ply.gDisasters_Revived.Body.Temperature = 37
 		ply.gDisasters_Revived.Body.Oxygen      = 100
@@ -11,27 +11,27 @@ function gDisasters_Revived_PostSpawn(ply)
 		elseif GetConVar("gdisasters_revived_hud_oxygen_enable"):GetInt() <= 0 then
 			ply:SetNWFloat("BodyOxygen", ply.gDisasters_Revived.Body.Oxygen)
 		end
-		
+	
 	end
-	local function gDisasters_Revived_SetupAreaVariables()
+	local function SetupAreaVariables()
 		ply.gDisasters_Revived.Area      = {}
 		ply.gDisasters_Revived.Area.LocalWind = 0
 		ply.gDisasters_Revived.Area.IsOutdoor = false
 	
 	end
-	local function gDisasters_Revived_SetupIntesity()
+	local function SetupIntesity()
 		ply.LavaIntensity = 0
 		ply.WaterIntensity = 0
 	end
 
-	gDisasters_Revived_SetupBodyVariables()
-	gDisasters_Revived_SetupAreaVariables()	
-	gDisasters_Revived_SetupIntesity()
+	SetupBodyVariables()
+	SetupAreaVariables()	
+	SetupIntesity()
 	
 end
-hook.Add( "PlayerInitialSpawn", "gDisasters_Revived_PostSpawn", gDisasters_Revived_PostSpawn )
+hook.Add( "PlayerInitialSpawn", "gDisasters_Revived_PostSpawn", gDisasters_Revived.PostSpawn )
 
-function gDisasters_Revived_OnSpawn_Reset( ply )
+function gDisasters_Revived.OnSpawn_Reset( ply )
 	ply.gDisasters_Revived.Body.Temperature = 37 
 	ply.gDisasters_Revived.Body.Oxygen      = 100
 	ply.LavaIntensity = 0
@@ -49,4 +49,4 @@ function gDisasters_Revived_OnSpawn_Reset( ply )
 		ply:SetNWFloat("BodyOxygen", ply.gDisasters_Revived.Body.Oxygen)
 	end
 end
-hook.Add( "PlayerSpawn", "gDisasters_Revived_OnSpawn_Reset", gDisasters_Revived_OnSpawn_Reset )
+hook.Add( "PlayerSpawn", "gDisasters_Revived_OnSpawn_Reset", gDisasters_Revived.OnSpawn_Reset )

@@ -77,7 +77,7 @@ function ENT:PostSpawn()
 			
 			
 			local pos         = self:GetPos() 
-			local funnel_ents = gDisasters_Revived:FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxGroundFunnel.Radius, self.Data.MinGroundFunnel.Radius, true )
+			local funnel_ents = gDisasters_Revived.FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxGroundFunnel.Radius, self.Data.MinGroundFunnel.Radius, true )
 			
 
 			for k, v in pairs(funnel_ents) do
@@ -97,16 +97,16 @@ function ENT:PostSpawn()
 						ent:Ignite(3)
 
 						if ent:IsPlayer() and ent:Alive() and ent:Health() <= 8 then	
-							gDisasters_Revived:MakeBurn( ent )
+							gDisasters_Revived.MakeBurn( ent )
 						elseif ent:Health() <= 8 and ent:IsNPC() or ent:IsNextBot() then
-							gDisasters_Revived:MakeBurn( ent )
+							gDisasters_Revived.MakeBurn( ent )
 						end
 					else
 			
 						if ent:GetClass() != self and ent:IsSolid() and (!ent:IsPlayer() and !ent:IsNPC()) then
 							if math.random(1,2) == 1 then
 								ent:Ignite(math.random(3,5),0)
-								gDisasters_Revived:MakeBurn( ent )
+								gDisasters_Revived.MakeBurn( ent )
 				
 							end
 						end

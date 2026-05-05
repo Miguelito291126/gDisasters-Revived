@@ -8,71 +8,71 @@ SetGlobalVector("gDisasters_Revived_wind_Direction", Vector(1,0,0))
 
 
 
-function Atmosphere()
-	GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = math.Clamp(GLOBAL_SYSTEM["Atmosphere"]["Temperature"],-273.3, 273.3)
-	GLOBAL_SYSTEM["Atmosphere"]["Humidity"]    = math.Clamp(GLOBAL_SYSTEM["Atmosphere"]["Humidity"],0, 100)
-	GLOBAL_SYSTEM["Atmosphere"]["Oxygen"]    = math.Clamp(GLOBAL_SYSTEM["Atmosphere"]["Oxygen"],0, 100)
-	GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]    = math.Clamp(GLOBAL_SYSTEM["Atmosphere"]["BRadiation"],0, 100)
-	GLOBAL_SYSTEM["Atmosphere"]["Pressure"]    = math.Clamp(GLOBAL_SYSTEM["Atmosphere"]["Pressure"], 0, math.huge)
+function gDisasters_Revived.Atmosphere()
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = math.Clamp(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"],-273.3, 273.3)
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"]    = math.Clamp(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"],0, 100)
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Oxygen"]    = math.Clamp(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Oxygen"],0, 100)
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]    = math.Clamp(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"],0, 100)
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"]    = math.Clamp(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"], 0, math.huge)
 	
 
 
-	Wind()
-	Pressure()
-	Humidity()
-	AtmosphereFadeControl()
-	BRadiation()
-	stormfox2()
-	spacebuild()
-	Temperature()
+	gDisasters_Revived.Wind()
+	gDisasters_Revived.Pressure()
+	gDisasters_Revived.Humidity()
+	gDisasters_Revived.AtmosphereFadeControl()
+	gDisasters_Revived.BRadiation()
+	gDisasters_Revived.stormfox2()
+	gDisasters_Revived.spacebuild()
+	gDisasters_Revived.Temperature()
 	
 	
 end
-hook.Add("Think", "atmosphericLoop", Atmosphere)
+hook.Add("Think", "atmosphericLoop", gDisasters_Revived.Atmosphere)
 
-function Atmosphere2()
-	Oxygen()
-	spacebuild()
+function gDisasters_Revived.Atmosphere2()
+	gDisasters_Revived.Oxygen()
+	gDisasters_Revived.spacebuild()
 end
-hook.Add("Think3", "atmosphericLoop2", Atmosphere2)
+hook.Add("Think3", "atmosphericLoop2", gDisasters_Revived.Atmosphere2)
 
 
-function AtmosphereFadeControl()
+function gDisasters_Revived.AtmosphereFadeControl()
 
-	GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"]=Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"])
-	GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"]=LerpVector(0.005, GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"], GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"])
-	GLOBAL_SYSTEM["Atmosphere"]["Pressure"]=Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["Pressure"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"])
-	GLOBAL_SYSTEM["Atmosphere"]["Oxygen"] = Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["Oxygen"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["Oxygen"])
-	GLOBAL_SYSTEM["Atmosphere"]["Temperature"]=Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["Temperature"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"])
-	GLOBAL_SYSTEM["Atmosphere"]["Humidity"]=Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["Humidity"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"])
-	GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]= Lerp(0.005, GLOBAL_SYSTEM["Atmosphere"]["BRadiation"],GLOBAL_SYSTEM_TARGET["Atmosphere"]["BRadiation"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"]=Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"]=LerpVector(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"], gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"]=Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Oxygen"] = Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Oxygen"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Oxygen"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"]=Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"]=Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"])
+	gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]= Lerp(0.005, gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"],gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["BRadiation"])
 
-end
-
-function Humidity()
-	SetGlobalFloat("gDisasters_Revived_Humidity", GLOBAL_SYSTEM["Atmosphere"]["Humidity"])
 end
 
-function Pressure()
-	SetGlobalFloat("gDisasters_Revived_Pressure", GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
+function gDisasters_Revived.Humidity()
+	SetGlobalFloat("gDisasters_Revived_Humidity", gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"])
 end
 
-function BRadiation()
-	local BRadiation = GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]
+function gDisasters_Revived.Pressure()
+	SetGlobalFloat("gDisasters_Revived_Pressure", gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Pressure"])
+end
+
+function gDisasters_Revived.BRadiation()
+	local BRadiation = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]
 	SetGlobalFloat("gDisasters_Revived_BRadiation", BRadiation)
 
 	function DamagePlayer()
 		for k, v in pairs(player.GetAll()) do
-			if BRadiation >= 80 and gDisasters_Revived:isOutdoor(v) then
-				if gDisasters_Revived:HitChance(0.5) then
+			if BRadiation >= 80 and gDisasters_Revived.isOutdoor(v) then
+				if gDisasters_Revived.HitChance(0.5) then
 					InflictDamage(v, v, "acid", 4)
 				end
 			end
 		end
 		for k, v in pairs(ents.FindByClass("npc_*")) do
 			if GetConVar("gdisasters_revived_weather_bradiation_damage_npcs"):GetInt() <= 0 then return end 
-			if BRadiation >= 80 and gDisasters_Revived:isOutdoor(v, true) then
-				if gDisasters_Revived:HitChance(0.5) then
+			if BRadiation >= 80 and gDisasters_Revived.isOutdoor(v, true) then
+				if gDisasters_Revived.HitChance(0.5) then
 					InflictDamage(v, v, "acid", 4)
 				end
 			end
@@ -80,8 +80,8 @@ function BRadiation()
 		if BRadiation >= 80 then
 			for k, v in pairs(ents.FindByClass("prop_*")) do
 				if GetConVar("gdisasters_revived_weather_bradiation_damage_props"):GetInt() <= 0 then return end 
-				if gDisasters_Revived:isOutdoor(v, true) then
-					if gDisasters_Revived:HitChance(0.5) then
+				if gDisasters_Revived.isOutdoor(v, true) then
+					if gDisasters_Revived.HitChance(0.5) then
 						InflictDamage(v, v, "acid", 4)
 					end
 				end
@@ -91,10 +91,10 @@ function BRadiation()
 	DamagePlayer()
 end
 
-function Temperature()
+function gDisasters_Revived.Temperature()
 
-	local temp = GLOBAL_SYSTEM["Atmosphere"]["Temperature"]
-	local humidity = GLOBAL_SYSTEM["Atmosphere"]["Humidity"]
+	local temp = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"]
+	local humidity = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"]
 	local compensation_max      = 10   -- degrees 
 	local body_heat_genK        = engine.TickInterval() -- basically 1 degree Celsius per second
 	local body_heat_genMAX      = 0.01/4
@@ -110,11 +110,11 @@ function Temperature()
 		if GetConVar("gdisasters_revived_hud_temp_value"):GetInt() <= 0 then return end
 
 		for k, v in pairs(plytbl) do
-			local closest_vfire, distance  = gDisasters_Revived:FindNearestEntity(v, "vfire") -- find closest fire entity
-			local closest_fire, distance_2 = gDisasters_Revived:FindNearestEntity(v, "entityflame")
-			local closest_envfire, distance_3 = gDisasters_Revived:FindNearestEntity(v, "env_fire")
-			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
-			local closest_dryice,  distance_5  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_dryice") -- find closest ice entity
+			local closest_vfire, distance  = gDisasters_Revived.FindNearestEntity(v, "vfire") -- find closest fire entity
+			local closest_fire, distance_2 = gDisasters_Revived.FindNearestEntity(v, "entityflame")
+			local closest_envfire, distance_3 = gDisasters_Revived.FindNearestEntity(v, "env_fire")
+			local closest_ice,  distance_4  = gDisasters_Revived.FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
+			local closest_dryice,  distance_5  = gDisasters_Revived.FindNearestEntity(v, "gdr_equip_dryice") -- find closest ice entity
 			
 			local heatscale               = 0
 			local coolscale               = 0
@@ -167,16 +167,16 @@ function Temperature()
 			if GetConVar("gdisasters_revived_hud_temp_damage"):GetInt() <= 0 then return end
 			if GetConVar("gdisasters_revived_hud_temp_value"):GetInt() <= 0 then return end
 		
-			local wl = gDisasters_Revived:isinWater(v)	
-			local lv =	gDisasters_Revived:isinLava(v)
-			local outdoor           = gDisasters_Revived:isOutdoor(v)
+			local wl = gDisasters_Revived.isinWater(v)	
+			local lv =	gDisasters_Revived.isinLava(v)
+			local outdoor           = gDisasters_Revived.isOutdoor(v)
 			local tempbody            = v.gDisasters_Revived.Body.Temperature
 			local alpha_hot  =  1-((44-math.Clamp(tempbody,39,44))/5)
 			local alpha_cold =  ((35-math.Clamp(tempbody,24,35))/11)
 
-			local closest_vfire, distance  = gDisasters_Revived:FindNearestEntity(v, "vfire") -- find closest fire entity
-			local closest_fire, distance_2 = gDisasters_Revived:FindNearestEntity(v, "entityflame")
-			local closest_envfire, distance_3 = gDisasters_Revived:FindNearestEntity(v, "env_fire")
+			local closest_vfire, distance  = gDisasters_Revived.FindNearestEntity(v, "vfire") -- find closest fire entity
+			local closest_fire, distance_2 = gDisasters_Revived.FindNearestEntity(v, "entityflame")
+			local closest_envfire, distance_3 = gDisasters_Revived.FindNearestEntity(v, "env_fire")
 
 			if math.random(1,5) == 5 then
 				if closest_vfire != nil then
@@ -314,23 +314,23 @@ function Temperature()
 			--]]		
 					
 			if tempbody >= 44 then
-				if v:Alive() then gDisasters_Revived:MakeBurn( v ) end
+				if v:Alive() then gDisasters_Revived.MakeBurn( v ) end
 			elseif tempbody <= 24 then
-				if v:Alive() then gDisasters_Revived:MakeFreeze( v ) end
+				if v:Alive() then gDisasters_Revived.MakeFreeze( v ) end
 			end
 		end
 		for k, v in pairs(ents.FindByClass("npc_*")) do
 
 			if GetConVar("gdisasters_revived_hud_temp_npc_damage"):GetInt() <= 0 then return end
 
-			local outdoor           = gDisasters_Revived:isOutdoor(v, true)
-			local wl = gDisasters_Revived:isinWater(v)
-			local lv =	gDisasters_Revived:isinLava(v)
+			local outdoor           = gDisasters_Revived.isOutdoor(v, true)
+			local wl = gDisasters_Revived.isinWater(v)
+			local lv =	gDisasters_Revived.isinLava(v)
 			
-			local closest_vfire, distance  = gDisasters_Revived:FindNearestEntity(v, "vfire") -- find closest fire entity
-			local closest_fire, distance_2 = gDisasters_Revived:FindNearestEntity(v, "entityflame")
-			local closest_envfire, distance_3 = gDisasters_Revived:FindNearestEntity(v, "env_fire")
-			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
+			local closest_vfire, distance  = gDisasters_Revived.FindNearestEntity(v, "vfire") -- find closest fire entity
+			local closest_fire, distance_2 = gDisasters_Revived.FindNearestEntity(v, "entityflame")
+			local closest_envfire, distance_3 = gDisasters_Revived.FindNearestEntity(v, "env_fire")
+			local closest_ice,  distance_4  = gDisasters_Revived.FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
 			
 			if math.random(1,5) == 5 then
 				if closest_vfire != nil then
@@ -467,19 +467,19 @@ function Temperature()
 	DamagePlayer()
 end
 
-function Oxygen()
+function gDisasters_Revived.Oxygen()
 
-	local oxygen = GLOBAL_SYSTEM["Atmosphere"]["Oxygen"]
+	local oxygen = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Oxygen"]
 	SetGlobalFloat("gDisasters_Revived_Oxygen", oxygen)
 
-	function DamagePlayer()
+	local function DamagePlayer()
 
 		if GetConVar("gdisasters_revived_hud_oxygen_enable"):GetInt() <= 0 then return end
 
 		for k, v in pairs(player.GetAll()) do
 			if GetConVar("gdisasters_revived_spacebuild_enabled"):GetInt() >= 1 then return end
 		
-			if gDisasters_Revived:isUnderWater(v) or gDisasters_Revived:isUnderLava(v) then 
+			if gDisasters_Revived.isUnderWater(v) or gDisasters_Revived.isUnderLava(v) then 
 				v.gDisasters_Revived.Body.Oxygen = math.Clamp( v.gDisasters_Revived.Body.Oxygen - 5,0,100 ) 
 			
 				if v.gDisasters_Revived.Body.Oxygen <= 0 then
@@ -527,7 +527,7 @@ function Oxygen()
 				else
 					v.gDisasters_Revived.Body.Oxygen = math.Clamp( v.gDisasters_Revived.Body.Oxygen + 5 , 0,100 )
 				end
-			elseif gDisasters_Revived:isUnderGround(v) then
+			elseif gDisasters_Revived.isUnderGround(v) then
 				v.gDisasters_Revived.Body.Oxygen = math.Clamp( v.gDisasters_Revived.Body.Oxygen - 5,0,100 ) 
 				
 				if v.gDisasters_Revived.Body.Oxygen <= 0 then
@@ -550,7 +550,7 @@ function Oxygen()
 			v:SetNWFloat("BodyOxygen", v.gDisasters_Revived.Body.Oxygen)
 		end
 		for k, v in pairs(ents.FindByClass("npc_*")) do           
-			if gDisasters_Revived:isinWater(v) or gDisasters_Revived:isinLava(v) then 
+			if gDisasters_Revived.isinWater(v) or gDisasters_Revived.isinLava(v) then 
 				timer.Simple(5, function()
 					
 					if GetConVar("gdisasters_revived_hud_oxygen_npc_damage"):GetInt() == 0 then return end
@@ -589,7 +589,7 @@ function Oxygen()
 						v:TakeDamageInfo(  dmg)
 					end
 				end)
-			elseif gDisasters_Revived:isUnderGround(v) then
+			elseif gDisasters_Revived.isUnderGround(v) then
 				timer.Simple(15, function()
 					if GetConVar("gdisasters_revived_hud_oxygen_npc_damage"):GetInt() == 0 then return end
 
@@ -609,9 +609,9 @@ function Oxygen()
 	DamagePlayer()
 end
 
-function Wind()
+function gDisasters_Revived.Wind()
 
-	local table_wind = GLOBAL_SYSTEM["Atmosphere"]["Wind"]
+	local table_wind = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]
 	local windspeed  = table_wind["Speed"]
 	local winddir    = table_wind["Direction"]
 	local windphysics_enabled = GetConVar( "gdisasters_revived_wind_physics_enabled" ):GetInt() == 1 
@@ -624,7 +624,7 @@ function Wind()
 		local wind_mul   = (math.Clamp(table_wind["Speed"],200, 256) -200) / 10
 		local phys = ent:GetPhysicsObject()
 
-		if gDisasters_Revived:HitChance(0.01 + wind_mul ) then
+		if gDisasters_Revived.HitChance(0.01 + wind_mul ) then
 			local can_play_sound = false
 
 
@@ -635,7 +635,7 @@ function Wind()
 			end	
 
 			if can_play_sound then
-				local material_type = gDisasters_Revived:GetMaterialType(ent)
+				local material_type = gDisasters_Revived.GetMaterialType(ent)
 
 
 				if material_type == "wood" then 
@@ -686,7 +686,7 @@ function Wind()
 	
 	for k, v in pairs(player.GetAll()) do
 		
-		local isOutdoor       = gDisasters_Revived:isOutdoor(v)
+		local isOutdoor       = gDisasters_Revived.isOutdoor(v)
 		local pos        	  = v:GetPos()
 		local hitLeft   	  = performTrace(v, Vector(1,0,0))
 		local hitRight   	  = performTrace(v, Vector(-1,0,0))
@@ -699,7 +699,7 @@ function Wind()
 		
 		
 		local local_wind      = area_percentage * windspeed
-		if isOutdoor==false or gDisasters_Revived:IsSomethingBlockingWind(v) then local_wind = 0 end 
+		if isOutdoor==false or gDisasters_Revived.IsSomethingBlockingWind(v) then local_wind = 0 end 
 		
 		v.gDisasters_Revived.Area.LocalWind = local_wind
 		v:SetNWFloat("LocalWind", local_wind)
@@ -728,7 +728,7 @@ function Wind()
 		-- frictional force has a maximum of 400 gmod units 
 		-- 
 		
-		local windvel           = gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe( ( math.Clamp((( math.Clamp(local_wind / 256, 0, 1) * 5)^2) * local_wind, 0, local_wind)  / 2.9225))) * winddir
+		local windvel           = gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe( ( math.Clamp((( math.Clamp(local_wind / 256, 0, 1) * 5)^2) * local_wind, 0, local_wind)  / 2.9225))) * winddir
 		local frictional_scalar = math.Clamp(windvel:Length(),-400, 400)
 		local frictional_velocity = frictional_scalar * -windvel:GetNormalized()
 		local windvel_new         = ( windvel + frictional_velocity ) * 0.5
@@ -738,7 +738,7 @@ function Wind()
 	
 		
 	
-		if isOutdoor and  gDisasters_Revived:IsSomethingBlockingWind(v)==false  then
+		if isOutdoor and  gDisasters_Revived.IsSomethingBlockingWind(v)==false  then
 		
 			if ((v:GetVelocity() - windvel_new) - v:GetVelocity()):Length()!=0 then
 			
@@ -756,15 +756,15 @@ function Wind()
 	
 	end
 	
-	if windphysics_enabled and windspeed >= 1 and CurTime() >= GLOBAL_SYSTEM["Atmosphere"]["Wind"]["NextThink"] and GetConVar("gdisasters_revived_heat_system_enabled"):GetInt() <= 0 then
-		GLOBAL_SYSTEM["Atmosphere"]["Wind"]["NextThink"] = CurTime() + GetConVar( "gdisasters_revived_wind_physics_simquality" ):GetFloat()
+	if windphysics_enabled and windspeed >= 1 and CurTime() >= gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["NextThink"] and GetConVar("gdisasters_revived_heat_system_enabled"):GetInt() <= 0 then
+		gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["NextThink"] = CurTime() + GetConVar( "gdisasters_revived_wind_physics_simquality" ):GetFloat()
 		
 		for k, v in pairs(ents.GetAll()) do
 			local phys = v:GetPhysicsObject()
 			if phys:IsValid() and v:IsPlayer()==false and  (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then 
 			
-				local outdoor = gDisasters_Revived:isOutdoor(v, true) 
-				local blocked = gDisasters_Revived:IsSomethingBlockingWind(v)
+				local outdoor = gDisasters_Revived.isOutdoor(v, true) 
+				local blocked = gDisasters_Revived.IsSomethingBlockingWind(v)
 				
 				if blocked==false and outdoor==true then
 					
@@ -783,7 +783,7 @@ function Wind()
 
 						local wind 				=  area_percentage * windspeed
 
-						local windvel           = (gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe( ( (math.Clamp((( math.Clamp( wind / 256, 0, 1) * 5)^2) * wind , 0, wind ) ) / 2.9225))) ) * winddir 
+						local windvel           = (gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe( ( (math.Clamp((( math.Clamp( wind / 256, 0, 1) * 5)^2) * wind , 0, wind ) ) / 2.9225))) ) * winddir 
 						local frictional_scalar = math.Clamp(windvel:Length(),-400, 400) 
 						local frictional_velocity = frictional_scalar * -windvel:GetNormalized()
 						local windvel_new         = ( windvel  + frictional_velocity ) * 2
@@ -821,14 +821,14 @@ function Wind()
 
 					end
 
-					local area    = gDisasters_Revived:Area(v)
+					local area    = gDisasters_Revived.Area(v)
 					local mass    = phys:GetMass()
 
 					local force_mul_area     = math.Clamp((area/680827),0,1) -- bigger the area >> higher the f multiplier is
 					local friction_mul       = math.Clamp((mass/50000),0,1) -- lower the mass  >> lower frictional force 
 					local avrg_mul           = (force_mul_area + friction_mul) / 2 
 
-					local windvel           = gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe(windspeed / 2.9225)) * winddir 
+					local windvel           = gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe(windspeed / 2.9225)) * winddir 
 					local frictional_scalar = math.Clamp(windvel:Length(), 0, mass)
 					local frictional_velocity = frictional_scalar * -windvel:GetNormalized()
 					local windvel_new         = (windvel + frictional_velocity) * -1
@@ -853,20 +853,20 @@ function Wind()
 	end
 end
 		
-function stormfox2()
+function gDisasters_Revived.stormfox2()
 	if GetConVar("gdisasters_revived_stormfox_enabled"):GetInt() >= 1 then 
 		
 		if Stormfox then 
-			GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = StormFox.GetTemperature()
-			GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"] = gDisasters_Revived:convert_MetoKMPH(StormFox.GetNetworkData("Wind",0) * 0.75)
-			GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] = Vector(-StormFox.GetWindVector().x, -StormFox.GetWindVector().y, 0)
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = StormFox.GetTemperature()
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"] = gDisasters_Revived.convert_MetoKMPH(StormFox.GetNetworkData("Wind",0) * 0.75)
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] = Vector(-StormFox.GetWindVector().x, -StormFox.GetWindVector().y, 0)
 			
 			if !StormFox.IsRaining() then
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
 			else
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
 			end
 		
 			if StormFox.IsThunder() then
@@ -876,22 +876,22 @@ function stormfox2()
 			end
 		elseif StormFox2 then
 			
-			GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = StormFox2.Temperature.Get()
-			GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"] = gDisasters_Revived:convert_MetoKMPH(StormFox2.Wind.GetForce())
-			GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] = Vector(-StormFox2.Wind.GetVector().x, -StormFox2.Wind.GetVector().y, 0)
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = StormFox2.Temperature.Get()
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"] = gDisasters_Revived.convert_MetoKMPH(StormFox2.Wind.GetForce())
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"] = Vector(-StormFox2.Wind.GetVector().x, -StormFox2.Wind.GetVector().y, 0)
 			
 			if !StormFox2.Weather.IsRaining() and !StormFox2.Weather.IsSnowing() and StormFox2.Weather.GetRainAmount(0) then
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
 			elseif StormFox2.Weather.IsRaining() and StormFox2.Weather.GetRainAmount(1) then
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
 			elseif StormFox2.Weather.IsSnowing() and StormFox2.Weather.GetRainAmount(0) then
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = 100
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = 96000
 			else
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
-				GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Humidity"]
+				gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL["Atmosphere"]["Pressure"]
 			end
 		
 			if StormFox2.Thunder.IsThundering() then
@@ -903,7 +903,7 @@ function stormfox2()
 	end
 end
 
-function spacebuild()
+function gDisasters_Revived.spacebuild()
 	if GetConVar("gdisasters_revived_spacebuild_enabled"):GetInt() <= 0 then return end
 	if CAF or LS then  
 		for k, v in pairs(player.GetAll()) do
@@ -915,7 +915,7 @@ function spacebuild()
 			v:SetNWFloat("BodyEnergy", v.gDisasters_Revived.Body.Energy)
 			v:SetNWFloat("BodyCoolant", v.gDisasters_Revived.Body.Coolant)
 
-			GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = gDisasters_Revived:convert_KevintoCelcius(v.caf.custom.ls.temperature)
+			gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Temperature"] = gDisasters_Revived.convert_KevintoCelcius(v.caf.custom.ls.temperature)
 			
 		end
 	end

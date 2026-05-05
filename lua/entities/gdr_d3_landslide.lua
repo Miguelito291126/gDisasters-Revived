@@ -77,7 +77,7 @@ end
 
 function ENT:LandslideAction()
 	if !self:IsValid() then return end
-	gDisasters_Revived:CreateSoundWave("streams/disasters/earthquake/earthquake_strong.wav", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
+	gDisasters_Revived.CreateSoundWave("streams/disasters/earthquake/earthquake_strong.wav", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
 	self:CreateLandsliderocks(20, {8, 10})
 end
 

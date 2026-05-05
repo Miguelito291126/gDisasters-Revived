@@ -37,7 +37,7 @@ end
 function SWEP:PrimaryAttack()
 	if CLIENT then return end
 	local ply = self:GetOwner()
-	local Humidity = math.Round(GLOBAL_SYSTEM["Atmosphere"]["Humidity"])
+	local Humidity = math.Round(gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Humidity"])
 	ply:PrintMessage(HUD_PRINTCENTER,"The humidity is: " .. Humidity .. "%")
 end
 

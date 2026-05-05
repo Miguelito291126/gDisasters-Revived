@@ -91,7 +91,7 @@ function ENT:PostSpawn()
 			
 			
 			local pos         = self:GetPos() + Vector(0,0,self.Data.MaxGroundFunnel.Height)
-			local funnel_ents = gDisasters_Revived:FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxFunnel.Radius, self.Data.MinFunnel.Radius, true )
+			local funnel_ents = gDisasters_Revived.FindInCone(pos, self.Data.MaxFunnel.Height, self.Data.MinFunnel.Height, self.Data.MaxFunnel.Radius, self.Data.MinFunnel.Radius, true )
 			
 
 			for k, v in pairs(funnel_ents) do
@@ -110,16 +110,16 @@ function ENT:PostSpawn()
 						InflictDamage(ent, me, "cold", 5)
 
 						if ent:IsPlayer() and ent:Alive() and ent:Health() <= 5 then	
-							gDisasters_Revived:MakeFreeze(  ent )
+							gDisasters_Revived.MakeFreeze(  ent )
 						elseif ent:Health() <= 5 and ent:IsNPC() or ent:IsNextBot() then
-							gDisasters_Revived:MakeFreeze(  ent )
+							gDisasters_Revived.MakeFreeze(  ent )
 						end
 						
 					else
 
 						if ent:GetClass() != me and ent:IsSolid() and (!ent:IsPlayer() and !ent:IsNPC()) then
 							if math.random(1,2) == 1 then
-								gDisasters_Revived:MakeFreeze(  ent )
+								gDisasters_Revived.MakeFreeze(  ent )
 							end
 						end
 					end

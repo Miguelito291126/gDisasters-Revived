@@ -196,9 +196,9 @@ gDisasters_Revived.HeatSystem.CalculateConvectiveFactor = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x] and gDisasters_Revived.HeatSystem.GridMap[x][y] and gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end  -- Verifica si la celda existe
     
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]  -- Temperatura de la celda (en °C)
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]  -- Temperatura de la celda (en °C)
     local surroundingTemperature = gDisasters_Revived.HeatSystem.CalculateSurroundingTemperature(x,y,z) -- Temperatura del aire circundante (en °C, ajustable)
-    local windSpeed = Cell.windSpeed or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]  -- Velocidad del viento (en m/s)
+    local windSpeed = Cell.windSpeed or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]  -- Velocidad del viento (en m/s)
     local airDensity = gDisasters_Revived.HeatSystem.CalculateAirDensity(x, y, z)
     
     -- Constantes para el cálculo
@@ -220,10 +220,10 @@ gDisasters_Revived.HeatSystem.CalculateRadiationEmissionFactor = function(x, y, 
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x] and gDisasters_Revived.HeatSystem.GridMap[x][y] and gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end  -- Verifica si la celda existe
     
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]  -- Temperatura de la celda (en °C)
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]  -- Temperatura de la celda (en °C)
     local emissivity = gDisasters_Revived.HeatSystem.CalculateEmissivity(x,y,z)
-    local temperatureKelvin = gDisasters_Revived:convert_CelciustoKelvin(temperature)  -- Convertir temperatura a Kelvin
-    local AmbienttemperatureKelvin = gDisasters_Revived:convert_CelciustoKelvin(gDisasters_Revived.HeatSystem.CalculateAmbientTemperature(x,y,z))
+    local temperatureKelvin = gDisasters_Revived.convert_CelciustoKelvin(temperature)  -- Convertir temperatura a Kelvin
+    local AmbienttemperatureKelvin = gDisasters_Revived.convert_CelciustoKelvin(gDisasters_Revived.HeatSystem.CalculateAmbientTemperature(x,y,z))
     -- Constante de Stefan-Boltzmann (en W/m²·K⁴)
     local sigma = 5.67e-8  
 
@@ -287,7 +287,7 @@ gDisasters_Revived.HeatSystem.CalculateVPs = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local T = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local T = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
 
     -- Calcular la presión de vapor saturada usando la fórmula adecuada
     local exponent = (7.5 * T) / (237.3 + T)
@@ -302,8 +302,8 @@ gDisasters_Revived.HeatSystem.Calculatetemperaturebh = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local T = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local HR = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+    local T = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local HR = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
 
     local Tbh = T * math.atan(0.151977 * math.sqrt(HR + 8.313659)) + math.atan(T + HR) - math.atan(HR - 1.676331) + 0.00391838 * math.pow(HR, 1.5) * math.atan(0.023101 * HR) - 4.686035
     
@@ -373,8 +373,8 @@ gDisasters_Revived.HeatSystem.CalculateWindChill = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local T = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] -- Temperatura en Celsius
-    local V = Cell.windSpeed or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] -- Velocidad del viento en km/h
+    local T = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] -- Temperatura en Celsius
+    local V = Cell.windSpeed or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] -- Velocidad del viento en km/h
 
     -- Calcular la sensación térmica usando la fórmula proporcionada
     local windChill = 13.12 + 0.6215 * T - 11.37 * math.pow(V, 0.16) + 0.3965 * T * math.pow(V, 0.16)
@@ -385,8 +385,8 @@ end
 gDisasters_Revived.HeatSystem.CalculatePrecipitation = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     local latentHeat = gDisasters_Revived.HeatSystem.CalculatelatentHeat(x, y, z)
-    local Temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local Humidity = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+    local Temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local Humidity = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
 
     if Humidity > gDisasters_Revived.HeatSystem.humidityThreshold and Temperature < gDisasters_Revived.HeatSystem.temperatureThreshold then
         if latentHeat >= gDisasters_Revived.HeatSystem.cloudLatentHeatThreshold then
@@ -429,8 +429,8 @@ gDisasters_Revived.HeatSystem.CalculateHeatIndex = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local T = gDisasters_Revived:convert_CelciustoFahrenheit(Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) -- Temperatura en Celsius
-    local RH = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] -- Humedad relativa en %
+    local T = gDisasters_Revived.convert_CelciustoFahrenheit(Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) -- Temperatura en Celsius
+    local RH = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] -- Humedad relativa en %
 
     -- Coeficientes para la fórmula del índice de calor
     local c1 = -42.379
@@ -444,7 +444,7 @@ gDisasters_Revived.HeatSystem.CalculateHeatIndex = function(x, y, z)
     local c9 = -0.00000199
 
     -- Calcular el índice de calor usando la fórmula proporcionada
-    local HI = gDisasters_Revived:convert_FahrenheittoCelcius(c1 + (c2 * T) + (c3 * RH) + (c4 * T * RH) + (c5 * T * T) + (c6 * RH * RH) + (c7 * T * T * RH) + (c8 * T * RH * RH) + (c9 * T * T * RH * RH))
+    local HI = gDisasters_Revived.convert_FahrenheittoCelcius(c1 + (c2 * T) + (c3 * RH) + (c4 * T * RH) + (c5 * T * T) + (c6 * RH * RH) + (c7 * T * T * RH) + (c8 * T * RH * RH) + (c9 * T * T * RH * RH))
     Cell.heatindex = math.Clamp( HI, gDisasters_Revived.HeatSystem.minTemperature, gDisasters_Revived.HeatSystem.maxTemperature)
     return Cell.heatindex
 end
@@ -454,7 +454,7 @@ gDisasters_Revived.HeatSystem.CalculatelatentHeat = function(x, y, z)
     if not Cell then return end
 
     local cloudDensity = Cell.cloudDensity or 0
-    local currentTemperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local currentTemperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
 
     if cloudDensity > 0 then
         if (currentTemperature > gDisasters_Revived.HeatSystem.freezingTemperature) then 
@@ -555,13 +555,13 @@ gDisasters_Revived.HeatSystem.CalculateTemperature = function(x, y, z)
     end
 
     local averageTemperature = totalTemperature / count
-    local currentTemperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local currentTemperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
                 
     local z_min = math.max(z, 0)
 
     local temperatureDropPerMeter = 0.00650 -- Gradiente adiabático estándar en °C por metro
     local altitudeAdjustment = z_min * temperatureDropPerMeter -- Calcular la temperatura en la superficie
-    local skybox = getMapSkyBox()
+    local skybox = gDisasters_Revived.getMapSkyBox()
     local maxAltitude = skybox[2].z or 1000
 
     local terrainTemperatureEffect = gDisasters_Revived.HeatSystem.CalculateTerrainInfluence(x,y,z).temperatureEffect
@@ -588,7 +588,7 @@ gDisasters_Revived.HeatSystem.CalculateHumidity = function(x, y, z)
     if not Cell then return 0 end -- Verificar que la celda actual exista
 
     -- Factor de temperatura (influencia en la capacidad del aire para retener humedad)
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
     local temperatureFactor = 1 + ((temperature - 23) * 0.02) -- Incremento del 2% por grado Celsius adicional
 
     -- Altitud (disminución de humedad en altitudes mayores)
@@ -598,7 +598,7 @@ gDisasters_Revived.HeatSystem.CalculateHumidity = function(x, y, z)
     local altitudeFactor = math.max(0.8, 1 - (altitude / 10000)) -- Reducir humedad en altitudes altas, mínimo 80%
 
     -- Velocidad del viento (dispersión de humedad)
-    local windSpeed = Cell.windSpeed or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
+    local windSpeed = Cell.windSpeed or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
     local windFactor = 1 + (windSpeed * 0.05) -- Incremento del 5% por m/s de viento
 
     -- Recopilar humedad de celdas vecinas
@@ -623,7 +623,7 @@ gDisasters_Revived.HeatSystem.CalculateHumidity = function(x, y, z)
     local averageHumidity = (count > 0) and (totalHumidity / count) or 25 -- Valor por defecto si no hay vecinos
 
     -- Calcular nuevos efectos
-    local currentHumidity = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+    local currentHumidity = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
     local terrainHumidityEffect = gDisasters_Revived.HeatSystem.CalculateTerrainInfluence(x,y,z).humidityEffect
     local humidityChange = gDisasters_Revived.HeatSystem.HumidityDiffusionCoefficient * (averageHumidity - currentHumidity)
 
@@ -645,7 +645,7 @@ gDisasters_Revived.HeatSystem.CalculatePressure = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Verificar que la celda actual exista
 
-    local T = gDisasters_Revived:convert_CelciustoKelvin(Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) -- Suponiendo que la temperatura se pasa en °C
+    local T = gDisasters_Revived.convert_CelciustoKelvin(Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) -- Suponiendo que la temperatura se pasa en °C
 
     -- Definir valores de los parámetros
     local P0 = 1013.25 -- Presión al nivel del mar estándar en hPa
@@ -662,7 +662,7 @@ gDisasters_Revived.HeatSystem.CalculatePressure = function(x, y, z)
     -- Ecuación barométrica para la presión
     local P1 = math.exp(-gravity * molarmass * (z - h0) / (gas_constant * T_at_z)) * P0
     -- Convertir la presión de hPa a Pa
-    P1 = gDisasters_Revived:convert_HpatoPa(P1)
+    P1 = gDisasters_Revived.convert_HpatoPa(P1)
     
     -- Limitar la presión a los valores máximo y mínimo
     P1 = math.Clamp(P1, gDisasters_Revived.HeatSystem.minPressure, gDisasters_Revived.HeatSystem.maxPressure)
@@ -677,8 +677,8 @@ gDisasters_Revived.HeatSystem.CalculateDewPoint = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
     
-    local T = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local HR = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+    local T = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local HR = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
 
     local a = 17.625
     local b = 243.04
@@ -694,8 +694,8 @@ gDisasters_Revived.HeatSystem.CalculateAirDensity = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local temperature = gDisasters_Revived:convert_CelciustoKelvin(Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) 
-    local pressure = Cell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] -- Pa, presión a nivel del mar por defecto
+    local temperature = gDisasters_Revived.convert_CelciustoKelvin(Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) 
+    local pressure = Cell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] -- Pa, presión a nivel del mar por defecto
 
     local R = 287.05 -- Constante de gas para el aire en J/(kg·K)
     local airdensity = pressure / (R * temperature) 
@@ -709,8 +709,8 @@ gDisasters_Revived.HeatSystem.CalculateWindSpeed = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end -- Si la celda no existe, retornar 0
 
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local pressure = Cell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local pressure = Cell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
     local altitude = z or 0  -- Altitud de la celda (puede ser en metros)
     local terrainFriction = gDisasters_Revived.HeatSystem.CalculateTerrainInfluence(x,y,z).windEffect -- Coeficiente de fricción según el tipo de terreno
 
@@ -731,8 +731,8 @@ gDisasters_Revived.HeatSystem.CalculateWindSpeed = function(x, y, z)
                     if gDisasters_Revived.HeatSystem.GridMap[nx] and gDisasters_Revived.HeatSystem.GridMap[nx][ny] and gDisasters_Revived.HeatSystem.GridMap[nx][ny][nz] then
                         local neighborCell = gDisasters_Revived.HeatSystem.GridMap[nx][ny][nz]
                         if neighborCell then
-                            deltaPressure = deltaPressure + ((neighborCell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]) - pressure)
-                            deltaTemperature = deltaTemperature + ((neighborCell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) - temperature)
+                            deltaPressure = deltaPressure + ((neighborCell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]) - pressure)
+                            deltaTemperature = deltaTemperature + ((neighborCell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) - temperature)
                             neighborCount = neighborCount + 1
                         end
                     end
@@ -771,8 +771,8 @@ gDisasters_Revived.HeatSystem.CalculateWindDirection = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return Vector(0, 0, 0) end  -- Retorna un vector nulo si la celda no existe
 
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local pressure = Cell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local pressure = Cell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
 
     -- Calcular la densidad del aire en la celda actual
     local airDensity = gDisasters_Revived.HeatSystem.CalculateAirDensity(x, y, z)
@@ -819,9 +819,9 @@ gDisasters_Revived.HeatSystem.CalculateAirflow = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
     if not Cell then return 0 end  -- Si la celda no existe, retornar 0
 
-    local windSpeed = Cell.windSpeed or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
-    local temperature = Cell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-    local pressure = Cell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
+    local windSpeed = Cell.windSpeed or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
+    local temperature = Cell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+    local pressure = Cell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]
     local area = gDisasters_Revived.HeatSystem.cellArea or 1  -- Área de la celda, en m²
 
     -- Calcular la densidad del aire en la celda actual
@@ -841,8 +841,8 @@ gDisasters_Revived.HeatSystem.CalculateAirflow = function(x, y, z)
                     if gDisasters_Revived.HeatSystem.GridMap[nx] and gDisasters_Revived.HeatSystem.GridMap[nx][ny] and gDisasters_Revived.HeatSystem.GridMap[nx][ny][nz] then
                         local neighborCell = gDisasters_Revived.HeatSystem.GridMap[nx][ny][nz]
                         if neighborCell then
-                            deltaPressure = deltaPressure + ((neighborCell.pressure or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]) - pressure)
-                            deltaTemperature = deltaTemperature + ((neighborCell.temperature or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) - temperature)
+                            deltaPressure = deltaPressure + ((neighborCell.pressure or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"]) - pressure)
+                            deltaTemperature = deltaTemperature + ((neighborCell.temperature or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]) - temperature)
                             neighborCount = neighborCount + 1
                         end
                     end
@@ -873,7 +873,7 @@ gDisasters_Revived.HeatSystem.CalculateAirflow = function(x, y, z)
 end
 
 gDisasters_Revived.HeatSystem.GetCellType = function(x, y, z)
-    local MapBounds = getMapBounds()
+    local MapBounds = gDisasters_Revived.getMapBounds()
     local max, min, floor = MapBounds[1], MapBounds[2], MapBounds[3]
     local minX, minY, maxZ = math.floor(min.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(min.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize,  math.ceil(min.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
     local maxX, maxY, minZ = math.ceil(max.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.ceil(max.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize,  math.floor(max.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
@@ -1001,7 +1001,7 @@ end
 
 gDisasters_Revived.HeatSystem.CalculateCloudDensity = function(x, y, z)
     local Cell = gDisasters_Revived.HeatSystem.GridMap[x][y][z]
-    local humidity = Cell.humidity or GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+    local humidity = Cell.humidity or gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
 
     if humidity > gDisasters_Revived.HeatSystem.humidityThreshold then
         Cell.cloudDensity = (humidity - gDisasters_Revived.HeatSystem.humidityThreshold) * gDisasters_Revived.HeatSystem.CloudDensityCoefficient
@@ -1023,7 +1023,7 @@ gDisasters_Revived.HeatSystem.CreateLightningAndThunder = function(x,y,z)
         start = startpos,
         endpos = endpos,
     })
-    if gDisasters_Revived:HitChance(1) then
+    if gDisasters_Revived.HitChance(1) then
         CreateLightningBolt(startpos, tr.HitPos, {"purple", "blue"}, {"Grounded", "NotGrounded"})
     end
 
@@ -1342,7 +1342,7 @@ gDisasters_Revived.HeatSystem.GenerateGrid = function()
             gDisasters_Revived.HeatSystem.LoadGrid()
         else
             -- Obtener los límites del mapa
-            local mapBounds = getMapBounds()
+            local mapBounds = gDisasters_Revived.getMapBounds()
             local minX, minY, maxZ = math.floor(mapBounds[2].x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(mapBounds[2].y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.ceil(mapBounds[2].z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
             local maxX, maxY, minZ = math.ceil(mapBounds[1].x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.ceil(mapBounds[1].y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(mapBounds[1].z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
 
@@ -1561,18 +1561,18 @@ gDisasters_Revived.HeatSystem.UpdatePlayerGrid = function()
                     -- Verifica si las propiedades de la celda son válidas
                     if Cell.temperature and Cell.humidity and Cell.pressure and Cell.windspeed and Cell.winddirection then
                         -- Actualiza las variables de la atmósfera del jugador
-                        GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] = Cell.temperature
-                        GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = Cell.humidity
-                        GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = Cell.pressure
-                        GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] = Cell.windspeed
-                        GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] = Cell.winddirection
+                        gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] = Cell.temperature
+                        gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = Cell.humidity
+                        gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = Cell.pressure
+                        gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] = Cell.windspeed
+                        gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] = Cell.winddirection
                     else
                         -- Actualiza las variables de la atmósfera del jugador
-                        Cell.temperature = GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
-                        Cell.humidity = GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
-                        Cell.pressure = GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] 
-                        Cell.windspeed = GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
-                        Cell.winddirection = GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] 
+                        Cell.temperature = gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"]
+                        Cell.humidity = gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"]
+                        Cell.pressure = gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] 
+                        Cell.windspeed = gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"]
+                        Cell.winddirection = gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] 
                     end
                 else
                     -- Manejo de celdas fuera de los límites de la cuadrícula
@@ -1607,7 +1607,7 @@ gDisasters_Revived.HeatSystem.UpdateEntityGrid = function()
                             local wind_mul   = (math.Clamp(windspeed,200, 256) -200) / 10
                             local phys = ent:GetPhysicsObject()
 
-                            if gDisasters_Revived:HitChance(0.01 + wind_mul ) then
+                            if gDisasters_Revived.HitChance(0.01 + wind_mul ) then
                                 local can_play_sound = false
 
 
@@ -1618,7 +1618,7 @@ gDisasters_Revived.HeatSystem.UpdateEntityGrid = function()
                                 end	
 
                                 if can_play_sound then
-                                    local material_type = gDisasters_Revived:GetMaterialType(ent)
+                                    local material_type = gDisasters_Revived.GetMaterialType(ent)
 
 
                                     if material_type == "wood" then 
@@ -1669,18 +1669,18 @@ gDisasters_Revived.HeatSystem.UpdateEntityGrid = function()
                         if Cell.windspeed and Cell.winddirection and windphysics_enabled and windspeed >= 1 then
 
                             local phys = ent:GetPhysicsObject()
-                            local outdoor = gDisasters_Revived:isOutdoor(ent, true) 
-				            local blocked = gDisasters_Revived:IsSomethingBlockingWind(ent)
+                            local outdoor = gDisasters_Revived.isOutdoor(ent, true) 
+				            local blocked = gDisasters_Revived.IsSomethingBlockingWind(ent)
                             if blocked==false and outdoor==true then
                                 -- Calcula la fuerza a aplicar
-                                local area    = gDisasters_Revived:Area(ent)
+                                local area    = gDisasters_Revived.Area(ent)
                                 local mass    = phys:GetMass()
 
                                 local force_mul_area     = math.Clamp((area/680827),0,1) -- bigger the area >> higher the f multiplier is
                                 local friction_mul       = math.Clamp((mass/50000),0,1) -- lower the mass  >> lower frictional force 
                                 local avrg_mul           = (force_mul_area + friction_mul) / 2 
 
-                                local windvel           = gDisasters_Revived:convert_MetoSU(gDisasters_Revived:convert_KMPHtoMe(windspeed / 2.9225)) * winddir 
+                                local windvel           = gDisasters_Revived.convert_MetoSU(gDisasters_Revived.convert_KMPHtoMe(windspeed / 2.9225)) * winddir 
                                 local frictional_scalar = math.Clamp(windvel:Length(), 0, mass)
                                 local frictional_velocity = frictional_scalar * -windvel:GetNormalized()
                                 local windvel_new         = (windvel + frictional_velocity) * -1

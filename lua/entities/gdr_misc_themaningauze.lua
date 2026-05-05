@@ -38,7 +38,7 @@ function ENT:Initialize()
 		self:SetPlaybackRate( 4 )
 		timer.Simple(8, function()
 			if !self:IsValid() then return end
-			gDisasters_Revived_CreateGlobalGFX("kingramses", self)
+			gDisasters_Revived.CreateGlobalGFX("kingramses", self)
 			self.KingRamses = true
 		end)
 		
@@ -47,7 +47,7 @@ function ENT:Initialize()
 			self:Remove()
 		end)
 		
-		gDisasters_Revived:CreateSoundWave("streams/disasters/wtf/kingramses.mp3", self:GetPos(), "stereo" ,340.29/2, {100,100}, 10)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/wtf/kingramses.mp3", self:GetPos(), "stereo" ,340.29/2, {100,100}, 10)
 
 		
 	end
@@ -83,7 +83,7 @@ function ENT:KingRamsed()
 	for k, v in pairs(player.GetAll()) do
 	
 		
-		gDisasters_Revived:SetOffsetAngles(v, Angle(math.random(-10,10),math.random(-10,10),math.random(-10,10)))
+		gDisasters_Revived.SetOffsetAngles(v, Angle(math.random(-10,10),math.random(-10,10),math.random(-10,10)))
 	end
 end
 
@@ -99,7 +99,7 @@ function ENT:Think()
 end
 
 function ENT:OnRemove()
-	gDisasters_Revived:StopSoundWave("streams/disasters/wtf/kingramses.mp3", "stereo")
+	gDisasters_Revived.StopSoundWave("streams/disasters/wtf/kingramses.mp3", "stereo")
 end
 
 function ENT:Draw()

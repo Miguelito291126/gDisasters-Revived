@@ -48,11 +48,11 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
-		gDisasters_Revived:setMapLight("a")		
+		gDisasters_Revived.setMapLight("a")		
 	
 
 
@@ -66,7 +66,7 @@ function ENT:Initialize()
 			data.EndMinCurrent  = 0
 			data.EndMaxCurrent  = 0
 		
-		gDisasters_Revived_CreateGlobalFog(self, data, true)   
+		gDisasters_Revived.CreateGlobalFog(self, data, true)   
 
 		self:SetupSequencedVars()
 		
@@ -87,12 +87,12 @@ function ENT:OnStateChange(next_state)
 				
 		local lol = {"e","f","g","h","i","j","k"}
 
-		gDisasters_Revived:gDisasters_Revived_RemoveGlobalFog()
-		gDisasters_Revived:gDisasters_Revived_RemoveGlobalGFX()
+		gDisasters_Revived.RemoveGlobalFog()
+		gDisasters_Revived.RemoveGlobalGFX()
 		for i=0, 100 do
 			timer.Simple(i/10, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Reset_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Reset_SkyData, 0.05)
 			end)
 			
 		end
@@ -100,7 +100,7 @@ function ENT:OnStateChange(next_state)
 		for i=1, 7 do 
 			timer.Simple(i, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:setMapLight(lol[i])
+				gDisasters_Revived.setMapLight(lol[i])
 			end)
 		end
 		
@@ -144,7 +144,7 @@ function ENT:StateProcessor()
 end
 
 function ENT:PressureCenter()
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(29,37),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 65000, ["Temperature"] = math.random(12,17), ["Humidity"]    = math.random(71,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(29,37),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 65000, ["Temperature"] = math.random(12,17), ["Humidity"]    = math.random(71,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 	
 	
@@ -152,7 +152,7 @@ end
 			
 			
 function ENT:PressureOutFlow()
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(48,66),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 75000, ["Temperature"] = math.random(8,12), ["Humidity"]    = math.random(82,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(48,66),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 75000, ["Temperature"] = math.random(8,12), ["Humidity"]    = math.random(82,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 	
 	
 
@@ -160,9 +160,9 @@ end
 
 function ENT:PressureBoundary()
 
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(68,97),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 85000, ["Temperature"] = math.random(13,18), ["Humidity"]    = math.random(82,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(68,97),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 85000, ["Temperature"] = math.random(13,18), ["Humidity"]    = math.random(82,89), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
-    gDisasters_Revived_CreateGlobalGFX("heavyrain", self)
+    gDisasters_Revived.CreateGlobalGFX("heavyrain", self)
 	
 	for k, v in pairs(player.GetAll()) do
 	
@@ -246,15 +246,15 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 		
-		gDisasters_Revived:setMapLight("t")
+		gDisasters_Revived.setMapLight("t")
 	end
 	
 	if (CLIENT) then

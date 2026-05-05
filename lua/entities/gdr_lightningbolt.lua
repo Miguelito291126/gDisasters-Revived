@@ -175,7 +175,7 @@ function ENT:Smite()
 
 		self:Scorch()
 
-		gDisasters_Revived:CreateSoundWave(table.Random(sounds), target:GetPos(), "3d" ,340.29/2, {70,120}, 0.5)
+		gDisasters_Revived.CreateSoundWave(table.Random(sounds), target:GetPos(), "3d" ,340.29/2, {70,120}, 0.5)
 		
 	end)
 	

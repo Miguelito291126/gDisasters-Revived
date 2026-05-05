@@ -53,7 +53,7 @@ end
 
 function ENT:Vortex()
 
-	local entities = gDisasters_Revived:FindInCylinder(self:GetPos(), 3400, 4,  -400, true)
+	local entities = gDisasters_Revived.FindInCylinder(self:GetPos(), 3400, 4,  -400, true)
 	local selfpos_norm = Vector(self:GetPos().x, self:GetPos().y, 0)
 	
 	for k, v in pairs(entities) do

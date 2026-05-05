@@ -1,4 +1,4 @@
-function gDisasters_Revived_CreateFog(ply, parent_entity, fogdata, override_quality)
+function gDisasters_Revived.CreateFog(ply, parent_entity, fogdata, override_quality)
 	if GetConVar("gdisasters_revived_graphics_fog"):GetInt() <= 0 then return end
 	net.Start("gdr_createfog")
 	net.WriteEntity(parent_entity)
@@ -8,31 +8,31 @@ function gDisasters_Revived_CreateFog(ply, parent_entity, fogdata, override_qual
 
 end
 
-function gDisasters_Revived_CreateGlobalFog(parent_entity, data, override_quality)
+function gDisasters_Revived.CreateGlobalFog(parent_entity, data, override_quality)
 	if GetConVar("gdisasters_revived_graphics_fog"):GetInt() <= 0 then return end
 	for k, v in pairs(player.GetAll()) do
-		gDisasters_Revived_CreateFog(v, parent_entity, data, override_quality)
+		gDisasters_Revived.CreateFog(v, parent_entity, data, override_quality)
 		
 	end
 
 end
 
-function gDisasters_Revived_ResetOutsideFactor(ply) 
+function gDisasters_Revived.ResetOutsideFactor(ply) 
 	
 	net.Start("gdr_resetoutsidefactor")
 	net.Send(ply)
 
 end
 
-function gDisasters_Revived_ResetGlobalOutsideFactor()
+function gDisasters_Revived.ResetGlobalOutsideFactor()
 	for k, v in pairs(player.GetAll()) do
-		gDisasters_Revived_ResetOutsideFactor(v)
+		gDisasters_Revived.ResetOutsideFactor(v)
 	end
 	
 
 end
 
-function gDisasters_Revived_RemoveGlobalFog()
+function gDisasters_Revived.RemoveGlobalFog()
 	if GetConVar("gdisasters_revived_graphics_fog"):GetInt() <= 0 then return end
 
 	net.Start("gdr_removegfxfog")
@@ -43,7 +43,7 @@ function gDisasters_Revived_RemoveGlobalFog()
 		
 end
 
-function gDisasters_Revived_RemoveGlobalGFX()
+function gDisasters_Revived.RemoveGlobalGFX()
 	if GetConVar("gdisasters_revived_graphics_gfx"):GetInt() <= 0 then return end
 
 	net.Start("gdr_removegfxfog")
@@ -57,7 +57,7 @@ end
 
 
 
-function gDisasters_Revived_CreateGFX(ply, parent_entity, effect)
+function gDisasters_Revived.CreateGFX(ply, parent_entity, effect)
 	if GetConVar("gdisasters_revived_graphics_gfx"):GetInt() <= 0 then return end
 
 	net.Start("gdr_creategfx")
@@ -68,10 +68,10 @@ function gDisasters_Revived_CreateGFX(ply, parent_entity, effect)
 		
 end
 
-function gDisasters_Revived_CreateGlobalGFX(effect, parent_entity)
+function gDisasters_Revived.CreateGlobalGFX(effect, parent_entity)
 	if GetConVar("gdisasters_revived_graphics_gfx"):GetInt() <= 0 then return end
 	for k, v in pairs(player.GetAll()) do
-		gDisasters_Revived_CreateGFX(v, parent_entity, effect)
+		gDisasters_Revived.CreateGFX(v, parent_entity, effect)
 	
 	end
 

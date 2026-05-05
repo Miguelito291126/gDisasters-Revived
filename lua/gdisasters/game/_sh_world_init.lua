@@ -2,7 +2,7 @@ SetGlobalFloat("gdr_dseismic_activity", 0)
 
 --Global_System table
 
-GLOBAL_SYSTEM = {
+gDisasters_Revived.GLOBAL_SYSTEM = {
 				["Atmosphere"] 	= {
 						["Wind"]        = {
 											["Speed"]=0,
@@ -24,7 +24,7 @@ GLOBAL_SYSTEM = {
 				}
 				}
 				
-GLOBAL_SYSTEM_TARGET = {
+gDisasters_Revived.GLOBAL_SYSTEM_TARGET = {
 				["Atmosphere"] 	= {
 						["Wind"]        = {
 											["Speed"]=0,
@@ -45,7 +45,7 @@ GLOBAL_SYSTEM_TARGET = {
 				}
 				}
 				
-GLOBAL_SYSTEM_ORIGINAL = {
+gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL = {
 				["Atmosphere"] 	= {
 						["Wind"]        = {
 											["Speed"]=0,
@@ -69,9 +69,9 @@ GLOBAL_SYSTEM_ORIGINAL = {
 
 --concommands
 
-concommand.Add("gdisasters_smite", function()
+concommand.Add("gdisasters_revived_smite", function()
 
-	local bounds    = getMapSkyBox()
+	local bounds    = gdisasters_revived_:getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 	
@@ -95,7 +95,7 @@ concommand.Add("gdisasters_smite", function()
 end)
 
 concommand.Add("setlight", function(ply, cmd, args)
-	gDisasters_Revived:setMapLight(args[1])
+	gdisasters_revived_:setMapLight(args[1])
 end)
 
 concommand.Add("setposme", function(ply, cmd, args)
@@ -120,52 +120,52 @@ concommand.Add("getpropnum", function()
 	print(#ents.FindByClass("prop_physics"))
 end)
 
-concommand.Add("gdisasters_heat_system_getcellslist", function()
+concommand.Add("gdisasters_revived_heat_system_getcellslist", function()
 
-	PrintTable(gDisasters_Revived.HeatSystem.GridMap)
+	PrintTable(gdisasters_revived_.HeatSystem.GridMap)
 end)
-concommand.Add("gdisasters_heat_system_getcurrentcell", function(ply)
+concommand.Add("gdisasters_revived_heat_system_getcurrentcell", function(ply)
 	local pos = ply:GetPos()
-	local px, py, pz = math.floor(pos.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
+	local px, py, pz = math.floor(pos.x / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.y / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.z / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize
 	
-	PrintTable(gDisasters_Revived.HeatSystem.GridMap[px][py][pz])
+	PrintTable(gdisasters_revived_.HeatSystem.GridMap[px][py][pz])
 end)
 
-concommand.Add("gdisasters_heat_system_getcellpos", function(ply)
+concommand.Add("gdisasters_revived_heat_system_getcellpos", function(ply)
 	local pos = ply:GetPos()
-	local px, py, pz = math.floor(pos.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
+	local px, py, pz = math.floor(pos.x / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.y / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.z / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize
 	
-	if gDisasters_Revived.HeatSystem.GridMap[px][py][pz] then
+	if gdisasters_revived_.HeatSystem.GridMap[px][py][pz] then
 		print("Position: X= " .. px, "Y= " .. py, "Z= " .. pz)
 	end
 end)
 
-concommand.Add("gdisasters_heat_system_getlandcells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.LandSources)
+concommand.Add("gdisasters_revived_heat_system_getlandcells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.LandSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getwatercells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.WaterSources)
+concommand.Add("gdisasters_revived_heat_system_getwatercells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.WaterSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getaircells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.AirSources)
+concommand.Add("gdisasters_revived_heat_system_getaircells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.AirSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getgrasscells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.GrassSources)
+concommand.Add("gdisasters_revived_heat_system_getgrasscells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.GrassSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getsnowcells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.SnowSources)
+concommand.Add("gdisasters_revived_heat_system_getsnowcells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.SnowSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getsandcells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.SandSources)
+concommand.Add("gdisasters_revived_heat_system_getsandcells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.SandSources)
 end)
 
-concommand.Add("gdisasters_heat_system_getasfaltcells", function(ply)
-	PrintTable(gDisasters_Revived.HeatSystem.AsfaltSources)
+concommand.Add("gdisasters_revived_heat_system_getasfaltcells", function(ply)
+	PrintTable(gdisasters_revived_.HeatSystem.AsfaltSources)
 end)
 
 concommand.Add("ent_getinfo", function(ply)
@@ -188,108 +188,108 @@ concommand.Add("freeze", function()
 end)
 
 
-concommand.Add("gdisasters_settemp", function(cmd, args, temp)
+concommand.Add("gdisasters_revived_settemp", function(cmd, args, temp)
 	local temperature = temp[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] = tonumber(temperature)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Temperature"] = tonumber(temperature)
 end)
 
 
 
-concommand.Add("gdisasters_setwind", function(cmd, args, wind)
+concommand.Add("gdisasters_revived_setwind", function(cmd, args, wind)
 	local speed = wind[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] = tonumber(speed)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Speed"] = tonumber(speed)
 end)
 
-concommand.Add("gdisasters_setwind_direction", function(cmd, args, wind)
+concommand.Add("gdisasters_revived_setwind_direction", function(cmd, args, wind)
 	local direction = Vector(tonumber(wind[1]), tonumber(wind[2]), tonumber(wind[3]))
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] = direction
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Wind"]["Direction"] = direction
 end)
 
 
-concommand.Add("gdisasters_setbody_temp", function(cmd, args, temp)
+concommand.Add("gdisasters_revived_setbody_temp", function(cmd, args, temp)
 	for k, v in pairs(player.GetAll()) do
 		local temperature = temp[1]
-		v.gDisasters_Revived.Body.Temperature = tonumber(temperature)
+		v.gdisasters_revived_.Body.Temperature = tonumber(temperature)
 	
 	end
 end)
 
-concommand.Add("gdisasters_setbody_oxygen", function(cmd, args, O2)
+concommand.Add("gdisasters_revived_setbody_oxygen", function(cmd, args, O2)
 	for k, v in pairs(player.GetAll()) do
 		local Oxygen = O2[1]
-		v.gDisasters_Revived.Body.Oxygen = tonumber(Oxygen)
+		v.gdisasters_revived_.Body.Oxygen = tonumber(Oxygen)
 	
 	end
 end)
 
-concommand.Add("gDisasters_Revived_dnc_getmoondirindegrees", function(cmd, args, O2)
-	print(gDisasters_Revived:gDisasters_GetMoonAngleInDegs())
+concommand.Add("gdisasters_revived_dnc_getmoondirindegrees", function(cmd, args, O2)
+	print(gDisasters_Revived.Revived_GetMoonAngleInDegs())
 end)
 
-concommand.Add("gDisasters_Revived_dnc_getsundirindegrees", function(cmd, args, O2)
-	print(gDisasters_Revived:gDisasters_GetSunAngleInDegs())
+concommand.Add("gdisasters_revived_dnc_getsundirindegrees", function(cmd, args, O2)
+	print(gDisasters_Revived.Revived_GetSunAngleInDegs())
 end)
 
-concommand.Add("gdisasters_setpressure", function(cmd, args, pressure)
+concommand.Add("gdisasters_revived_setpressure", function(cmd, args, pressure)
 	local press = pressure[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = tonumber(press)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Pressure"] = tonumber(press)
 end)
 
-concommand.Add("gdisasters_sethumidity", function(cmd, args, humidity)
+concommand.Add("gdisasters_revived_sethumidity", function(cmd, args, humidity)
 	local humi =  humidity[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = tonumber(humi)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Humidity"] = tonumber(humi)
 end)
 
-concommand.Add("gdisasters_setbdadiation", function(cmd, args, BRadiation)
+concommand.Add("gdisasters_revived_setbdadiation", function(cmd, args, BRadiation)
 	local BR =  BRadiation[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["BRadiation"] = tonumber(BR)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["BRadiation"] = tonumber(BR)
 end)
-concommand.Add("gdisasters_setoxygen", function(cmd, args, Oxygen)
+concommand.Add("gdisasters_revived_setoxygen", function(cmd, args, Oxygen)
 	local Ox = Oxygen[1]
-	GLOBAL_SYSTEM_TARGET["Atmosphere"]["Oxygen"] = tonumber(Ox)
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET["Atmosphere"]["Oxygen"] = tonumber(Ox)
 end)
 
 concommand.Add("getmap", function()
 	print(game.GetMap())
 end)
 
-concommand.Add("gDisasters_Revived_dnc_getsundir", function(cmd, args, O2)
-	print(gDisasters_Revived:gDisasters_GetSunDir())
+concommand.Add("gdisasters_revived_dnc_getsundir", function(cmd, args, O2)
+	print(gDisasters_Revived.Revived_GetSunDir())
 end)
 
-concommand.Add("gDisasters_Revived_dnc_getmoondir", function(cmd, args, O2)
-	print(gDisasters_Revived:gDisasters_GetMoonDir())
+concommand.Add("gdisasters_revived_dnc_getmoondir", function(cmd, args, O2)
+	print(gDisasters_Revived.Revived_GetMoonDir())
 end)
 
-concommand.Add( "gDisasters_Revived_dnc_pause", function( pl, cmd, args )
+concommand.Add( "gdisasters_revived_dnc_pause", function( pl, cmd, args )
 
 	if ( !IsValid( pl ) or !pl:IsAdmin() and !IsSuperAdmin() ) then return end
 
-	gDisasters_Revived.DayNightSystem.TogglePause()
+	gdisasters_revived_.DayNightSystem.TogglePause()
 
 	if ( IsValid( pl ) ) then
 
-		pl:PrintMessage( HUD_PRINTCONSOLE, "DNC is " .. (gDisasters_Revived.DayNightSystem.Paused and "paused" or "no longer paused") );
+		pl:PrintMessage( HUD_PRINTCONSOLE, "DNC is " .. (gdisasters_revived_.DayNightSystem.Paused and "paused" or "no longer paused") );
 
 	else
 
-		print( "DNC is " .. (gDisasters_Revived.DayNightSystem.Paused and "paused" or "no longer paused") );
+		print( "DNC is " .. (gdisasters_revived_.DayNightSystem.Paused and "paused" or "no longer paused") );
 
 	end
 
 end );
 
-concommand.Add( "gDisasters_Revived_dnc_settime", function( pl, cmd, args )
+concommand.Add( "gdisasters_revived_dnc_settime", function( pl, cmd, args )
 
 	if ( !IsValid( pl ) or !pl:IsAdmin() and !IsSuperAdmin() ) then return end
 
-	gDisasters_Revived.DayNightSystem.SetTime( tonumber( args[1] or "0" ) );
+	gdisasters_revived_.DayNightSystem.SetTime( tonumber( args[1] or "0" ) );
 
 end );
 
-concommand.Add( "gDisasters_Revived_dnc_gettime", function( pl, cmd, args )
+concommand.Add( "gdisasters_revived_dnc_gettime", function( pl, cmd, args )
 
-	local time = gDisasters_Revived.DayNightSystem.GetTime();
+	local time = gdisasters_revived_.DayNightSystem.GetTime();
 	local hours = math.floor( time );
 	local minutes = ( time - hours ) * 60;
 
@@ -304,12 +304,12 @@ concommand.Add( "gDisasters_Revived_dnc_gettime", function( pl, cmd, args )
 	end
 
 end );
-hook.Add( "Think", "gDisastersSettingSunDir", function()
+hook.Add( "Think", "gDisastersRevivedSettingSunDir", function()
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 and GetConVar( "gdisasters_revived_dnc_enabled", "0", {FCVAR_ARCHIVE}, "" ):GetInt() <= 0 then 
 		local env_sun = ents.FindByClass("env_sun")[1]
 		if env_sun then
 			local sunDir = env_sun:GetInternalVariable("sun_dir")
-			gDisasters_Revived:gDisasters_SetSunDir(sunDir)
+			gDisasters_Revived.SetSunDir(sunDir)
 		end
 	end
 end)

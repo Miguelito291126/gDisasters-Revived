@@ -19,14 +19,14 @@ function ENT:Initialize()
 	
 		
 		
-		LocalPlayer().Sounds["Ashstorm_IDLE"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_loop.wav")
-		LocalPlayer().Sounds["Ashstorm_muffled_IDLE"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_muffled_loop.wav")
+		LocalPlayer().Sounds["Ashstorm_IDLE"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_loop.wav")
+		LocalPlayer().Sounds["Ashstorm_muffled_IDLE"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/sandstorm_muffled_loop.wav")
 
 	end
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=25,["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 101000, ["Temperature"] = math.random(35,40), ["Humidity"]    = math.random(2,5), ["BRadiation"]  = 0.1, ["Oxygen"] = 10}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=25,["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 101000, ["Temperature"] = math.random(35,40), ["Humidity"]    = math.random(2,5), ["BRadiation"]  = 0.1, ["Oxygen"] = 10}}
 		
 		self:SetModel(self.Model)
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -54,13 +54,13 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		
 		end
 		
 		
-		gDisasters_Revived:setMapLight("a")
+		gDisasters_Revived.setMapLight("a")
 		self:SetNoDraw(true)
 		physenv.SetAirDensity(50)
 		
@@ -110,7 +110,7 @@ function ENT:AffectPlayers()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
-			if gDisasters_Revived:HitChance(time_mul) then
+			if gDisasters_Revived.HitChance(time_mul) then
 				if math.random(1,3)==1 then
 					net.Start("gdr_screen_particles")
 					net.WriteString("hud/snow")
@@ -180,15 +180,15 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 		
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 		physenv.SetAirDensity(2)
-		gDisasters_Revived:setMapLight("t")
+		gDisasters_Revived.setMapLight("t")
 	end
 	
 	if (CLIENT) then
@@ -217,7 +217,7 @@ function ENT:UpdateTransmitState()
 end
 
 if (CLIENT) then
-	function gDisasters_Revived:CreateLoopedSound(client, sound)
+	function gDisasters_Revived.CreateLoopedSound(client, sound)
 		local sound = Sound(sound)
 
 		CSPatch = CreateSound(client, sound)

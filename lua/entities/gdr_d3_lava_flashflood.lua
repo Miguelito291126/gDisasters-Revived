@@ -32,11 +32,11 @@ function ENT:Initialize()
 			phys:SetMass(self.Mass)
 		end 		
 		
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 			self.Child = createlava(math.random(self.MaxFloodLevel[1], self.MaxFloodLevel[2]), self)
 		else
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 			
 		
@@ -52,10 +52,10 @@ function ENT:SpawnFunction( ply, tr )
 	local ent = ents.Create( self.ClassName )
 	ent:SetPhysicsAttacker(ply)
 	
-	if IsMapRegistered() == false then 
+	if gDisasters_Revived.IsMapRegistered() == false then 
 		ent:SetPos( tr.HitPos + tr.HitNormal * 1  )
 	else 
-		ent:SetPos( getMapCenterFloorPos() )
+		ent:SetPos( gDisasters_Revived.getMapCenterFloorPos() )
 	end
 	
 	ent:Spawn()

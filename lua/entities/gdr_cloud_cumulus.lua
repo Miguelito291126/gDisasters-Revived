@@ -88,11 +88,11 @@ end
 function ENT:AtmosphericReposition()
 	local max_height_below_ceiling, min_height_below_ceiling = 20000, 15000
 	
-	local ceiling_multiplier = math.abs(   getMapBounds()[2].z -  getMapBounds()[1].z ) / 27625 
+	local ceiling_multiplier = math.abs(   gDisasters_Revived.getMapBounds()[2].z -  gDisasters_Revived.getMapBounds()[1].z ) / 27625 
 
 	local height = math.random(min_height_below_ceiling * ceiling_multiplier, max_height_below_ceiling * ceiling_multiplier)
 	
-	local bounds    = getMapSkyBox()
+	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 	
@@ -121,7 +121,7 @@ function ENT:MoveCloud()
 			self:Remove()
 		end
     else
-		local wind_speed, wind_dir = GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"], GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"]
+		local wind_speed, wind_dir = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Speed"], gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["Wind"]["Direction"]
 		
 
 

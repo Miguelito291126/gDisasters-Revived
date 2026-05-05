@@ -1,4 +1,4 @@
-function gDisasters_Revived:CreateLoopedSound(client, sound)
+function gDisasters_Revived.CreateLoopedSound(client, sound)
 	local sound = Sound(sound)
 
 	CSPatch = CreateSound(client, sound)
@@ -7,8 +7,8 @@ function gDisasters_Revived:CreateLoopedSound(client, sound)
 	
 end
 
-function gDisasters_Revived:StopLoopedSound(client, sound)
-	CSPatch = gDisasters_Revived:CreateLoopedSound(client, sound)
+function gDisasters_Revived.StopLoopedSound(client, sound)
+	CSPatch = gDisasters_Revived.CreateLoopedSound(client, sound)
 	CSPatch:Stop()
 	return CSPatch
 	
@@ -16,13 +16,8 @@ end
 
 
 
-function gDisasters_Revived:gfx_screenParticles()
-	if LocalPlayer().ScreenParticles==nil then return end
-
-	
-	
-
-
+function gDisasters_Revived.gfx_screenParticles()
+	if LocalPlayer().ScreenParticles == nil then return end
 	
 	for k, v in pairs(LocalPlayer().ScreenParticles) do
 	
@@ -35,7 +30,7 @@ function gDisasters_Revived:gfx_screenParticles()
 		local pvel  = v["Velocity"]
 		
 		local vel   = LocalPlayer():GetVelocity()/50
-		local velnrl= LocalPlayer():GetVelocity():GetNormalized()
+		local velnrl = LocalPlayer():GetVelocity():GetNormalized()
 		local dot   = (LocalPlayer():GetAimVector():Dot(LocalPlayer():GetVelocity())/10) -- dot product between aim vec and vel
 		
 		
@@ -69,12 +64,12 @@ hook.Add("RenderScreenspaceEffects", "gfx_Underwater", function()
 	
 	if GetConVar("gdisasters_revived_hud_underwater_effects"):GetInt() == 0 then return end
 	
-	LocalPlayer().WaterIntensity = math.Clamp(LocalPlayer().WaterIntensity - (FrameTime()/4), 0, 1)
+	LocalPlayer().WaterIntensity = math.Clamp(LocalPlayer().WaterIntensity - (FrameTime() / 4), 0, 1)
 	local intensity = LocalPlayer().WaterIntensity
 
-	if gDisasters_Revived:isUnderWater(LocalPlayer()) then
+	if gDisasters_Revived.isUnderWater(LocalPlayer()) then
 		if LocalPlayer().LastIsUnderwater == false then
-			LocalPlayer().Sounds["Underwater"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "ambient/water/underwater.wav")
+			LocalPlayer().Sounds["Underwater"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "ambient/water/underwater.wav")
 			LocalPlayer().LastIsUnderwater = true
 		end
 
@@ -103,7 +98,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_Underwater", function()
 		
 		local flood  = ents.FindByClass("gdr_env_dynamicwater")[1] or  ents.FindByClass("gdr_env_dynamicwater_b")[1]
 		
-		if flood==nil then return end 
+		if flood == nil then return end 
 		
 		if flood:IsValid() then 
 		
@@ -156,9 +151,9 @@ hook.Add("RenderScreenspaceEffects", "gfx_Underlava", function()
 	LocalPlayer().LavaIntensity = math.Clamp(LocalPlayer().LavaIntensity - (FrameTime()/4), 0, 1)
 	local intensity = LocalPlayer().LavaIntensity 
 
-	if gDisasters_Revived:isUnderLava(LocalPlayer()) then	
+	if gDisasters_Revived.isUnderLava(LocalPlayer()) then	
 		if LocalPlayer().LastIsUnderlava == false then
-			LocalPlayer().Sounds["Underlava"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "ambient/water/underwater.wav")
+			LocalPlayer().Sounds["Underlava"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "ambient/water/underwater.wav")
 			LocalPlayer().LastIsUnderwater = true
 		end
 
@@ -271,7 +266,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_TempEffect", function()
 
 
 
-	if temp > 39 and math.random(1,400)==1 then
+	if temp > 39 and math.random(1,400) == 1 then
 		if GetConVar("gdisasters_revived_hud_temp_vomit"):GetInt() == 0 then return end
 		if temp >= 42 then
 
@@ -282,7 +277,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_TempEffect", function()
 			hud_gDisastersVomit()
 		end
 	end
-	if temp < 35 and math.random(1,400)==1 then
+	if temp < 35 and math.random(1,400) == 1 then
 		if GetConVar("gdisasters_revived_hud_temp_sneeze"):GetInt() == 0 then return end
 		if temp <= 32 then
 
@@ -294,7 +289,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_TempEffect", function()
 		end
 	end
 
-	LocalPlayer():SetEyeAngles( Angle(iangle.x + (math.random(-200 * shivering_intensity,200 * shivering_intensity)/100), iangle.y + (math.random(-100 * shivering_intensity,100 * shivering_intensity)/100) , 0))
+	LocalPlayer():SetEyeAngles( Angle(iangle.x + (math.random(-200 * shivering_intensity,200 * shivering_intensity) / 100), iangle.y + (math.random(-100 * shivering_intensity,100 * shivering_intensity)/100) , 0))
 	DrawColorModify( cm_hot )
 	DrawColorModify( cm_cold )
 	DrawMotionBlur( 0.1, blur_alpha_hot, 0.05)
@@ -330,7 +325,7 @@ Function notes:
 --]]
 
 
-function gDisasters_Revived:FindInCylinder(pos, radius, top, bottom)
+function gDisasters_Revived.FindInCylinder(pos, radius, top, bottom)
 
 	local entities = {}
 	local selfpos_normalized = Vector(pos.x, pos.y, 0)
@@ -377,11 +372,11 @@ function gDisasters_Revived:FindInCylinder(pos, radius, top, bottom)
 end
 
 
-function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, speed, pitchrange, shakeduration) -- SPEED MUST BE IN MS^-1
+function gDisasters_Revived.CreateSoundWave(soundpath, epicenter, soundtype, speed, pitchrange, shakeduration) -- SPEED MUST BE IN MS^-1
 
 
 	local distance = LocalPlayer():GetPos():Distance(epicenter) -- distance from player and epicenter
-	local t        = distance / gDisasters_Revived:convert_MetoSU(speed)  -- speed of sound = 340.29 m/s
+	local t        = distance / gDisasters_Revived.convert_MetoSU(speed)  -- speed of sound = 340.29 m/s
 
 	timer.Simple(t, function()
 		if LocalPlayer():IsValid() then
@@ -404,7 +399,7 @@ function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, spe
 
 end
 
-function gDisasters_Revived:StopSoundWave(soundpath, soundtype) -- SPEED MUST BE IN MS^-1
+function gDisasters_Revived.StopSoundWave(soundpath, soundtype) -- SPEED MUST BE IN MS^-1
 	
 	if soundtype == "mono" then
 		surface.StopSound(soundpath)
@@ -417,7 +412,7 @@ function gDisasters_Revived:StopSoundWave(soundpath, soundtype) -- SPEED MUST BE
 	
 end
 
-function gDisasters_Revived:AddCeilingWaterDrops(effect_nm, ieffect_nm, delay, offset_range, angle)
+function gDisasters_Revived.AddCeilingWaterDrops(effect_nm, ieffect_nm, delay, offset_range, angle)
 
 	if GetConVar("gdisasters_revived_graphics_draw_ceiling_effects"):GetInt() <= 0 then return end 
 
@@ -454,19 +449,19 @@ function gDisasters_Revived:AddCeilingWaterDrops(effect_nm, ieffect_nm, delay, o
 end
 
 
-function gDisasters_Revived:SetMDScale(ent, scale)
+function gDisasters_Revived.SetMDScale(ent, scale)
 	local mat = Matrix()
 	mat:Scale(scale)
 	ent:EnableMatrix("RenderMultiply", mat)
 end
 
-function gDisasters_Revived:SetParticleScale(particle, scale)
+function gDisasters_Revived.SetParticleScale(particle, scale)
 	local mat = Matrix()
 	mat:Scale(scale)
 	particle:EnableMatrix("RenderMultiply", mat)
 end
 
-function gDisasters_Revived:GasMask()
+function gDisasters_Revived.GasMask()
 	local tex = surface.GetTextureID("hud/mask_overlay")
 	surface.SetTexture(tex)
 	surface.SetDrawColor( 255, 255, 255, 255 );

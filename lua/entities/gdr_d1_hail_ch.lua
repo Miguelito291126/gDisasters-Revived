@@ -85,7 +85,7 @@ function ENT:PhysicsCollide( data, phys )
 			ParticleEffect("hail_impact_effect_main", data.HitPos + Vector(0,0,1), Angle(0,0,0), nil)
 			sound.Play(table.Random({"streams/event/break/ice_break_a.mp3","streams/event/break/ice_break_b.mp3","streams/event/break/ice_break_c.mp3"}), self:GetPos(), 80, math.random(80,120), 1)
 			
-			if gDisasters_Revived:HitChance(10) then
+			if gDisasters_Revived.HitChance(10) then
 			else
 			
 				self:Remove()

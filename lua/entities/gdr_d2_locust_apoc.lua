@@ -110,7 +110,7 @@ function ENT:AddLocusts()
 		end
 		
 	end
-	local eatables = gDisasters_Revived:FindEntitiesByModels(nomnoms)
+	local eatables = gDisasters_Revived.FindEntitiesByModels(nomnoms)
 	if #eatables > 0 then
 	
 		for k, v in pairs(eatables) do

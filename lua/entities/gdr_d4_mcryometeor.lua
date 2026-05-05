@@ -41,7 +41,7 @@ end
 
 function ENT:CreateHail()
 
-	local bounds    = getMapSkyBox()
+	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 

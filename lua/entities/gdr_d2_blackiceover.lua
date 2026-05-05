@@ -84,7 +84,7 @@ function ENT:GetSkatingPlayers()
 end
 
 function ENT:PlayerIceSkating()
-	local vel_mod = gDisasters_Revived:GetPhysicsMultiplier()
+	local vel_mod = gDisasters_Revived.GetPhysicsMultiplier()
 	local i       = 1
 
 	for k, v in pairs(self.TouchedEntities) do
@@ -117,7 +117,7 @@ end
 
 
 function ENT:VehicleIceSkating()
-	local vel_mod = gDisasters_Revived:GetPhysicsMultiplier()
+	local vel_mod = gDisasters_Revived.GetPhysicsMultiplier()
 	local i       = 1
 
 	for k, v in pairs(self.TouchedVehicles) do

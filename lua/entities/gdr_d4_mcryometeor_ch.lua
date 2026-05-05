@@ -68,7 +68,7 @@ function ENT:PhysicsCollide( data, phys )
 		local mat = self.Material
 		local vel = Vector( math.random(-2000,2000), math.random(-2000,2000), 0)
 		
-		gDisasters_Revived:CreateSoundWave("streams/disasters/atmospheric/sonic_boom_01.mp3", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/atmospheric/sonic_boom_01.mp3", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
 
 		ParticleEffect("megacryometeor_explosion_main", self:GetPos(), Angle(0,0,0), nil)
 		
@@ -120,9 +120,9 @@ function ENT:Think()
 		if !self:IsValid() then return end
 		self:Move()
 
-		if gDisasters_Revived:isinWater(self) then 
+		if gDisasters_Revived.isinWater(self) then 
 			self:Remove() 
-		elseif gDisasters_Revived:isinLava(self) then
+		elseif gDisasters_Revived.isinLava(self) then
 			self:Remove()
 		end
 		

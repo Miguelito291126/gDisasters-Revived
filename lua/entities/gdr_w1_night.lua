@@ -16,7 +16,7 @@ ENT.Mass                             =  100
 function ENT:Initialize()	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(1,3),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 103000, ["Temperature"] = math.random(5,10), ["Humidity"]    = math.random(10,25), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(1,3),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 103000, ["Temperature"] = math.random(5,10), ["Humidity"]    = math.random(10,25), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 		self:SetModelScale(2.5, 0)
 		self:SetModel(self.Model)
@@ -58,15 +58,15 @@ function ENT:Initialize()
 			self.Reset_SkyData["DuskIntensity"]  = 1
 			self.Reset_SkyData["SunColor"]       = Vector(0.20,0.10,0.00)
 			
-			gDisasters_Revived:setMapLight("g")		
-		gDisasters_Revived_CreateGlobalGFX("heavyfog", self)
+			gDisasters_Revived.setMapLight("g")		
+		gDisasters_Revived.CreateGlobalGFX("heavyfog", self)
 		
 
 		
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 
@@ -105,11 +105,11 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 
@@ -117,7 +117,7 @@ function ENT:OnRemove()
 			v:Fire( "TurnOn", "", 0 )
 		end
 
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 	
 	

@@ -51,7 +51,7 @@ function ENT:Initialize()
 		
 		self:ResetSequence(self:LookupSequence("idle"))
 
-		if gDisasters_Revived:isUnderWater(self) or gDisasters_Revived:isinWater(self) then
+		if gDisasters_Revived.isUnderWater(self) or gDisasters_Revived.isinWater(self) then
 			ParticleEffectAttach("sumerged_bigvolcano_main", PATTACH_POINT_FOLLOW, self, 0)
 		end
 		
@@ -65,7 +65,7 @@ function ENT:VolcanicLavaEffects()
 	local effect = table.Random({"volcano_magma_heat_warp"})
 	
 
-	if gDisasters_Revived:HitChance(10) then ParticleEffect(effect, pos, Angle(0,0,0), nil) end
+	if gDisasters_Revived.HitChance(10) then ParticleEffect(effect, pos, Angle(0,0,0), nil) end
 	
 end
 
@@ -234,10 +234,10 @@ end
 function ENT:Erupt()
 	timer.Simple(2, function() -- we have a delay here because air is still expanding from heat
 		if !self:IsValid() then return end
-		gDisasters_Revived:CreateSoundWave("streams/disasters/nature/krakatoa_explosion.mp3", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
+		gDisasters_Revived.CreateSoundWave("streams/disasters/nature/krakatoa_explosion.mp3", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
 	end)
 
-	if gDisasters_Revived:isUnderWater(self) or gDisasters_Revived:isinWater(self) then
+	if gDisasters_Revived.isUnderWater(self) or gDisasters_Revived.isinWater(self) then
 		ParticleEffect("water_huge", tr.HitPos, Angle(0,0,0), nil)
 		ParticleEffect("volcano_eruption_dusty_main", self:GetLavaLevelPosition(), Angle(0,0,0), nil)
 	else
@@ -330,7 +330,7 @@ end
 
 function ENT:IfUnderWater()
 
-	if gDisasters_Revived:isUnderWater(self) or gDisasters_Revived:isinWater(self) then
+	if gDisasters_Revived.isUnderWater(self) or gDisasters_Revived.isinWater(self) then
 		if (math.random(1,100) == 1) and self:CanPlayBubblingSound() then
 			self:EmitSound("streams/tarpit.mp3")
 		end

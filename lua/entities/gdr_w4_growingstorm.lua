@@ -20,8 +20,8 @@ function ENT:Initialize()
 	if (CLIENT) then
 	
 		
-		LocalPlayer().Sounds["Rainstorm_IDLE"]         = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop.wav")
-		LocalPlayer().Sounds["Rainstorm_muffled_IDLE"] = gDisasters_Revived:CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop_muffled.wav")
+		LocalPlayer().Sounds["Rainstorm_IDLE"]         = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop.wav")
+		LocalPlayer().Sounds["Rainstorm_muffled_IDLE"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/nature/heavy_rain_loop_muffled.wav")
 	end
 	
 	if (SERVER) then
@@ -40,9 +40,9 @@ function ENT:Initialize()
 		if (phys:IsValid()) then
 			phys:SetMass(self.Mass)
 		end
-		if IsMapRegistered() == false then
+		if gDisasters_Revived.IsMapRegistered() == false then
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 		
 		self.Original_SkyData = {}
@@ -59,11 +59,11 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
-		gDisasters_Revived:setMapLight("d")	
+		gDisasters_Revived.setMapLight("d")	
 		
 		self:Lightning()
 	
@@ -79,9 +79,9 @@ function ENT:Initialize()
 			data.EndMinCurrent  = 0
 			data.EndMaxCurrent  = 0       
 
-		gDisasters_Revived_CreateGlobalFog(self, data, true)	
+		gDisasters_Revived.CreateGlobalFog(self, data, true)	
 		
-		gDisasters_Revived_CreateGlobalGFX("heavyrain", self)
+		gDisasters_Revived.CreateGlobalGFX("heavyrain", self)
 
 		self:SetupSequencedVars()
 		self:Phase()
@@ -181,7 +181,7 @@ function ENT:StateProcessor()
 end
 
 function ENT:Cloudy()
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(2,5),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 98000, ["Temperature"] = math.random(20,21), ["Humidity"]    = math.random(42,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(2,5),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 98000, ["Temperature"] = math.random(20,21), ["Humidity"]    = math.random(42,45), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 	
 end
@@ -191,16 +191,16 @@ end
 
 
 function ENT:SpawnDeath(ply)
-	local bounds    = getMapSkyBox()
+	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 	local z         = max.z 
 	local pos       = ply:GetPos()
 	local hitchance = math.Clamp(25 / ( (#player.GetAll()) ),5,50)
 	
-	if gDisasters_Revived:HitChance( hitchance ) then
+	if gDisasters_Revived.HitChance( hitchance ) then
 			
-		if gDisasters_Revived:HitChance(110) then
+		if gDisasters_Revived.HitChance(110) then
 			
 		if ply:InVehicle() then 
 		
@@ -258,7 +258,7 @@ end
 			
 			
 function ENT:Squall()
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(34,38),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(14,16), ["Humidity"]    = math.random(62,75), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(34,38),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 97000, ["Temperature"] = math.random(14,16), ["Humidity"]    = math.random(62,75), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 	for k, v in pairs(player.GetAll()) do
 
@@ -266,7 +266,7 @@ function ENT:Squall()
 			
 			if math.random(1,6) == 1 then
 				
-				if gDisasters_Revived:HitChance(50) then
+				if gDisasters_Revived.HitChance(50) then
 
 					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
@@ -304,14 +304,14 @@ end
 
 function ENT:LightRaining()
 
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(34,38),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 96000, ["Temperature"] = math.random(13,16), ["Humidity"]    = math.random(72,76), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(34,38),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 96000, ["Temperature"] = math.random(13,16), ["Humidity"]    = math.random(72,76), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
  
 	for k, v in pairs(player.GetAll()) do
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
-			if gDisasters_Revived:HitChance(50)  then
+			if gDisasters_Revived.HitChance(50)  then
 				
 	
 				net.Start("gdr_clParticles")
@@ -324,7 +324,7 @@ function ENT:LightRaining()
 					
 			end
 
-			if gDisasters_Revived:HitChance(1)  then
+			if gDisasters_Revived.HitChance(1)  then
 				
 				
 				net.Start("gdr_screen_particles")
@@ -354,7 +354,7 @@ end
 
 function ENT:LRHRT()
 
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(12,27),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 95000, ["Temperature"] = math.random(8,11), ["Humidity"]    = math.random(92,93), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(12,27),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 95000, ["Temperature"] = math.random(8,11), ["Humidity"]    = math.random(92,93), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 	
 	for k, v in pairs(player.GetAll()) do
@@ -362,7 +362,7 @@ function ENT:LRHRT()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
 			if math.random(1,2) == 2 then
-				if gDisasters_Revived:HitChance(50) then
+				if gDisasters_Revived.HitChance(50) then
 				
 					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
@@ -375,7 +375,7 @@ function ENT:LRHRT()
 				end
 			end
 			
-			if gDisasters_Revived:HitChance(90)  then
+			if gDisasters_Revived.HitChance(90)  then
 				
 	
 				net.Start("gdr_clParticles")
@@ -389,7 +389,7 @@ function ENT:LRHRT()
 					
 			end
 
-			if gDisasters_Revived:HitChance(2)  then
+			if gDisasters_Revived.HitChance(2)  then
 				
 				
 				net.Start("gdr_screen_particles")
@@ -443,7 +443,7 @@ function ENT:HeavyRain()
 
 
 
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(27,30),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 90000, ["Temperature"] = math.random(10,13), ["Humidity"]    = math.random(82,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(27,30),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 90000, ["Temperature"] = math.random(10,13), ["Humidity"]    = math.random(82,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
     
 
 	for k, v in pairs(player.GetAll()) do
@@ -451,7 +451,7 @@ function ENT:HeavyRain()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
 			if math.random(1,2) == 2 then
-				if gDisasters_Revived:HitChance(50) then
+				if gDisasters_Revived.HitChance(50) then
 				
 					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
@@ -464,7 +464,7 @@ function ENT:HeavyRain()
 				end
 			end
 			
-			if gDisasters_Revived:HitChance(100)  then
+			if gDisasters_Revived.HitChance(100)  then
 				
 	
 				net.Start("gdr_clParticles")
@@ -477,7 +477,7 @@ function ENT:HeavyRain()
 					
 			end
 			
-			if gDisasters_Revived:HitChance(50)  then
+			if gDisasters_Revived.HitChance(50)  then
 				
 	
 				net.Start("gdr_clParticles")
@@ -490,7 +490,7 @@ function ENT:HeavyRain()
 					
 			end
 
-			if gDisasters_Revived:HitChance(3)  then
+			if gDisasters_Revived.HitChance(3)  then
 				
 				
 				net.Start("gdr_screen_particles")
@@ -520,7 +520,7 @@ function ENT:TornadoForm()
 
     
 
-	GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(45,67),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 90000, ["Temperature"] = math.random(10,13), ["Humidity"]    = math.random(82,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+	gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(45,67),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 90000, ["Temperature"] = math.random(10,13), ["Humidity"]    = math.random(82,85), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 	if(!recentTor) then
 	Tornadospawn()
 	return end
@@ -529,7 +529,7 @@ function ENT:TornadoForm()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
-			if gDisasters_Revived:HitChance(100)  then
+			if gDisasters_Revived.HitChance(100)  then
 				
 	
 				net.Start("gdr_clParticles")
@@ -539,7 +539,7 @@ function ENT:TornadoForm()
 					
 			end
 
-			if gDisasters_Revived:HitChance(3)  then
+			if gDisasters_Revived.HitChance(3)  then
 				
 				
 				net.Start("gdr_screen_particles")
@@ -633,17 +633,17 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
 		
 		for k, v in pairs(ents.FindByClass("gdr_w2_thunderstorm_cl")) do v:Remove() end
 		
-		gDisasters_Revived:setMapLight("t")
+		gDisasters_Revived.setMapLight("t")
 	end
 	
 	if (CLIENT) then

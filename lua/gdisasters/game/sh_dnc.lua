@@ -132,7 +132,7 @@ gDisasters_Revived.DayNightSystem.Paused = false
 gDisasters_Revived.DayNightSystem.Initialize = function()
 	gDisasters_Revived.DayNightSystem.OldSkyName = GetConVar("sv_skyname"):GetString();
 
-	if gDisasters_Revived:gDisasters_Is3DSkybox() then
+	if gDisasters_Revived.Is3DSkybox() then
 		print("this have 3D skybox")
 	else
 		print("this don't have 3D skybox")
@@ -307,9 +307,9 @@ gDisasters_Revived.DayNightSystem.Think = function()
 		if ( gDisasters_Revived.DayNightSystem.Time >= gDisasters_Revived.DayNightSystem.InternalVars.time.Dawn_Start and gDisasters_Revived.DayNightSystem.Time <= gDisasters_Revived.DayNightSystem.InternalVars.time.Dusk_End ) then
 			local sunfrac = 1 - ( ( gDisasters_Revived.DayNightSystem.Time - gDisasters_Revived.DayNightSystem.InternalVars.time.Dawn_Start ) / ( gDisasters_Revived.DayNightSystem.InternalVars.time.Dusk_End - gDisasters_Revived.DayNightSystem.InternalVars.time.Dawn_Start ) );
 			local angle = Angle( 180 * sunfrac, 15, 0 );
-			gDisasters_Revived:gDisasters_SetSunDir(gDisasters_Revived:convert_AngleToVector(-angle))
+			gDisasters_Revived.SetSunDir(gDisasters_Revived.convert_AngleToVector(-angle))
 
-			gDisasters_Revived.DayNightSystem.EnvSun:SetKeyValue( "sun_dir", tostring(gDisasters_Revived:gDisasters_GetSunDir()) );
+			gDisasters_Revived.DayNightSystem.EnvSun:SetKeyValue( "sun_dir", tostring(gDisasters_Revived.GetSunDir()) );
 		end
 	end
 
@@ -473,9 +473,9 @@ gDisasters_Revived.DayNightSystem.RenderMoon = function()
 		end
 
 		local angle = Angle( 180 * mul, 15, 0 );
-		gDisasters_Revived:gDisasters_SetMoonDir(gDisasters_Revived:convert_AngleToVector(angle))
+		gDisasters_Revived.SetMoonDir(gDisasters_Revived.convert_AngleToVector(angle))
 
-        local moonPos = gDisasters_Revived:gDisasters_GetMoonDir() * ( LastFarZ * 0.900 );
+        local moonPos = gDisasters_Revived.GetMoonDir() * ( LastFarZ * 0.900 );
         local moonNormal = ( vector_origin - moonPos ):GetNormal();
 
         moonAlpha = Lerp( FrameTime() * 1, moonAlpha, 255 );

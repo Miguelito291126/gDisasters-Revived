@@ -47,14 +47,14 @@ function ENT:Initialize()
 					
 					EndHeight    = GetConVar("gdisasters_revived_envdynamicwater_b_endlevel"):GetInt(),
 					EndWedge     = self.EndWedgeConstant,
-					Speed        = gDisasters_Revived:convert_MetoSU(GetConVar("gdisasters_revived_envdynamicwater_b_speed"):GetInt())
+					Speed        = gDisasters_Revived.convert_MetoSU(GetConVar("gdisasters_revived_envdynamicwater_b_speed"):GetInt())
 					}
 					
-		if IsMapRegistered() == true then
+		if gDisasters_Revived.IsMapRegistered() == true then
 			self.Child = createTsunamilava(self, data)
 		else
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 			
 		
@@ -70,10 +70,10 @@ function ENT:SpawnFunction( ply, tr )
 	local ent = ents.Create( self.ClassName )
 	ent:SetPhysicsAttacker(ply)
 	
-	if IsMapRegistered() == false then 
+	if gDisasters_Revived.IsMapRegistered() == false then 
 		ent:SetPos( tr.HitPos + tr.HitNormal * 1  )
 	else 
-		ent:SetPos( getMapCenterFloorPos() )
+		ent:SetPos( gDisasters_Revived.getMapCenterFloorPos() )
 	end
 	
 	ent:Spawn()

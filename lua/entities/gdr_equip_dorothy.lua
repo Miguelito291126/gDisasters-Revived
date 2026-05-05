@@ -65,7 +65,7 @@ function ENT:TurnProp()
 	local bone = self:LookupBone("prop")
 	local pos, ang = self:GetBonePosition( bone )
 	
-	local ms_windspeed = gDisasters_Revived:convert_SUtoMe(self:GetVelocity():Length())
+	local ms_windspeed = gDisasters_Revived.convert_SUtoMe(self:GetVelocity():Length())
 	local radius       = 0.1 -- radius of prop
 	local circum       = math.pi * radius 
 	local t            = circum / ms_windspeed 

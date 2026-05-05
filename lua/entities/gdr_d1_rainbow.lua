@@ -38,7 +38,7 @@ function ENT:Initialize()
 			ParticleEffectAttach("rainbow_larger", PATTACH_POINT_FOLLOW, self, 0)
 		end
 		for k, v in pairs(player.GetAll()) do
-			gDisasters_Revived:clPlaySound(v, "streams/disasters/nature/harp.mp3")
+			gDisasters_Revived.clPlaySound(v, "streams/disasters/nature/harp.mp3")
 		end
 		
 			

@@ -18,7 +18,7 @@ function ENT:Initialize()
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(60,80),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 500000, ["Temperature"] =300 , ["Humidity"]    = math.random(0,0), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=math.random(60,80),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 500000, ["Temperature"] =300 , ["Humidity"]    = math.random(0,0), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 			
 		self:SetModel(self.Model)
@@ -50,15 +50,15 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
-		gDisasters_Revived:setMapLight("z")	
+		gDisasters_Revived.setMapLight("z")	
 
 		self:SetNoDraw(true)
 		
-		gDisasters_Revived_CreateGlobalGFX("heatwave", self)
+		gDisasters_Revived.CreateGlobalGFX("heatwave", self)
 
 	end
 end
@@ -103,13 +103,13 @@ function ENT:AffectPlayers()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
-			if gDisasters_Revived:HitChance(75) then
+			if gDisasters_Revived.HitChance(75) then
 				net.Start("gdr_clParticles")
 				net.WriteString("localized_firestorm_effect")
 				net.Send(v)		
 			end
 		
-			if gDisasters_Revived:HitChance(25) then
+			if gDisasters_Revived.HitChance(25) then
 		
 				net.Start("gdr_clParticles")
 				net.WriteString("heatwave_ripple_01_main", Angle(0,math.random(1,40),0))
@@ -117,7 +117,7 @@ function ENT:AffectPlayers()
 			
 			end
 			
-			if gDisasters_Revived:HitChance(0.5) then
+			if gDisasters_Revived.HitChance(0.5) then
 			
 				InflictDamage(v, self, "fire", math.random	(15,20))
 			
@@ -148,14 +148,14 @@ function ENT:OnRemove()
 
 	if (SERVER) then		
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 		end
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end
 	
 	

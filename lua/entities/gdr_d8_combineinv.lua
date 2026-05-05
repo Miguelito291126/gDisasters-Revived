@@ -25,11 +25,11 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_NONE  )
 		self:SetUseType( ONOFF_USE )
-		if IsMapRegistered() == true then
-			self:SetPos(getMapCenterFloorPos())
+		if gDisasters_Revived.IsMapRegistered() == true then
+			self:SetPos(gDisasters_Revived.getMapCenterFloorPos())
 		else
 			self:Remove()
-			gDisasters_Revived:Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 		self:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
 		local phys = self:GetPhysicsObject()
@@ -67,12 +67,12 @@ function ENT:Initialize()
 		for i=0, 100 do
 			timer.Simple(i/100, function()
 				if !self:IsValid() then return  end
-				gDisasters_Revived:paintSky_Fade(self.Original_SkyData, 0.05)
+				gDisasters_Revived.paintSky_Fade(self.Original_SkyData, 0.05)
 			end)
 		end
 		
 		
-		gDisasters_Revived:setMapLight("g")	
+		gDisasters_Revived.setMapLight("g")	
 		
 		self:FogSpawn()
 		
@@ -84,9 +84,9 @@ end
 
 function ENT:SpawnCombine()
 
-	if gDisasters_Revived:HitChance(8) then
+	if gDisasters_Revived.HitChance(8) then
 	
-		local bounds    = getMapSkyBox()
+		local bounds    = gDisasters_Revived.getMapSkyBox()
 		local min       = bounds[1]
 		local max       = bounds[2]
 		
@@ -199,16 +199,16 @@ function ENT:OnRemove()
 		end	
 
 		local resetdata = self.Reset_SkyData
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL
 
 		for i=0, 40 do
 			timer.Simple(i/100, function()
-				gDisasters_Revived:paintSky_Fade(resetdata,0.05)
+				gDisasters_Revived.paintSky_Fade(resetdata,0.05)
 			end)
 
 		end
 
-		gDisasters_Revived:setMapLight("t")	
+		gDisasters_Revived.setMapLight("t")	
 	end	
 
 

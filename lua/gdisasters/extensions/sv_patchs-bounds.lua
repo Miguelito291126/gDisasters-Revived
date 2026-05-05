@@ -8,16 +8,16 @@ concommand.Add("GPS", function(ply, cmd, args)
 	
 end)
 
-concommand.Add("gdisasters_ncompat_maps", function(ply, cmd, args)
-	for k, v in pairs(MAP_BOUNDS) do
+concommand.Add("gdisasters_revived_ncompat_maps", function(ply, cmd, args)
+	for k, v in pairs(gDisasters_Revived.MAP_BOUNDS) do
 		ply:ChatPrint(k)
 	
 	end
 	
 end)
 
-concommand.Add("gdisasters_tornadocompat_maps", function(ply, cmd, args)
-	for k, v in pairs(MAP_PATHS) do
+concommand.Add("gdisasters_revived_tornadocompat_maps", function(ply, cmd, args)
+	for k, v in pairs(gDisasters_Revived.MAP_PATHS) do
 		ply:ChatPrint(k)
 	
 	end

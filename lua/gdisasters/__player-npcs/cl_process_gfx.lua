@@ -1,6 +1,6 @@
-gDisasters_Revived_Effects = {}
+gDisasters_Revived.Effects = {}
 
-gDisasters_Revived_Effects["sunny"] = function()
+gDisasters_Revived.Effects["sunny"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -16,7 +16,7 @@ gDisasters_Revived_Effects["sunny"] = function()
 		cm[ "$pp_colour_mulr" ] = 0
 		cm[ "$pp_colour_mulg" ] = 0
 		cm[ "$pp_colour_mulb" ] = 0
-		
+	
 		DrawColorModify( cm )
 		
 		if LocalPlayer().gDisasters_Revived.GFX.Parent:IsValid() == false then hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX") LocalPlayer().gDisasters_Revived.GFX.Effect = "none" LocalPlayer().gDisasters_Revived.GFX.Parent = false end 
@@ -26,7 +26,7 @@ gDisasters_Revived_Effects["sunny"] = function()
 
 end
 
-gDisasters_Revived_Effects["heatwave"] = function()
+gDisasters_Revived.Effects["heatwave"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -51,7 +51,7 @@ gDisasters_Revived_Effects["heatwave"] = function()
 	hook.Add("RenderScreenspaceEffects", "gDisasters_GFX", RenderEffect )
 
 end	
-gDisasters_Revived_Effects["coldwave"] = function()
+gDisasters_Revived.Effects["coldwave"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -76,7 +76,7 @@ gDisasters_Revived_Effects["coldwave"] = function()
 	hook.Add("RenderScreenspaceEffects", "gDisasters_GFX", RenderEffect )
 
 end	
-gDisasters_Revived_Effects["sandstormy"] = function()
+gDisasters_Revived.Effects["sandstormy"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -107,7 +107,7 @@ gDisasters_Revived_Effects["sandstormy"] = function()
 end
 
 
-gDisasters_Revived_Effects["heavyrain"] = function()
+gDisasters_Revived.Effects["heavyrain"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -137,7 +137,7 @@ gDisasters_Revived_Effects["heavyrain"] = function()
 
 end
 
-gDisasters_Revived_Effects["kingramses"] = function()
+gDisasters_Revived.Effects["kingramses"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -176,7 +176,7 @@ gDisasters_Revived_Effects["kingramses"] = function()
 end
 
 
-gDisasters_Revived_Effects["heavyfog"] = function()
+gDisasters_Revived.Effects["heavyfog"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -206,7 +206,7 @@ gDisasters_Revived_Effects["heavyfog"] = function()
 
 end
 
-gDisasters_Revived_Effects["night"] = function()
+gDisasters_Revived.Effects["night"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_GFX")
 	
@@ -236,7 +236,7 @@ gDisasters_Revived_Effects["night"] = function()
 
 end
 
-gDisasters_Revived_Effects["RENDERFOG"] = function()
+gDisasters_Revived.Effects["RENDERFOG"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_RenderFog")
 

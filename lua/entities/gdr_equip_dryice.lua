@@ -101,27 +101,27 @@ function ENT:Think()
 		return true
 	end
 	
-	if gDisasters_Revived:isinWater(self) == nil or gDisasters_Revived:isUnderWater(self) == nil then return end
+	if gDisasters_Revived.isinWater(self) == nil or gDisasters_Revived.isUnderWater(self) == nil then return end
 
-	if gDisasters_Revived:isinWater(self) == false and gDisasters_Revived:isUnderWater(self) == false then
+	if gDisasters_Revived.isinWater(self) == false and gDisasters_Revived.isUnderWater(self) == false then
 		self.isnotinwater = true;
 		self.isinwater = false;
 		self.isunderwater = false;
 	end
 	
-	if gDisasters_Revived:isinWater(self) == true and gDisasters_Revived:isUnderWater(self) == false then 
+	if gDisasters_Revived.isinWater(self) == true and gDisasters_Revived.isUnderWater(self) == false then 
 		self.isnotinwater = false;
 		self.isinwater = true;
 		self.isunderwater = false;
 	end
 	
-	if gDisasters_Revived:isUnderWater(self) == true and gDisasters_Revived:isinWater(self) == false then 
+	if gDisasters_Revived.isUnderWater(self) == true and gDisasters_Revived.isinWater(self) == false then 
 		self.isnotinwater = false;
 		self.isinwater = false;
 		self.isunderwater = true;
 	end
 
-	if gDisasters_Revived:isUnderWater(self) == true and gDisasters_Revived:isinWater(self) == true then 
+	if gDisasters_Revived.isUnderWater(self) == true and gDisasters_Revived.isinWater(self) == true then 
 		self.isnotinwater = false;
 		self.isinwater = true;
 		self.isunderwater = true;

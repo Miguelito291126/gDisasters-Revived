@@ -18,7 +18,7 @@ function ENT:Initialize()
 	
 	if (SERVER) then
 	
-		GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=(28),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 103000, ["Temperature"] = math.random(25,38), ["Humidity"]    = math.random(10,25), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET =  {["Atmosphere"] 	= {["Wind"]        = {["Speed"]=(28),["Direction"]=Vector(math.random(-1,1),math.random(-1,1),0)}, ["Pressure"]    = 103000, ["Temperature"] = math.random(25,38), ["Humidity"]    = math.random(10,25), ["BRadiation"]  = 0.1, ["Oxygen"]  = 100}}
 
 			
 		self:SetModel(self.Model)
@@ -66,7 +66,7 @@ end
 function ENT:OnRemove()
 
 	if (SERVER) then		
-		GLOBAL_SYSTEM_TARGET=GLOBAL_SYSTEM_ORIGINAL	
+		gDisasters_Revived.GLOBAL_SYSTEM_TARGET=gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL	
 	end
 	
 	

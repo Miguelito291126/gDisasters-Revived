@@ -110,7 +110,7 @@ function ENT:Explode()
 	
 	ParticleEffect("meteorite_explosion_main_ground", self:GetPos(), Angle(0,0,0), nil)
 	
-	gDisasters_Revived:CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
+	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 	
 	for k,v in pairs(ents.FindInSphere(self:GetPos(), 2500)) do
 		
@@ -162,9 +162,9 @@ function ENT:Think()
 
 		
 
-		if gDisasters_Revived:isinWater(self) then 
+		if gDisasters_Revived.isinWater(self) then 
 			self:Remove() 
-		elseif gDisasters_Revived:isinLava(self) then
+		elseif gDisasters_Revived.isinLava(self) then
 			self:Remove()
 		end	
 	

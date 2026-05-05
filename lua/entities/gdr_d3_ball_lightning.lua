@@ -160,7 +160,7 @@ function ENT:DrawLight()
 end
 
 function ENT:ElectrolizeShell()
-	if gDisasters_Revived:HitChance(20) then
+	if gDisasters_Revived.HitChance(20) then
 		InflictDamageInSphere(self:GetPos(), 100, self, "electrical", 15)
 	
 	end

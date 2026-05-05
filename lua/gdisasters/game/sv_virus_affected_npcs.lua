@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-gDisasters_Revived:Msg("LOADING TVIRUS... ")
+gDisasters_Revived.Msg("LOADING TVIRUS... ")
 
 npc_tvirus = {
 	"npc_monk",
@@ -20,7 +20,7 @@ npc_tvirus = {
 }
 
 for i = 1, #npc_tvirus do
-	gDisasters_Revived:Msg("LOADING TABLE: " .. npc_tvirus[i])
+	gDisasters_Revived.Msg("LOADING TABLE: " .. npc_tvirus[i])
 end
 
-gDisasters_Revived:Msg("FINISH")
+gDisasters_Revived.Msg("FINISH")
