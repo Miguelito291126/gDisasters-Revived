@@ -38,7 +38,7 @@ function SWEP:PrimaryAttack()
 	if CLIENT then return end
 	local ply = self:GetOwner()
 	local airoxygen = math.Round(GLOBAL_SYSTEM["Atmosphere"]["Oxygen"],1)
-	local oxygen = math.Round(ply.gDisasters.Body.Oxygen,1)
+	local oxygen = math.Round(ply.gDisasters_Revived.Body.Oxygen,1)
 	ply:PrintMessage(HUD_PRINTCENTER, "Your Oxygen is: " .. oxygen .. " %, Air Oxygen is: " .. airoxygen .. " %" )
 end
 
@@ -50,7 +50,7 @@ function SWEP:SecondaryAttack()
 		if plypos:Distance(v:GetPos()) <= self.Secondary.Distance then
 			if v != ply then
 				if v:IsPlayer() then
-					local oxygen = math.Round(v.gDisasters.Body.Oxygen,1)
+					local oxygen = math.Round(v.gDisasters_Revived.Body.Oxygen,1)
 					ply:PrintMessage(HUD_PRINTCENTER,"The Oxygen of player ".. v:GetName() .." Is: ".. oxygen .." %")
 				elseif v:IsNPC() or v:IsNextBot() then
 					ply:PrintMessage(HUD_PRINTCENTER, "No Work With Npcs or Nextbot")

@@ -37,9 +37,9 @@ end
 function SWEP:PrimaryAttack()
 	local ply = self:GetOwner()
 	ply:PrintMessage(HUD_PRINTCENTER, "I don't detect anything")
-	for k, v in pairs(ents.FindByClass("env_earthquake")) do
+	for k, v in pairs(ents.FindByClass("gdr_env_earthquake")) do
 		if v:IsValid() then
-			ply:PrintMessage(HUD_PRINTCENTER, "Seismograph Detect: " .. GetGlobalFloat("gd_seismic_activity") .. "≈")
+			ply:PrintMessage(HUD_PRINTCENTER, "Seismograph Detect: " .. GetGlobalFloat("gdr_dseismic_activity") .. "≈")
 		end
 	end
 end

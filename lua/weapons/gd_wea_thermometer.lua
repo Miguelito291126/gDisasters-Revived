@@ -37,7 +37,7 @@ end
 function SWEP:PrimaryAttack()
 	if CLIENT then return end
 	local ply = self:GetOwner()
-	local temp = math.Round(ply.gDisasters.Body.Temperature,1)
+	local temp = math.Round(ply.gDisasters_Revived.Body.Temperature,1)
 	local airtemp = math.Round(GLOBAL_SYSTEM["Atmosphere"]["Temperature"],1)
 	ply:PrintMessage(HUD_PRINTCENTER,"Your temp is: ".. temp .."°C, The Air Temp Is: ".. airtemp .." °C")
 end
@@ -50,7 +50,7 @@ function SWEP:SecondaryAttack()
 		if plypos:Distance(v:GetPos()) <= self.Secondary.Distance then
 			if v != ply then
 				if v:IsPlayer() then
-					local temp = math.Round(v.gDisasters.Body.Temperature,1)
+					local temp = math.Round(v.gDisasters_Revived.Body.Temperature,1)
 					ply:PrintMessage(HUD_PRINTCENTER,"The Temp of player ".. v:GetName() .." Is: ".. temp .." °C")
 				elseif v:IsNPC() or v:IsNextBot() then
 					ply:PrintMessage(HUD_PRINTCENTER, "No Work With Npcs or Nextbot")

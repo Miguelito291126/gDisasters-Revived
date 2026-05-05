@@ -30,7 +30,7 @@ Q: Why I getting crashed?
 A: Because you have beta 64 or 32 installer. please unistall that, is causing crash. 
 
 Q: how do i hide the hud?
-A: with the command "gdisasters_hud_enabled"
+A: with the command "gDisasters_Revived_hud_enabled"
 
 Q: Why I getting Message "This map is incompatible with this addon!" ?
 A: Because you are in a incompatible map, please use "gdisasters_ncompat_maps" command to see compatible maps
@@ -48,7 +48,7 @@ Q: Why the gdisasters spawnmenu no work in multiplayer? Why am I getting errors 
 A: because you have the outdated mod, try to reinstall the mod or else the game. Another reason may be because you have the gdisasters base pack 1 or another mod that causes that problem. Please disable it. 
 
 Q: Why screen is black?
-A: Because something is breaking the body temperature, just disable it with the command "gdisasters_hud_temp_effects"
+A: Because something is breaking the body temperature, just disable it with the command "gDisasters_Revived_hud_temp_effects"
 
 Q: I can't solve my problem, where can i ask for help?
 A: If you continue with the problem I recommend that you ask for help in our discord

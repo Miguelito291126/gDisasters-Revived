@@ -1,0 +1,135 @@
+function gDisasters_Revived_PostSpawnSH()
+    local function gDisasters_Revived_SetupConvars()
+        --Heat System
+
+        CreateConVar( "gdisasters_revived_heat_system_enabled", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_updatebatchsize", "500", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_updateinterval", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_tempdifussioncoefficient", "0.01", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_humiditydifussioncoefficient", "0.01", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_solarinfluencecoefficient", "0.1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_clouddensitycoefficient", "0.05", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_convergencecoefficient", "0.05", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_terraincoefficient", "0.1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_coolingcoefficient", "0.1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_cellsize", "5000", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxclouds", "5", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxraindrop", "5", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxhail", "5", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxtemp", "50", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxhumidity", "100", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxpressure", "106000", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_maxwind", "10000", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_mintemp", "-50", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_minhumidity", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_minpressure", "94000", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_heat_system_minwind", "0", {FCVAR_ARCHIVE}, "" )
+		--dnc
+        CreateConVar( "gdisasters_revived_dnc_enabled", "0", {FCVAR_ARCHIVE}, "" )
+        CreateConVar( "gdisasters_revived_dnc_realtime", "0", {FCVAR_ARCHIVE}, "" )
+        CreateConVar( "gdisasters_revived_dnc_paused", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_dnc_length_day", "600", {FCVAR_ARCHIVE}, "" )
+        CreateConVar( "gdisasters_revived_dnc_length_night", "600", {FCVAR_ARCHIVE}, "" )
+        CreateConVar( "gdisasters_revived_dnc_moon_size", "3000", {FCVAR_ARCHIVE}, "" )
+        CreateConVar( "gdisasters_revived_dnc_create_light_environment", "1", {FCVAR_ARCHIVE}, "" )
+
+        --tvirus
+
+        CreateConVar("gdisasters_revived__easyuse", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived__tvirus_zombie_strength", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived__sound_speed", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived__fragility", "1", {FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived__tvirus_nmrih_zombies", "0", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+    
+		--env
+			
+		CreateConVar( "gdisasters_revived_envdynamicwater_simquality", "0.10", {FCVAR_ARCHIVE}, "this affects simulation quality of gdr_env_dynamicwater " )
+		CreateConVar( "gdisasters_revived_envdynamicwater_candamageconstraints", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_level_min", "100", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_level_max", "800", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_b_startlevel", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_b_middellevel", "500", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_b_endlevel", "100", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envdynamicwater_b_speed", "20", {FCVAR_ARCHIVE}, "" )
+			
+		CreateConVar( "gdisasters_revived_envearthquake_simquality", "0.10", {FCVAR_ARCHIVE}, "this affects simulation quality of gdr_env_earthquake " )
+		CreateConVar( "gdisasters_revived_envearthquake_change_collision_group", "1", {FCVAR_ARCHIVE}, "" )
+			
+		CreateConVar( "gdisasters_revived_envtornado_simquality", "0.10", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_envtornado_candamageconstraints", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_envtornado_manualspeed", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envtornado_speed", "9", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envtornado_lifetime_min", "100", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envtornado_lifetime_max", "500", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_envtornado_damage", "200", {FCVAR_ARCHIVE}, "" )
+			
+		CreateConVar( "gdisasters_revived_wind_physics_simquality", "0.10", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_physics_enabled", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_candamageconstraints", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_postdamage_nocollide_enabled", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_postdamage_nocollide_basetimeout", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_postdamage_nocollide_basetimeout_spread", "1", {FCVAR_ARCHIVE}, " " )
+		CreateConVar( "gdisasters_revived_wind_postdamage_reducemass_enabled", "1", {FCVAR_ARCHIVE}, " " )
+			
+		CreateConVar( "gdisasters_revived_volcano_weatherchange", "1", {FCVAR_ARCHIVE}, "")
+		CreateConVar( "gdisasters_revived_volcano_pressure_increase", "0.05", {FCVAR_ARCHIVE}, "")
+		CreateConVar( "gdisasters_revived_volcano_pressure_decrease", "0.1", {FCVAR_ARCHIVE}, "")
+		CreateConVar( "gdisasters_revived_weather_bradiation_damage_props", "1", {FCVAR_ARCHIVE}, "")
+		CreateConVar( "gdisasters_revived_weather_bradiation_damage_npcs", "1", {FCVAR_ARCHIVE}	, "" )
+			
+			
+		--hud
+			
+		CreateConVar( "gdisasters_revived_hud_temp_damage", "1", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_npc_damage", "1", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_player_speed_enable", "1", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_player_speed_walk", "400", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_player_speed_sprint", "600", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_breathing", "1", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_value", "1", {FCVAR_ARCHIVE}	, "" )
+		CreateConVar( "gdisasters_revived_hud_temp_enable", "1", {FCVAR_ARCHIVE}	, "" )
+			
+		CreateConVar( "gdisasters_revived_hud_oxygen_damage", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_hud_oxygen_npc_damage", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_hud_oxygen_enable", "1", {FCVAR_ARCHIVE}, "" )
+			
+			
+		--autospawn
+			
+		CreateConVar( "gdisasters_revived_autospawn_getridmaptor", "0", {FCVAR_ARCHIVE}, "" )
+			
+		CreateConVar( "gdisasters_revived_autospawn_spawn_timer", "120", { FCVAR_ARCHIVE,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "How often do you want to run the tornado spawn?")
+		CreateConVar( "gdisasters_revived_autospawn_remove_timer", "300", { FCVAR_ARCHIVE,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "How often do you want to run the tornado spawn?")
+		CreateConVar( "gdisasters_revived_autospawn_spawn_chance", "3", { FCVAR_ARCHIVE,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "What is the chance that a tornado will spawn?")
+		CreateConVar( "gdisasters_revived_autospawn_enable", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_autospawn_chat", "1", {FCVAR_ARCHIVE}, "")
+		CreateConVar( "gdisasters_revived_autospawn_type", "Tornado", {FCVAR_ARCHIVE}, "" )
+		
+		--graphics
+		
+		CreateConVar( "gdisasters_revived_graphics_atmosphere", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_graphics_gfx", "1", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_graphics_fog", "1", {FCVAR_ARCHIVE}, "" )
+		
+		
+		
+		CreateConVar( "gdisasters_revived_antilag_enabled", "0", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_antilag_maximum_safe_collisions_per_second_average", "400", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_antilag_maximum_safe_collisions_per_second_per_prop", "400", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_antilag_post_damage_no_collide_base_time", "400", {FCVAR_ARCHIVE}, "" )
+		CreateConVar( "gdisasters_revived_antilag_mode", "0", {FCVAR_ARCHIVE}, "" )
+		
+		
+		--SpaceBuild
+		
+		CreateConVar( "gdisasters_revived_spacebuild_enabled", "0", {FCVAR_ARCHIVE}, "" )
+		
+		--stormfox
+		
+		CreateConVar( "gdisasters_revived_stormfox_enabled", "0", {FCVAR_ARCHIVE}, "")
+    
+    end
+    gDisasters_Revived_SetupConvars()
+end
+hook.Add( "InitPostEntity", "gDisasters_Revived_PostSpawnSH", gDisasters_Revived_PostSpawnSH)
+gDisasters_Revived_PostSpawnSH()

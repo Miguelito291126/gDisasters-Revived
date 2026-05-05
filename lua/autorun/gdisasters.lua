@@ -1,44 +1,54 @@
 --class
-gDisasters = {}
-gDisasters.__index = gDisasters
-gDisasters.Version = 0.495
-gDisasters.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedetails/?id=2522900784"
-gDisasters.WorkshopVersion = false
+gDisasters_Revived = {}
+gDisasters_Revived.Version = 0.495
+gDisasters_Revived.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedetails/?id=2522900784"
+gDisasters_Revived.WorkshopVersion = true
+gDisasters_Revived.lua_Directory = "gdisasters"
+gDisasters_Revived.resources_Directory = "resource/localization"
+gDisasters_Revived.root_Directory = "materials"
+gDisasters_Revived.root_Directory2 = "sound/streams"
+gDisasters_Revived.root_Directory3 = "models/ramses/models"
+gDisasters_Revived.decals_Directory = "materials/decals/gdisasters" 
+gDisasters_Revived.particles_Directory = "particles/gdisasters" 
+
+local snowtable = {}
+local sandtable = {}
+local icetable = {}
 
 for _,v in pairs(engine.GetAddons()) do
 	if v.downloaded and tonumber(v.wsid) == 2522900784 or v.title == "gDisasters Base Pack 2" then
-		gDisasters.WorkshopVersion = true
+		gDisasters_Revived.WorkshopVersion = true
 		break
 	end
 end
 
-print("Workshop Version == ".. tostring(gDisasters.WorkshopVersion))
+print("Workshop Version == ".. tostring(gDisasters_Revived.WorkshopVersion))
 
 --functions
 
 local env_color = SERVER and Color(138,223,255) or Color(230,217,111)
 
-function gDisasters:dump(o)
-   	if type(o) == 'table' then
-    	local s = '{ '
-      	for k,v in pairs(o) do
-      	   if type(k) ~= 'number' then k = '"'..k..'"' end
-      	   s = s .. '['..k..'] = ' .. self:dump(v) .. ','
-      	end
-      	return s .. '} '
-   	else
-      	return tostring(o)
-   	end
+function gDisasters_Revived:dump(o)
+	if type(o) == 'table' then
+		local s = '{ '
+		for k,v in pairs(o) do
+			if type(k) ~= 'number' then k = '"'..k..'"' end
+			s = s .. '['..k..'] = ' .. self:dump(v) .. ','
+		end
+		return s .. '} '
+	else
+		return tostring(o)
+	end
 end
 
-function gDisasters:is_done(x, y)
+function gDisasters_Revived:is_done(x, y)
 	if x == y then
 		return true
 	end
 	return false
 end
 
-function gDisasters:Msg(...)
+function gDisasters_Revived:Msg(...)
 	local a = {...}
 	table.insert(a, 1, env_color)
 	local t = {}
@@ -66,7 +76,7 @@ function gDisasters:Msg(...)
 	MsgN()
 end
 
-function gDisasters:Warning( sMessage, bError )
+function gDisasters_Revived:Warning( sMessage, bError )
 	MsgC(Color(255,136,0),"[gDisasters]",Color(255,75,75)," [WARNING] ",env_color,sMessage,"\n")
 	if bError then
 		error(sMessage)
@@ -78,11 +88,11 @@ end
 
 --loading lua files
 
-gDisasters:Msg("INCLUDING LUA FILES...")
+gDisasters_Revived:Msg("INCLUDING LUA FILES...")
 
-gDisasters.root_Directory = "gdisasters"
 
-function gDisasters:IncludeFile( File, directory )
+
+function gDisasters_Revived:IncludeFile( File, directory )
 	if string.StartWith(File, "_sv_") or string.StartWith(File, "sv_") then
 		if SERVER then
 			include( directory .. File )
@@ -106,7 +116,7 @@ function gDisasters:IncludeFile( File, directory )
 	end
 end
 
-function gDisasters:loadluafiles( directory )
+function gDisasters_Revived:loadluafiles( directory )
 	directory = directory .. "/"
 
 	local files, directories = file.Find( directory .. "*", "LUA" )
@@ -123,24 +133,22 @@ function gDisasters:loadluafiles( directory )
 	end
 end
 
-gDisasters:loadluafiles( gDisasters.root_Directory )
+gDisasters_Revived:loadluafiles( gDisasters_Revived.lua_Directory )
 
-gDisasters:Msg("FINISH")
+gDisasters_Revived:Msg("FINISH")
 
 --adding materials and sounds and models to client
 
 if SERVER then
 
-	gDisasters:Msg("DOWNLOADING BASIC...")
-
-	gDisasters.root_Directory = "resource/localization"
+	gDisasters_Revived:Msg("DOWNLOADING BASIC...")
 	
-	function gDisasters:AddResourceFile( File, directory )
+	function gDisasters_Revived:AddResourceFile( File, directory )
 		resource.AddSingleFile( directory .. File )
 		self:Msg( "ADDING: " .. File )
 	end
 
-	function gDisasters:loadresourcefiles( directory )
+	function gDisasters_Revived:loadresourcefiles( directory )
 		directory = directory .. "/"
 
 		local files, directories = file.Find( directory .. "*", "THIRDPARTY" )
@@ -157,22 +165,18 @@ if SERVER then
 		end
 	end
 
-	gDisasters:loadresourcefiles(gDisasters.root_Directory)
+	gDisasters_Revived:loadresourcefiles(gDisasters_Revived.resources_Directory)
 
-	if not gDisasters.WorkshopVersion then
+	if not gDisasters_Revived.WorkshopVersion then
 
 		self:Msg("ADDING CONTENT FILE...")
 
-		gDisasters.root_Directory = "materials"
-		gDisasters.root_Directory2 = "sound/streams"
-		gDisasters.root_Directory3 = "models/ramses/models"
-
-		function gDisasters:AddResourceFile( File, directory )
+		function gDisasters_Revived:AddResourceFile( File, directory )
 			resource.AddSingleFile( directory .. File )
 			self:Msg( "ADDING: " .. File )
 		end
 
-		function gDisasters:loadresourcefiles( directory )
+		function gDisasters_Revived:loadresourcefiles( directory )
 			directory = directory .. "/"
 
 			local files, directories = file.Find( directory .. "*", "THIRDPARTY" )
@@ -189,32 +193,28 @@ if SERVER then
 			end
 		end
 
-		gDisasters:loadresourcefiles(gDisasters.root_Directory)
-		gDisasters:loadresourcefiles(gDisasters.root_Directory2)
-		gDisasters:loadresourcefiles(gDisasters.root_Directory3)
+		gDisasters_Revived:loadresourcefiles(gDisasters_Revived.root_Directory)
+		gDisasters_Revived:loadresourcefiles(gDisasters_Revived.root_Directory2)
+		gDisasters_Revived:loadresourcefiles(gDisasters_Revived.root_Directory3)
 
-		gDisasters:Msg("ADDED CONTENT FILE")
+		gDisasters_Revived:Msg("ADDED CONTENT FILE")
 		
 	else
-		gDisasters:Msg("ADDING CONTENT FILE FROM WORKSHOP...")
-		resource.AddWorkshop(string.match(gDisasters.WorkShopURL, "%d+$"))
-		gDisasters:Msg("ADDED CONTENT FILE FROM WORKSHOP")
+		gDisasters_Revived:Msg("ADDING CONTENT FILE FROM WORKSHOP...")
+		resource.AddWorkshop(string.match(gDisasters_Revived.WorkShopURL, "%d+$"))
+		gDisasters_Revived:Msg("ADDED CONTENT FILE FROM WORKSHOP")
 	end
 
-	gDisasters:Msg("FINISH")
+	gDisasters_Revived:Msg("FINISH")
 end
 
 --loading decals
 
-gDisasters:Msg("LOADING DECALS...")
+gDisasters_Revived:Msg("LOADING DECALS...")
 
-gDisasters.root_Directory = "materials/decals/gdisasters" 
 
-local snowtable = {}
-local sandtable = {}
-local icetable = {}
 
-function gDisasters:AddDecalsFile( Key, File, directory)
+function gDisasters_Revived:AddDecalsFile( Key, File, directory)
 	local name = File:match("(.+)%..+$")
 	directory = directory:match("materials/(.-)/") .. "/gdisasters/" .. name
 
@@ -248,7 +248,7 @@ function gDisasters:AddDecalsFile( Key, File, directory)
 	
 end
 
-function gDisasters:loaddecalsfiles( directory )
+function gDisasters_Revived:loaddecalsfiles( directory )
 	directory = directory .. "/"
 
 	local files, directories = file.Find( directory .. "*", "THIRDPARTY" )
@@ -265,22 +265,20 @@ function gDisasters:loaddecalsfiles( directory )
 	end
 end
 
-gDisasters:loaddecalsfiles(gDisasters.root_Directory)
+gDisasters_Revived:loaddecalsfiles(gDisasters_Revived.decals_Directory)
 
-gDisasters:Msg("FINISH")
+gDisasters_Revived:Msg("FINISH")
 
 --adding particles
 
-gDisasters:Msg("LOADING PARTICLES...")
+gDisasters_Revived:Msg("LOADING PARTICLES...")
 
-gDisasters.root_Directory = "particles/gdisasters"
-
-function gDisasters:AddParticleFile( File, directory )
+function gDisasters_Revived:AddParticleFile( File, directory )
 	game.AddParticles( directory .. File )
 	self:Msg( "ADDING: " .. File )
 end
 
-function gDisasters:loadparticlesfiles( directory )
+function gDisasters_Revived:loadparticlesfiles( directory )
 	directory = directory .. "/"
 
 	local files, directories = file.Find( directory .. "*", "THIRDPARTY" )
@@ -297,14 +295,14 @@ function gDisasters:loadparticlesfiles( directory )
 	end
 end
 
-gDisasters:loadparticlesfiles( gDisasters.root_Directory)
+gDisasters_Revived:loadparticlesfiles( gDisasters_Revived.particles_Directory)
 
-gDisasters:Msg("FINISH")
+gDisasters_Revived:Msg("FINISH")
 
 
 --prechaching the particles
 
-gDisasters:Msg("PRECHACHING PARTICLES...")
+gDisasters_Revived:Msg("PRECHACHING PARTICLES...")
 
 PrecacheParticleSystem("localized_dust_effect")
 PrecacheParticleSystem("localized_sand_effect")
@@ -519,10 +517,10 @@ PrecacheParticleSystem("tsunami_splash_effect_r500")
 --black hole
 PrecacheParticleSystem("micro_blackhole_effect")
 
-gDisasters:Msg("FINISH")
+gDisasters_Revived:Msg("FINISH")
 
 --adding new hook
-gDisasters:Msg("ADDING CUSTOM HOOK")
+gDisasters_Revived:Msg("ADDING CUSTOM HOOK")
 timer.Simple(1,function()
     hook.Run("PostInit")
 end)
@@ -534,4 +532,4 @@ end)
 timer.Create("Think3", 1, 0, function()
     hook.Run("Think3")
 end)
-gDisasters:Msg("ADDED CUSTOM HOOK")
+gDisasters_Revived:Msg("ADDED CUSTOM HOOK")
