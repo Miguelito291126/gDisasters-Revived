@@ -96,22 +96,22 @@ function gDisasters_Revived.IncludeFile( File, directory )
 	if string.StartWith(File, "_sv_") or string.StartWith(File, "sv_") then
 		if SERVER then
 			include( directory .. File )
-			Msg( "SERVER INCLUDE: " .. File )
+			gDisasters_Revived.Msg( "SERVER INCLUDE: " .. File )
 		end
 	elseif string.StartWith(File, "_sh_") or string.StartWith(File, "sh_") then
 		if SERVER then
 			AddCSLuaFile( directory .. File )
-			Msg( "SHARED ADDCS: " .. File )
+			gDisasters_Revived.Msg( "SHARED ADDCS: " .. File )
 		end
 		include( directory .. File )
-		Msg( "SHARED INCLUDE: " .. File )
+		gDisasters_Revived.Msg( "SHARED INCLUDE: " .. File )
 	elseif string.StartWith(File, "_cl_") or string.StartWith(File, "cl_") then
 		if SERVER then
 			AddCSLuaFile( directory .. File )
-			Msg( "CLIENT ADDCS: " .. File )
+			gDisasters_Revived.Msg( "CLIENT ADDCS: " .. File )
 		elseif CLIENT then
 			include( directory .. File )
-			Msg( "CLIENT INCLUDE: " .. File )
+			gDisasters_Revived.Msg( "CLIENT INCLUDE: " .. File )
 		end
 	end
 end
@@ -128,7 +128,7 @@ function gDisasters_Revived.loadluafiles( directory )
 	end
 
 	for _, v in ipairs( directories ) do
-		Msg( "Directory: " .. v )
+		gDisasters_Revived.Msg( "Directory: " .. v )
 		gDisasters_Revived.loadluafiles( directory .. v )
 	end
 end
@@ -145,7 +145,7 @@ if SERVER then
 	
 	function gDisasters_Revived.AddResourceFile( File, directory )
 		resource.AddSingleFile( directory .. File )
-		Msg( "ADDING: " .. File )
+		gDisasters_Revived.Msg( "ADDING: " .. File )
 	end
 
 	function gDisasters_Revived.loadresourcefiles( directory )
@@ -160,7 +160,7 @@ if SERVER then
 		end
 
 		for _, v in ipairs( directories ) do
-			Msg( "Directory: " .. v )
+			gDisasters_Revived.Msg( "Directory: " .. v )
 			gDisasters_Revived.loadresourcefiles( directory .. v )
 		end
 	end
@@ -169,11 +169,11 @@ if SERVER then
 
 	if not gDisasters_Revived.WorkshopVersion then
 
-		Msg("ADDING CONTENT FILE...")
+		gDisasters_Revived.Msg("ADDING CONTENT FILE...")
 
 		function gDisasters_Revived.AddResourceFile( File, directory )
 			resource.AddSingleFile( directory .. File )
-			Msg( "ADDING: " .. File )
+			gDisasters_Revived.Msg( "ADDING: " .. File )
 		end
 
 		function gDisasters_Revived.loadresourcefiles( directory )
@@ -188,7 +188,7 @@ if SERVER then
 			end
 
 			for _, v in ipairs( directories ) do
-				Msg( "Directory: " .. v )
+				gDisasters_Revived.Msg( "Directory: " .. v )
 				gDisasters_Revived.loadresourcefiles( directory .. v )
 			end
 		end
@@ -225,24 +225,24 @@ function gDisasters_Revived.AddDecalsFile( Key, File, directory)
 	elseif string.StartWith(File, "_snow") then
 		table.insert(snowtable,  directory)
 	else	
-		Msg( "ADDING: " .. name .. " DECAL")
+		gDisasters_Revived.Msg( "ADDING: " .. name .. " DECAL")
 		game.AddDecal(name, directory)
-		Msg( "ADDED")
+		gDisasters_Revived.Msg( "ADDED")
 	end
 
 	if gDisasters_Revived.is_done(Key, 21) then
 		
-		Msg( "ADDING ICE DECALS")
+		gDisasters_Revived.Msg( "ADDING ICE DECALS")
 		game.AddDecal( "ice", icetable)
-		Msg( "ADDED ICE DECALS")
+		gDisasters_Revived.Msg( "ADDED ICE DECALS")
 
-		Msg( "ADDING SAND DECALS")
+		gDisasters_Revived.Msg( "ADDING SAND DECALS")
 		game.AddDecal( "sand", sandtable)
-		Msg( "ADDED SAND DECALS")
+		gDisasters_Revived.Msg( "ADDED SAND DECALS")
 
-		Msg( "ADDING SNOW DECALS")
+		gDisasters_Revived.Msg( "ADDING SNOW DECALS")
 		game.AddDecal( "snow", snowtable)
-		Msg( "ADDED SNOW DECALS")
+		gDisasters_Revived.Msg( "ADDED SNOW DECALS")
 	end
 	
 	
@@ -260,7 +260,7 @@ function gDisasters_Revived.loaddecalsfiles( directory )
 	end
 
 	for _, v in ipairs( directories ) do
-		Msg( "Directory: " .. v )
+		gDisasters_Revived.Msg( "Directory: " .. v )
 		gDisasters_Revived.loaddecalsfiles( directory .. v )
 	end
 end
@@ -275,7 +275,7 @@ gDisasters_Revived.Msg("LOADING PARTICLES...")
 
 function gDisasters_Revived.AddParticleFile( File, directory )
 	game.AddParticles( directory .. File )
-	Msg( "ADDING: " .. File )
+	gDisasters_Revived.Msg( "ADDING: " .. File )
 end
 
 function gDisasters_Revived.loadparticlesfiles( directory )
@@ -290,7 +290,7 @@ function gDisasters_Revived.loadparticlesfiles( directory )
 	end
 
 	for _, v in ipairs( directories ) do
-		Msg( "Directory: " .. v )
+		gDisasters_Revived.Msg( "Directory: " .. v )
 		gDisasters_Revived.loadparticlesfiles( directory .. v )
 	end
 end
