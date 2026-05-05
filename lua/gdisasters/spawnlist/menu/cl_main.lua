@@ -11,13 +11,13 @@ search.AddProvider(
 				table.insert(entities, v)
 			end
 		end
-		searchList("gDisasters_Weapons", "weapon")
-		searchList("gDisasters_Disasters", "entity")
-		searchList("gDisasters_Weather", "entity")
-		searchList("gDisasters_Buildings", "entity")
-		searchList("gDisasters_Equipment", "entity")
-		searchList("gDisasters_NPCs", "npc")
-		searchList("gDisasters_Misc", "entity")
+		searchList("gDisasters_Revived_Weapons", "weapon")
+		searchList("gDisasters_Revived_Disasters", "entity")
+		searchList("gDisasters_Revived_Weather", "entity")
+		searchList("gDisasters_Revived_Buildings", "entity")
+		searchList("gDisasters_Revived_Equipment", "entity")
+		searchList("gDisasters_Revived_NPCs", "npc")
+		searchList("gDisasters_Revived_Misc", "entity")
 
 		// searchList("VJBASE_SPAWNABLE_VEHICLES", "vehicle") -- vehicle (Not yet lol)
 		for _, v in pairs(entities) do
@@ -48,14 +48,14 @@ search.AddProvider(
 spawnmenu.AddCreationTab("gDisasters", function()
 
 	local ctrl = vgui.Create("SpawnmenuContentPanel")
-	ctrl:EnableSearch("gDisastersSearch","PopulategDisasters_Disasters")
-	ctrl:CallPopulateHook("PopulategDisasters_Disasters")
-	ctrl:CallPopulateHook("PopulategDisasters_Weather")
-	ctrl:CallPopulateHook("PopulategDisasters_Buildings")
-	ctrl:CallPopulateHook("PopulategDisasters_Weapons")
-	ctrl:CallPopulateHook("PopulategDisasters_Equipment")
-	ctrl:CallPopulateHook("PopulategDisasters_NPCs")
-	ctrl:CallPopulateHook("PopulategDisasters_Misc")
+	ctrl:EnableSearch("gDisastersSearch","PopulategDisasters_Revived_Disasters")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Disasters")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Weather")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Buildings")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Weapons")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Equipment")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_NPCs")
+	ctrl:CallPopulateHook("PopulategDisasters_Revived_Misc")
 	return ctrl
 	end,
 	"icons/gdlogo.png", 30
@@ -67,7 +67,7 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 	-- available parent categories 
 	-- Disasters, Weather, Weapons, Buildings, Misc
 	if category == "Disasters" then 
-		list.Set( "gDisasters_Disasters", class, {
+		list.Set( "gDisasters_Revived_Disasters", class, {
 			Name = name, 
 			Class = class, 
 			Category = subcategory, 
@@ -75,7 +75,7 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 			Offset = 0
 		})
 	elseif category == "Weather" then 
-		list.Set( "gDisasters_Weather", class, {
+		list.Set( "gDisasters_Revived_Weather", class, {
 			Name = name,
 			Class = class, 
 			Category = subcategory, 
@@ -90,7 +90,7 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 			AdminOnly = adminonly, 
 			Spawnable = true
 		})
-		list.Set( "gDisasters_Weapons", class, {
+		list.Set( "gDisasters_Revived_Weapons", class, {
 			Name = name,
 			Class = class, 
 			Category = subcategory, 
@@ -98,14 +98,14 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 			Spawnable = true
 		})
 	elseif category == "Buildings" then
-		list.Set( "gDisasters_Buildings", class, {
+		list.Set( "gDisasters_Revived_Buildings", class, {
 			Name = name, 
 			Class = class, 
 			Category = subcategory, 
 			AdminOnly = adminonly, 
 		})
 	elseif category == "Equipment" then
-		list.Set( "gDisasters_Equipment", class, {
+		list.Set( "gDisasters_Revived_Equipment", class, {
 			Name = name, 
 			Class = class, 
 			Category = subcategory, 
@@ -120,14 +120,14 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 				Category = subcategory,
 				AdminOnly = adminonly
 			})	
-			list.Set( "gDisasters_NPCs", class, {
+			list.Set( "gDisasters_Revived_NPCs", class, {
 				Name = name, 
 				Class = class, 
 				Category = subcategory, 
 				AdminOnly = adminonly
 			})
 		else
-			list.Set( "gDisasters_NPCs", class, {
+			list.Set( "gDisasters_Revived_NPCs", class, {
 				Name = name, 
 				Class = class, 
 				Category = subcategory, 
@@ -145,7 +145,7 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 			})
 		end
 	elseif category == "Misc" then
-		list.Set( "gDisasters_Misc", class, {
+		list.Set( "gDisasters_Revived_Misc", class, {
 			Name = name, 
 			Class = class, 
 			Category = subcategory, 
@@ -156,7 +156,7 @@ function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
 
 end
 
-hook.Add( "PopulategDisasters_Weapons", "AddWeaponsContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Weapons", "AddWeaponsContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Weapons & Ammo", "icons/weapons.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -168,7 +168,7 @@ hook.Add( "PopulategDisasters_Weapons", "AddWeaponsContent", function( pnlConten
 	end
 
 	local WeaponsCategories = {}
-	local SpawnableWeaponsList = list.Get("gDisasters_Weapons")
+	local SpawnableWeaponsList = list.Get("gDisasters_Revived_Weapons")
 	if (SpawnableWeaponsList) then
 		for k, v in pairs(SpawnableWeaponsList) do
 
@@ -219,7 +219,7 @@ hook.Add( "PopulategDisasters_Weapons", "AddWeaponsContent", function( pnlConten
 end )
 
 
-hook.Add( "PopulategDisasters_Equipment", "AddEquipmentContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Equipment", "AddEquipmentContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Equipment", "icons/equipment.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -231,7 +231,7 @@ hook.Add( "PopulategDisasters_Equipment", "AddEquipmentContent", function( pnlCo
 	end
 
 	local EquipmentCategories = {}
-	local SpawnableEquipmentList = list.Get("gDisasters_Equipment")
+	local SpawnableEquipmentList = list.Get("gDisasters_Revived_Equipment")
 	if (SpawnableEquipmentList) then
 		for k, v in pairs(SpawnableEquipmentList) do
 			EquipmentCategories[v.Category] = EquipmentCategories[v.Category] or {}
@@ -279,7 +279,7 @@ hook.Add( "PopulategDisasters_Equipment", "AddEquipmentContent", function( pnlCo
 
 
 end )
-hook.Add( "PopulategDisasters_Disasters", "AddDisastersContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Disasters", "AddDisastersContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Disasters", "icons/disasters.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -291,7 +291,7 @@ hook.Add( "PopulategDisasters_Disasters", "AddDisastersContent", function( pnlCo
 	end
 
 	local DisastersCategories = {}
-	local SpawnableDisastersList = list.Get("gDisasters_Disasters")
+	local SpawnableDisastersList = list.Get("gDisasters_Revived_Disasters")
 	if (SpawnableDisastersList) then
 		for k, v in pairs(SpawnableDisastersList) do
 			DisastersCategories[v.Category] = DisastersCategories[v.Category] or {}
@@ -341,7 +341,7 @@ hook.Add( "PopulategDisasters_Disasters", "AddDisastersContent", function( pnlCo
 end )
 
 
-hook.Add( "PopulategDisasters_Buildings", "AddBuildingsContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Buildings", "AddBuildingsContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Buildings", "icons/buildings.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -353,7 +353,7 @@ hook.Add( "PopulategDisasters_Buildings", "AddBuildingsContent", function( pnlCo
 	end
 
 	local BuildingsCategories = {}
-	local SpawnableBuildingsList = list.Get("gDisasters_Buildings")
+	local SpawnableBuildingsList = list.Get("gDisasters_Revived_Buildings")
 	if (SpawnableBuildingsList) then
 		for k, v in pairs(SpawnableBuildingsList) do
 			BuildingsCategories[v.Category] = BuildingsCategories[v.Category] or {}
@@ -402,7 +402,7 @@ hook.Add( "PopulategDisasters_Buildings", "AddBuildingsContent", function( pnlCo
 
 end )
 
-hook.Add( "PopulategDisasters_Weather", "AddWeatherContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Weather", "AddWeatherContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Weather", "icons/weather.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -414,7 +414,7 @@ hook.Add( "PopulategDisasters_Weather", "AddWeatherContent", function( pnlConten
 	end
 
 	local WeatherCategories = {}
-	local SpawnableWeatherList = list.Get("gDisasters_Weather")
+	local SpawnableWeatherList = list.Get("gDisasters_Revived_Weather")
 	if (SpawnableWeatherList) then
 		for k, v in pairs(SpawnableWeatherList) do
 
@@ -464,7 +464,7 @@ hook.Add( "PopulategDisasters_Weather", "AddWeatherContent", function( pnlConten
 
 end )
 
-hook.Add( "PopulategDisasters_NPCs", "AddNPCsContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_NPCs", "AddNPCsContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("NPCs", "icon16/monkey.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -476,7 +476,7 @@ hook.Add( "PopulategDisasters_NPCs", "AddNPCsContent", function( pnlContent, tre
 	end
 
 	local MiscCategories = {}
-	local SpawnableMiscList = list.Get("gDisasters_NPCs")
+	local SpawnableMiscList = list.Get("gDisasters_Revived_NPCs")
 
 	if (SpawnableMiscList) then
 		for k, v in pairs(SpawnableMiscList) do
@@ -536,7 +536,7 @@ hook.Add( "PopulategDisasters_NPCs", "AddNPCsContent", function( pnlContent, tre
 
 end )
 
-hook.Add( "PopulategDisasters_Misc", "AddMiscContent", function( pnlContent, tree, node )
+hook.Add( "PopulategDisasters_Revived_Misc", "AddMiscContent", function( pnlContent, tree, node )
 
 	local dtree = tree:AddNode("Misc", "icon16/brick.png")
 	dtree.PropPanel = vgui.Create("ContentContainer", pnlContent)
@@ -548,7 +548,7 @@ hook.Add( "PopulategDisasters_Misc", "AddMiscContent", function( pnlContent, tre
 	end
 
 	local MiscCategories = {}
-	local SpawnableMiscList = list.Get("gDisasters_Misc")
+	local SpawnableMiscList = list.Get("gDisasters_Revived_Misc")
 
 	if (SpawnableMiscList) then
 		for k, v in pairs(SpawnableMiscList) do

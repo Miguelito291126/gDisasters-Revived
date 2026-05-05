@@ -191,7 +191,7 @@ function ENT:OnRemove()
 		gDisasters_Revived:setMapLight("t")	
 	end
 	
-	for k, v in pairs(ents.FindByClass("gdr_dw2_thunderstorm_cl")) do v:Remove() end
+	for k, v in pairs(ents.FindByClass("gdr_d2_thunderstorm_cl")) do v:Remove() end
 	
 	if (CLIENT) then
 		
@@ -236,7 +236,7 @@ function ENT:Lightning()
 	
 	timer.Simple(0.1, function()
 	if !self:IsValid() then return end
-		local ent = ents.Create("gdr_dw2_thunderstorm_cl")
+		local ent = ents.Create("gdr_d2_thunderstorm_cl")
 		ent:SetPos(pos)
 		ent:Spawn()
 		ent:Activate()

@@ -165,7 +165,7 @@ function ENT:Think()
 	if (SERVER) then
 	local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1
 	
-		if #ents.FindByClass("gdr_dw*") >= 1 then 
+		if #ents.FindByClass("gdr_d*") >= 1 then 
 
 		self:Remove()
 	

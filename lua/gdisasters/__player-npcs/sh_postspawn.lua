@@ -35,11 +35,11 @@ function gDisasters_Revived_PostSpawnSH()
 
         --tvirus
 
-        CreateConVar("gdisasters_revived__easyuse", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
-        CreateConVar("gdisasters_revived__tvirus_zombie_strength", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
-        CreateConVar("gdisasters_revived__sound_speed", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
-        CreateConVar("gdisasters_revived__fragility", "1", {FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
-        CreateConVar("gdisasters_revived__tvirus_nmrih_zombies", "0", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived_easyuse", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived_tvirus_zombie_strength", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived_sound_speed", "1", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived_fragility", "1", {FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
+        CreateConVar("gdisasters_revived_tvirus_nmrih_zombies", "0", { FCVAR_REPLICATED, FCVAR_ARCHIVE, FCVAR_NOTIFY } )
     
 		--env
 			

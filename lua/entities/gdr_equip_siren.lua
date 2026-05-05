@@ -159,7 +159,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw1_catonehurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d1_catonehurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -173,7 +173,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw2_cattwohurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d2_cattwohurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -187,7 +187,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_catthreehurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_catthreehurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -201,7 +201,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_catfourhurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_catfourhurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -215,7 +215,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw5_catfivehurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d5_catfivehurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -229,7 +229,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_catsixhurricane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_catsixhurricane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -243,7 +243,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw2_haboob")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d2_haboob")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -257,7 +257,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw1_duststorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d1_duststorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -271,7 +271,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_heavythunderstorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_heavythunderstorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -285,7 +285,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_severethunderstorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_severethunderstorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -299,7 +299,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw5_macroburst")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d5_macroburst")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -313,7 +313,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw5_downburst")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d5_downburst")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -327,7 +327,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw5_microburst")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d5_microburst")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -341,7 +341,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_drought")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_drought")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -355,7 +355,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_heavyacidrain")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_heavyacidrain")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -369,7 +369,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw7_solarray")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d7_solarray")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -383,7 +383,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_freezeray")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_freezeray")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -397,7 +397,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_neptune")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_neptune")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -411,7 +411,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_redspot")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_redspot")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -425,7 +425,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw2_volcano_ash")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d2_volcano_ash")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -439,7 +439,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw2_acidrain")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d2_acidrain")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -453,7 +453,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_heavyashstorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_heavyashstorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -467,7 +467,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_major_hailstorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_major_hailstorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -481,7 +481,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw2_blizzard")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d2_blizzard")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -495,7 +495,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_icestorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_icestorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -509,7 +509,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_hurricanic_lowpressure_sys")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_hurricanic_lowpressure_sys")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -523,7 +523,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw3_extremeheavyrain")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d3_extremeheavyrain")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -537,7 +537,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_strong_coldfront")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_strong_coldfront")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -551,7 +551,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_strong_warmfront")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_strong_warmfront")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -565,7 +565,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_strong_occludedfront")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_strong_occludedfront")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -579,7 +579,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw4_derecho")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d4_derecho")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -593,7 +593,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw5_pyrocum")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d5_pyrocum")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -607,7 +607,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_martiansnow")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_martiansnow")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -621,7 +621,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_martianduststorm")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_martianduststorm")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 
@@ -635,7 +635,7 @@ function ENT:Think()
 			end 
 			
 		end
-		for k, v in pairs(ents.FindByClass("gdr_dw6_hypercane")) do 
+		for k, v in pairs(ents.FindByClass("gdr_d6_hypercane")) do 
 			
 			
 			if v:IsValid() and CurTime() >= self.NextAvailableSoundEmission then 

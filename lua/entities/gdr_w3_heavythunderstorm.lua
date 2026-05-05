@@ -247,7 +247,7 @@ function ENT:OnRemove()
 			net.Send(ply)
 		end
 		
-		for k, v in pairs(ents.FindByClass("gdr_dw3_heavythunderstorm_cl")) do v:Remove() end
+		for k, v in pairs(ents.FindByClass("gdr_d3_heavythunderstorm_cl")) do v:Remove() end
 	
 	end
 	
@@ -283,7 +283,7 @@ function ENT:Lightning()
 	
 	timer.Simple(0.1, function()
 	if !self:IsValid() then return end
-		local ent = ents.Create("gdr_dw3_heavythunderstorm_cl")
+		local ent = ents.Create("gdr_d3_heavythunderstorm_cl")
 		ent:SetPos(pos)
 		ent:Spawn()
 		ent:Activate()
