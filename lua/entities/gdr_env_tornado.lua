@@ -625,7 +625,7 @@ function ENT:ApplyShaking()
 		local d_ratio = 1 - (math.Clamp(d,0,8000)/8000)
 		
 		if gDisasters_Revived:HitChance(50) then
-			net.Start("gdr_dshakescreen")
+			net.Start("gdr_shakescreen")
 			net.WriteFloat(1)
 			net.WriteFloat( 1 * d_ratio )
 			net.WriteFloat(1 * d_ratio)

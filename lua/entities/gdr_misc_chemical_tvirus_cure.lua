@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS( "gdr_dbase_advanced" )
+DEFINE_BASECLASS( "gdr_base_advanced" )
 
 local ExploSnds = {}
 ExploSnds[1]                         =  "ambient/explosions/explode_1.wav"

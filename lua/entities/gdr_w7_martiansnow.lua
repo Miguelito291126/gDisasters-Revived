@@ -108,10 +108,10 @@ function ENT:SpawnSand()
 
 		local endpos   = tr.HitPos
 		
-		if #ents.FindByClass("gdr_d1_quicksand") < 10 then
+		if #ents.FindByClass("gdr_1_quicksand") < 10 then
 			
 
-			local ice = ents.Create("gdr_d1_quicksand")
+			local ice = ents.Create("gdr_1_quicksand")
 			ice:Spawn()
 			ice:Activate()	
 			ice:SetPos( tr.HitPos )
@@ -135,33 +135,33 @@ function ENT:AffectPlayers()
 			if math.random(1,3) == 1 then
 			
 				
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_acid_rain_effect", Angle(0,math.random(1,40),0))
 				net.Send(v)
-				net.Start("gdr_dclParticles_ground")
+				net.Start("gdr_clParticles_ground")
 				net.WriteString("rain_splash_effect", Angle(0,math.random(1,40),0))
 				net.Send(v)
 				
 			end
 			
 			if math.random(1,4)==1 then
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_dust_effect")
 				net.Send(v)		
 			end
 			
 			if math.random(1,10)==10 then
-			net.Start("gdr_dclParticles")
+			net.Start("gdr_clParticles")
 			net.WriteString("localized_snow_effect", Angle(0,math.random(1,40),0))
 			net.Send(v)		
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("snow_ground_effect", Angle(0,math.random(1,40),0))
 			net.Send(v)		
 			end
 			
 			if math.random(1,10) == 10 then
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,228))
 				net.WriteFloat(math.random(0,100)/100)
@@ -172,7 +172,7 @@ function ENT:AffectPlayers()
 			
 			if math.random(1,10)==10 then
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString(table.Random({"hud/sand_1","hud/sand_2","hud/sand_3"}))
 				net.WriteFloat(math.random(100,438))
 				net.WriteFloat(math.random(0,100)/100)
@@ -183,7 +183,7 @@ function ENT:AffectPlayers()
 			end
 			
 			if math.random(1,6) == 1 then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/snow")
 				net.WriteFloat(math.random(5,228))
 				net.WriteFloat(math.random(0,100)/100)
@@ -205,7 +205,7 @@ end
 
 function ENT:CreateSandDecals()
 	for k, v in pairs(player.GetAll()) do
-		net.Start("gdr_dcreatedecals")
+		net.Start("gdr_createdecals")
 		if gDisasters_Revived:HitChance(15) then
 			net.WriteString("snow")	
 		else

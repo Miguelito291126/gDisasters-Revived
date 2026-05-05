@@ -958,7 +958,7 @@ function gDisasters_Revived:gDisasters_EntityExists(entname)
 	
 	if not (gDisasters_Revived.CachedExists[entname]) then 
 	
-		net.Start("gdr_dentity_exists_on_server")
+		net.Start("gdr_entity_exists_on_server")
 		net.WriteString(entname)
 		net.SendToServer()
 

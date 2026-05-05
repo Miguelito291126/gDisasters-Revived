@@ -100,7 +100,7 @@ function ENT:AddLocusts()
 		if v.islocusted == nil or v.islocusted == false then
 			v.islocusted = true
 			
-			local ent = ents.Create("gdr_dlocusts")
+			local ent = ents.Create("gdr_locusts")
 			ent:SetPos( self:GetPos() )
 			ent.TargetEntity = v
 			ent:Spawn()
@@ -118,7 +118,7 @@ function ENT:AddLocusts()
 			if v.islocusted == nil or v.islocusted == false then
 				v.islocusted = true
 			
-				local ent = ents.Create("gdr_dlocusts")
+				local ent = ents.Create("gdr_locusts")
 				ent:SetPos( self:GetPos() )
 				ent.TargetProp = v
 				ent:Spawn()

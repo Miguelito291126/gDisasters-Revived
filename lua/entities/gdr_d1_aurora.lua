@@ -57,7 +57,7 @@ function ENT:CreateClouds()
 	
 	self.NextCloudCreation = CurTime() + 0.1
 	
-	local cloud = ents.Create("gdr_dauroraborealis")
+	local cloud = ents.Create("gdr_auroraborealis")
 	cloud:Spawn()
 	cloud:Activate()
 	

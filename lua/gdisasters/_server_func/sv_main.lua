@@ -14,11 +14,11 @@ function gDisasters_Revived:setMapLight(light)
 			if light == "a" then
 
 				engine.LightStyle( 0, "b" )
-				net.Start("gdr_dmaplight_cl")
+				net.Start("gdr_maplight_cl")
 				net.Broadcast()
 			else
 				engine.LightStyle( 0, light )
-				net.Start("gdr_dmaplight_cl")
+				net.Start("gdr_maplight_cl")
 				net.Broadcast()
 
 			end
@@ -32,7 +32,7 @@ function gDisasters_Revived:GetLightLevel(player)
 
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 then 
 
-		net.Start("gdr_dambientlight")
+		net.Start("gdr_ambientlight")
 		net.Send(player)
 		return player.AmbientLight
 	
@@ -236,7 +236,7 @@ function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, spe
 		timer.Simple(t, function()
 			if v:IsValid() then
 			
-				net.Start("gdr_dsoundwave")
+				net.Start("gdr_soundwave")
 				net.WriteString(soundpath)
 				net.WriteString(soundtype)
 				net.WriteVector(epicenter)
@@ -245,7 +245,7 @@ function gDisasters_Revived:CreateSoundWave(soundpath, epicenter, soundtype, spe
 
 				if shakeduration > 0 then
 
-					net.Start("gdr_dshakescreen")
+					net.Start("gdr_shakescreen")
 					net.WriteFloat(shakeduration)
 					net.Send(v)
 				
@@ -258,7 +258,7 @@ function gDisasters_Revived:StopSoundWave(soundpath, soundtype) -- SPEED MUST BE
 	for k, v in pairs(player.GetAll()) do
 
 		if v:IsValid() then
-			net.Start("gdr_dsoundwave_stop")
+			net.Start("gdr_soundwave_stop")
 			net.WriteString(soundpath)
 			net.WriteString(soundtype)
 			net.Send(v)			
@@ -467,7 +467,7 @@ end
 function gDisasters_Revived:clShakeScreen(ply, duration)
 
 
-	net.Start("gdr_dshakescreen")
+	net.Start("gdr_shakescreen")
 	net.WriteFloat(duration)
 	net.Send(ply)
 
@@ -476,7 +476,7 @@ end
 
 function gDisasters_Revived:clPlaySound(ply, sound, pitch, volume)
 
-	net.Start("gdr_dsendsound")
+	net.Start("gdr_sendsound")
 	net.WriteString(sound or "")
 	net.WriteFloat(pitch or 100)
 	net.WriteFloat(volume or 1)
@@ -485,13 +485,13 @@ end
 
 function gDisasters_Revived:clStopSound(ply, sound)
 
-	net.Start("gdr_dstopsound")
+	net.Start("gdr_stopsound")
 	net.WriteString(sound or "")
 	net.Send(ply)
 end
 
 function gDisasters_Revived:SetOffsetAngles(player, offset)
-	net.Start("gdr_dseteyeangles_cl")
+	net.Start("gdr_seteyeangles_cl")
 	net.WriteAngle(offset)
 	net.Send(player)
 
@@ -580,7 +580,7 @@ function gDisasters_Revived:isOutdoor(ply, isprop)
 	
 	if gDisasters_Revived:isUnderWater(ply) or gDisasters_Revived:isUnderLava(ply) then
 		if isprop == nil then
-			net.Start("gdr_disOutdoor")
+			net.Start("gdr_isOutdoor")
 			net.WriteBool(false)
 			net.Send(ply)
 			ply.gDisasters_Revived.Area.IsOutdoor = false
@@ -590,7 +590,7 @@ function gDisasters_Revived:isOutdoor(ply, isprop)
 		return false
 	else
 		if isprop == nil then
-			net.Start("gdr_disOutdoor")
+			net.Start("gdr_isOutdoor")
 			net.WriteBool(hitSky)
 			net.Send(ply)
 			ply.gDisasters_Revived.Area.IsOutdoor = hitSky

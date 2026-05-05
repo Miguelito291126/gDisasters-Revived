@@ -139,7 +139,7 @@ function ENT:AffectPlayers()
 			
 
 			if math.random(1,32)==1 then
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("renderfog_main_HQ")
 				net.Send(v)		
 			end
@@ -147,7 +147,7 @@ function ENT:AffectPlayers()
 			
 			if math.random(1,2)==1 then
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString(table.Random({"hud/sand_1"}))
 				net.WriteFloat(math.random(100,438))
 				net.WriteFloat(math.random(0,100)/100)
@@ -265,7 +265,7 @@ end
 
 function ENT:CreateSandDecals()
 	for k, v in pairs(player.GetAll()) do
-		net.Start("gdr_dcreatedecals")
+		net.Start("gdr_createdecals")
 		net.WriteString("sand")
 		net.WriteBool(self.CreatedDecals)
 		net.Send(v)

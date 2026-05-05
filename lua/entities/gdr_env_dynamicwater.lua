@@ -153,7 +153,7 @@ function ENT:ProcessFlood(scalar, t)
 				else
 
 					if v:GetNWBool("IsUnderwater")==true then
-						net.Start("gdr_dscreen_particles")
+						net.Start("gdr_screen_particles")
 						net.WriteString("hud/warp_ripple3")
 						net.WriteFloat(math.random(10,58))
 						net.WriteFloat(math.random(10,50)/10)

@@ -1031,9 +1031,9 @@ end
 
 gDisasters_Revived.HeatSystem.SpawnCloud = function(pos, color)
     if CLIENT then return end
-    if #ents.FindByClass("gdr_dcloud_cumulus") > gDisasters_Revived.HeatSystem.MaxClouds then return end
+    if #ents.FindByClass("gdr_cloud_cumulus") > gDisasters_Revived.HeatSystem.MaxClouds then return end
 
-    local cloud = ents.Create("gdr_dcloud_cumulus")
+    local cloud = ents.Create("gdr_cloud_cumulus")
     if not IsValid(cloud) then return end -- Verifica si la entidad fue creada correctamente
 
     cloud:SetPos(pos)
@@ -1182,9 +1182,9 @@ end
 
 gDisasters_Revived.HeatSystem.CreateHail = function(x, y, z)
     if CLIENT then return end
-    if #ents.FindByClass("gdr_d1_hail_ch") > gDisasters_Revived.HeatSystem.MaxHail then return end
+    if #ents.FindByClass("gdr_1_hail_ch") > gDisasters_Revived.HeatSystem.MaxHail then return end
     
-    local hail = ents.Create("gdr_d1_hail_ch")
+    local hail = ents.Create("gdr_1_hail_ch")
     hail:SetPos(Vector(x, y, z))
     hail:Spawn()
     hail:Activate()
@@ -1243,13 +1243,13 @@ gDisasters_Revived.HeatSystem.SpawnWeatherEntity = function(precipitationType, x
     
     local entityName = ""
     if precipitationType == "Raining" then
-        entityName = "gdr_dheatsys_raincell"
+        entityName = "gdr_heatsys_raincell"
     elseif precipitationType == "Storming" then
-        entityName = "gdr_dheatsys_thundercell"
+        entityName = "gdr_heatsys_thundercell"
     elseif precipitationType == "Hailing" then
-        entityName = "gdr_dheatsys_hailcell"
+        entityName = "gdr_heatsys_hailcell"
     elseif precipitationType == "Snowing" then
-        entityName = "gdr_dheatsys_snowcell"
+        entityName = "gdr_heatsys_snowcell"
     else
         return
     end

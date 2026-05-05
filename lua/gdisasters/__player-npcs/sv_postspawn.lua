@@ -39,7 +39,7 @@ function gDisasters_Revived_OnSpawn_Reset( ply )
 	ply.hazsuited=false
 	ply.isinfected=false
 	ply:StopSound("breathing")
-	net.Start( "gdr_dnet" )        
+	net.Start( "gdr_net" )        
 	net.WriteBit( false )
 	net.Send(ply)
 

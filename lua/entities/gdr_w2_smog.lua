@@ -94,7 +94,7 @@ function ENT:AffectPlayers()
 		
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			if math.random(1,15)==15 then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,128))
 				net.WriteFloat(math.random(0,100)/100)

@@ -291,7 +291,7 @@ function ENT:Erupt()
 	if GetConVar("gdisasters_revived_volcano_weatherchange"):GetInt() <= 0 then return end
 	
 	timer.Simple(22, function()
-		local ent = ents.Create("gdr_d2_ashstorm")
+		local ent = ents.Create("gdr_w2_ashstorm")
 		local ent2 = ents.Create("gdr_d7_lavabombshower")
 		local ent3 = ents.Create("gdr_d8_volcanicrockhower")
 		ent:Spawn()

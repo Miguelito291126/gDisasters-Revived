@@ -299,7 +299,7 @@ function ENT:Squall()
 				
 				if gDisasters_Revived:HitChance(50) then
 
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
 					net.WriteFloat(math.random(5,50))
 					net.WriteFloat(math.random(0,100)/100)
@@ -352,10 +352,10 @@ function ENT:Passage()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 				
 	
-			net.Start("gdr_dclParticles")
+			net.Start("gdr_clParticles")
 			net.WriteString("localized_extreme_rain_effect")
 			net.Send(v)	
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("extreme_rain_splash_effect")
 			net.Send(v)	
 			self:SpawnDeath(v)
@@ -366,7 +366,7 @@ function ENT:Passage()
 			if gDisasters_Revived:HitChance(1)  then
 				
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,200))
 				net.WriteFloat(math.random(0,100)/100)

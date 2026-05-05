@@ -1,6 +1,6 @@
 function gDisasters_Revived_CreateFog(ply, parent_entity, fogdata, override_quality)
 	if GetConVar("gdisasters_revived_graphics_fog"):GetInt() <= 0 then return end
-	net.Start("gdr_dcreatefog")
+	net.Start("gdr_createfog")
 	net.WriteEntity(parent_entity)
 	net.WriteBool(override_quality)
 	net.WriteTable(fogdata)
@@ -19,7 +19,7 @@ end
 
 function gDisasters_Revived_ResetOutsideFactor(ply) 
 	
-	net.Start("gdr_dresetoutsidefactor")
+	net.Start("gdr_resetoutsidefactor")
 	net.Send(ply)
 
 end
@@ -35,7 +35,7 @@ end
 function gDisasters_Revived_RemoveGlobalFog()
 	if GetConVar("gdisasters_revived_graphics_fog"):GetInt() <= 0 then return end
 
-	net.Start("gdr_dremovegfxfog")
+	net.Start("gdr_removegfxfog")
 	net.WriteBool(true)
 	net.WriteBool(false)
 	net.Broadcast()
@@ -46,7 +46,7 @@ end
 function gDisasters_Revived_RemoveGlobalGFX()
 	if GetConVar("gdisasters_revived_graphics_gfx"):GetInt() <= 0 then return end
 
-	net.Start("gdr_dremovegfxfog")
+	net.Start("gdr_removegfxfog")
 	net.WriteBool(false)
 	net.WriteBool(true)
 	net.Broadcast()
@@ -60,7 +60,7 @@ end
 function gDisasters_Revived_CreateGFX(ply, parent_entity, effect)
 	if GetConVar("gdisasters_revived_graphics_gfx"):GetInt() <= 0 then return end
 
-	net.Start("gdr_dcreategfx")
+	net.Start("gdr_creategfx")
 	net.WriteEntity(parent_entity)
 	net.WriteString(effect)
 	net.Send(ply)

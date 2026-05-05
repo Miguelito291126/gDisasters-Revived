@@ -117,7 +117,7 @@ function ENT:Explode()
 	if not self.Exploded then return end
 	local pos = self:LocalToWorld(self:OBBCenter())
 
-	local ent = ents.Create("gdr_dshockwave_ent")
+	local ent = ents.Create("gdr_shockwave_ent")
 	ent:SetPos( pos ) 
 	ent:Spawn()
 	ent:Activate()
@@ -131,7 +131,7 @@ function ENT:Explode()
 	ent.trace=self.TraceLength
 	ent.decal=self.Decal
 
-	local ent = ents.Create("gdr_dshockwave_sound_lowsh")
+	local ent = ents.Create("gdr_shockwave_sound_lowsh")
 	ent:SetPos( pos ) 
 	ent:Spawn()
 	ent:Activate()

@@ -1,41 +1,41 @@
 
-util.AddNetworkString( "gdr_dclmenu_vars" )
-util.AddNetworkString( "gdr_disOutdoor" )
-util.AddNetworkString( "gdr_dclParticles" )
-util.AddNetworkString( "gdr_dclParticles_ground" )
-util.AddNetworkString( "gdr_dscreen_particles" )	
-util.AddNetworkString( "gdr_dmaplight_cl")
-util.AddNetworkString( "gdr_dseteyeangles_cl")
-util.AddNetworkString( "gdr_dvomit")
-util.AddNetworkString( "gdr_dvomit_blood")
-util.AddNetworkString( "gdr_dsneeze")
-util.AddNetworkString( "gdr_dsneeze_big")
-util.AddNetworkString( "gdr_dlightning_bolt")
-util.AddNetworkString( "gdr_dcreatedecals")
-util.AddNetworkString( "gdr_dsendsound" )
-util.AddNetworkString( "gdr_dstopsound" )
-util.AddNetworkString( "gdr_dambientlight"	)
-util.AddNetworkString( "gdr_dshakescreen"	)
-util.AddNetworkString( "gdr_dsoundwave" )
-util.AddNetworkString( "gdr_dsoundwave_stop")
-util.AddNetworkString( "gdr_dWeatherChange" )
-util.AddNetworkString( "gdr_dUpdateTemperature" )
-util.AddNetworkString( "gdr_dUpdateWeather" )
+util.AddNetworkString( "gdr_clmenu_vars" )
+util.AddNetworkString( "gdr_isOutdoor" )
+util.AddNetworkString( "gdr_clParticles" )
+util.AddNetworkString( "gdr_clParticles_ground" )
+util.AddNetworkString( "gdr_screen_particles" )	
+util.AddNetworkString( "gdr_maplight_cl")
+util.AddNetworkString( "gdr_seteyeangles_cl")
+util.AddNetworkString( "gdr_vomit")
+util.AddNetworkString( "gdr_vomit_blood")
+util.AddNetworkString( "gdr_sneeze")
+util.AddNetworkString( "gdr_sneeze_big")
+util.AddNetworkString( "gdr_lightning_bolt")
+util.AddNetworkString( "gdr_createdecals")
+util.AddNetworkString( "gdr_sendsound" )
+util.AddNetworkString( "gdr_stopsound" )
+util.AddNetworkString( "gdr_ambientlight"	)
+util.AddNetworkString( "gdr_shakescreen"	)
+util.AddNetworkString( "gdr_soundwave" )
+util.AddNetworkString( "gdr_soundwave_stop")
+util.AddNetworkString( "gdr_WeatherChange" )
+util.AddNetworkString( "gdr_UpdateTemperature" )
+util.AddNetworkString( "gdr_UpdateWeather" )
 
-util.AddNetworkString( "gdr_dCreateCeilingWaterDrops" )		
-util.AddNetworkString( "gdr_dRemoveCeilingWaterDrops" )	
+util.AddNetworkString( "gdr_CreateCeilingWaterDrops" )		
+util.AddNetworkString( "gdr_RemoveCeilingWaterDrops" )	
 
-util.AddNetworkString( "gdr_dentity_exists_on_server" )
+util.AddNetworkString( "gdr_entity_exists_on_server" )
 
-util.AddNetworkString( "gdr_dcreatefog" )
-util.AddNetworkString( "gdr_dcreategfx" )
-util.AddNetworkString( "gdr_dremovegfxfog" )
-util.AddNetworkString( "gdr_dresetoutsidefactor" )
+util.AddNetworkString( "gdr_createfog" )
+util.AddNetworkString( "gdr_creategfx" )
+util.AddNetworkString( "gdr_removegfxfog" )
+util.AddNetworkString( "gdr_resetoutsidefactor" )
 
-util.AddNetworkString( "gdr_dnet" )
-util.AddNetworkString( "gdr_dnet_tvirus" )
+util.AddNetworkString( "gdr_net" )
+util.AddNetworkString( "gdr_net_tvirus" )
 
-net.Receive( "gdr_dclmenu_vars", function( len, pl )
+net.Receive( "gdr_clmenu_vars", function( len, pl )
 	if !pl:IsAdmin() or !pl:IsSuperAdmin() then return end
 	
 	local cvar = net.ReadString();
@@ -47,13 +47,13 @@ net.Receive( "gdr_dclmenu_vars", function( len, pl )
 	game.ConsoleCommand( tostring( cvar ) .." ".. tostring( val ) .."\n" );
 end)
 
-net.Receive("gdr_dambientlight", function()
+net.Receive("gdr_ambientlight", function()
 	local ent = net.ReadEntity()
 	local aLL = net.ReadVector()
 	ent.AmbientLight = aLL
 end)
 
-net.Receive("gdr_dvomit_blood", function()
+net.Receive("gdr_vomit_blood", function()
 	
 	local ent = net.ReadEntity()
 	local mouth_attach = ent:LookupAttachment("mouth")
@@ -62,7 +62,7 @@ net.Receive("gdr_dvomit_blood", function()
 
 end)
 
-net.Receive("gdr_dvomit", function()
+net.Receive("gdr_vomit", function()
 	
 	local ent = net.ReadEntity()
 	local mouth_attach = ent:LookupAttachment("mouth")
@@ -71,7 +71,7 @@ net.Receive("gdr_dvomit", function()
 
 end)
 
-net.Receive("gdr_dsneeze", function()
+net.Receive("gdr_sneeze", function()
 	
 	local ent = net.ReadEntity()
 	local mouth_attach = ent:LookupAttachment("mouth")
@@ -79,7 +79,7 @@ net.Receive("gdr_dsneeze", function()
 	ParticleEffectAttach( "sneeze_main", PATTACH_POINT_FOLLOW, ent, mouth_attach )
 
 end)
-net.Receive("gdr_dsneeze_big", function()
+net.Receive("gdr_sneeze_big", function()
 	
 	local ent = net.ReadEntity()
 	local mouth_attach = ent:LookupAttachment("mouth")

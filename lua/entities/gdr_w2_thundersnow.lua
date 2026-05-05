@@ -97,7 +97,7 @@ function ENT:AffectPlayers()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 
-			net.Start("gdr_dscreen_particles")
+			net.Start("gdr_screen_particles")
 			net.WriteString("hud/snow")
 			net.WriteFloat(math.random(5,128))
 			net.WriteFloat(math.random(0,100)/100)
@@ -106,15 +106,15 @@ function ENT:AffectPlayers()
 			net.Send(v)		
 			
 			if math.random(1,3) == 2 then
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_snow_effect", Angle(0,math.random(40,60),0))
 				net.Send(v)	
 			end
 			
-			net.Start("gdr_dclParticles")
+			net.Start("gdr_clParticles")
 			net.WriteString("localized_snow_effect", Angle(0,math.random(40,60),0))
 			net.Send(v)	
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("heavy_snow_ground_effect", Angle(0,math.random(40,60),0))
 			net.Send(v)	
             
@@ -126,7 +126,7 @@ end
 
 function ENT:CreateSnowDecals()
 	for k, v in pairs(player.GetAll()) do
-		net.Start("gdr_dcreatedecals")
+		net.Start("gdr_createdecals")
 		net.WriteString("snow")
 		net.WriteBool(self.CreatedDecals)
 		net.Send(v)
@@ -183,7 +183,7 @@ function ENT:OnRemove()
 		end
 		gDisasters_Revived:setMapLight("t")	
 		
-		for k, v in pairs(ents.FindByClass("gdr_d2_thunderstorm_cl")) do v:Remove() end
+		for k, v in pairs(ents.FindByClass("gdr_w2_thunderstorm_cl")) do v:Remove() end
 	
 	end
 	
@@ -216,7 +216,7 @@ function ENT:Lightning()
 	
 	timer.Simple(0.1, function()
 	if !self:IsValid() then return end
-		local ent = ents.Create("gdr_d2_thunderstorm_cl")
+		local ent = ents.Create("gdr_w2_thunderstorm_cl")
 		ent:SetPos(pos)
 		ent:Spawn()
 		ent:Activate()

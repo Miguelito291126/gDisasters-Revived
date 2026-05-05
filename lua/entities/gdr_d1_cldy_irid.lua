@@ -55,11 +55,11 @@ function ENT:CreateClouds()
 
 	if CurTime() < self.NextCloudCreation then return end 
 
-	if #ents.FindByClass("gdr_dcloud_iridescent") > self.MaxClouds then return end 
+	if #ents.FindByClass("gdr_cloud_iridescent") > self.MaxClouds then return end 
 	
 	self.NextCloudCreation = CurTime() + 0.1
 	
-	local cloud = ents.Create("gdr_dcloud_iridescent")
+	local cloud = ents.Create("gdr_cloud_iridescent")
 	cloud:Spawn()
 	cloud:Activate()
 	

@@ -97,7 +97,7 @@ end
 function ENT:UpdateGlobalSeismicActivity()
 	if self:GetRealMagnitude() == GetGlobalFloat("gdr_dseismic_activity") then
 	else
-		SetGlobalFloat( "gdr_dseismic_activity", self:GetRealMagnitude() )
+		SetGlobalFloat( "gdr_seismic_activity", self:GetRealMagnitude() )
 	end
 end
 function ENT:EFire(pointer, arg) 
@@ -164,20 +164,20 @@ end
 function ENT:SendClientsideEffects( ply, offset_ang, amplitude )
 	local magnitude = math.floor(self.Magnitude * self.MagnitudeModifier)
 	if math.random(1,8) == 1 then
-		net.Start("gdr_dshakescreen")
+		net.Start("gdr_shakescreen")
 		net.WriteFloat(0.6)
 		net.WriteFloat( amplitude * 2)
 		net.WriteFloat(25)
 		net.Send(ply)
 	end
 	if math.random(1, 11 - magnitude)==1 then
-		net.Start("gdr_dclParticles_ground")
+		net.Start("gdr_clParticles_ground")
 		net.WriteString("earthquake_player_ground_rocks", Angle(0,math.random(1,40),0))
 		net.Send(ply)
 	end
 	if magnitude >= 4 then
 		if math.random(1, 21 - magnitude)==1 then
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("earthquake_player_ground_dust", Angle(0,math.random(1,40),0))
 			net.Send(ply)
 		end	
@@ -520,7 +520,7 @@ function ENT:OnRemove()
 		end
 	end
 	if (SERVER) then
-		SetGlobalFloat( "gdr_dseismic_activity", 0 )
+		SetGlobalFloat( "gdr_seismic_activity", 0 )
 	end
 	self:StopParticles()
 end

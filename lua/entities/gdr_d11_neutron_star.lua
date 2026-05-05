@@ -69,13 +69,13 @@ function ENT:CreatePoleEndTracers()
 	self.Tracers["South"] = tracer_south
 	self.Tracers["North"] = tracer_north
 
-	net.Start("gdr_dlightning_bolt")
+	net.Start("gdr_lightning_bolt")
 	net.WriteEntity(self)
 	net.WriteEntity(tracer_south)
 	net.WriteString("neutron_star_ray_main")
 	net.Broadcast()
 	
-	net.Start("gdr_dlightning_bolt")
+	net.Start("gdr_lightning_bolt")
 	net.WriteEntity(self)
 	net.WriteEntity(tracer_north)
 	net.WriteString("neutron_star_ray_main")

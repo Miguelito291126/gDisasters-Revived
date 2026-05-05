@@ -198,7 +198,7 @@ if (CLIENT) then
 	function gDisasters_ProbeFlares()
 	
 		
-		for k, v in pairs(ents.FindByClass("gdr_dequip_dorothy_probe")) do
+		for k, v in pairs(ents.FindByClass("gdr_equip_dorothy_probe")) do
 		
 			if v:GetNWBool("IsOn")==true then
 				local sratio =  math.Clamp( v:GetPos():Distance(LocalPlayer():GetPos()) / 2000 , 0.01, 1) 

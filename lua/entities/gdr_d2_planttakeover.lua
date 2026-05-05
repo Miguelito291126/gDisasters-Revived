@@ -60,7 +60,7 @@ function ENT:SpawnTrees()
 		} )
 		
 		
-		local tree = ents.Create("gdr_dtakeover")
+		local tree = ents.Create("gdr_takeover")
 		if ( !IsValid( tree ) ) then return end
 		if tree:WaterLevel() >= 2 then return end
 		tree:Spawn()

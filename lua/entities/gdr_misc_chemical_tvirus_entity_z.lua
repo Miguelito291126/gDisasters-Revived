@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS( "gdr_dnuclear_fission_rad_base" )
+DEFINE_BASECLASS( "gdr_nuclear_fission_rad_base" )
 
 
 ENT.Spawnable		            	 =  false

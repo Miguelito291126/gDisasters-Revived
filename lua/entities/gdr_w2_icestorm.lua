@@ -211,7 +211,7 @@ function ENT:AffectPlayers()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 
 			if gDisasters_Revived:HitChance(0.1) then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/snow")
 				net.WriteFloat(math.random(5,128))
 				net.WriteFloat(math.random(0,100)/100)
@@ -222,14 +222,14 @@ function ENT:AffectPlayers()
 			
 			if gDisasters_Revived:HitChance(25) then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_blizzard_effect")
 				net.Send(v)
 	
 			else
 				if gDisasters_Revived:HitChance(50) then
 				
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_02_main")
 					net.Send(v)	
 					
@@ -243,7 +243,7 @@ function ENT:AffectPlayers()
 		else
 				if gDisasters_Revived:HitChance(50) then
 				
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_02_main")
 					net.Send(v)	
 					
@@ -258,7 +258,7 @@ end
 
 function ENT:CreateIceDecals()
 	for k, v in pairs(player.GetAll()) do
-		net.Start("gdr_dcreatedecals")
+		net.Start("gdr_createdecals")
 		if gDisasters_Revived:HitChance(15) then
 			net.WriteString("snow")	
 		else

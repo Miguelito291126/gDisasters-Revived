@@ -1,4 +1,4 @@
-net.Receive("gdr_dambientlight", function()
+net.Receive("gdr_ambientlight", function()
 
 	local tr = util.TraceLine( {
 		start = LocalPlayer():GetPos(),
@@ -10,14 +10,14 @@ net.Receive("gdr_dambientlight", function()
 
 	LocalPlayer().AmbientLight = render.ComputeLighting(  tr.HitPos, tr.HitNormal )
 
-	net.Start("gdr_dambientlight")
+	net.Start("gdr_ambientlight")
 	net.WriteEntity(LocalPlayer())
 	net.WriteVector(LocalPlayer().AmbientLight)
 	net.SendToServer()
 
 end)
 
-net.Receive("gdr_dcreatedecals", function()
+net.Receive("gdr_createdecals", function()
 	if GetConVar("gdisasters_revived_graphics_experimental_overdraw"):GetInt() != 1 then return end
 
 	decal = net.ReadString()
@@ -44,7 +44,7 @@ net.Receive("gdr_dcreatedecals", function()
 	end
 end)
 
-net.Receive("gdr_dclParticles", function()
+net.Receive("gdr_clParticles", function()
 	if GetConVar("gdisasters_revived_graphics_enable_weather_particles"):GetInt() <= 0 then return end
 
 	local effect = net.ReadString()
@@ -53,7 +53,7 @@ net.Receive("gdr_dclParticles", function()
 
 end)
 
-net.Receive("gdr_dclParticles_ground", function()
+net.Receive("gdr_clParticles_ground", function()
 	if GetConVar("gdisasters_revived_graphics_enable_ground_particles"):GetInt() <= 0 then return end
 	for k,v in pairs(player.GetAll()) do
 		if !v:IsOnGround() then return end
@@ -65,7 +65,7 @@ net.Receive("gdr_dclParticles_ground", function()
 
 end)
 
-net.Receive("gdr_dCreateCeilingWaterDrops", function()
+net.Receive("gdr_CreateCeilingWaterDrops", function()
 
 	if GetConVar("gdisasters_revived_graphics_draw_ceiling_effects"):GetInt() <= 0 then return end 
 
@@ -75,7 +75,7 @@ net.Receive("gdr_dCreateCeilingWaterDrops", function()
 
 end)
 
-net.Receive("gdr_dRemoveCeilingWaterDrops", function()
+net.Receive("gdr_RemoveCeilingWaterDrops", function()
 
 	if GetConVar("gdisasters_revived_graphics_draw_ceiling_effects"):GetInt() <= 0 then return end 
 
@@ -85,7 +85,7 @@ net.Receive("gdr_dRemoveCeilingWaterDrops", function()
 end)
 
 
-net.Receive("gdr_dseteyeangles_cl", function()
+net.Receive("gdr_seteyeangles_cl", function()
 
 	local offset = net.ReadAngle()
 	local angle  = LocalPlayer():EyeAngles()
@@ -99,7 +99,7 @@ net.Receive("gdr_dseteyeangles_cl", function()
 
 end)
 
-net.Receive("gdr_dscreen_particles", function()
+net.Receive("gdr_screen_particles", function()
 
 	if GetConVar("gdisasters_revived_graphics_enable_screen_particles"):GetInt() <= 0 then return end
 
@@ -129,12 +129,12 @@ net.Receive("gdr_dscreen_particles", function()
 																			["Pos"]    = center,
 																			["Velocity"] = vel
 																			}
-		hook.Add( "RenderScreenspaceEffects", "Draw Particles", gfx_screenParticles)
+		hook.Add( "RenderScreenspaceEffects", "Draw Particles", gDisasters_Revived.gfx_screenParticles)
 	end	
 
 end)
 
-net.Receive("gdr_dlightning_bolt", function()
+net.Receive("gdr_lightning_bolt", function()
 
 	local ent1   = net.ReadEntity()
 	local ent2   = net.ReadEntity()
@@ -158,7 +158,7 @@ net.Receive("gdr_dlightning_bolt", function()
 
 end)
 
-net.Receive("gdr_dsoundwave", function()
+net.Receive("gdr_soundwave", function()
 
 	local s 	 = net.ReadString()
 	local stype 	 = net.ReadString() -- "mono or stereo or 3d"
@@ -177,7 +177,7 @@ net.Receive("gdr_dsoundwave", function()
 
 end)
 
-net.Receive("gdr_dsoundwave_stop", function()
+net.Receive("gdr_soundwave_stop", function()
 
 	local s 	 = net.ReadString()
 	local t 	 = net.ReadString()
@@ -193,7 +193,7 @@ net.Receive("gdr_dsoundwave_stop", function()
 
 end)
 
-net.Receive("gdr_dshakescreen", function()
+net.Receive("gdr_shakescreen", function()
 
 	if GetConVar("gdisasters_revived_graphics_shakescreen_enable"):GetInt() == 0 then return end
 
@@ -208,7 +208,7 @@ net.Receive("gdr_dshakescreen", function()
 end)
 
 
-net.Receive("gdr_dsendsound", function()
+net.Receive("gdr_sendsound", function()
 
 	local sound  = net.ReadString()
 	local pitch  = net.ReadFloat() or 100
@@ -219,7 +219,7 @@ net.Receive("gdr_dsendsound", function()
 
 end)
 
-net.Receive("gdr_dstopsound", function()
+net.Receive("gdr_stopsound", function()
 
 	local sound  = net.ReadString()
 	LocalPlayer():StopSound(sound)
@@ -228,7 +228,7 @@ net.Receive("gdr_dstopsound", function()
 
 end)
 
-net.Receive("gdr_disOutdoor", function()
+net.Receive("gdr_isOutdoor", function()
 	isOutside                = net.ReadBool()
 
 	if LocalPlayer().gDisasters == nil then return end
@@ -256,7 +256,7 @@ end)
 
 
 
-net.Receive("gdr_dseteyeangles_cl", function()
+net.Receive("gdr_seteyeangles_cl", function()
 
 	local offset = net.ReadAngle()
 	local angle  = LocalPlayer():EyeAngles()
@@ -272,13 +272,13 @@ end)
 
 
 
-net.Receive( "gdr_dmaplight_cl", function( len, pl ) 
+net.Receive( "gdr_maplight_cl", function( len, pl ) 
 	timer.Simple(0.1, function()
 		render.RedownloadAllLightmaps()
 	end)
 end )
 
-net.Receive("gdr_dremovegfxfog", function()
+net.Receive("gdr_removegfxfog", function()
 
 	local remove_fog = net.ReadBool()
 	local remove_gfx = net.ReadBool()
@@ -286,8 +286,8 @@ net.Receive("gdr_dremovegfxfog", function()
 	if remove_fog then
 	
 		hook.Remove("RenderScreenspaceEffects", "gDisasters_RenderFog")
-		hook.Remove("SetupSkyboxFog", "gdr_dRenderFogSkybox")
-		hook.Remove("SetupWorldFog", "gdr_dRenderFogWorld")
+		hook.Remove("SetupSkyboxFog", "gdr_RenderFogSkybox")
+		hook.Remove("SetupWorldFog", "gdr_RenderFogWorld")
 		LocalPlayer().gDisasters_Revived.Fog.Parent = "none"	
 
 	elseif remove_gfx then
@@ -301,13 +301,13 @@ net.Receive("gdr_dremovegfxfog", function()
 
 end)
 
-net.Receive("gdr_dresetoutsidefactor", function()
+net.Receive("gdr_resetoutsidefactor", function()
 
 	LocalPlayer().gDisasters_Revived.Outside.OutsideFactor = 0 
 
 end)	
 
-net.Receive("gdr_dcreatefog", function()
+net.Receive("gdr_createfog", function()
 
 	local entity = net.ReadEntity()
 	local oq     = net.ReadBool()
@@ -322,7 +322,7 @@ net.Receive("gdr_dcreatefog", function()
 end)
 
 
-net.Receive("gdr_dcreategfx", function()
+net.Receive("gdr_creategfx", function()
 
 	local entity = net.ReadEntity()
 	local effect  = net.ReadString()
@@ -335,7 +335,7 @@ net.Receive("gdr_dcreategfx", function()
 
 end)
 
-net.Receive( "gdr_dentity_exists_on_server", function() 
+net.Receive( "gdr_entity_exists_on_server", function() 
 	local string = net.ReadString()
 	gDisasters_Revived.CachedExists[string] = ents.FindByClass(string)
 
@@ -346,7 +346,7 @@ net.Receive( "gdr_dentity_exists_on_server", function()
 	end
 end)
 
-net.Receive("gdr_dWeatherChange", function()
+net.Receive("gdr_WeatherChange", function()
 	currentWeather = net.ReadString()
 	print("El clima ha cambiado a: " .. currentWeather)
 end)

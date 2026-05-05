@@ -164,24 +164,24 @@ function ENT:LightRaining()
 			
 			if gDisasters_Revived:HitChance(25) then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("hail_character_effect_01_main")
 				net.Send(v)	
 				
 			else 
 				if gDisasters_Revived:HitChance(2) then
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("localized_snow_effect")
 					net.Send(v)
-					net.Start("gdr_dclParticles_ground")
+					net.Start("gdr_clParticles_ground")
 					net.WriteString("snow_ground_effect")
 					net.Send(v)	
 				else
 					if gDisasters_Revived:HitChance(10) then					
-						net.Start("gdr_dclParticles")
+						net.Start("gdr_clParticles")
 						net.WriteString("downburst_light_rain_main")
 						net.Send(v)
-						net.Start("gdr_dclParticles_ground")
+						net.Start("gdr_clParticles_ground")
 						net.WriteString("rain_splash_effect")
 						net.Send(v)		
 					end
@@ -192,7 +192,7 @@ function ENT:LightRaining()
 			
 				if gDisasters_Revived:HitChance(10) then
 				
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/snow")
 					net.WriteFloat(math.random(5,128))
 					net.WriteFloat(math.random(0,100)/100)
@@ -201,7 +201,7 @@ function ENT:LightRaining()
 					net.Send(v)	
 				else
 					if gDisasters_Revived:HitChance(10) then
-						net.Start("gdr_dscreen_particles")
+						net.Start("gdr_screen_particles")
 						net.WriteString("hud/warp_ripple3")
 						net.WriteFloat(math.random(5,100))
 						net.WriteFloat(math.random(0,100)/100)
@@ -307,13 +307,13 @@ function ENT:LRMRTransition()
 
 			if gDisasters_Revived:HitChance(50) then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("downburst_light_rain_main")
 				net.Send(v)				
 			
 			else
 				
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("downburst_medium_rain_main")
 				net.Send(v)	
 			end
@@ -325,7 +325,7 @@ function ENT:LRMRTransition()
 				
 				if gDisasters_Revived:HitChance(50) then
 
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
 					net.WriteFloat(math.random(5,50))
 					net.WriteFloat(math.random(0,100)/100)
@@ -336,7 +336,7 @@ function ENT:LRMRTransition()
 				else	
 					
 					
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
 					net.WriteFloat(math.random(5,200))
 					net.WriteFloat(math.random(0,100)/100)
@@ -370,7 +370,7 @@ function ENT:ModerateRaining()
 			if gDisasters_Revived:HitChance(50)  then
 				
 	
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("downburst_medium_rain_main")
 				net.Send(v)	
 		
@@ -380,7 +380,7 @@ function ENT:ModerateRaining()
 			if gDisasters_Revived:HitChance(1)  then
 				
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,200))
 				net.WriteFloat(math.random(0,100)/100)
@@ -417,7 +417,7 @@ function ENT:HeavyRaining()
 			if gDisasters_Revived:HitChance(90)  then
 				
 	
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_extreme_rain_effect")
 				net.Send(v)	
 				
@@ -428,7 +428,7 @@ function ENT:HeavyRaining()
 			if gDisasters_Revived:HitChance(2)  then
 				
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,600))
 				net.WriteFloat(math.random(0,100)/100)

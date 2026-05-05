@@ -95,17 +95,17 @@ function ENT:AffectPlayers()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			if math.random(1,2) == 2 then
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
 					net.Send(v)			
 			if math.random(1,2) == 2 then		
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
 					net.Send(v)			
 				end
 			end
 			if math.random(1,100)==100 then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/snow")
 				net.WriteFloat(math.random(5,128))
 				net.WriteFloat(math.random(0,100)/100)
@@ -115,22 +115,22 @@ function ENT:AffectPlayers()
 			end
 			if math.random(1,10)==10 then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_snow_effect")--heatburst_air_compression_main
 				net.Send(v)		
-				net.Start("gdr_dclParticles_ground")
+				net.Start("gdr_clParticles_ground")
 				net.WriteString("snow_ground_effect")
 				net.Send(v)		
 			end
 			if math.random(1,50)==50 then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("heatburst_air_compression_main")
 				net.Send(v)			
 			end
 			if math.random(1,50)==50 then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("renderfog_main_HQ")
 				net.Send(v)			
 			end

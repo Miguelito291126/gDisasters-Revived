@@ -158,7 +158,7 @@ gDisasters_Revived.DayNightSystem.LightStyle = function(style, force)
 	
 		timer.Simple( 0.1, function()
 		
-			net.Start( "gdr_dmaplight_cl" )
+			net.Start( "gdr_maplight_cl" )
 			net.Broadcast()
 		
 		end )
@@ -180,7 +180,7 @@ gDisasters_Revived.DayNightSystem.initEntities_Function = function()
 		gDisasters_Revived.DayNightSystem.RelayDawn = ents.FindByName( "dawn" )[1]
 		gDisasters_Revived.DayNightSystem.RelayDusk = ents.FindByName( "dusk" )[1]
 
-		gDisasters_Revived.DayNightSystem.Fog = ents.Create("gdr_dfog")
+		gDisasters_Revived.DayNightSystem.Fog = ents.Create("gdr_fog")
 		gDisasters_Revived.DayNightSystem.Fog:Spawn()
 		gDisasters_Revived.DayNightSystem.Fog:Activate()
 
@@ -313,7 +313,7 @@ gDisasters_Revived.DayNightSystem.Think = function()
 		end
 	end
 
-	--gdr_dfog
+	--gdr_fog
 
 	
 

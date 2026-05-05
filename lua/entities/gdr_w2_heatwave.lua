@@ -80,7 +80,7 @@ function ENT:AffectPlayers()
 		
 			if gDisasters_Revived:HitChance(25) then
 		
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("heatwave_ripple_01_main", Angle(0,math.random(1,40),0))
 				net.Send(v)
 			

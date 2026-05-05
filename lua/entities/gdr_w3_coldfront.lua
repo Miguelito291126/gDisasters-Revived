@@ -99,7 +99,7 @@ function ENT:Lightning()
 	
 	timer.Simple(0.1, function()
 	if !self:IsValid() then return end
-		local ent = ents.Create("gdr_d2_thunderstorm_cl")
+		local ent = ents.Create("gdr_w2_thunderstorm_cl")
 		ent:SetPos(pos)
 		ent:Spawn()
 		ent:Activate()
@@ -298,7 +298,7 @@ function ENT:Squall()
 				
 				if gDisasters_Revived:HitChance(50) then
 
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
 					net.WriteFloat(math.random(5,50))
 					net.WriteFloat(math.random(0,100)/100)
@@ -352,10 +352,10 @@ function ENT:Passage()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 				
 	
-			net.Start("gdr_dclParticles")
+			net.Start("gdr_clParticles")
 			net.WriteString("localized_rain_effect")
 			net.Send(v)
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("rain_splash_effect")
 			net.Send(v)		
 				
@@ -364,7 +364,7 @@ function ENT:Passage()
 			if gDisasters_Revived:HitChance(1)  then
 				
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,200))
 				net.WriteFloat(math.random(0,100)/100)
@@ -463,7 +463,7 @@ function ENT:OnRemove()
 		
 		gDisasters_Revived:setMapLight("t")
 		
-		for k, v in pairs(ents.FindByClass("gdr_d2_thunderstorm_cl")) do v:Remove() end
+		for k, v in pairs(ents.FindByClass("gdr_w2_thunderstorm_cl")) do v:Remove() end
 		
 	end
 	

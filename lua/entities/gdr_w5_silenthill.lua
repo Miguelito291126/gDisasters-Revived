@@ -102,7 +102,7 @@ function ENT:AffectPlayers()
 	for k, v in pairs(player.GetAll()) do
 	
 		local outdoor = gDisasters_Revived:isOutdoor(v)
-		net.Start("gdr_disOutdoor")
+		net.Start("gdr_isOutdoor")
 		net.WriteBool(outdoor)
 		net.Send(v)
 		
@@ -110,7 +110,7 @@ function ENT:AffectPlayers()
 		
 			if outdoor then
 				if math.random(1,40)==40 then
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/snow")
 					net.WriteFloat(math.random(5,428))
 					net.WriteFloat(math.random(0,100)/100)
@@ -119,7 +119,7 @@ function ENT:AffectPlayers()
 					net.Broadcast(v)	
 				end
 				if math.random(1,3)==1 then
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("localized_ash_effect", Angle(0,math.random(1,40),0))
 					net.Send(v)		
 				end
@@ -167,7 +167,7 @@ function ENT:CreateDarkness(bool)
 		timer.Simple(31, function()
 			if !self:IsValid() then return end
 			for k, ply in pairs(player.GetAll()) do	
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("darkness_arriving_main", Angle(0,math.random(0,1),0))
 				net.Send(ply)	
 				gDisasters_Revived:clPlaySound(ply, "streams/disasters/silenthill/darkness_arrival.mp3", 100, 1)
@@ -175,7 +175,7 @@ function ENT:CreateDarkness(bool)
 			
 			timer.Simple(23.3, function()
 				if !self:IsValid() then return end
-				net.Start("gdr_darkness_stun")
+				net.Start("gdr_arkness_stun")
 				net.WriteFloat(4)
 				net.WriteFloat(0.4)
 				net.WriteFloat(0.5)

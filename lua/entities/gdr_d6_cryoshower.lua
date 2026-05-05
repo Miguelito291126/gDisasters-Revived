@@ -98,18 +98,18 @@ function ENT:AffectPlayers()
 			if math.random(1,2) == 2 then
 				if gDisasters_Revived:HitChance(50) then
 				
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
 					net.Send(v)			
 					
 				else
-					net.Start("gdr_dclParticles")
+					net.Start("gdr_clParticles")
 					net.WriteString("hail_character_effect_01_main")
 					net.Send(v)			
 				end
 			end
 			if math.random(1,100)==100 then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/snow")
 				net.WriteFloat(math.random(5,128))
 				net.WriteFloat(math.random(0,100)/100)
@@ -119,7 +119,7 @@ function ENT:AffectPlayers()
 			end
 			if math.random(1,100)==100 then
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_snow_effect")
 				net.Send(v)			
 			end

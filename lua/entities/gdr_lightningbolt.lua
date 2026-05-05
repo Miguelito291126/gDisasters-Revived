@@ -120,7 +120,7 @@ function ENT:Smite()
 	
 	timer.Simple(0.05, function()
 
-		net.Start("gdr_dlightning_bolt")
+		net.Start("gdr_lightning_bolt")
 		net.WriteEntity(self)
 		net.WriteEntity(target)
 		net.WriteString(particle)

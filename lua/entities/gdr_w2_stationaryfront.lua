@@ -98,16 +98,16 @@ function ENT:AffectPlayers()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 		
 		if math.random(1,2) == 2 then
-			net.Start("gdr_dclParticles")
+			net.Start("gdr_clParticles")
 			net.WriteString("localized_light_rain_effect", Angle(0,math.random(1,40),0))
 			net.Send(v)
-			net.Start("gdr_dclParticles_ground")
+			net.Start("gdr_clParticles_ground")
 			net.WriteString("rain_splash_effect", Angle(0,math.random(1,40),0))
 			net.Send(v)
 			end
 
 			if math.random(1,20) == 20 then
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,228))
 				net.WriteFloat(math.random(0,100)/100)

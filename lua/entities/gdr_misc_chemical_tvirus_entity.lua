@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS( "gdr_dnuclear_fission_rad_base" )
+DEFINE_BASECLASS( "gdr_nuclear_fission_rad_base" )
 
 ENT.Spawnable		            	 =  false
 ENT.AdminSpawnable		             =  false     
@@ -75,7 +75,7 @@ function ENT:Think()
 	self:MovePlayerSpeed()
 	self:FollowInfected()
 	
-	net.Start("gdr_dnet_tvirus")
+	net.Start("gdr_net_tvirus")
 	net.WriteTable({["IsDead"]=false,["Seconds"]=self.Seconds,["Infected"]=self.infected,["IsDead"]=false})
 	net.Send(self.infected)
 	
@@ -283,7 +283,7 @@ if (SERVER) then
 		infected_player:StopParticles()
 		infected_player:SetColor(Color(255,255,255))
 		
-		net.Start("gdr_dnet_tvirus")
+		net.Start("gdr_net_tvirus")
 		net.WriteTable({["IsDead"]=false,["Seconds"]=self.Seconds,["Infected"]=self.infected,["IsDead"]=true})
 		net.Send(self.infected)
 	end

@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS( "gdr_dbuilding_base" )
+DEFINE_BASECLASS( "gdr_building_base" )
 
 ENT.Spawnable		            	 = false        
 ENT.AdminSpawnable		             = false 

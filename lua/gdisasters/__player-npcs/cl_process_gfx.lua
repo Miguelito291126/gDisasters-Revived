@@ -240,11 +240,11 @@ gDisasters_Revived_Effects["RENDERFOG"] = function()
 
 	hook.Remove("RenderScreenspaceEffects", "gDisasters_RenderFog")
 
-	hook.Remove("SetupSkyboxFog", "gdr_dRenderFogSkybox")
-	hook.Remove("SetupWorldFog", "gdr_dRenderFog")
+	hook.Remove("SetupSkyboxFog", "gdr_RenderFogSkybox")
+	hook.Remove("SetupWorldFog", "gdr_RenderFog")
 	
 
-	local function gdr_dRenderFogWorld()
+	local function gdr_RenderFogWorld()
 		
 		local isOutside         = LocalPlayer().isOutside 
 		local fogColor          = LocalPlayer().gDisasters_Revived.Fog.Data.Color
@@ -259,7 +259,7 @@ gDisasters_Revived_Effects["RENDERFOG"] = function()
 		return true
 	end
 
-	local function gdr_dRenderFogSkybox()
+	local function gdr_RenderFogSkybox()
 		local isOutside         = LocalPlayer().isOutside 
 		local fogColor          = LocalPlayer().gDisasters_Revived.Fog.Data.Color
 
@@ -297,8 +297,8 @@ gDisasters_Revived_Effects["RENDERFOG"] = function()
 		if LocalPlayer().gDisasters_Revived.Fog.Parent:IsValid()==false then
 			
 			hook.Remove("RenderScreenspaceEffects", "gDisasters_RenderFog")
-			hook.Remove("SetupSkyboxFog", "gdr_dRenderFogSkybox")
-			hook.Remove("SetupWorldFog", "gdr_dRenderFogWorld")
+			hook.Remove("SetupSkyboxFog", "gdr_RenderFogSkybox")
+			hook.Remove("SetupWorldFog", "gdr_RenderFogWorld")
 			LocalPlayer().gDisasters_Revived.Fog.Parent = "none"
 			
 			
@@ -309,12 +309,12 @@ gDisasters_Revived_Effects["RENDERFOG"] = function()
 	end
 	
 	if LocalPlayer().gDisasters_Revived.Fog.OQ == true then 
-		hook.Add("SetupSkyboxFog", "gdr_dRenderFogSkybox", gdr_dRenderFogSkybox)
-		hook.Add("SetupWorldFog", "gdr_dRenderFogWorld", gdr_dRenderFogWorld) 		
+		hook.Add("SetupSkyboxFog", "gdr_RenderFogSkybox", gdr_RenderFogSkybox)
+		hook.Add("SetupWorldFog", "gdr_RenderFogWorld", gdr_RenderFogWorld) 		
 		hook.Add("RenderScreenspaceEffects", "gDisasters_RenderFog", RenderFog )
 	else
-		hook.Add("SetupSkyboxFog", "gdr_dRenderFogSkybox", gdr_dRenderFogSkybox)
-		hook.Add("SetupWorldFog", "gdr_dRenderFogWorld", gdr_dRenderFogWorld) 		
+		hook.Add("SetupSkyboxFog", "gdr_RenderFogSkybox", gdr_RenderFogSkybox)
+		hook.Add("SetupWorldFog", "gdr_RenderFogWorld", gdr_RenderFogWorld) 		
 		hook.Add("RenderScreenspaceEffects", "gDisasters_RenderFog", RenderFog )
 		LocalPlayer().gDisasters_Revived.Fog.Data.DensityMax = (LocalPlayer().gDisasters_Revived.Fog.Data.DensityMax/5) * (2 + GetConVar( "gdisasters_revived_graphics_fog_quality" ):GetInt())
 

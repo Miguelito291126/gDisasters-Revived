@@ -1,4 +1,4 @@
-net.Receive( "gdr_dnet", function( len )
+net.Receive( "gdr_net", function( len )
 
 	local mask_on = net.ReadBit()
 	if mask_on==1 then
@@ -8,7 +8,7 @@ net.Receive( "gdr_dnet", function( len )
 	end
 end)
 
-net.Receive( "gdr_dnet_tvirus", function( len, pl )
+net.Receive( "gdr_net_tvirus", function( len, pl )
 	local tickrate   = 1/engine.TickInterval()
 	local data_table = net.ReadTable()
 	

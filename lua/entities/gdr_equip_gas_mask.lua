@@ -24,7 +24,7 @@ sound.Add( {
 function ENT:SpawnFunction( ply, tr )
 	if ( not tr.Hit ) then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 16
-	local ent = ents.Create( "gdr_dequip_gas_mask" )
+	local ent = ents.Create( "gdr_equip_gas_mask" )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -65,7 +65,7 @@ if SERVER then
 			activator:EmitSound("streams/others/protection_used.wav",50,100)
 			activator.gasmasked=true
 			activator:EmitSound("breathing")
-			net.Start( "gdr_dnet" )        
+			net.Start( "gdr_net" )        
 			net.WriteBit( true )
 			net.Send(activator)
 			

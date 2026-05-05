@@ -75,7 +75,7 @@ function ENT:Smite()
 
 	timer.Simple(0.1, function()
 		if !self:IsValid() then return end 
-		net.Start("gdr_dlightning_bolt")
+		net.Start("gdr_lightning_bolt")
 		net.WriteEntity(self)
 		net.WriteEntity(target)
 		net.WriteString(self.Particle)

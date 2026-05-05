@@ -410,7 +410,7 @@ function ENT:UpdateDisplay()
 	end
 	
 	local function UpdateForRain()
-		local targets2 = ents.FindByClass("gdr_dheatsys_raincell")
+		local targets2 = ents.FindByClass("gdr_heatsys_raincell")
 		
 		for k, v in pairs(targets2) do 
 			local pos = ConvertVectorToScreenSpace(v:GetPos() * Vector(-1,1,1))
@@ -423,7 +423,7 @@ function ENT:UpdateDisplay()
 	end
 	
 	local function UpdateForHail()
-		local targets2 = ents.FindByClass("gdr_dheatsys_hailcell")
+		local targets2 = ents.FindByClass("gdr_heatsys_hailcell")
 		
 		for k, v in pairs(targets2) do 
 			local pos = ConvertVectorToScreenSpace(v:GetPos() * Vector(-1,1,1))
@@ -436,7 +436,7 @@ function ENT:UpdateDisplay()
 	end
 
 	local function UpdateForSnow()
-		local targets2 = ents.FindByClass("gdr_dheatsys_snowcell")
+		local targets2 = ents.FindByClass("gdr_heatsys_snowcell")
 		
 		for k, v in pairs(targets2) do 
 			local pos = ConvertVectorToScreenSpace(v:GetPos() * Vector(-1,1,1))
@@ -450,7 +450,7 @@ function ENT:UpdateDisplay()
 	
 	
 	local function UpdateForThunder()
-		local targets2 = ents.FindByClass("gdr_dheatsys_thundercell")
+		local targets2 = ents.FindByClass("gdr_heatsys_thundercell")
 		
 		for k, v in pairs(targets2) do 
 			local pos = ConvertVectorToScreenSpace(v:GetPos() * Vector(-1,1,1))
@@ -576,9 +576,9 @@ function gDisasters_Revived.RenderRadarPixels(self)
 	
 end
 
-hook.Add("PostDrawOpaqueRenderables", "gdr_dequip_wradar.draw.pixelscreen",function() 
+hook.Add("PostDrawOpaqueRenderables", "gdr_equip_wradar.draw.pixelscreen",function() 
 
-	local radars = ents.FindByClass("gdr_dequip_wradar")
+	local radars = ents.FindByClass("gdr_equip_wradar")
 		
 	
 	local max_render_distance    = 5000

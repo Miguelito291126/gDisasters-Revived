@@ -156,14 +156,14 @@ function ENT:LightRain()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			
 			
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_light_rain_effect")
 				net.Send(v)				
 		
 	
 				if gDisasters_Revived:HitChance(2) then
 
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/warp_ripple3")
 					net.WriteFloat(math.random(5,80))
 					net.WriteFloat(math.random(0,100)/100)
@@ -191,10 +191,10 @@ function ENT:ModerateRaining()
 		if v.gDisasters_Revived.Area.IsOutdoor then
 				
 	
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("downburst_medium_rain_main")
 				net.Send(v)	
-				net.Start("gdr_dclParticles_ground")
+				net.Start("gdr_clParticles_ground")
 				net.WriteString("rain_splash_effect")
 				net.Send(v)	
 				
@@ -202,7 +202,7 @@ function ENT:ModerateRaining()
 			if gDisasters_Revived:HitChance(1)  then
 				
 				
-				net.Start("gdr_dscreen_particles")
+				net.Start("gdr_screen_particles")
 				net.WriteString("hud/warp_ripple3")
 				net.WriteFloat(math.random(5,200))
 				net.WriteFloat(math.random(0,100)/100)

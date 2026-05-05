@@ -103,19 +103,19 @@ function ENT:AffectPlayers()
 
 		if v.gDisasters_Revived.Area.IsOutdoor then
 			if math.random(1,4)==1 then
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_sand_effect", Angle(0,math.random(1,40),0))
 				net.Send(v)
 			end
 			
 			if math.random(1,4)==1 then
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_dust_effect")
 				net.Send(v)		
 			end
 			
 
-			net.Start("gdr_dscreen_particles")
+			net.Start("gdr_screen_particles")
 			net.WriteString(table.Random({"hud/sand_1","hud/sand_2","hud/sand_3"}))
 			net.WriteFloat(math.random(4,108))
 			net.WriteFloat(math.random(0,100)/100)
@@ -130,7 +130,7 @@ end
 
 function ENT:CreateSandDecals()
 	for k, v in pairs(player.GetAll()) do
-		net.Start("gdr_dcreatedecals")
+		net.Start("gdr_createdecals")
 		net.WriteString("sand")
 		net.WriteBool(self.CreatedDecals)
 		net.Send(v)
@@ -191,7 +191,7 @@ function ENT:OnRemove()
 		gDisasters_Revived:setMapLight("t")	
 	end
 	
-	for k, v in pairs(ents.FindByClass("gdr_d2_thunderstorm_cl")) do v:Remove() end
+	for k, v in pairs(ents.FindByClass("gdr_w2_thunderstorm_cl")) do v:Remove() end
 	
 	if (CLIENT) then
 		
@@ -236,7 +236,7 @@ function ENT:Lightning()
 	
 	timer.Simple(0.1, function()
 	if !self:IsValid() then return end
-		local ent = ents.Create("gdr_d2_thunderstorm_cl")
+		local ent = ents.Create("gdr_w2_thunderstorm_cl")
 		ent:SetPos(pos)
 		ent:Spawn()
 		ent:Activate()

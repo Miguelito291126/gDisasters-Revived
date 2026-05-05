@@ -110,7 +110,7 @@ function ENT:AffectPlayers()
 			
 			if gDisasters_Revived:HitChance(time_mul) then
 				if math.random(1,3)==1 then
-					net.Start("gdr_dscreen_particles")
+					net.Start("gdr_screen_particles")
 					net.WriteString("hud/snow")
 					net.WriteFloat(math.random(100,1538))
 					net.WriteFloat(math.random(0,100)/100)
@@ -121,12 +121,12 @@ function ENT:AffectPlayers()
 				
 				local ang = (v:GetPos()-self:GetPos()):Angle().y + 90
 
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_ash_effect_2")
 				net.Send(v)
 				
 				
-				net.Start("gdr_dclParticles")
+				net.Start("gdr_clParticles")
 				net.WriteString("localized_ash_effect_2")
 				net.Send(v)
 			

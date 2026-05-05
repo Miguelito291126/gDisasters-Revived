@@ -113,8 +113,8 @@ function Temperature()
 			local closest_vfire, distance  = gDisasters_Revived:FindNearestEntity(v, "vfire") -- find closest fire entity
 			local closest_fire, distance_2 = gDisasters_Revived:FindNearestEntity(v, "entityflame")
 			local closest_envfire, distance_3 = gDisasters_Revived:FindNearestEntity(v, "env_fire")
-			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_dequip_supercooledice") -- find closest ice entity
-			local closest_dryice,  distance_5  = gDisasters_Revived:FindNearestEntity(v, "gdr_dequip_dryice") -- find closest ice entity
+			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
+			local closest_dryice,  distance_5  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_dryice") -- find closest ice entity
 			
 			local heatscale               = 0
 			local coolscale               = 0
@@ -330,7 +330,7 @@ function Temperature()
 			local closest_vfire, distance  = gDisasters_Revived:FindNearestEntity(v, "vfire") -- find closest fire entity
 			local closest_fire, distance_2 = gDisasters_Revived:FindNearestEntity(v, "entityflame")
 			local closest_envfire, distance_3 = gDisasters_Revived:FindNearestEntity(v, "env_fire")
-			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_dequip_supercooledice") -- find closest ice entity
+			local closest_ice,  distance_4  = gDisasters_Revived:FindNearestEntity(v, "gdr_equip_supercooledice") -- find closest ice entity
 			
 			if math.random(1,5) == 5 then
 				if closest_vfire != nil then
