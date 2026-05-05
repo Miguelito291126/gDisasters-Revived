@@ -4,7 +4,7 @@ end
 hook.Add("Think", "atmosphericLoop", gDisasters_Revived.Atmosphere)
 
 function gDisasters_Revived.WindControl()
-	if LocalPlayer().gDisasters == nil then return end
+	if LocalPlayer().gDisasters_Revived == nil then return end
 	if LocalPlayer().Sounds == nil then LocalPlayer().Sounds = {} end
 	
 	local local_wind    = LocalPlayer():GetNWFloat("LocalWind")

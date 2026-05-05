@@ -231,7 +231,7 @@ end)
 net.Receive("gdr_isOutdoor", function()
 	isOutside                = net.ReadBool()
 
-	if LocalPlayer().gDisasters == nil then return end
+	if LocalPlayer().gDisasters_Revived == nil then return end
 
 
 	LocalPlayer().gDisasters_Revived.Outside.IsOutside     = isOutside
