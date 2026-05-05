@@ -413,24 +413,24 @@ local function gDisastersAudioSettings( CPanel )
 end
 
 hook.Add( "AddToolMenuTabs", "gDisasters_Tab", function()
-	spawnmenu.AddToolTab( "gDisasters", "#gDisasters", "icons/gdlogo.png" )
+	spawnmenu.AddToolTab( "gDisasters Revived", "#gDisasters Revived", "icons/gdlogo.png" )
 end)
 
-hook.Add( "PopulateToolMenu", "gDisasters_PopulateMenu", function()
+hook.Add( "PopulateToolMenu", "gDisasters_Revived_PopulateMenu", function()
 	
 
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersSHADSettings", language.GetPhrase("gdr_advanced"), "", "", gDisastersSHADVSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersSHSettings", language.GetPhrase("gdr_main"), "", "", gDisastersSHSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersAutospawn", language.GetPhrase("gdr_autospawn"), "", "", gDisastersAutospawn )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisasterDNC", language.GetPhrase("gdr_nc"), "", "", gDisastersDNC )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersSHhud", language.GetPhrase("gdr_server_hud"), "", "", gDisastersSHhud )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersAddonsCompatibility", language.GetPhrase("gdr_addons"), "", "", gDisastersAddonsCompatibility )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersSHGraphics", language.GetPhrase("gdr_server_graphics"), "", "", gDisastersSHGraphics )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Shared", "gDisastersHeatSystemSettings", language.GetPhrase("gdr_heatsystem"), "", "", gDisastersHeatSystemBeta )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Client", "gDisastersAudioSettings", language.GetPhrase("gdr_volume"), "", "", gDisastersAudioSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Client", "gDisastersADVGraphicsSettings", language.GetPhrase("gdr_advanced_graphics"), "", "", gDisastersADVGraphicsSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Client", "gDisastersHudSettings", language.GetPhrase("gdr_hud"), "", "", gDisastersHudSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters", "Client", "gDisastersGraphicsSettings", language.GetPhrase("gdr_graphics"), "", "", gDisastersGraphicsSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersSHADSettings", language.GetPhrase("gdr_advanced"), "", "", gDisastersSHADVSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersSHSettings", language.GetPhrase("gdr_main"), "", "", gDisastersSHSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersAutospawn", language.GetPhrase("gdr_autospawn"), "", "", gDisastersAutospawn )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisasterDNC", language.GetPhrase("gdr_nc"), "", "", gDisastersDNC )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersSHhud", language.GetPhrase("gdr_server_hud"), "", "", gDisastersSHhud )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersAddonsCompatibility", language.GetPhrase("gdr_addons"), "", "", gDisastersAddonsCompatibility )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersSHGraphics", language.GetPhrase("gdr_server_graphics"), "", "", gDisastersSHGraphics )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Shared", "gDisastersHeatSystemSettings", language.GetPhrase("gdr_heatsystem"), "", "", gDisastersHeatSystemBeta )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersAudioSettings", language.GetPhrase("gdr_volume"), "", "", gDisastersAudioSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersADVGraphicsSettings", language.GetPhrase("gdr_advanced_graphics"), "", "", gDisastersADVGraphicsSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersHudSettings", language.GetPhrase("gdr_hud"), "", "", gDisastersHudSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersGraphicsSettings", language.GetPhrase("gdr_graphics"), "", "", gDisastersGraphicsSettings )
 	
 
 end );
