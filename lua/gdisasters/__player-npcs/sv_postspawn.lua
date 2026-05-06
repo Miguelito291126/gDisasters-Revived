@@ -7,9 +7,9 @@ function gDisasters_Revived.PostSpawn(ply)
 		ply.gDisasters_Revived.Body.Oxygen      = 100
 
 		if GetConVar("gdisasters_revived_hud_temp_enable"):GetInt() <= 0 or GetConVar("gdisasters_revived_hud_temp_value"):GetInt() <= 0 then 
-			ply:SetNWFloat("BodyTemperature", ply.gDisasters_Revived.Body.Temperature)
+			ply:SetNWFloat("gdr_BodyTemperature", ply.gDisasters_Revived.Body.Temperature)
 		elseif GetConVar("gdisasters_revived_hud_oxygen_enable"):GetInt() <= 0 then
-			ply:SetNWFloat("BodyOxygen", ply.gDisasters_Revived.Body.Oxygen)
+			ply:SetNWFloat(gdr_BodyOxygen, ply.gDisasters_Revived.Body.Oxygen)
 		end
 	
 	end
@@ -44,9 +44,9 @@ function gDisasters_Revived.OnSpawn_Reset( ply )
 	net.Send(ply)
 
 	if GetConVar("gdisasters_revived_hud_temp_enable"):GetInt() <= 0 or GetConVar("gdisasters_revived_hud_temp_value"):GetInt() <= 0 then 
-		ply:SetNWFloat("BodyTemperature", ply.gDisasters_Revived.Body.Temperature)
+		ply:SetNWFloat("gdr_BodyTemperature", ply.gDisasters_Revived.Body.Temperature)
 	elseif GetConVar("gdisasters_revived_hud_oxygen_enable"):GetInt() <= 0 then
-		ply:SetNWFloat("BodyOxygen", ply.gDisasters_Revived.Body.Oxygen)
+		ply:SetNWFloat("gdr_BodyOxygen", ply.gDisasters_Revived.Body.Oxygen)
 	end
 end
 hook.Add( "PlayerSpawn", "gDisasters_Revived_OnSpawn_Reset", gDisasters_Revived.OnSpawn_Reset )

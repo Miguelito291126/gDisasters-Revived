@@ -71,7 +71,7 @@ gDisasters_Revived.GLOBAL_SYSTEM_ORIGINAL = {
 
 concommand.Add("gdisasters_revived_smite", function()
 
-	local bounds    = gdisasters_revived_:getMapSkyBox()
+	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 	
@@ -95,7 +95,7 @@ concommand.Add("gdisasters_revived_smite", function()
 end)
 
 concommand.Add("setlight", function(ply, cmd, args)
-	gdisasters_revived_:setMapLight(args[1])
+	gDisasters_Revived.setMapLight(args[1])
 end)
 
 concommand.Add("setposme", function(ply, cmd, args)
@@ -122,50 +122,50 @@ end)
 
 concommand.Add("gdisasters_revived_heat_system_getcellslist", function()
 
-	PrintTable(gdisasters_revived_.HeatSystem.GridMap)
+	PrintTable(gDisasters_Revived.HeatSystem.GridMap)
 end)
 concommand.Add("gdisasters_revived_heat_system_getcurrentcell", function(ply)
 	local pos = ply:GetPos()
-	local px, py, pz = math.floor(pos.x / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.y / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.z / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize
+	local px, py, pz = math.floor(pos.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
 	
-	PrintTable(gdisasters_revived_.HeatSystem.GridMap[px][py][pz])
+	PrintTable(gDisasters_Revived.HeatSystem.GridMap[px][py][pz])
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getcellpos", function(ply)
 	local pos = ply:GetPos()
-	local px, py, pz = math.floor(pos.x / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.y / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize, math.floor(pos.z / gdisasters_revived_.HeatSystem.cellSize) * gdisasters_revived_.HeatSystem.cellSize
+	local px, py, pz = math.floor(pos.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
 	
-	if gdisasters_revived_.HeatSystem.GridMap[px][py][pz] then
+	if gDisasters_Revived.HeatSystem.GridMap[px][py][pz] then
 		print("Position: X= " .. px, "Y= " .. py, "Z= " .. pz)
 	end
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getlandcells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.LandSources)
+	PrintTable(gDisasters_Revived.HeatSystem.LandSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getwatercells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.WaterSources)
+	PrintTable(gDisasters_Revived.HeatSystem.WaterSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getaircells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.AirSources)
+	PrintTable(gDisasters_Revived.HeatSystem.AirSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getgrasscells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.GrassSources)
+	PrintTable(gDisasters_Revived.HeatSystem.GrassSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getsnowcells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.SnowSources)
+	PrintTable(gDisasters_Revived.HeatSystem.SnowSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getsandcells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.SandSources)
+	PrintTable(gDisasters_Revived.HeatSystem.SandSources)
 end)
 
 concommand.Add("gdisasters_revived_heat_system_getasfaltcells", function(ply)
-	PrintTable(gdisasters_revived_.HeatSystem.AsfaltSources)
+	PrintTable(gDisasters_Revived.HeatSystem.AsfaltSources)
 end)
 
 concommand.Add("ent_getinfo", function(ply)
@@ -209,16 +209,16 @@ end)
 concommand.Add("gdisasters_revived_setbody_temp", function(cmd, args, temp)
 	for k, v in pairs(player.GetAll()) do
 		local temperature = temp[1]
-		v.gdisasters_revived_.Body.Temperature = tonumber(temperature)
-	
+		v.gDisasters_Revived.Body.Temperature = tonumber(temperature)
+		
 	end
 end)
 
 concommand.Add("gdisasters_revived_setbody_oxygen", function(cmd, args, O2)
 	for k, v in pairs(player.GetAll()) do
 		local Oxygen = O2[1]
-		v.gdisasters_revived_.Body.Oxygen = tonumber(Oxygen)
-	
+		v.gDisasters_Revived.Body.Oxygen = tonumber(Oxygen)
+		
 	end
 end)
 

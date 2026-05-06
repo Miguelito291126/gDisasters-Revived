@@ -235,7 +235,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_TempEffect", function()
 
 	if GetConVar("gdisasters_revived_hud_temp_effects"):GetInt() == 0 then return end
 
-	local temp            = LocalPlayer():GetNWFloat("BodyTemperature")
+	local temp            = LocalPlayer():GetNWFloat("gdr_BodyTemperature")
 	local blur_alpha_hot  =  1-((44-math.Clamp(temp,39,44))/5)
 	local blur_alpha_cold =  ((35-math.Clamp(temp,24,35))/11)
 	local iangle          = LocalPlayer():EyeAngles()

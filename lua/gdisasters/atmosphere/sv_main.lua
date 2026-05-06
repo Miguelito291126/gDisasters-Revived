@@ -61,7 +61,7 @@ function gDisasters_Revived.BRadiation()
 	local BRadiation = gDisasters_Revived.GLOBAL_SYSTEM["Atmosphere"]["BRadiation"]
 	SetGlobalFloat("gDisasters_Revived_BRadiation", BRadiation)
 
-	function DamagePlayer()
+	local function DamagePlayer()
 		for k, v in pairs(player.GetAll()) do
 			if BRadiation >= 80 and gDisasters_Revived.isOutdoor(v) then
 				if gDisasters_Revived.HitChance(0.5) then
@@ -149,7 +149,7 @@ function gDisasters_Revived.Temperature()
 
 			v.gDisasters_Revived.Body.Temperature = math.Clamp(v.gDisasters_Revived.Body.Temperature + core_equilibrium  + heatsource_equilibrium + coldsource_equilibrium + ambient_equilibrium, 24, 44)
 
-			v:SetNWFloat("BodyTemperature", v.gDisasters_Revived.Body.Temperature)
+			v:SetNWFloat("gdr_BodyTemperature", v.gDisasters_Revived.Body.Temperature)
 			
 		
 			
@@ -547,7 +547,7 @@ function gDisasters_Revived.Oxygen()
 				v.gDisasters_Revived.Body.Oxygen = math.Clamp( v.gDisasters_Revived.Body.Oxygen + 5 , 0,100 )
 			end
 		
-			v:SetNWFloat("BodyOxygen", v.gDisasters_Revived.Body.Oxygen)
+			v:SetNWFloat("gdr_BodyOxygen", v.gDisasters_Revived.Body.Oxygen)
 		end
 		for k, v in pairs(ents.FindByClass("npc_*")) do           
 			if gDisasters_Revived.isinWater(v) or gDisasters_Revived.isinLava(v) then 
@@ -911,7 +911,7 @@ function gDisasters_Revived.spacebuild()
 			v.gDisasters_Revived.Body.Energy = v.suit.energy
 			v.gDisasters_Revived.Body.Coolant = v.suit.coolant
 
-			v:SetNWFloat("BodyOxygen", v.gDisasters_Revived.Body.Oxygen)
+			v:SetNWFloat("gdr_BodyOxygen", v.gDisasters_Revived.Body.Oxygen)
 			v:SetNWFloat("BodyEnergy", v.gDisasters_Revived.Body.Energy)
 			v:SetNWFloat("BodyCoolant", v.gDisasters_Revived.Body.Coolant)
 
