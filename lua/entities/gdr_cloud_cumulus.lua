@@ -106,10 +106,10 @@ end
 function ENT:MoveCloud()
 	if GetConVar("gdisasters_revived_heat_system_enabled"):GetInt() >= 1 then 
 		local pos = self:GetPos()
-		local ex, ey, ez = math.floor(pos.x / gDisasters_Revived-HeatSystem.cellSize) * gDisasters_Revived-HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived-HeatSystem.cellSize) * gDisasters_Revived-HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived-HeatSystem.cellSize) * gDisasters_Revived-HeatSystem.cellSize
+		local ex, ey, ez = math.floor(pos.x / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.y / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize, math.floor(pos.z / gDisasters_Revived.HeatSystem.cellSize) * gDisasters_Revived.HeatSystem.cellSize
 		
-		if gDisasters_Revived-HeatSystem.GridMap[ex] and gDisasters_Revived-HeatSystem.GridMap[ex][ey] and gDisasters_Revived-HeatSystem.GridMap[ex][ey][ez] then
-			local cell = gDisasters_Revived-HeatSystem.GridMap[ex][ey][ez]
+		if gDisasters_Revived.HeatSystem.GridMap[ex] and gDisasters_Revived.HeatSystem.GridMap[ex][ey] and gDisasters_Revived.HeatSystem.GridMap[ex][ey][ez] then
+			local cell = gDisasters_Revived.HeatSystem.GridMap[ex][ey][ez]
 			local wind_speed, wind_dir = cell.windspeed, cell.winddirection
 			
 			-- Reducir la velocidad del viento aplicada a las nubes
