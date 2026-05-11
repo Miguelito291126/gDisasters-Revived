@@ -327,7 +327,7 @@ function ENT:Unfreeze(phys, v, mag)
 	end
 end
 function ENT:DoPhysics()
-	local t =  GetConVar( "gdisasters_envearthquake_simquality" ):GetFloat()-- tick dependant function that allows for constant think loop regardless of server tickrate
+	local t =  GetConVar( "gdisasters_revived_envearthquake_simquality" ):GetFloat()-- tick dependant function that allows for constant think loop regardless of server tickrate
 	local scale_velocity = 66/( 1/engine.TickInterval())
 	local mag = self.Magnitude * self.MagnitudeModifier
 	if !self:CanDoPhysics(t) or mag < 3 then return end -- if magnitude is less than 3 dont bother doing physics
@@ -512,7 +512,7 @@ end
 function ENT:OnRemove()
 	if (CLIENT) then
 		
-		if LocalPlayer().Sounds["Earthquake"]==nil then
+		if LocalPlayer().Sounds["Earthquake"] == nil then
 			LocalPlayer().Sounds["Earthquake"] = {  ["sound"] = gDisasters_Revived.CreateLoopedSound(LocalPlayer(), "streams/disasters/earthquake/earthquake.wav"), ["volume"] = 0 }
 			LocalPlayer().Sounds["Earthquake"]["sound"]:ChangeVolume(0,0)
 		else

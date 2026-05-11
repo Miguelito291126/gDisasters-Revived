@@ -1008,19 +1008,19 @@ function gDisasters_Revived.MakeBurn( ent ) -- credits goes to Kogitsune
     end
 end
 
-hook.Add("Think", "LavaVolcano", function()
+hook.Add("Think", "gDisasters_Revived_LavaVolcano", function()
 	for k, v in pairs(player.GetAll()) do
 		v.LavaIntensity = math.Clamp(v.LavaIntensity - (FrameTime()/4), 0, 1)
 	end
 end)
 
-hook.Add("Think", "WaterGeyser", function()
+hook.Add("Think", "gDisasters_Revived_WaterGeyser", function()
 	for k, v in pairs(player.GetAll()) do
 		v.WaterIntensity = math.Clamp(v.WaterIntensity - (FrameTime()/4), 0, 1)
 	end
 end)
 
-hook.Add( "Think", "gDisasters_EnvWaterMovement", function(  )
+hook.Add( "Think", "gDisasters_Revived_EnvWaterMovement", function(  )
 	for k, ply in pairs(player.GetAll()) do 
 	
 		if gDisasters_Revived.isinWater(ply) then
