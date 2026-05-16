@@ -1111,9 +1111,9 @@ end)
 
 end
 
-list.Set( "NPC", "npc_bcat", {
+list.Set( "NPC", "gdr_npc_bcat", {
 	Name = "Bcat lol", 
-	Class = "npc_bcat", 
+	Class = "gdr_npc_bcat", 
 	Category = "Nextbot",
 	AdminOnly = false,
 })
