@@ -78,10 +78,7 @@ function ENT:PhysicsCollide( data, physobj )
 	end
 	
 	if (data.Speed > 200 ) then 
-	
-		
 		self:Explode()
-						 
 	end
 
 	
@@ -131,7 +128,6 @@ function ENT:Explode()
 			end
 						
 		end
-				  
 	end
 	
 	local pe = ents.Create( "env_physexplosion" );

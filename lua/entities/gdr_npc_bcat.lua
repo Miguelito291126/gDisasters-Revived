@@ -6,14 +6,14 @@ ENT.Base = "base_nextbot"
 ENT.PhysgunDisabled = true
 ENT.AutomaticFrameAdvance = false
 
-ENT.JumpSound = Sound("streams/nextbot/gdr_dnpc_bcat/jumplol.mp3")
-ENT.JumpHighSound = Sound("streams/nextbot/gdr_dnpc_bcat/jumplol.mp3")
+ENT.JumpSound = Sound("streams/nextbot/npc_bcat/jumplol.mp3")
+ENT.JumpHighSound = Sound("streams/nextbot/npc_bcat/jumplol.mp3")
 ENT.TauntSounds = {
-	Sound("streams/nextbot/gdr_dnpc_bcat/lol.mp3"),
-	Sound("streams/nextbot/gdr_dnpc_bcat/lol2.mp3"),
-	Sound("streams/nextbot/gdr_dnpc_bcat/lol3.mp3"),
+	Sound("streams/nextbot/npc_bcat/lol.mp3"),
+	Sound("streams/nextbot/npc_bcat/lol2.mp3"),
+	Sound("streams/nextbot/npc_bcat/lol3.mp3"),
 }
-local chaseMusic = Sound("streams/nextbot/gdr_dnpc_bcat/chaselol.mp3")
+local chaseMusic = Sound("streams/nextbot/npc_bcat/chaselol.mp3")
 
 local IsValid = IsValid
 
@@ -170,13 +170,13 @@ local function isValidTarget(ent)
 	local class = ent:GetClass()
 	return (ent:IsNPC()
 		and ent:Health() > 0
-		and class ~= "gdr_dnpc_bcat"
+		and class ~= "npc_bcat"
 		and not class:find("bullseye"))
 end
 
 hook.Add("PlayerSpawnedNPC", "bcatMissingNavmeshNag", function(ply, ent)
 	if not IsValid(ent) then return end
-	if ent:GetClass() ~= "gdr_dnpc_bcat" then return end
+	if ent:GetClass() ~= "npc_bcat" then return end
 	if navmesh.GetNavAreaCount() > 0 then return end
 
 	-- Try to explain why bcat isn't working.
@@ -303,7 +303,7 @@ local function navGenerate()
 	end
 
 	-- The least we can do is ensure they don't have to listen to this noise.
-	for _, bcat in pairs(ents.FindByClass("gdr_dnpc_bcat")) do
+	for _, bcat in pairs(ents.FindByClass("npc_bcat")) do
 		bcat:Remove()
 	end
 
@@ -813,16 +813,16 @@ end
 
 else -- CLIENT --
 
-local MAT_bcat = Material("nextbot/gdr_dnpc_bcat/bcat")
-killicon.Add("gdr_dnpc_bcat", "nextbot/gdr_dnpc_bcat/killicon", color_white)
-language.Add("gdr_dnpc_bcat", "bcat ")
+local MAT_bcat = Material("nextbot/npc_bcat/bcat")
+killicon.Add("npc_bcat", "nextbot/npc_bcat/killicon", color_white)
+language.Add("npc_bcat", "bcat ")
 
 ENT.RenderGroup = RENDERGROUP_TRANSLUCENT
 
 local developer = GetConVar("developer")
 local function DevPrint(devLevel, msg)
 	if developer:GetInt() >= devLevel then
-		print("gdr_dnpc_bcat: " .. msg)
+		print("npc_bcat: " .. msg)
 	end
 end
 
@@ -853,7 +853,7 @@ local MUSIC_bcat_MAX_DISTANCE_SCORE =
 	(MUSIC_CUTOFF_DISTANCE - MUSIC_PANIC_DISTANCE) * MUSIC_bcat_PANIC_COUNT
 
 local function updatePanicMusic()
-	if #ents.FindByClass("gdr_dnpc_bcat") == 0 then
+	if #ents.FindByClass("npc_bcat") == 0 then
 		-- Whoops. No need to run for now.
 		DevPrint(4, "Halting music timer.")
 		timer.Remove("bcatPanicMusicUpdate")
@@ -883,7 +883,7 @@ local function updatePanicMusic()
 	local totalDistanceScore = 0
 	local nearEntities = ents.FindInSphere(LocalPlayer():GetPos(), 1000)
 	for _, ent in pairs(nearEntities) do
-		if IsValid(ent) and ent:GetClass() == "gdr_dnpc_bcat" then
+		if IsValid(ent) and ent:GetClass() == "npc_bcat" then
 			local distanceScore = math.max(0, MUSIC_CUTOFF_DISTANCE
 				- LocalPlayer():GetPos():Distance(ent:GetPos()))
 			totalDistanceScore = totalDistanceScore + distanceScore
@@ -1111,9 +1111,9 @@ end)
 
 end
 
-list.Set( "NPC", "gdr_dnpc_bcat", {
+list.Set( "NPC", "npc_bcat", {
 	Name = "Bcat lol", 
-	Class = "gdr_dnpc_bcat", 
+	Class = "npc_bcat", 
 	Category = "Nextbot",
 	AdminOnly = false,
 })

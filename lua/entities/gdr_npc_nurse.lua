@@ -9,7 +9,7 @@ ENT.PrintName		                 =  "Nurse"
 ENT.Author			                 =  "Hmm"
 ENT.Contact		                     =  "Hmm"
 ENT.Category                         =  "Hmm"
-     
+
 ENT.Mass                             =  100
 ENT.Model                            =  "models/ramses/models/nurse/slow.mdl"
 
@@ -79,7 +79,7 @@ if (CLIENT) then
 
 	local function NearestNurse_Sound()
 
-		local nurse = gDisasters_Revived.FindNearestEntity(LocalPlayer(),  "gdr_dnpc_nurse")
+		local nurse = gDisasters_Revived.FindNearestEntity(LocalPlayer(),  "npc_nurse")
 		
 		if nurse==nil then 
 			
@@ -347,9 +347,9 @@ function ENT:UpdateTransmitState()
 	return TRANSMIT_ALWAYS
 end
 
-list.Set( "NPC", "gdr_dnpc_nurse", {
+list.Set( "NPC", "npc_nurse", {
 	Name = "Nurse", 
-	Class = "gdr_dnpc_nurse", 
+	Class = "npc_nurse", 
 	Category = "Nextbot",
 	AdminOnly = false,
 })

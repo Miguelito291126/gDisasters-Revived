@@ -86,7 +86,6 @@ function ENT:PhysicsCollide( data, physobj )
 		local h = data.HitPos + data.HitNormal
 		local p = data.HitPos - data.HitNormal
 		util.Decal("Scorch", h, p )
-						 
 
 	end
 
