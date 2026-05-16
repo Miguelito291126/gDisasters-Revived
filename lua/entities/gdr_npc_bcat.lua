@@ -6,72 +6,72 @@ ENT.Base = "base_nextbot"
 ENT.PhysgunDisabled = true
 ENT.AutomaticFrameAdvance = false
 
-ENT.JumpSound = Sound("streams/nextbot/npc_bcat/jumplol.mp3")
-ENT.JumpHighSound = Sound("streams/nextbot/npc_bcat/jumplol.mp3")
+ENT.JumpSound = Sound("streams/nextbot/gdr_npc_bcat/jumplol.mp3")
+ENT.JumpHighSound = Sound("streams/nextbot/gdr_npc_bcat/jumplol.mp3")
 ENT.TauntSounds = {
-	Sound("streams/nextbot/npc_bcat/lol.mp3"),
-	Sound("streams/nextbot/npc_bcat/lol2.mp3"),
-	Sound("streams/nextbot/npc_bcat/lol3.mp3"),
+	Sound("streams/nextbot/gdr_npc_bcat/lol.mp3"),
+	Sound("streams/nextbot/gdr_npc_bcat/lol2.mp3"),
+	Sound("streams/nextbot/gdr_npc_bcat/lol3.mp3"),
 }
-local chaseMusic = Sound("streams/nextbot/npc_bcat/chaselol.mp3")
+local chaseMusic = Sound("streams/nextbot/gdr_npc_bcat/chaselol.mp3")
 
 local IsValid = IsValid
 
 if SERVER then -- SERVER --
 
-local npc_bcat_acquire_distance =
-	CreateConVar("npc_bcat_acquire_distance", 9500, FCVAR_NONE,
+local gdr_npc_bcat_acquire_distance =
+	CreateConVar("gdr_npc_bcat_acquire_distance", 9500, FCVAR_NONE,
 	"The maximum distance at which bcat will chase a target.")
 
-local npc_bcat_spawn_protect =
-	CreateConVar("npc_bcat_spawn_protect", 1, FCVAR_NONE,
+local gdr_npc_bcat_spawn_protect =
+	CreateConVar("gdr_npc_bcat_spawn_protect", 1, FCVAR_NONE,
 	"If set to 1, bcat will not target players or hide within 200 units of \z
 	a spawn point.")
 
-local npc_bcat_attack_distance =
-	CreateConVar("npc_bcat_attack_distance", 60, FCVAR_NONE,
+local gdr_npc_bcat_attack_distance =
+	CreateConVar("gdr_npc_bcat_attack_distance", 60, FCVAR_NONE,
 	"The reach of bcat's attack.")
 
-local npc_bcat_attack_interval =
-	CreateConVar("npc_bcat_attack_interval", 0.1, FCVAR_NONE,
+local gdr_npc_bcat_attack_interval =
+	CreateConVar("gdr_npc_bcat_attack_interval", 0.1, FCVAR_NONE,
 	"The delay between bcat's attacks.")
 
-local npc_bcat_attack_force =
-	CreateConVar("npc_bcat_attack_force", 9000, FCVAR_NONE,
+local gdr_npc_bcat_attack_force =
+	CreateConVar("gdr_npc_bcat_attack_force", 9000, FCVAR_NONE,
 	"The physical force of bcat's attack. Higher values throw things \z
 	farther.")
 
-local npc_bcat_smash_props =
-	CreateConVar("npc_bcat_smash_props", 1, FCVAR_NONE,
+local gdr_npc_bcat_smash_props =
+	CreateConVar("gdr_npc_bcat_smash_props", 1, FCVAR_NONE,
 	"If set to 1, bcat will punch through any props placed in their way.")
 
-local npc_bcat_allow_jump =
-	CreateConVar("npc_bcat_allow_jump", 1, FCVAR_NONE,
+local gdr_npc_bcat_allow_jump =
+	CreateConVar("gdr_npc_bcat_allow_jump", 1, FCVAR_NONE,
 	"If set to 1, bcat will be able to jump.")
 
-local npc_bcat_hiding_scan_interval =
-	CreateConVar("npc_bcat_hiding_scan_interval", 3, FCVAR_NONE,
+local gdr_npc_bcat_hiding_scan_interval =
+	CreateConVar("gdr_npc_bcat_hiding_scan_interval", 3, FCVAR_NONE,
 	"bcat will only seek out hiding places every X seconds. This can be an \z
 	expensive operation, so it is not recommended to lower this too much. \z
 	However, if distant bcats are not hiding from you quickly enough, you \z
 	may consider lowering this a small amount.")
 
-local npc_bcat_hiding_repath_interval =
-	CreateConVar("npc_bcat_hiding_repath_interval", 1, FCVAR_NONE,
+local gdr_npc_bcat_hiding_repath_interval =
+	CreateConVar("gdr_npc_bcat_hiding_repath_interval", 1, FCVAR_NONE,
 	"The path to bcat's hiding spot will be redetermined every X seconds.")
 
-local npc_bcat_chase_repath_interval =
-	CreateConVar("npc_bcat_chase_repath_interval", 0.1, FCVAR_NONE,
+local gdr_npc_bcat_chase_repath_interval =
+	CreateConVar("gdr_npc_bcat_chase_repath_interval", 0.1, FCVAR_NONE,
 	"The path to and position of bcat's target will be redetermined every \z
 	X seconds.")
 
-local npc_bcat_expensive_scan_interval =
-	CreateConVar("npc_bcat_expensive_scan_interval", 1, FCVAR_NONE,
+local gdr_npc_bcat_expensive_scan_interval =
+	CreateConVar("gdr_npc_bcat_expensive_scan_interval", 1, FCVAR_NONE,
 	"Slightly expensive operations (distance calculations and entity \z
 	searching) will occur every X seconds.")
 
-local npc_bcat_force_download =
-	CreateConVar("npc_bcat_force_download", 1, FCVAR_ARCHIVE,
+local gdr_npc_bcat_force_download =
+	CreateConVar("gdr_npc_bcat_force_download", 1, FCVAR_ARCHIVE,
 	"If set to 1, clients will be forced to download bcat resources \z
 	(restart required after changing).\n\z
 	WARNING: If this option is disabled, clients will be unable to see or \z
@@ -150,7 +150,7 @@ local function buildHidingSpotCache()
 		end
 	end
 
-	print(string.format("npc_bcat: found %d suitable (%d unsuitable) hiding \z
+	print(string.format("gdr_npc_bcat: found %d suitable (%d unsuitable) hiding \z
 		places in %d areas over %.2fms!", goodSpots, badSpots, #areas,
 		(SysTime() - rStart) * 1000))
 end
@@ -170,13 +170,13 @@ local function isValidTarget(ent)
 	local class = ent:GetClass()
 	return (ent:IsNPC()
 		and ent:Health() > 0
-		and class ~= "npc_bcat"
+		and class ~= "gdr_npc_bcat"
 		and not class:find("bullseye"))
 end
 
 hook.Add("PlayerSpawnedNPC", "bcatMissingNavmeshNag", function(ply, ent)
 	if not IsValid(ent) then return end
-	if ent:GetClass() ~= "npc_bcat" then return end
+	if ent:GetClass() ~= "gdr_npc_bcat" then return end
 	if navmesh.GetNavAreaCount() > 0 then return end
 
 	-- Try to explain why bcat isn't working.
@@ -189,9 +189,9 @@ local function navEndGenerate()
 	local timeElapsedStr = string.NiceTime(SysTime() - generateStart)
 
 	if not navmesh.IsGenerating() then
-		print("npc_bcat: Navmesh generation completed in " .. timeElapsedStr)
+		print("gdr_npc_bcat: Navmesh generation completed in " .. timeElapsedStr)
 	else
-		print("npc_bcat: Navmesh generation aborted after " .. timeElapsedStr)
+		print("gdr_npc_bcat: Navmesh generation aborted after " .. timeElapsedStr)
 	end
 
 	-- Turn this back off.
@@ -278,7 +278,7 @@ local function navGenerate()
 	addEntitiesToSet(seeds, GAMEMODE.SpawnPoints or {})
 
 	if next(seeds, nil) == nil then
-		print("npc_bcat: Couldn't find any places to seed nav_generate")
+		print("gdr_npc_bcat: Couldn't find any places to seed nav_generate")
 		return false
 	end
 
@@ -294,16 +294,16 @@ local function navGenerate()
 		local tr = util.TraceLine(trace)
 
 		if not tr.StartSolid and tr.Hit then
-			print(string.format("npc_bcat: Adding seed %s at %s", seed, pos))
+			print(string.format("gdr_npc_bcat: Adding seed %s at %s", seed, pos))
 			navmesh.AddWalkableSeed(tr.HitPos, tr.HitNormal)
 		else
-			print(string.format("npc_bcat: Couldn't add seed %s at %s", seed,
+			print(string.format("gdr_npc_bcat: Couldn't add seed %s at %s", seed,
 				pos))
 		end
 	end
 
 	-- The least we can do is ensure they don't have to listen to this noise.
-	for _, bcat in pairs(ents.FindByClass("npc_bcat")) do
+	for _, bcat in pairs(ents.FindByClass("gdr_npc_bcat")) do
 		bcat:Remove()
 	end
 
@@ -317,14 +317,14 @@ local function navGenerate()
 		generateStart = SysTime()
 		hook.Add("ShutDown", "bcatNavGen", navEndGenerate)
 	else
-		print("npc_bcat: nav_generate failed to initialize")
+		print("gdr_npc_bcat: nav_generate failed to initialize")
 		navmesh.ClearWalkableSeeds()
 	end
 
 	return navmesh.IsGenerating()
 end
 
-concommand.Add("npc_bcat_learn", function(ply, cmd, args)
+concommand.Add("gdr_npc_bcat_learn", function(ply, cmd, args)
 	if navmesh.IsGenerating() then
 		return
 	end
@@ -332,7 +332,7 @@ concommand.Add("npc_bcat_learn", function(ply, cmd, args)
 	-- Rcon or single-player only.
 	local isConsole = (ply:EntIndex() == 0)
 	if game.SinglePlayer() then
-		print("npc_bcat: Beginning nav_generate requested by " .. ply:Name())
+		print("gdr_npc_bcat: Beginning nav_generate requested by " .. ply:Name())
 
 		-- Disable expensive computations in single-player. bcat doesn't use
 		-- their results, and it consumes a massive amount of time and CPU.
@@ -344,7 +344,7 @@ concommand.Add("npc_bcat_learn", function(ply, cmd, args)
 		-- Enable developer mode so we can see console messages in the corner.
 		RunConsoleCommand("developer", "1")
 	elseif isConsole then
-		print("npc_bcat: Beginning nav_generate requested by server console")
+		print("gdr_npc_bcat: Beginning nav_generate requested by server console")
 	else
 		return
 	end
@@ -423,7 +423,7 @@ end
 
 function ENT:GetNearestTarget()
 	-- Only target entities within the acquire distance.
-	local maxAcquireDist = npc_bcat_acquire_distance:GetInt()
+	local maxAcquireDist = gdr_npc_bcat_acquire_distance:GetInt()
 	local maxAcquireDistSqr = maxAcquireDist * maxAcquireDist
 	local myPos = self:GetPos()
 	local acquirableEntities = ents.FindInSphere(myPos, maxAcquireDist)
@@ -439,7 +439,7 @@ function ENT:GetNearestTarget()
 		-- Spawn protection! Ignore players within 200 units of a spawn point
 		-- if `npc_bcat_spawn_protect' = 1.
 		--TODO: Only for the first few seconds?
-		if npc_bcat_spawn_protect:GetBool() and ent:IsPlayer()
+		if gdr_npc_bcat_spawn_protect:GetBool() and ent:IsPlayer()
 			and isPointNearSpawn(ent:GetPos(), 0)
 		then
 			continue
@@ -458,7 +458,7 @@ end
 
 --TODO: Giant ugly monolith of a function eww eww eww.
 function ENT:AttackNearbyTargets(radius)
-	local attackForce = npc_bcat_attack_force:GetInt()
+	local attackForce = gdr_npc_bcat_attack_force:GetInt()
 	local hitSource = self:LocalToWorld(self:OBBCenter())
 	local nearEntities = ents.FindInSphere(hitSource, radius)
 	local hit = false
@@ -513,7 +513,7 @@ function ENT:AttackNearbyTargets(radius)
 			-- Hits only count if we dealt some damage.
 			hit = (hit or (newHealth < health))
 		elseif ent:GetMoveType() == MOVETYPE_VPHYSICS then
-			if not npc_bcat_smash_props:GetBool() then continue end
+			if not gdr_npc_bcat_smash_props:GetBool() then continue end
 			if ent:IsVehicle() and IsValid(ent:GetDriver()) then continue end
 
 			-- Knock away any props put in our path.
@@ -624,7 +624,7 @@ function ENT:AttemptJumpAtTarget()
 	local targetPos = self.CurrentTarget:GetPos()
 	local xyDistSqr = (targetPos - self:GetPos()):Length2DSqr()
 	local zDifference = targetPos.z - self:GetPos().z
-	local maxAttackDistance = npc_bcat_attack_distance:GetInt()
+	local maxAttackDistance = gdr_npc_bcat_attack_distance:GetInt()
 	if xyDistSqr <= math.pow(maxAttackDistance + 200, 2)
 		and zDifference >= maxAttackDistance
 	then
@@ -686,7 +686,7 @@ function ENT:BehaveUpdate() --TODO: Split this up more. Eww.
 
 	local currentTime = CurTime()
 
-	local scanInterval = npc_bcat_expensive_scan_interval:GetFloat()
+	local scanInterval = gdr_npc_bcat_expensive_scan_interval:GetFloat()
 	if currentTime - self.LastTargetSearch > scanInterval then
 		local target = self:GetNearestTarget()
 
@@ -705,9 +705,9 @@ function ENT:BehaveUpdate() --TODO: Split this up more. Eww.
 		self.LastHidingPlaceScan = 0
 
 		-- Attack anyone nearby while we're rampaging.
-		local attackInterval = npc_bcat_attack_interval:GetFloat()
+		local attackInterval = gdr_npc_bcat_attack_interval:GetFloat()
 		if currentTime - self.LastAttack > attackInterval then
-			local attackDistance = npc_bcat_attack_distance:GetInt()
+			local attackDistance = gdr_npc_bcat_attack_distance:GetInt()
 			if self:AttackNearbyTargets(attackDistance) then
 				if currentTime - self.LastTaunt > TAUNT_INTERVAL then
 					self.LastTaunt = currentTime
@@ -722,7 +722,7 @@ function ENT:BehaveUpdate() --TODO: Split this up more. Eww.
 		end
 
 		-- Recompute the path to the target every so often.
-		local repathInterval = npc_bcat_chase_repath_interval:GetFloat()
+		local repathInterval = gdr_npc_bcat_chase_repath_interval:GetFloat()
 		if currentTime - self.LastPathRecompute > repathInterval then
 			self.LastPathRecompute = currentTime
 			self:RecomputeTargetPath()
@@ -732,14 +732,14 @@ function ENT:BehaveUpdate() --TODO: Split this up more. Eww.
 		self.MovePath:Update(self)
 
 		-- Try to jump at a target in the air.
-		if self:IsOnGround() and npc_bcat_allow_jump:GetBool()
+		if self:IsOnGround() and gdr_npc_bcat_allow_jump:GetBool()
 			and currentTime - self.LastJumpScan >= scanInterval
 		then
 			self:AttemptJumpAtTarget()
 			self.LastJumpScan = currentTime
 		end
 	else
-		local hidingScanInterval = npc_bcat_hiding_scan_interval:GetFloat()
+		local hidingScanInterval = gdr_npc_bcat_hiding_scan_interval:GetFloat()
 		if currentTime - self.LastHidingPlaceScan >= hidingScanInterval then
 			self.LastHidingPlaceScan = currentTime
 
@@ -749,7 +749,7 @@ function ENT:BehaveUpdate() --TODO: Split this up more. Eww.
 		end
 
 		if self.HidingSpot ~= nil then
-			local hidingInterval = npc_bcat_hiding_repath_interval:GetFloat()
+			local hidingInterval = gdr_npc_bcat_hiding_repath_interval:GetFloat()
 			if currentTime - self.LastPathRecompute >= hidingInterval then
 				self.LastPathRecompute = currentTime
 				self.MovePath:Compute(self, self.HidingSpot.pos)
@@ -813,16 +813,16 @@ end
 
 else -- CLIENT --
 
-local MAT_bcat = Material("nextbot/npc_bcat/bcat")
-killicon.Add("npc_bcat", "nextbot/npc_bcat/killicon", color_white)
-language.Add("npc_bcat", "bcat ")
+local MAT_bcat = Material("nextbot/gdr_npc_bcat/bcat")
+killicon.Add("gdr_npc_bcat", "nextbot/gdr_npc_bcat/killicon", color_white)
+language.Add("gdr_npc_bcat", "bcat ")
 
 ENT.RenderGroup = RENDERGROUP_TRANSLUCENT
 
 local developer = GetConVar("developer")
 local function DevPrint(devLevel, msg)
 	if developer:GetInt() >= devLevel then
-		print("npc_bcat: " .. msg)
+		print("gdr_npc_bcat: " .. msg)
 	end
 end
 
@@ -830,8 +830,8 @@ local panicMusic = nil
 local lastPanic = 0 -- The last time we were in music range of a bcat.
 
 --TODO: Why don't these flags show up? Bug? Documentation would be lovely.
-local npc_bcat_music_volume =
-	CreateConVar("npc_bcat_music_volume", 1,
+local gdr_npc_bcat_music_volume =
+	CreateConVar("gdr_npc_bcat_music_volume", 1,
 	bit.bor(FCVAR_DEMO, FCVAR_ARCHIVE),
 	"Maximum music volume when being chased by bcat. (0-1, where 0 is muted)")
 
@@ -853,7 +853,7 @@ local MUSIC_bcat_MAX_DISTANCE_SCORE =
 	(MUSIC_CUTOFF_DISTANCE - MUSIC_PANIC_DISTANCE) * MUSIC_bcat_PANIC_COUNT
 
 local function updatePanicMusic()
-	if #ents.FindByClass("npc_bcat") == 0 then
+	if #ents.FindByClass("gdr_npc_bcat") == 0 then
 		-- Whoops. No need to run for now.
 		DevPrint(4, "Halting music timer.")
 		timer.Remove("bcatPanicMusicUpdate")
@@ -874,7 +874,7 @@ local function updatePanicMusic()
 		end
 	end
 
-	local userVolume = math.Clamp(npc_bcat_music_volume:GetFloat(), 0, 1)
+	local userVolume = math.Clamp(gdr_npc_bcat_music_volume:GetFloat(), 0, 1)
 	if userVolume == 0 or not IsValid(LocalPlayer()) then
 		panicMusic:Stop()
 		return
@@ -883,7 +883,7 @@ local function updatePanicMusic()
 	local totalDistanceScore = 0
 	local nearEntities = ents.FindInSphere(LocalPlayer():GetPos(), 1000)
 	for _, ent in pairs(nearEntities) do
-		if IsValid(ent) and ent:GetClass() == "npc_bcat" then
+		if IsValid(ent) and ent:GetClass() == "gdr_npc_bcat" then
 			local distanceScore = math.max(0, MUSIC_CUTOFF_DISTANCE
 				- LocalPlayer():GetPos():Distance(ent:GetPos()))
 			totalDistanceScore = totalDistanceScore + distanceScore
@@ -1061,7 +1061,7 @@ end)
 local nagMe = true
 
 local function requestNavGenerate()
-	RunConsoleCommand("npc_bcat_learn")
+	RunConsoleCommand("gdr_npc_bcat_learn")
 end
 
 local function stopNagging()
@@ -1098,7 +1098,7 @@ net.Receive("bcat_nag", function()
 			\n\z
 			Ask the server host about teaching this map to bcat.\n\z
 			\n\z
-			If you ARE the server host, you can run npc_bcat_learn over \z
+			If you ARE the server host, you can run gdr_npc_bcat_learn over \z
 			rcon.\n\z
 			Keep in mind that it may take hours during which you will be \z
 			unable\n\z
