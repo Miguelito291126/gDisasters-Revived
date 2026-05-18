@@ -1,6 +1,4 @@
-=========================================================
 PRESERVATION PROJECT - ORIGINALLY LOST MOD
-======================================================
 
 Original Creators: Miguel Jimenez, Odvivalgo, Juno, Astral, Bcat, Harry Dalton, and Tempested (Copyright © 2021).
 
