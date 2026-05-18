@@ -9,4 +9,4 @@ This project does NOT have a formal open-source license (such as BSD, MIT, or GP
 PURPOSE OF THIS PUBLICATION:
 This file is being re-uploaded solely for historical preservation purposes and without any profit motive.
 
-If any of the original authors (Miguel, Odvivalgo, Juno, Astral, Bcat, Harry, or Tempested) wish for this file to be removed or modified, they can contact me and it will be deleted immediately.
+If any of the original authors (Bcat, Harry, or Tempested) wish for this file to be removed or modified, they can contact me and it will be deleted immediately.
