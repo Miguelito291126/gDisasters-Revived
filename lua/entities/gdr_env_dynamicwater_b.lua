@@ -618,7 +618,7 @@ function ENT:ProcessState()
 		
 	elseif alpha >= 1 then 
 		if (SERVER) then 
-			local flood = createFlood(self.CurrentHeight, ents.GetAll()[1])
+			local flood = createFlood(self.CurrentHeight, player.GetAll()[1])
 			flood:EFire("Height", self.CurrentHeight)
 
 			timer.Simple(50, function()

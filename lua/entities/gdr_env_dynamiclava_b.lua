@@ -633,7 +633,7 @@ function ENT:ProcesslavaState()
 		
 	elseif alpha >= 1 then 
 		if (SERVER) then 
-			local lava = createlava(self.CurrentHeight, ents.GetAll()[1])
+			local lava = createlava(self.CurrentHeight, player.GetAll()[1])
 			lava:EFire("Height", self.CurrentHeight)
 			
 			timer.Simple(50, function()
