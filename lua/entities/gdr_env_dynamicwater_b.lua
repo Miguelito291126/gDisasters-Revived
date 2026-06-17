@@ -624,8 +624,6 @@ function ENT:ProcessState()
 			timer.Simple(50, function()
 				if flood:IsValid() then flood:Remove() end
 			end)
-			
-			self:Remove()
 
 		end 
 		
