@@ -70,13 +70,23 @@ function ENT:PhysicsCollide( data, physobj )
 end
 
 function ENT:MegaTsunamiCreate( pos )
-	self:Explode()
 	
-	local ent = ents.Create("gdr_d10_megatsunami")
-	if IsValid(ent) then
-		ent:SetPos(pos)
-		ent:Spawn()
-		ent:Activate()
+	if gDisasters_Revived.isinWater(self) or  gDisasters_Revived.isUnderWater(self) then
+		self:Explode()
+		local ent = ents.Create("gdr_d10_megatsunami")
+		if IsValid(ent) then
+			ent:SetPos(pos)
+			ent:Spawn()
+			ent:Activate()
+		end
+	elseif gDisasters_Revived.isinLava(self) or  gDisasters_Revived.isUnderLava(self) then
+		self:Explode()
+		local ent = ents.Create("gdr_d11_lava_megatsunami")
+		if IsValid(ent) then
+			ent:SetPos(pos)
+			ent:Spawn()
+			ent:Activate()
+		end
 	end
 end
 
@@ -170,10 +180,8 @@ function ENT:Think()
 	local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1	
 	
 	if SERVER then
-		if self:WaterLevel() > 0 then
-			self:MegaTsunamiCreate(self:GetPos())
-			return
-		end
+		self:MegaTsunamiCreate(self:GetPos())
+		return
 	end
 
 	self:NextThink(CurTime() + t)
