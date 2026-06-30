@@ -1,6 +1,6 @@
 --class
 gDisasters_Revived = {}
-gDisasters_Revived.Version = 0.51
+gDisasters_Revived.Version = 0.52
 gDisasters_Revived.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedetails/?id=2522900784"
 gDisasters_Revived.WorkshopVersion = true
 gDisasters_Revived.lua_Directory = "gdisasters"

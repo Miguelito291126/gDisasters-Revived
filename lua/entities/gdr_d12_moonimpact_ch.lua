@@ -57,30 +57,27 @@ end
 
 
 function ENT:PhysicsCollide( data, physobj )
-
-	local tr,trace = {},{}
-	tr.start = self:GetPos() + self:GetForward() * -200
-	tr.endpos = tr.start + self:GetForward() * 500
-	tr.filter = { self, physobj }
-	trace = util.TraceLine( tr )
-	
-	if( trace.HitSky ) then
-	
-		self:Remove()
-		
-		return
-		
-	end
 	
 	if (data.Speed > 200 ) then 
 	
 		
 		self:Explode()
-			 
+
 
 	end
 
 	
+end
+
+function ENT:MegaTsunamiCreate( pos )
+	self:Explode()
+	
+	local ent = ents.Create("gdr_d10_megatsunami")
+	if IsValid(ent) then
+		ent:SetPos(pos)
+		ent:Spawn()
+		ent:Activate()
+	end
 end
 
 function ENT:Explode()
@@ -91,11 +88,6 @@ function ENT:Explode()
 		
 	end
 	
-	local pos = self:GetPos()
-	local mat = self.Material
-	local mat = self.Material
-	local vel = self.Move_vector 
-	
 	local metsound = "streams/disasters/space/chucxulub/chucxulub.wav"
 	
 	ParticleEffect("chicxuclub_explosion_main", self:GetPos(), Angle(0,0,0), nil)
@@ -103,30 +95,27 @@ function ENT:Explode()
 	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 	
 	local earthquake = ents.Create("gdr_d12_rs12eq")
-	earthquake:Spawn()
-	earthquake:Activate()
-	earthquake:SetPos(self:GetPos())	
+	if IsValid(earthquake) then
+		earthquake:Spawn()
+		earthquake:Activate()
+		earthquake:SetPos(self:GetPos())
+	end
 
 	
 	for k,v in pairs(ents.FindInSphere(self:GetPos(), 5000000)) do
-		
-	local dist = ( v:GetPos() - self:GetPos() ):Length() 	
-		
-	if (  v != self && IsValid( v ) && IsValid( v:GetPhysicsObject() ) ) and (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then 
-	
-		if dist < 5000000 then 
-	
-			if( !v.Destroy ) then
-						
-				constraint.RemoveAll( v )
-				v:GetPhysicsObject():EnableMotion(true)
-				v:GetPhysicsObject():Wake()
-				v.Destroy = true
-		
+
+		local dist = ( v:GetPos() - self:GetPos() ):Length() 	
+
+		if (  v != self && IsValid( v ) && IsValid( v:GetPhysicsObject() ) ) and (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then 
+
+			if dist < 5000000 then 
+				if( !v.Destroy ) then
+					constraint.RemoveAll( v )
+					v:GetPhysicsObject():EnableMotion(true)
+					v:GetPhysicsObject():Wake()
+					v.Destroy = true
 				end
-						
 			end
-						
 		end
 	end
 	
@@ -148,34 +137,27 @@ function ENT:Explode()
 		local ent = ents.Create("gdr_w2_ashstorm")
 		local ent2 = ents.Create("gdr_d9_meteorshower")
 		local ent3 = ents.Create("gdr_d10_meteoriteshower")
-		ent:Spawn()
-		ent:Activate()
-		ent2:Spawn()
-		ent2:Activate()
-		ent3:Spawn()
-		ent3:Activate()
+		if IsValid(ent) then ent:Spawn() ent:Activate() end
+        if IsValid(ent2) then ent2:Spawn() ent2:Activate() end
+        if IsValid(ent3) then ent3:Spawn() ent3:Activate() end
 
 	end)
 	timer.Simple(120, function()
 		local ent1 = ents.FindByClass("gdr_w2_ashstorm")[1]
-		if !ent1:IsValid() then return end
-		if ent1:IsValid() then ent1:Remove() end
+		if IsValid(ent1) then ent1:Remove() end
 
 		local ent4 = ents.Create("gdr_w4_heavyacidrain")
-		ent4:Spawn()
-		ent4:Activate()
+		if IsValid(ent4) then ent4:Spawn() ent4:Activate() end
 	end)
 	timer.Simple(160, function()
 		local ent1 = ents.FindByClass("gdr_d9_meteorshower")[1]
 		local ent2 = ents.FindByClass("gdr_d10_meteoriteshower")[1]
-		if !ent1:IsValid() or !ent2:IsValid() then return end
-		if ent1:IsValid() then ent1:Remove() end
-		if ent2:IsValid() then ent2:Remove() end
+		if IsValid(ent1) then ent1:Remove() end
+		if IsValid(ent2) then ent2:Remove() end
 	end)
 	timer.Simple(200, function()
-		local ent1 = ents.FindByClass("gdr_w4_heavyacidrain")[1]
-		if !ent1:IsValid() then return end
-		if ent1:IsValid() then ent1:Remove() end
+		local ent4 = ents.FindByClass("gdr_w4_heavyacidrain")[1]
+		if IsValid(ent4) then ent4:Remove() end
 	end)
 
 	self:Remove()
@@ -185,31 +167,17 @@ end
 
 
 function ENT:Think()
-	if (CLIENT) then
-		
-	
-	end
-	
 	local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1	
-		
-	if (SERVER) then
-		if gDisasters_Revived.isinWater(self) or gDisasters_Revived.isUnderWater(self) then
-			self:Explode()
-			local ent = ents.Create("gdr_d10_megatsunami")
-			ent:Spawn()
-			ent:Activate()
+	
+	if SERVER then
+		if self:WaterLevel() > 0 then
+			self:MegaTsunamiCreate(self:GetPos())
+			return
 		end
-		if gDisasters_Revived.isinLava(self) or gDisasters_Revived.isUnderLava(self) then
-			self:Explode()
-			local ent = ents.Create("gdr_d10_lava_megatsunami")
-			ent:Spawn()
-			ent:Activate()
-		end	
-
-
-		self:NextThink(CurTime() + t)
-		return true	
 	end
+
+	self:NextThink(CurTime() + t)
+	return true	
 			
 end
 
@@ -218,8 +186,6 @@ function ENT:OnRemove()
 end
 
 function ENT:Draw()
-
-
 
 	self:DrawModel()
 	
