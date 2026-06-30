@@ -62,7 +62,16 @@ end
 
 
 function ENT:PhysicsCollide( data, physobj )
+	local tr,trace = {},{}
+	tr.start = self:GetPos() + self:GetForward() * -200
+	tr.endpos = tr.start + self:GetForward() * 500
+	tr.filter = { self, physobj }
+	trace = util.TraceLine( tr )
 	
+	if( trace.HitSky ) then
+		return
+	end
+
 	if (data.Speed > 200 ) then 
 		self:Explode()
 	end
@@ -188,7 +197,6 @@ function ENT:Think()
 
 	if SERVER then
 		self:MegaTsunamiCreate(self:GetPos())
-		return
 	end
 	
 	self:NextThink(CurTime() + t)
