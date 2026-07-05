@@ -71,11 +71,7 @@ function ENT:PhysicsCollide( data, physobj )
 	trace = util.TraceLine( tr )
 	
 	if( trace.HitSky ) then
-	
-		self:Remove()
-		
 		return
-		
 	end
 	
 	if (data.Speed > 200 ) then 
@@ -158,20 +154,15 @@ function ENT:Think()
 	self:SetModelScale( 2, 0 )
 		
 	if (SERVER) then
-
-		
-
-		if gDisasters_Revived.isinWater(self) then 
+		if gDisasters_Revived.isinWater(self) or gDisasters_Revived.isUnderWater(self) then 
 			self:Remove() 
-		elseif gDisasters_Revived.isinLava(self) then
+		elseif gDisasters_Revived.isinLava(self) or gDisasters_Revived.isUnderWater(self) then
 			self:Remove()
 		end	
-	
-		self:NextThink(CurTime() + t)
-		return true
-	
 	end
-			
+		
+	self:NextThink(CurTime() + t)
+	return true
 end
 
 

@@ -49,19 +49,23 @@ function ENT:CreateMeteorite()
 	local min       = bounds[1]
 	local max       = bounds[2]
 		
-	local startpos  = Vector(self:GetPos().x, self:GetPos().y, self:GetPos().z )
-	local endpos  = Vector(self:GetPos().x, self:GetPos().y, max.z )
+	local startpos  = self:GetPos()
+	local endpos  = Vector(startpos.x, startpos.y, max.z + 5000 )
 
 	local tr = util.TraceLine( {
 		start  = startpos,
 		endpos = endpos,
-		mask = MASK_SOLID_BRUSHONLY
+		mask   = MASK_NPCWORLDSTATIC,
+		filter = function(ent)
+			-- Ignora absolutamente todas las entidades (jugadores, props, NPCs)
+			return false 
+		end
 	} )
 
+	local spawnPos = tr.HitSky and tr.HitPos or Vector(startpos.x, startpos.y, max.z - 100)
 
-	local moite = ents.Create("gdr_d9_meteorite_ch")
-			
-	moite:SetPos( tr.HitPos)
+	local moite = ents.Create("gdr_d9_meteorite_ch")			
+	moite:SetPos( spawnPos)
 	moite:Spawn()
 	moite:Activate()
 	moite:GetPhysicsObject():EnableMotion(true)

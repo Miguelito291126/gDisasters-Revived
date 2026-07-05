@@ -44,55 +44,29 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:Physics( data, physobj )
-
-	local tr,trace = {},{}
-	tr.start = self:GetPos() + self:GetForward() * -200
-	tr.endpos = tr.start + self:GetForward() * 500
-	tr.filter = { self, physobj }
-	trace = util.TraceLine( tr )
-	
-	if( trace.HitSky ) then
-	
-		self:Remove()
-		
-		return
-		
-	end
-	
-	if (data.Speed > 50 ) then 
-
-
-		ParticleEffect("meteor_explosion_main_ground", self:GetPos(), Angle(0,0,0), nil)
-	
-		
-		self:Explode()
-						 
-
-	end
-
-	
-end
-
 function ENT:CreateMeteor()
 	
 	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
 
-	local startpos  = Vector(self:GetPos().x, self:GetPos().y, self:GetPos().z )
-	local endpos  = Vector(self:GetPos().x, self:GetPos().y, max.z )
+	local startpos  = self:GetPos()
+	local endpos  = Vector(startpos.x, startpos.y, max.z + 5000 )
 	
 	local tr = util.TraceLine( {
 		start  =  startpos,
 		endpos = endpos,
-		mask = MASK_SOLID_BRUSHONLY
+		mask   = MASK_NPCWORLDSTATIC,
+		filter = function(ent)
+			-- Ignora absolutamente todas las entidades (jugadores, props, NPCs)
+			return false 
+		end
 	} )
 
+	local spawnPos = tr.HitSky and tr.HitPos or Vector(startpos.x, startpos.y, max.z - 100)
 
-	local moite = ents.Create("gdr_d6_meteor_ch")
-			
-	moite:SetPos( tr.HitPos)
+	local moite = ents.Create("gdr_d6_meteor_ch")	
+	moite:SetPos( spawnPos)
 	moite:Spawn()
 	moite:Activate()
 	moite:GetPhysicsObject():EnableMotion(true)

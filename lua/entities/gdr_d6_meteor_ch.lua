@@ -80,7 +80,6 @@ function ENT:PhysicsCollide( data, physobj )
 		local h = data.HitPos + data.HitNormal
 		local p = data.HitPos - data.HitNormal
 		util.Decal("Scorch", h, p )
-						 
 
 	end
 
@@ -152,20 +151,19 @@ end
 
 
 function ENT:Think()
+	if !self:IsValid() then return end
+	local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1
+
 	if (SERVER) then
-		if !self:IsValid() then return end
-		
-		if gDisasters_Revived.isinWater(self) then 
+		if gDisasters_Revived.isinWater(self) or gDisasters_Revived.isUnderWater(self) then 
 			self:Remove() 
-		elseif gDisasters_Revived.isinLava(self) then
+		elseif gDisasters_Revived.isinLava(self) or gDisasters_Revived.isUnderWater(self) then
 			self:Remove()
 		end
-		
-		local t =  ( (1 / (engine.TickInterval())) ) / 66.666 * 0.1
-		
-		self:NextThink(CurTime() + t)
-		return true
 	end
+
+	self:NextThink(CurTime() + t)
+	return true
 end
 
 function ENT:OnRemove()

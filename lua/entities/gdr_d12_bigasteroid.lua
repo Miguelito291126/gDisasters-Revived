@@ -31,7 +31,7 @@ function ENT:Initialize()
 		end 		
 
 		if gDisasters_Revived.IsMapRegistered() == true then
-			self:CreateMeteorite()
+			self:CreateBigAsteroid()
 		else
 			self:Remove()
 			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
@@ -42,30 +42,31 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:CreateMeteorite()
+function ENT:CreateBigAsteroid()
 
-	
+
 	local bounds    = gDisasters_Revived.getMapSkyBox()
 	local min       = bounds[1]
 	local max       = bounds[2]
-		
-	local startpos  = Vector(   self:GetPos().x     ,  self:GetPos().y ,   max.z )
 
-	local startpos  = startpos
-	
-	local endpos    = self:GetPos()
-	
-		
+	local startpos  = self:GetPos()
+	local endpos    = Vector(startpos.x,startpos.y ,max.z)	
+
+
 	local tr = util.TraceLine( {
 		start  = startpos,
-		endpos = endpos + Vector(0,0,50000),
-
+		endpos = endpos,
+		mask   = MASK_NPCWORLDSTATIC,
+		filter = function(ent)
+			-- Ignora absolutamente todas las entidades (jugadores, props, NPCs)
+			return false 
+		end
 	} )
 
+	local spawnPos = tr.HitSky and tr.HitPos or Vector(startpos.x, startpos.y, max.z - 100)
 
 	local moite = ents.Create("gdr_d12_bigasteroid_ch")
-			
-	moite:SetPos( tr.HitPos - Vector(0,0,3000) )
+	moite:SetPos( spawnPos - Vector(0,0,3000))
 	moite:Spawn()
 	moite:Activate()
 	moite:GetPhysicsObject():EnableMotion(true)
