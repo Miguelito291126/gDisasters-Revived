@@ -5,9 +5,9 @@ gDisasters_Revived.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedet
 gDisasters_Revived.WorkshopVersion = true
 gDisasters_Revived.lua_Directory = "gdisasters"
 gDisasters_Revived.resources_Directory = "resource/localization"
-gDisasters_Revived.root_Directory = "materials"
-gDisasters_Revived.root_Directory2 = "sound/streams"
-gDisasters_Revived.root_Directory3 = "models/ramses/models"
+gDisasters_Revived.materials_Directory = "materials"
+gDisasters_Revived.sounds_Directory = "sound/streams"
+gDisasters_Revived.models_Directory = "models/ramses/models"
 gDisasters_Revived.decals_Directory = "materials/decals/gdisasters" 
 gDisasters_Revived.particles_Directory = "particles/gdisasters" 
 
@@ -193,9 +193,9 @@ if SERVER then
 			end
 		end
 
-		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.root_Directory)
-		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.root_Directory2)
-		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.root_Directory3)
+		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.materials_Directory)
+		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.sounds_Directory)
+		gDisasters_Revived.loadresourcefiles(gDisasters_Revived.models_Directory)
 
 		gDisasters_Revived.Msg("ADDED CONTENT FILE")
 		
