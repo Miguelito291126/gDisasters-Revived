@@ -60,9 +60,6 @@ AddToGDSpawnMenu("Mask Remover"        , "gdr_equip_gas_mask_remover"           
 NPCs
 --]]
 
-AddToGDSpawnMenu("Bcat lol" , "gdr_npc_bcat", "NPCs", "Nextbot", false)
-AddToGDSpawnMenu("xShitter" , "gdr_npc_xshitter", "NPCs", "Nextbot", false)
-AddToGDSpawnMenu("rainbowdoes'ntstuff" , "gdr_npc_rainbow", "NPCs", "Nextbot", false)
 AddToGDSpawnMenu("Nurse" , "gdr_npc_nurse", "NPCs", "Nextbot", false)
 
 --[[
