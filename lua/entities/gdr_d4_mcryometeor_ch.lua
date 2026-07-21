@@ -13,6 +13,21 @@ ENT.Category                         =  "Hmm"
 ENT.Model                            = "models/ramses/models/nature/megacryometeor.mdl"
 ENT.Material                         = "nature/ice_clear"
 
+ENT.MaxProps = 10
+ENT.PropsTimer = 10	
+ENT.MaxSpeed = 200
+ENT.PropsModels = { "models/ramses/models/nature/megacryometeor_01.mdl",
+					"models/ramses/models/nature/megacryometeor_02.mdl",
+					"models/ramses/models/nature/megacryometeor_03.mdl",
+					"models/ramses/models/nature/megacryometeor_04.mdl",
+					"models/ramses/models/nature/megacryometeor_05.mdl",
+					"models/ramses/models/nature/megacryometeor_06.mdl",
+					"models/ramses/models/nature/megacryometeor_07.mdl",
+					"models/ramses/models/nature/megacryometeor_08.mdl",
+					"models/ramses/models/nature/megacryometeor_09.mdl",
+					"models/ramses/models/nature/megacryometeor_10.mdl"
+				}
+
 function ENT:Initialize()	
 
 	if (SERVER) then
@@ -62,7 +77,7 @@ end
 
 function ENT:PhysicsCollide( data, phys )
 
-	if ( data.Speed > 200 ) then 
+	if ( data.Speed > self.MaxSpeed ) then 
 	
 		local pos = self:GetPos()
 		local mat = self.Material
@@ -71,21 +86,10 @@ function ENT:PhysicsCollide( data, phys )
 		gDisasters_Revived.CreateSoundWave("streams/disasters/atmospheric/sonic_boom_01.mp3", self:GetPos(), "3d" ,340.29/2, {100,100}, 5)
 
 		ParticleEffect("megacryometeor_explosion_main", self:GetPos(), Angle(0,0,0), nil)
-		
-		local models = { "models/ramses/models/nature/megacryometeor_01.mdl",
-						 "models/ramses/models/nature/megacryometeor_02.mdl",
-						 "models/ramses/models/nature/megacryometeor_03.mdl",
-						 "models/ramses/models/nature/megacryometeor_04.mdl",
-					 	 "models/ramses/models/nature/megacryometeor_05.mdl",
-					  	 "models/ramses/models/nature/megacryometeor_06.mdl",
-					 	 "models/ramses/models/nature/megacryometeor_07.mdl",
-						 "models/ramses/models/nature/megacryometeor_08.mdl",
-						 "models/ramses/models/nature/megacryometeor_09.mdl",
-						 "models/ramses/models/nature/megacryometeor_10.mdl"}
 
-		for i=1, 10 do 
+		for i=1, self.MaxProps do 
 			local piece = ents.Create("prop_physics") 
-			piece:SetModel( models[i] )
+			piece:SetModel( self.PropsModels[i] )
 			piece:SetPos(pos)
 			piece:Spawn()
 			piece:Activate()
@@ -94,7 +98,7 @@ function ENT:PhysicsCollide( data, phys )
 
 
 			ParticleEffectAttach("megacryometeor_piece_steam", PATTACH_POINT_FOLLOW, piece, 0)
-			timer.Simple(i + 10, function() 
+			timer.Simple(i + self.PropsTimer, function() 
 				if piece:IsValid() then piece:Remove() end 
 			end)
 
@@ -102,9 +106,6 @@ function ENT:PhysicsCollide( data, phys )
 
 		self:Remove()
 	end
-		
-			
-
 			
 
 end

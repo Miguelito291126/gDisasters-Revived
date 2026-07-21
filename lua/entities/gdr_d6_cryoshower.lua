@@ -34,7 +34,7 @@ function ENT:Initialize()
 
 		if gDisasters_Revived.IsMapRegistered() == false then
 			self:Remove()
-gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
+			gDisasters_Revived.Warning("This map is incompatible with this addon! Tell the addon owner about this as soon as possible and change to gm_flatgrass or construct.", true) 
 		end
 		
 		self.Original_SkyData = {}

@@ -5,22 +5,6 @@ DEFINE_BASECLASS( "base_anim" )
 ENT.Spawnable		            	 = false        
 ENT.AdminSpawnable		             = false 
 
-ENT.PrintName		                 =  "Moon"
-ENT.Author			                 =  "Hmm"
-ENT.Contact		                     =  "Hmm"
-ENT.Category                         =  "Hmm"
-
-ENT.Mass                             =  100
-ENT.Model                            = "models/props_junk/PopCan01a.mdl"
-
-
-AddCSLuaFile()
-
-DEFINE_BASECLASS( "base_anim" )
-
-ENT.Spawnable		            	 = false        
-ENT.AdminSpawnable		             = false 
-
 ENT.PrintName		                 =  "Meteorite"
 ENT.Author			                 =  "Hmm"
 ENT.Contact		                     =  "Hmm"

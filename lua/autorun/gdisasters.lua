@@ -1,7 +1,8 @@
 --class
 gDisasters_Revived = {}
-gDisasters_Revived.Version = 0.531
+gDisasters_Revived.Version = 0.532
 gDisasters_Revived.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedetails/?id=2522900784"
+gDisasters_Revived.WorkShopURLAlternative = "https://steamcommunity.com/sharedfiles/filedetails/?id=3764674326"
 gDisasters_Revived.WorkshopVersion = true
 gDisasters_Revived.lua_Directory = "gdisasters"
 gDisasters_Revived.resources_Directory = "resource/localization"
@@ -202,6 +203,7 @@ if SERVER then
 	else
 		gDisasters_Revived.Msg("ADDING CONTENT FILE FROM WORKSHOP...")
 		resource.AddWorkshop(string.match(gDisasters_Revived.WorkShopURL, "%d+$"))
+		resource.AddWorkshop(string.match(gDisasters_Revived.WorkShopURLAlternative, "%d+$"))
 		gDisasters_Revived.Msg("ADDED CONTENT FILE FROM WORKSHOP")
 	end
 

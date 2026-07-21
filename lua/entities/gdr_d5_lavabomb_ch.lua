@@ -13,6 +13,24 @@ ENT.Category                         =  "Hmm"
 ENT.Model                            = "models/ramses/models/nature/volcanic_rock_03_64.mdl"
 ENT.Material                         = "ramses/models/space/lavabomb/main_diffuse"
 
+ENT.Radius = 200 
+ENT.Magnitude = 50
+ENT.damageMin = 10
+ENT.damageMax = 20
+ENT.MaxSpeed = 200	
+ENT.MaxProps = 8
+ENT.PropsTimer = 12
+ENT.PropsModels = { 
+					"models/ramses/models/nature/hail_02.mdl",
+					"models/ramses/models/nature/hail_03.mdl",
+					"models/ramses/models/nature/hail_04.mdl",
+					"models/ramses/models/nature/hail_05.mdl",
+					"models/ramses/models/nature/hail_02.mdl",
+					"models/ramses/models/nature/hail_03.mdl",
+					"models/ramses/models/nature/hail_04.mdl",
+					"models/ramses/models/nature/hail_05.mdl"
+				}
+
 function ENT:Initialize()	
 
 	if (SERVER) then
@@ -24,7 +42,8 @@ function ENT:Initialize()
 		self:SetUseType( ONOFF_USE )
 		self:SetMaterial(self.Material)
 		
-		
+
+
 		local phys = self:GetPhysicsObject()
 		phys:Wake()
 		
@@ -77,7 +96,7 @@ function ENT:PhysicsCollide( data, physobj )
 	end
 	
 	
-	if (data.Speed > 200 ) then 
+	if (data.Speed > self.MaxSpeed ) then 
 		
 		self:Explode()
 
@@ -112,35 +131,23 @@ function ENT:Explode()
 	
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
-	pe:SetKeyValue( "Magnitude", 50 );
-	pe:SetKeyValue( "radius", 200 );
+	pe:SetKeyValue( "Magnitude", self.Magnitude );
+	pe:SetKeyValue( "radius", self.Radius );
 	pe:SetKeyValue( "spawnflags", 19 );
 	pe:Spawn();
 	pe:Activate();
 	pe:Fire( "Explode", "", 0 );
 	pe:Fire( "Kill", "", 0.5 );
 	
-	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), 512, math.random( 10, 20 ) )		
-
-		
-	local models = { 
-					 "models/ramses/models/nature/hail_02.mdl",
-					 "models/ramses/models/nature/hail_03.mdl",
-					 "models/ramses/models/nature/hail_04.mdl",
-					 "models/ramses/models/nature/hail_05.mdl",
-					 "models/ramses/models/nature/hail_02.mdl",
-					 "models/ramses/models/nature/hail_03.mdl",
-					 "models/ramses/models/nature/hail_04.mdl",
-					 "models/ramses/models/nature/hail_05.mdl"
-					 }
+	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), self.Radius, math.random( self.damageMin, self.damageMax ) )
 
 	self:Remove()
 
-	for i=1, 8 do 
+	for i=1, self.MaxProps do 
 		local mod_vector = Vector( math.random(-1000,1000), math.random(-1000,1000), 0)
 		local piece = ents.Create("prop_physics") 
 		piece:SetModelScale(0.4,0)
-		piece:SetModel( models[i] ) 
+		piece:SetModel( self.PropsModels[i] ) 
 		piece:SetMaterial(mat)
 		local phys = piece:GetPhysicsObject()
 		if (phys:IsValid()) then
@@ -154,7 +161,7 @@ function ENT:Explode()
 		
 		
 		ParticleEffectAttach("megacryometeor_piece_steam", PATTACH_POINT_FOLLOW, piece, 0)
-		timer.Simple(i + 12, function() if piece:IsValid() then piece:Remove() end end)
+		timer.Simple(i + self.PropsTimer, function() if piece:IsValid() then piece:Remove() end end)
 		
 	end
 		

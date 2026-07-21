@@ -12,6 +12,12 @@ ENT.Category                         =  "Hmm"
 
 ENT.Model                            = "models/ramses/models/space/meteorite.mdl"
 
+ENT.Radius = 2500
+ENT.Magnitude = 5000
+ENT.damageMin = 10000
+ENT.damageMax = 40000
+ENT.MaxSpeed = 200
+	
 function ENT:Initialize()	
 
 	if (SERVER) then
@@ -21,8 +27,7 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_VPHYSICS  )
 		self:SetUseType( ONOFF_USE )
-		
-		
+
 		local phys = self:GetPhysicsObject()
 		if (phys:IsValid()) then
 			phys:SetMass(math.random(600,700))
@@ -73,7 +78,7 @@ function ENT:PhysicsCollide( data, physobj )
 		
 	end
 	
-	if (data.Speed > 200 ) then 
+	if (data.Speed > self.MaxSpeed ) then 
 		
 		self:Explode()
 
@@ -103,17 +108,17 @@ function ENT:Explode()
 
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
-	pe:SetKeyValue( "Magnitude", 2500 );
-	pe:SetKeyValue( "radius", 2000 );
+	pe:SetKeyValue( "Magnitude", self.Magnitude );
+	pe:SetKeyValue( "radius", self.Radius );
 	pe:SetKeyValue( "spawnflags", 19 );
 	pe:Spawn();
 	pe:Activate();
 	pe:Fire( "Explode", "", 0 );
 	pe:Fire( "Kill", "", 0.5 );
 	
-	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), 1800, math.random( 400, 450 ) )
+	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), self.Radius, math.random( self.damageMin, self.damageMax ) )
 
-	for k,v in pairs(ents.FindInSphere(self:GetPos(), 1000)) do
+	for k,v in pairs(ents.FindInSphere(self:GetPos(), self.Radius)) do
 		
 		local dist = ( v:GetPos() - self:GetPos() ):Length() 	
 
@@ -121,18 +126,14 @@ function ENT:Explode()
 
 			local mass = v:GetPhysicsObject():GetMass()
 			
-			if dist < 1000 then 
+			if dist < self.Radius then 
 			
-				if ( !v.Destroy ) and mass < 50000 then
+				if( !v.Destroy ) then
 
-					if math.random(1,10) == 1 then
-
-						constraint.RemoveAll( v )
-						v:GetPhysicsObject():EnableMotion(true)
-						v:GetPhysicsObject():Wake()
-						v.Destroy = true
-
-					end
+					constraint.RemoveAll( v )
+					v:GetPhysicsObject():EnableMotion(true)
+					v:GetPhysicsObject():Wake()
+					v.Destroy = true
 
 				end
 

@@ -12,6 +12,12 @@ ENT.Category                         =  "Hmm"
 
 ENT.Model                            = "models/ramses/models/space/meteorite.mdl"
 
+ENT.Radius = 2500
+ENT.Magnitude = 5000
+ENT.damageMin = 10000
+ENT.damageMax = 40000
+ENT.MaxSpeed = 200
+
 function ENT:Initialize()	
 
 	if (SERVER) then
@@ -22,7 +28,7 @@ function ENT:Initialize()
 		self:SetMoveType( MOVETYPE_VPHYSICS  )
 		self:SetUseType( ONOFF_USE )
 
-		
+
 		local phys = self:GetPhysicsObject()
 		if (phys:IsValid()) then
 			phys:SetMass(700)
@@ -74,7 +80,7 @@ function ENT:PhysicsCollide( data, physobj )
 		return
 	end
 	
-	if (data.Speed > 200 ) then 
+	if (data.Speed > self.MaxSpeed ) then 
 	
 		
 		self:Explode()
@@ -107,13 +113,13 @@ function ENT:Explode()
 	
 	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 	
-	for k,v in pairs(ents.FindInSphere(self:GetPos(), 2500)) do
+	for k,v in pairs(ents.FindInSphere(self:GetPos(), self.Radius)) do
 		
 		local dist = ( v:GetPos() - self:GetPos() ):Length() 	
 			
 		if (  v != self && IsValid( v ) && IsValid( v:GetPhysicsObject() ) ) and (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then 
 
-			if dist < 2500 then 
+			if dist < self.Radius then 
 
 				if( !v.Destroy ) then
 								
@@ -132,15 +138,15 @@ function ENT:Explode()
 	
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
-	pe:SetKeyValue( "Magnitude", 5000 );
-	pe:SetKeyValue( "radius", 4000 );
+	pe:SetKeyValue( "Magnitude", self.Magnitude );
+	pe:SetKeyValue( "radius", self.Radius );
 	pe:SetKeyValue( "spawnflags", 19 );
 	pe:Spawn();
 	pe:Activate();
 	pe:Fire( "Explode", "", 0 );
 	pe:Fire( "Kill", "", 0.5 );
 	
-	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), 3200, math.random( 10000, 40000 ) )
+	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), self.Radius, math.random( self.damageMin, self.damageMax ) )
 
 	self:Remove()
 

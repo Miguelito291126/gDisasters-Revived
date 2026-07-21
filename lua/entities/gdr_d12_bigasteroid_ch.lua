@@ -12,6 +12,11 @@ ENT.Category                         =  "Hmm"
 
 ENT.Model                            = "models/ramses/models/nature/Chicxulub.mdl"
 
+ENT.Radius = 30000
+ENT.Magnitude = 10000
+ENT.damageMin = 10000
+ENT.damageMax = 40000
+ENT.MaxSpeed = 200
 
 function ENT:Initialize()	
 
@@ -23,6 +28,7 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_VPHYSICS  )
 		self:SetUseType( ONOFF_USE )
+
 
 		
 		local phys = self:GetPhysicsObject()
@@ -72,7 +78,7 @@ function ENT:PhysicsCollide( data, physobj )
 		return
 	end
 
-	if (data.Speed > 200 ) then 
+	if (data.Speed > self.MaxSpeed ) then 
 		self:Explode()
 	end
 
@@ -114,20 +120,13 @@ function ENT:Explode()
 	
 	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 
-	local earthquake = ents.Create("gdr_d12_rs12eq")
-	if IsValid(earthquake) then
-		earthquake:Spawn()
-		earthquake:Activate()
-		earthquake:SetPos(self:GetPos())
-	end
-
-	for k,v in pairs(ents.FindInSphere(self:GetPos(), 5000000)) do
+	for k,v in pairs(ents.FindInSphere(self:GetPos(), self.Radius)) do
 		
 		local dist = ( v:GetPos() - self:GetPos() ):Length() 	
 		
 		if (  v != self && IsValid( v ) && IsValid( v:GetPhysicsObject() ) ) and (v:GetClass()!= "phys_constraintsystem" and v:GetClass()!= "phys_constraint"  and v:GetClass()!= "logic_collision_pair") then 
 	
-			if dist < 5000000 then 
+			if dist < self.Radius then 
 	
 				if( !v.Destroy ) then
 						
@@ -145,16 +144,23 @@ function ENT:Explode()
 	
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
-	pe:SetKeyValue( "Magnitude", 5000000 );
-	pe:SetKeyValue( "radius", 5000000 );
+	pe:SetKeyValue( "Magnitude", self.Magnitude);
+	pe:SetKeyValue( "radius", self.Radius );
 	pe:SetKeyValue( "spawnflags", 19 );
 	pe:Spawn();
 	pe:Activate();
 	pe:Fire( "Explode", "", 0 );
 	pe:Fire( "Kill", "", 0.5 );
 	
-	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), 5000000, math.random( 100000, 400000 ) )
+	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), self.Radius, math.random( self.damageMin, self.damageMax ) )
 	
+	local earthquake = ents.Create("gdr_d12_rs12eq")
+	if IsValid(earthquake) then
+		earthquake:Spawn()
+		earthquake:Activate()
+		earthquake:SetPos(self:GetPos())
+	end
+
 	if GetConVar("gdisasters_revived_volcano_weatherchange"):GetInt() <= 0 then return end
 
 	timer.Simple(2, function()

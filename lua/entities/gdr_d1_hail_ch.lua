@@ -13,6 +13,10 @@ ENT.Category                         =  "Hmm"
 ENT.Material                         = "nature/ice"        
 ENT.Models                           =  {"models/ramses/models/nature/hail_01.mdl","models/ramses/models/nature/hail_02.mdl","models/ramses/models/nature/hail_03.mdl","models/ramses/models/nature/hail_04.mdl","models/ramses/models/nature/hail_05.mdl"}  
 
+ENT.MaxSpeed = 500
+ENT.MinTimeRemove = 3
+ENT.MaxTimeRemove = 12
+
 
 function ENT:Initialize()	
 
@@ -49,7 +53,7 @@ end
 
 function ENT:PhysicsCollide( data, phys )
 	
-	if ( data.Speed > 500 ) then 
+	if ( data.Speed > self.MaxSpeed ) then 
 
 		if self:GetModel()=="models/ramses/models/nature/hail_01.mdl" then
 
@@ -76,7 +80,7 @@ function ENT:PhysicsCollide( data, phys )
 			
 			self:Remove()
 			
-			timer.Simple(math.random(3,12), function()
+			timer.Simple(math.random(self.MinTimeRemove, self.MaxTimeRemove), function()
 				if p1:IsValid() then p1:Remove() end
 				if p2:IsValid() then p2:Remove() end
 			end)
@@ -84,12 +88,7 @@ function ENT:PhysicsCollide( data, phys )
 			
 			ParticleEffect("hail_impact_effect_main", data.HitPos + Vector(0,0,1), Angle(0,0,0), nil)
 			sound.Play(table.Random({"streams/event/break/ice_break_a.mp3","streams/event/break/ice_break_b.mp3","streams/event/break/ice_break_c.mp3"}), self:GetPos(), 80, math.random(80,120), 1)
-			
-			if gDisasters_Revived.HitChance(10) then
-			else
-			
-				self:Remove()
-			end
+			self:Remove()
 		end
 			
 	

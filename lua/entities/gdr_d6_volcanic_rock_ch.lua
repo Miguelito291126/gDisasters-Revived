@@ -12,6 +12,13 @@ ENT.Category                         =  "Hmm"
 
 ENT.Model                            = {"models/ramses/models/nature/volcanic_rock_03_128.mdl","models/ramses/models/nature/volcanic_rock_02_128.mdl","models/ramses/models/nature/volcanic_rock_01_128.mdl", "models/ramses/models/nature/volcanic_rock_03_64.mdl", "models/ramses/models/nature/volcanic_rock_02_64.mdl", "models/ramses/models/nature/volcanic_rock_01_64.mdl"}
 
+ENT.Radius = 2000
+ENT.Magnitude = 1500
+ENT.damageMin = 10
+ENT.damageMax = 20
+ENT.MaxSpeed = 200
+
+
 function ENT:Initialize()	
 
 	if (SERVER) then
@@ -21,6 +28,7 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_VPHYSICS  )
 		self:SetUseType( ONOFF_USE )
+
 
 		
 		local phys = self:GetPhysicsObject()
@@ -75,7 +83,7 @@ function ENT:PhysicsCollide( data, phys )
 		
 	end
 
-	if ( data.Speed > 200 ) then 
+	if ( data.Speed > self.MaxSpeed ) then 
 			
 		self:Explode()
 
@@ -96,15 +104,15 @@ function ENT:Explode()
 	
 	local pe = ents.Create( "env_physexplosion" );
 	pe:SetPos( self:GetPos() );
-	pe:SetKeyValue( "Magnitude", 1500 );
-	pe:SetKeyValue( "radius", 2000 );
+	pe:SetKeyValue( "Magnitude", self.Magnitude );
+	pe:SetKeyValue( "radius", self.Radius );
 	pe:SetKeyValue( "spawnflags", 19 );
 	pe:Spawn();
 	pe:Activate();
 	pe:Fire( "Explode", "", 0 );
 	pe:Fire( "Kill", "", 0.5 );
 	
-	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), 1200, math.random( 10, 20 ) )		
+	util.BlastDamage( self, self, self:GetPos()+Vector(0,0,12), self.Radius, math.random( self.damageMin, self.damageMax ) )		
 
 	self:Remove()
 	
