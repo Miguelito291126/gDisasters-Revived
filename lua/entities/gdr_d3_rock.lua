@@ -2,8 +2,8 @@ AddCSLuaFile()
 
 DEFINE_BASECLASS( "base_anim" )
 
-ENT.Spawnable		            	 = false        
-ENT.AdminSpawnable		             = false 
+ENT.Spawnable		            	 = false
+ENT.AdminSpawnable		             = false
 
 ENT.PrintName		                 =  "Rock"
 ENT.Author			                 =  "Hmm"
@@ -11,6 +11,18 @@ ENT.Contact		                     =  "Hmm"
 ENT.Category                         =  "Hmm"
 
 ENT.Model                            = {"models/ramses/models/nature/landmass_1.mdl", "models/ramses/models/nature/landmass_2.mdl"}
+
+ENT.MaxSpeed = 200
+ENT.PropsTimerMax = 12
+ENT.PropsTimerMin = 3
+ENT.PropsMax = 12
+ENT.PropsMin = 3
+ENT.PropsModels = { 
+			"models/ramses/models/nature/rock_1.mdl",		
+			"models/ramses/models/nature/rock_2.mdl",	    
+			"models/ramses/models/nature/rock_3.mdl"
+		}
+
 
 function ENT:Initialize()	
 
@@ -57,28 +69,20 @@ end
 
 function ENT:PhysicsCollide( data, phys )
 	
-	if ( data.Speed > 500 ) then 
-		
+	if ( data.Speed > self.MaxSpeed ) then 
 		
 		sound.Play(table.Random({"streams/event/break/rock_break_a.mp3","streams/event/break/rock_break_b.mp3","streams/event/break/rock_break_c.mp3"}), self:GetPos(), 80, math.random(80,120), 1)
-		
 
-		local models = { 
-			"models/ramses/models/nature/rock_1.mdl",		
-			"models/ramses/models/nature/rock_2.mdl",	    
-			"models/ramses/models/nature/rock_3.mdl"
-		}
-
-		for i=1, math.random(3, 5) do
+		for i=1, math.random(self.PropsMin, self.PropsMax) do
 			local piece = ents.Create("prop_physics") 
-			piece:SetModel( table.Random(models) )
+			piece:SetModel( table.Random(self.PropsModels) )
 			piece:SetPos(data.HitPos + Vector(0,0,15))
 			piece:Spawn()
 			piece:Activate()
 			piece:GetPhysicsObject():SetVelocity(self:GetVelocity())
 			piece:GetPhysicsObject():AddAngleVelocity( VectorRand() * 10000 )
 
-			timer.Simple(math.random(3,12), function()
+			timer.Simple(math.random(self.PropsTimerMin, self.PropsTimerMax), function()
 				if piece:IsValid() then piece:Remove() end
 			end)
 			
