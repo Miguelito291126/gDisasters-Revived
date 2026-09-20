@@ -1,7 +1,7 @@
 gDisasters_Revived.CachedExists     = {}
 gDisasters_Revived.Cached         = {}
 
-Break_Sounds = {
+gDisasters_Revived.Break_Sounds = {
 
 
 	Metal = {

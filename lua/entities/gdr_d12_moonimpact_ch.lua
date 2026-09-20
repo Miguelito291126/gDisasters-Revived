@@ -114,8 +114,6 @@ function ENT:Explode()
 	
 	gDisasters_Revived.CreateSoundWave(metsound, self:GetPos(), "3d" ,340.29, {100,110}, 5)
 
-
-	
 	for k,v in pairs(ents.FindInSphere(self:GetPos(), self.Radius)) do
 
 		local dist = ( v:GetPos() - self:GetPos() ):Length() 	

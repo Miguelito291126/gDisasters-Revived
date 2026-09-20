@@ -1,4 +1,4 @@
-hook.Add( "InitPostEntity", "gDisastersInitPostEvo", function()
+hook.Add( "InitPostEntity", "gDisastersRevivedInitPostEvo", function()
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 or gDisasters_Revived.DayNightSystem.InternalVars.Enabled:GetInt() >= 1 then 
 
 		local oldCleanUpMap = game.CleanUpMap
@@ -21,7 +21,7 @@ hook.Add( "InitPostEntity", "gDisastersInitPostEvo", function()
 
 end )
 
-hook.Add( "PostInit", "gDisastersInitFix", function()
+hook.Add( "PostInit", "gDisastersRevivedInitFix", function()
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 or gDisasters_Revived.DayNightSystem.InternalVars.Enabled:GetInt() >= 1 then 
 
 		if #ents.FindByClass("env_skypaint")<1 then

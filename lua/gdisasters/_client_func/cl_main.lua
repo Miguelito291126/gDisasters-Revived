@@ -60,7 +60,7 @@ function gDisasters_Revived.gfx_screenParticles()
 	
 end
 
-hook.Add("RenderScreenspaceEffects", "gfx_Underwater", function() 
+hook.Add("RenderScreenspaceEffects", "gdr_gfx_Underwater", function() 
 	
 	if GetConVar("gdisasters_revived_hud_underwater_effects"):GetInt() == 0 then return end
 	
@@ -144,7 +144,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_Underwater", function()
 
 end)
 
-hook.Add("RenderScreenspaceEffects", "gfx_Underlava", function() 
+hook.Add("RenderScreenspaceEffects", "gdr_gfx_Underlava", function() 
 	
 	if GetConVar("gdisasters_revived_hud_underlava_effects"):GetInt() == 0 then return end
 
@@ -231,7 +231,7 @@ hook.Add("RenderScreenspaceEffects", "gfx_Underlava", function()
 end)
 
 	
-hook.Add("RenderScreenspaceEffects", "gfx_TempEffect", function()
+hook.Add("RenderScreenspaceEffects", "gdr_gfx_TempEffect", function()
 
 	if GetConVar("gdisasters_revived_hud_temp_effects"):GetInt() == 0 then return end
 

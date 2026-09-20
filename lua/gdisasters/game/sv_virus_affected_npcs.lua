@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 gDisasters_Revived.Msg("LOADING TVIRUS... ")
 
-npc_tvirus = {
+gDisasters_Revived.npc_tvirus = {
 	"npc_monk",
 	"npc_metropolice",
 	"npc_combine_s",
@@ -19,8 +19,8 @@ npc_tvirus = {
 	"npc_breen"
 }
 
-for i = 1, #npc_tvirus do
-	gDisasters_Revived.Msg("LOADING TABLE: " .. npc_tvirus[i])
+for i = 1, #gDisasters_Revived.npc_tvirus do
+	gDisasters_Revived.Msg("LOADING TABLE: " .. gDisasters_Revived.npc_tvirus[i])
 end
 
 gDisasters_Revived.Msg("FINISH")

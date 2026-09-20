@@ -1622,25 +1622,25 @@ gDisasters_Revived.HeatSystem.UpdateEntityGrid = function()
 
 
                                     if material_type == "wood" then 
-                                        sound.Play(table.Random(Break_Sounds.Wood), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Wood), ent:GetPos(), 80, math.random(90,110), 1)
                                     
                                     elseif material_type == "metal" then 
-                                        sound.Play(table.Random(Break_Sounds.Metal), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Metal), ent:GetPos(), 80, math.random(90,110), 1)
                                     
                                     elseif material_type == "plastic" then 
-                                        sound.Play(table.Random(Break_Sounds.Plastic), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Plastic), ent:GetPos(), 80, math.random(90,110), 1)
 
                                     elseif material_type == "rock" then 
-                                        sound.Play(table.Random(Break_Sounds.Rock), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Rock), ent:GetPos(), 80, math.random(90,110), 1)
 
                                     elseif material_type == "glass" then 
-                                        sound.Play(table.Random(Break_Sounds.Glass), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Glass), ent:GetPos(), 80, math.random(90,110), 1)
 
                                     elseif material_type == "ice" then 
-                                        sound.Play(table.Random(Break_Sounds.Ice), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Ice), ent:GetPos(), 80, math.random(90,110), 1)
                                     
                                     else
-                                        sound.Play(table.Random(Break_Sounds.Generic), ent:GetPos(), 80, math.random(90,110), 1)
+                                        sound.Play(table.Random(gDisasters_Revived.Break_Sounds.Generic), ent:GetPos(), 80, math.random(90,110), 1)
                                     
                                     end
 

@@ -62,7 +62,7 @@ spawnmenu.AddCreationTab("gDisasters Revived", function()
 )
 
 
-function AddToGDSpawnMenu(name, class, category, subcategory, adminonly)
+function AddToGDRSpawnMenu(name, class, category, subcategory, adminonly)
 
 	-- available parent categories 
 	-- Disasters, Weather, Weapons, Buildings, Misc

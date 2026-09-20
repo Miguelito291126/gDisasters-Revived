@@ -1,4 +1,4 @@
-Buoyancy_Lookup = { 
+gDisasters_Revived.Buoyancy_Lookup = { 
 				
 				["default"] = 4,
 				["default_silent"] = 4,
@@ -106,12 +106,12 @@ Buoyancy_Lookup = {
 
 }
 
-function GetBuoyancyMod(entity)
+function gDisasters_Revived.GetBuoyancyMod(entity)
 	if entity:GetPhysicsObject():IsValid()==false then return 0.2 end
-	if Buoyancy_Lookup[entity:GetPhysicsObject():GetMaterial()] == nil then return 0.2 end 
+	if gDisasters_Revived.Buoyancy_Lookup[entity:GetPhysicsObject():GetMaterial()] == nil then return 0.2 end 
 	
 	
-	return Buoyancy_Lookup[entity:GetPhysicsObject():GetMaterial()] 
+	return gDisasters_Revived.Buoyancy_Lookup[entity:GetPhysicsObject():GetMaterial()] 
 
 end
 

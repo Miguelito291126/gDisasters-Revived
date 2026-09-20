@@ -1,5 +1,5 @@
 -- Checks the workshop page for version number.
-local function RunCheck()
+local function gDisasters_Revived_RunCheck()
     http.Fetch(gDisasters_Revived.WorkShopURL, function(code)
         local lV = tonumber(string.match(code, "Version:(.-)<"))
         if not lV then return end -- Unable to locate last version
@@ -17,4 +17,4 @@ local function RunCheck()
 end
 
 -- Se ejecuta directamente RunCheck en lugar de consultar cookies de tiempo
-hook.Add("PlayerInitialSpawn", "gDisasters_checkversion", RunCheck)
+hook.Add("PlayerInitialSpawn", "gDisasters_checkversion", gDisasters_Revived_RunCheck)

@@ -403,7 +403,7 @@ function ENT:ProcessEntitiesInWedgeLava()
 				else
 	
 					local massmod       = math.Clamp((phys:GetMass()/25000),0,1)
-					local buoyancy_mod  = GetBuoyancyMod(v)
+					local buoyancy_mod  = gDisasters_Revived.GetBuoyancyMod(v)
 					
 					if v:GetModel()=="models/airboat.mdl" then   
 						buoyancy_mod = 5 
@@ -820,7 +820,7 @@ function ENT:OnWedgelavaEntry(ent)
 	else
 		
 		local phys = ent:GetPhysicsObject()
-		local buoyancy_mod  = GetBuoyancyMod(ent)
+		local buoyancy_mod  = gDisasters_Revived.GetBuoyancyMod(ent)
 		
 		if !phys:IsValid() then return end 
 			

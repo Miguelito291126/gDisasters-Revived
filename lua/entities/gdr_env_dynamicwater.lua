@@ -196,7 +196,7 @@ function ENT:ProcessFlood(scalar, t)
 				if v.IsInWater then
 					
 					local massmod       = math.Clamp((phys:GetMass()/25000),0,1)
-					local buoyancy_mod  = GetBuoyancyMod(v)
+					local buoyancy_mod  = gDisasters_Revived.GetBuoyancyMod(v)
 					
 					if v:GetModel()=="models/airboat.mdl" then 
 						buoyancy_mod = 5 

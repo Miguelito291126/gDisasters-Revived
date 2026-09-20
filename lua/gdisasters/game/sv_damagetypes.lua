@@ -1,11 +1,11 @@
-local gDisasters_DamageTypes = {}
+gDisasters_Revived.DamageTypes = {}
 
-gDisasters_DamageTypes["acid"] = function(ent)
+gDisasters_Revived.DamageTypes["acid"] = function(ent)
 	ParticleEffectAttach("acid_damage", PATTACH_POINT_FOLLOW, ent, 0)
 
 end
 
-gDisasters_DamageTypes["elemental"] = function(ent)
+gDisasters_Revived.DamageTypes["elemental"] = function(ent)
 	ParticleEffectAttach("acid_damage", PATTACH_POINT_FOLLOW, ent, 0)
 	ParticleEffectAttach("fire_damage", PATTACH_POINT_FOLLOW, ent, 0)
 	ParticleEffectAttach("heat_damage", PATTACH_POINT_FOLLOW, ent, 0)
@@ -13,21 +13,21 @@ gDisasters_DamageTypes["elemental"] = function(ent)
 	ParticleEffectAttach("cold_damage", PATTACH_POINT_FOLLOW, ent, 0)
 end
 
-gDisasters_DamageTypes["energy"] = function(ent)
+gDisasters_Revived.DamageTypes["energy"] = function(ent)
 	ParticleEffectAttach("fire_damage", PATTACH_POINT_FOLLOW, ent, 0)
 	ParticleEffectAttach("heat_damage", PATTACH_POINT_FOLLOW, ent, 0)
 	ParticleEffectAttach("electrical_damage_01", PATTACH_POINT_FOLLOW, ent, 0)
 end
-gDisasters_DamageTypes["fire"] = function(ent)
+gDisasters_Revived.DamageTypes["fire"] = function(ent)
 	ParticleEffectAttach("fire_damage", PATTACH_POINT_FOLLOW, ent, 0)
 
 end
 
-gDisasters_DamageTypes["heat"] = function(ent)
+gDisasters_Revived.DamageTypes["heat"] = function(ent)
 	ParticleEffectAttach("heat_damage", PATTACH_POINT_FOLLOW, ent, 0)
 
 end
-gDisasters_DamageTypes["electrical"] = function(ent)
+gDisasters_Revived.DamageTypes["electrical"] = function(ent)
 	
 	
 	ParticleEffectAttach("electrical_damage_01", PATTACH_POINT_FOLLOW, ent, 0)
@@ -35,13 +35,13 @@ gDisasters_DamageTypes["electrical"] = function(ent)
 
 end
 
-gDisasters_DamageTypes["cold"] = function(ent)
+gDisasters_Revived.DamageTypes["cold"] = function(ent)
 
 	ParticleEffectAttach("cold_damage", PATTACH_POINT_FOLLOW, ent, 0)
 
 end
 
-gDisasters_DamageTypes["cold"] = function(ent)
+gDisasters_Revived.DamageTypes["cold"] = function(ent)
 
 	ParticleEffectAttach("cold_damage", PATTACH_POINT_FOLLOW, ent, 0)
 
@@ -51,7 +51,7 @@ end
 function InflictDamage(ent, attacker, dmgtype, amount)
 
 	ent:TakeDamage( amount, attacker, attacker )
-	gDisasters_DamageTypes[dmgtype](ent)
+	gDisasters_Revived.DamageTypes[dmgtype](ent)
 
 end
 

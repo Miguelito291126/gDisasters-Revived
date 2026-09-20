@@ -26,7 +26,7 @@ end
 local function CreateTickboxConVariable(CPanel, desc, convarname)
 	local CB = AddControlCB(CPanel, language.GetPhrase(desc), convarname)
 	
- 
+
 	CB.OnChange = function( panel, bVal ) 
 		if (CurTime() - gDisasters_gDisastersSetupTime) < 1 then return end 
 
@@ -81,7 +81,7 @@ end
 
 --SH MENU 
 
-local function gDisastersSHSettings( CPanel )
+local function gDisastersRevivedSHSettings( CPanel )
 
 	local lb = AddControlLabel( CPanel, "gdr_1" )
 	lb:SetTextColor(Color( 0, 0, 0))
@@ -99,7 +99,7 @@ local function gDisastersSHSettings( CPanel )
 	CreateTickboxConVariable(CPanel, "gdr_7" ,"gdisasters_revived_tvirus_nmrih_zombies");
 end
 
-local function gDisastersSHADVSettings( CPanel )
+local function gDisastersRevivedSHADVSettings( CPanel )
 
 	local lb = AddControlLabel( CPanel, "gdr_8")
 	local lb2 = AddControlLabel( CPanel, "gdr_9")
@@ -174,7 +174,7 @@ local function gDisastersSHADVSettings( CPanel )
 	
 end
 
-local function gDisastersSHGraphics( CPanel )
+local function gDisastersRevivedSHGraphics( CPanel )
 
 	local lb = AddControlLabel( CPanel, "gdr_42" )
 	lb:SetTextColor(Color( 0, 0, 0))
@@ -206,7 +206,7 @@ end
 
 
 
-local function gDisastersAutospawn( CPanel )
+local function gDisastersRevivedAutospawn( CPanel )
 
 	local lb = AddControlLabel( CPanel, "gdr_54" )
 	lb:SetTextColor(Color( 0, 0, 0))
@@ -229,7 +229,7 @@ local function gDisastersAutospawn( CPanel )
 	
 end
 
-local function gDisastersHeatSystemBeta( CPanel )
+local function gDisastersRevivedHeatSystemBeta( CPanel )
 	CreateSliderConVariable(CPanel, "Cell Size", 1, 5000, 0, "gdisasters_revived_heat_system_cellsize" )
 	CreateSliderConVariable(CPanel, "Update interval", 0, 5, 2, "gdisasters_revived_heat_system_updateinterval" )
 	CreateSliderConVariable(CPanel, "Update Batch size", 1, 5000, 0, "gdisasters_revived_heat_system_updatebatchsize" )
@@ -257,7 +257,7 @@ local function gDisastersHeatSystemBeta( CPanel )
 	CreateTickboxConVariable(CPanel, "gdr_87", "gdisasters_revived_graphics_draw_heatsystem_grid");
 end
 
-local function gDisastersSHhud( CPanel )
+local function gDisastersRevivedSHhud( CPanel )
 
 	
 	local lb2 = AddControlLabel( CPanel, "gdr_62" )
@@ -284,7 +284,7 @@ local function gDisastersSHhud( CPanel )
 	
 end
 
-local function gDisastersDNC( CPanel )
+local function gDisastersRevivedDNC( CPanel )
 	local lb1 = AddControlLabel( CPanel, "gdr_74" )
 	local lb2 = AddControlLabel( CPanel, "gdr_75" )
 	lb1:SetTextColor(Color( 0, 47, 255))
@@ -303,7 +303,7 @@ local function gDisastersDNC( CPanel )
 	
 end
 
-local function gDisastersAddonsCompatibility( CPanel )
+local function gDisastersRevivedAddonsCompatibility( CPanel )
 
 	local lb = AddControlLabel( CPanel, "gdr_83" )
 	lb:SetTextColor(Color( 0, 0, 0))
@@ -321,7 +321,7 @@ end
 
 --CL MENU 
 
-local function gDisastersADVGraphicsSettings( CPanel )			
+local function gDisastersRevivedADVGraphicsSettings( CPanel )			
 	local lb = AddControlLabel( CPanel, "gdr_cl_1" )
 	lb:SetTextColor(Color( 0, 0, 0))
 	lb:SetSize(500, 500)
@@ -346,7 +346,7 @@ local function gDisastersADVGraphicsSettings( CPanel )
 	
 end
 
-local function gDisastersGraphicsSettings( CPanel )
+local function gDisastersRevivedGraphicsSettings( CPanel )
 
 	local lb3 = AddControlLabel( CPanel, "gdr_cl_12" )
 	local lb4 = AddControlLabel( CPanel, "gdr_cl_13")
@@ -368,7 +368,7 @@ local function gDisastersGraphicsSettings( CPanel )
 
 end
 
-local function gDisastersHudSettings( CPanel )
+local function gDisastersRevivedHudSettings( CPanel )
 	
 	local lb = AddControlLabel( CPanel, "gdr_cl_22")
 	local lb2 = AddControlLabel( CPanel, "gdr_cl_23")
@@ -393,7 +393,7 @@ local function gDisastersHudSettings( CPanel )
 end
 
 
-local function gDisastersAudioSettings( CPanel )
+local function gDisastersRevivedAudioSettings( CPanel )
 	
 	local lb = AddControlLabel( CPanel, "gdr_cl_33" )
 	lb:SetTextColor(Color( 0, 0, 0))
@@ -419,18 +419,18 @@ end)
 hook.Add( "PopulateToolMenu", "gDisasters_Revived_PopulateMenu", function()
 	
 
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersSHADSettings", language.GetPhrase("gdr_advanced"), "", "", gDisastersSHADVSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersSHSettings", language.GetPhrase("gdr_main"), "", "", gDisastersSHSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersAutospawn", language.GetPhrase("gdr_autospawn"), "", "", gDisastersAutospawn )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisasterDNC", language.GetPhrase("gdr_nc"), "", "", gDisastersDNC )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersSHhud", language.GetPhrase("gdr_server_hud"), "", "", gDisastersSHhud )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersAddonsCompatibility", language.GetPhrase("gdr_addons"), "", "", gDisastersAddonsCompatibility )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersSHGraphics", language.GetPhrase("gdr_server_graphics"), "", "", gDisastersSHGraphics )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersHeatSystemSettings", language.GetPhrase("gdr_heatsystem"), "", "", gDisastersHeatSystemBeta )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersAudioSettings", language.GetPhrase("gdr_volume"), "", "", gDisastersAudioSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersADVGraphicsSettings", language.GetPhrase("gdr_advanced_graphics"), "", "", gDisastersADVGraphicsSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersHudSettings", language.GetPhrase("gdr_hud"), "", "", gDisastersHudSettings )
-	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersGraphicsSettings", language.GetPhrase("gdr_graphics"), "", "", gDisastersGraphicsSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedSHADSettings", language.GetPhrase("gdr_advanced"), "", "", gDisastersRevivedSHADVSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedSHSettings", language.GetPhrase("gdr_main"), "", "", gDisastersRevivedSHSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedAutospawn", language.GetPhrase("gdr_autospawn"), "", "", gDisastersRevivedAutospawn )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedDNC", language.GetPhrase("gdr_nc"), "", "", gDisastersRevivedDNC )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedSHhud", language.GetPhrase("gdr_server_hud"), "", "", gDisastersRevivedSHhud )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedAddonsCompatibility", language.GetPhrase("gdr_addons"), "", "", gDisastersRevivedAddonsCompatibility )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedSHGraphics", language.GetPhrase("gdr_server_graphics"), "", "", gDisastersRevivedSHGraphics )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Server", "gDisastersRevivedHeatSystemSettings", language.GetPhrase("gdr_heatsystem"), "", "", gDisastersRevivedHeatSystemBeta )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersRevivedAudioSettings", language.GetPhrase("gdr_volume"), "", "", gDisastersRevivedAudioSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersRevivedADVGraphicsSettings", language.GetPhrase("gdr_advanced_graphics"), "", "", gDisastersRevivedADVGraphicsSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersRevivedHudSettings", language.GetPhrase("gdr_hud"), "", "", gDisastersRevivedHudSettings )
+	spawnmenu.AddToolMenuOption( "gDisasters Revived", "Client", "gDisastersRevivedGraphicsSettings", language.GetPhrase("gdr_graphics"), "", "", gDisastersRevivedGraphicsSettings )
 	
 
 end );
