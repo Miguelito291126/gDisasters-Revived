@@ -1,4 +1,3 @@
---class
 gDisasters_Revived = {}
 gDisasters_Revived.Version = 0.533
 gDisasters_Revived.WorkShopURL = "https://steamcommunity.com/sharedfiles/filedetails/?id=2522900784"
