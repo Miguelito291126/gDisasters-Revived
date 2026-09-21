@@ -1,26 +1,3 @@
-hook.Add( "InitPostEntity", "gDisastersRevivedInitPostEvo", function()
-	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 or gDisasters_Revived.DayNightSystem.InternalVars.Enabled:GetInt() >= 1 then 
-
-		local oldCleanUpMap = game.CleanUpMap
-	
-		game.CleanUpMap = function(dontSendToClients, ExtraFilters)
-			dontSendToClients = (dontSendToClients != nil and dontSendToClients or false)
-
-			if ( ExtraFilters != nil ) then
-				table.insert(ExtraFilters, "env_skypaint")
-				table.insert(ExtraFilters, "light_environment")
-			else
-				ExtraFilters = { "env_skypaint", "light_environment" }
-			end
-
-			oldCleanUpMap(dontSendToClients, ExtraFilters)
-		end
-		gDisasters_Revived.Msg("removed entitys env_skypaint and light_environment")
-	
-	end
-
-end )
-
 hook.Add( "PostInit", "gDisastersRevivedInitFix", function()
 	if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 or gDisasters_Revived.DayNightSystem.InternalVars.Enabled:GetInt() >= 1 then 
 
@@ -51,54 +28,20 @@ hook.Add( "PostInit", "gDisastersRevivedInitFix", function()
 	end
 end)
 
+function gDisasters_Revived.CleanMapComplete()
+    if GetConVar("gdisasters_revived_graphics_atmosphere"):GetInt() >= 1 or gDisasters_Revived.DayNightSystem.InternalVars.Enabled:GetInt() >= 1 then 
+        local skypaints = ents.FindByClass("env_skypaint")
+        for _, ent in pairs(skypaints) do
+            ent:Remove()
+            MsgC("Removed entity: " .. tostring(ent))
+        end
+        
+        local lights = ents.FindByClass("light_environment")
+        for _, ent in pairs(lights) do
+            ent:Remove()
+            MsgC("Removed entity: " .. tostring(ent))
+        end
+    end
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+hook.Add("InitPostEntity", "gDisastersRevivedCleanMap", gDisasters_Revived.CleanMapComplete)
